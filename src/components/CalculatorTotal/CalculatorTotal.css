@@ -1,0 +1,12 @@
+.calculatorTotalDiv {
+	/* background-color: hsl(36, 99%, 49%);
+	max-width: 100%;
+	min-width: 99.5%;
+	height: 6vh;
+	padding: 4px;
+	border-radius: 12px;
+	align-content: center;
+	margin: 0; */
+	font-size: 16px;
+	font-weight: bold;
+}

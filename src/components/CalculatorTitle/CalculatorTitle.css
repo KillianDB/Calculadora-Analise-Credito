@@ -1,0 +1,11 @@
+.textCalculatorTitle {
+	color: white;
+	background-color: #f99401;
+	border-radius: 8px;
+	padding: 8px;
+	width: fit-content;
+	align-self: center;
+	margin: 0;
+	font-size: 20px;
+	font-weight: 600;
+}

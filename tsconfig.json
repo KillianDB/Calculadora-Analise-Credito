@@ -4,7 +4,6 @@
     "module": "ESNext",
     "outDir": "./dist",
     "rootDir": "./src",
-    "strict": true,
     "useDefineForClassFields": true,
     "lib": [
       "ES2020",
@@ -26,8 +25,9 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src"
-, "backend/generatePNGResult.ts"  ],
+    "src",
+    "backend/generatePNGResult.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

@@ -15,22 +15,20 @@ export function CalculatorINSS4({ isChecked }: CalculatorINSS4Props) {
 	const label: string = "SALÁRIO: ";
 
 	function handleInputValue(label: string, value: string) {
-		// if (!filterIsChecked) {
-
-		// const values = [{ label: "VALOR MARGEM EMPRÉSTIMO: ", value: "" }, {label:"VALOR MARGEM CARTÃO INSS: ", value:""}, {label:"VALOR MARGEM CARTÃO BENEFÍCIO: ", value:""},{label:"VALOR EMPRÉSTIMO: ", value:""},{label:"CARTÃO INSS: ", value:""},{label:"CARTÃO BENEFÍCIO: ", value:""},{label:"VALOR CARTÃO ENVIADO: ",value:""}];
-
-		// if (label == "SALÁRIO: ") {
-		// 	const result = calculate(
-		// 		"INSS",
-		// 		"Cálculo Salário Cliente",
-		// 		 [{label, value}]
-		// 	);
-		// 	if (result != "no valid labels" && result != undefined) {
-		// 		setResults(result.slice(0, 1));
-		// 		setTotais(result.slice(1, 2));
-		// 	}
-		// }
-		// }
+		if (!isChecked) {
+			// const values = [{ label: "VALOR MARGEM EMPRÉSTIMO: ", value: "" }, {label:"VALOR MARGEM CARTÃO INSS: ", value:""}, {label:"VALOR MARGEM CARTÃO BENEFÍCIO: ", value:""},{label:"VALOR EMPRÉSTIMO: ", value:""},{label:"CARTÃO INSS: ", value:""},{label:"CARTÃO BENEFÍCIO: ", value:""},{label:"VALOR CARTÃO ENVIADO: ",value:""}];
+			// if (label == "SALÁRIO: ") {
+			// 	const result = calculate(
+			// 		"INSS",
+			// 		"Cálculo Salário Cliente",
+			// 		 [{label, value}]
+			// 	);
+			// 	if (result != "no valid labels" && result != undefined) {
+			// 		setResults(result.slice(0, 1));
+			// 		setTotais(result.slice(1, 2));
+			// 	}
+			// }
+		}
 
 		// const values = [
 		// 	{ label: "VALOR MARGEM EMPRÉSTIMO: ", value: "" },

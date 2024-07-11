@@ -5,51 +5,47 @@ import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 
-export function CalculatorINSS3() {
-	const [results, setResults] = useState([""]);
-	const [totais, setTotal] = useState([""]);
-	// const [filterIsChecked, setFilterIsChecked] = useState(false);
-	const label: string = "SALÁRIO";
+interface CalculatorINSS3Props {
+	isChecked: boolean;
+}
+
+export function CalculatorINSS3({ isChecked }: CalculatorINSS3Props) {
+	const [results, setResults] = useState([
+		"VALOR EMPRÉSTIMO: R$00000,00",
+		"SALDO DEVEDOR (APROXIMADO): R$ 00000,00",
+		"PARCELA: R$ 0000,00",
+		"VALOR REDUÇÃO DE JUROS (VALOR LIQUÍDO APROXIMADO): R$ 00000,00",
+		"LIBERA + O VALOR (APROXIMADO) DE: R$ 0000,00",
+		"APÓS 03 PARCELAS PAGAS NA REDUÇÃO DE JUROS SEM ALTERAR A PARCELA.",
+	]);
+	const [totais, setTotal] = useState([
+		"TOTAL: R$ 0,00",
+		"PARCELA - R$ 0,00",
+		"84x",
+		"TOTAL: R$ 0,00",
+		"(com redução)",
+		"PARCELA - R$ 0,00",
+		"84x",
+	]);
+	const label: string = "SALÁRIO: ";
 
 	function handleInputValue(label: string, value: string) {
-		// if (!filterIsChecked) {
+		const result = calculate(
+			"INSS",
+			"Cálculo Salário Cliente Sem Cartões",
+			[{ label, value }]
+		);
+		console.log("CHECKED", isChecked);
 
-		// const values = [{ label: "VALOR EMPRÉSTIMO: ", value: "" }];
-
-		// if (label == "SALÁRIO: ") {
-		// 	values[0].value = value;
-		// 	const result = calculate(
-		// 		"INSS",
-		// 		"Cálculo Salário Cliente Sem Cartões",
-		// 		values
-		// 	);
-		// 	if (result != "no valid labels" && result != undefined) {
-		// 		setResults(result.slice(0, 1));
-		// 		setTotal(result.slice(1, 2));
-		// 	}
-		// }
-		// }
-
-		// const values = [
-		// 	{ label: "VALOR EMPRÉSTIMO: ", value: "" },
-		// 	{ label: "SALDO DEVEDOR(APROXIMADO): ", value: "" },
-		// 	{ label: "PARCELA: ", value: "" },
-		// 	{
-		// 		label: "VALOR REDUÇÃO DE JUROS (VALOR LIQUÍDO APROXIMADO): ",
-		// 		value: "",
-		// 	},
-		// 	{ label: "LIBERA + O VALOR (APROXIMADO) DE: ", value: "" },
-		// ];
-
-		if (label == "SALÁRIO: ") {
-			const result = calculate(
-				"INSS",
-				"Cálculo Salário Cliente Sem Cartões",
-				[{ label, value }]
-			);
+		if (!isChecked) {
 			if (result != "no valid labels" && result != undefined) {
-				setResults(result.slice(0, 1).concat(result.slice(2, 5)));
-				setTotal([result[2], result[6]]);
+				setResults(result.slice(0, 2));
+				setTotal(result.slice(2, 5));
+			}
+		} else {
+			if (result != "no valid labels" && result != undefined) {
+				setResults(result.slice(0, 2).concat(result.slice(5, 14)));
+				setTotal(result.slice(2, 5).concat(result.slice(14, 18)));
 			}
 		}
 	}
@@ -60,17 +56,41 @@ export function CalculatorINSS3() {
 				menu='INSS'
 				submenu='Cálculo Salário Cliente Sem Cartões'
 			/>
-			<CalculatorInput
-				label={label}
-				onChange={(e) => handleInputValue(label, e.target.value)}
-			/>
-			<CalculatorResult result={results[0]} />
-			<CalculatorTotal total={totais[0]} />
-			<CalculatorResult result={results[1]} />
-			<CalculatorResult result={results[2]} />
-			<CalculatorResult result={results[3]} />
-			<CalculatorResult result={results[4]} />
-			<CalculatorTotal total={totais[1]} />
+			<div className='inputsContainer'>
+				<CalculatorInput
+					label={label}
+					onChange={(e) => handleInputValue(label, e.target.value)}
+				/>
+			</div>
+
+			{isChecked ? (
+				<div className='answerContainer'>
+					<div className='resultsContainer'>
+						<CalculatorResult result={results[0]} />
+					</div>
+					<div className='totaisContainer'>
+						<CalculatorTotal total={totais[0]} />
+					</div>
+					<div className='resultsContainer'>
+						<CalculatorResult result={results[1]} />
+						<CalculatorResult result={results[2]} />
+						<CalculatorResult result={results[3]} />
+						<CalculatorResult result={results[4]} />
+					</div>
+					<div className='totaisContainer'>
+						<CalculatorTotal total={totais[1]} />
+					</div>
+				</div>
+			) : (
+				<div className='answerContainer'>
+					<div className='resultsContainer'>
+						<CalculatorResult result={results[0]} />
+					</div>
+					<div className='totaisContainer'>
+						<CalculatorTotal total={totais[0]} />
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

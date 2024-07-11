@@ -1,0 +1,404 @@
+/* Frame 985 */
+.calculatorIMGResult {
+	width: 414px;
+	height: 896px;
+	background: #ffffff;
+	overflow: hidden;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+}
+
+.calculatorIMGResultTitle {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	text-align: center;
+	color: #265064;
+	width: 100%;
+	padding: 20px;
+	padding-left: 0;
+	margin: 0;
+	height: 15%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+/* Proposta de */
+.textoPropostaDe {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-size: 38px;
+	text-align: center;
+	color: #265064;
+	margin: 0;
+}
+
+/* CRÉDITO */
+.textoCredito {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-size: 50px;
+	text-align: center;
+	color: #f99401;
+	margin: 0;
+}
+
+/* Consignado */
+.textoConsignado {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-size: 38px;
+	margin: 0;
+	text-align: center;
+	color: #265064;
+}
+
+.calculatorIMGResultLabelDiv {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: rgba(133, 130, 130, 0.5);
+}
+
+/* Rectangle 240 */
+.calculatorIMGResultLeft {
+	box-sizing: border-box;
+	background: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(38, 80, 100, 0.7) 0%,
+			rgba(38, 80, 100, 0.35) 70%,
+			rgba(38, 80, 100, 0.35) 100%
+		),
+		#265064;
+	box-shadow: 4px 21px 62px rgba(0, 0, 0, 0.3), inset -3px -4px 7px #265064;
+	border-radius: 50px;
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 800;
+	font-size: 16px;
+	align-content: center;
+	color: #ffffff;
+	width: 98%;
+	padding-left: 10px;
+	padding-right: 0;
+}
+
+/* Rectangle 228 */
+.calculatorIMGResultRight {
+	background: none;
+	border-radius: 10px;
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 400;
+	text-align: center;
+	color: #ffffff;
+}
+
+.calculatorIMGResultRight span {
+	color: #f99401;
+}
+
+/* logo 1 credito real sem fundo 1 */
+.logoCreditoReal {
+	background: url(logo-square.svg);
+}
+
+/* Rectangle 241 */
+.caixaNumero {
+	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
+	/* box-shadow: 0px 4.14218px 41.4218px rgba(0, 0, 0, 0.5); */
+	border-radius: 42.1781px;
+}
+
+/* Rectangle 257 */
+.caixaValorTotal {
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	/* box-shadow: 0px 3.85532px 38.5532px rgba(0, 0, 0, 0.5); */
+	border-radius: 39.2571px;
+}
+
+/* VALOR TOTAL */
+.textoValorTotal {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 42.3477px;
+	text-align: center;
+	color: #ffffff;
+}
+
+/* 987,99 */
+.numeroValorTotal {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 52.6254px;
+	text-align: center;
+	color: #ffffff;
+	border: 1.61924px solid #ffffff;
+}
+
+/* Rectangle 238 */
+.caixaParcelaTotal {
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	/* box-shadow: 0px 3.85532px 38.5532px rgba(0, 0, 0, 0.5); */
+	border-radius: 39.2571px;
+}
+
+/* PARCELA TOTAL */
+.textoParcelaTotal {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 42.3477px;
+	text-align: center;
+	color: #ffffff;
+}
+
+/* 987,99 */
+.numeroParcelaTotal {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 52.6254px;
+	text-align: center;
+	color: #ffffff;
+	border: 1.61924px solid #ffffff;
+}
+
+/* Rectangle 260 */
+.caixaValoresPequena {
+	background: linear-gradient(0deg, #2e2e2e 0%, #625d5d 50%, #625d5d 100%);
+	border-radius: 10px;
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 24px;
+	text-align: center;
+	color: #ffffff;
+	padding: 5px;
+	margin-top: 21px;
+	width: fit-content;
+	align-self: center;
+}
+
+/* Rectangle 259 */
+.calculatorIMGResultDiv {
+	background: linear-gradient(
+		90deg,
+		rgba(133, 130, 130, 0.57) 0%,
+		rgba(133, 130, 130, 0.57) 50%,
+		#949494 100%
+	);
+	border-radius: 30px;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 20px;
+	row-gap: 10px;
+	justify-items: center;
+	align-content: space-evenly;
+	height: 300px;
+	width: fit-content;
+	align-self: center;
+	padding: 9px;
+}
+
+.calculatorIMGResultValues {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	color: #ffffff;
+}
+
+.calculatorIMGResultValues text {
+	width: 10px;
+	color: #ffffff;
+	margin-bottom: 9px;
+}
+
+.calculatorIMGResultValues button {
+	font-size: 16px;
+	width: 130px;
+	margin: 0;
+}
+
+/* Faça sua contratação presencial em uma de nossas lojas */
+.calculatorIMGResultContratacao {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 15px;
+	text-align: center;
+	color: #000000;
+	text-shadow: 0px 2.08721px 26.0901px #ffffff;
+}
+
+/* Rectangle 282 */
+.calculatorIMGResultEnderecos {
+	box-sizing: border-box;
+	background: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(38, 80, 100, 0.7) 0%,
+			rgba(38, 80, 100, 0.35) 70%,
+			rgba(38, 80, 100, 0.175) 100%
+		),
+		linear-gradient(180deg, #4da2ca 0%, #397997 50%, #265064 100%);
+	box-shadow: inset -3.80611px -5.07481px 8.88092px rgba(38, 80, 100, 0.5);
+	border-radius: 32.6627px;
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 6px;
+	text-align: center;
+	color: #ffffff;
+	display: flex;
+	flex-direction: row;
+}
+
+.calculatorIMGResultEnderecosLeft {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+}
+
+.calculatorIMGResultEnderecosRight {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+}
+
+.calculatorIMGResultEndereco {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 5px 0;
+	height: fit-content;
+	width: 137px;
+}
+
+.calculatorIMGResultEndereco img {
+	border-radius: 64.3119px;
+	width: 9px;
+	margin-bottom: 0;
+	margin-right: 5px;
+}
+
+.calculatorIMGResultEndereco p {
+	margin: 0;
+}
+
+.calculatorIMGResultTotais {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 21px;
+}
+
+/* Ajustes para valores */
+.calculatorIMGResultTotal,
+.calculatorIMGResultSubtotal {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 10px 0;
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	box-shadow: 0px 3.85532px 38.5532px rgba(0, 0, 0, 0.5);
+	border-radius: 18px;
+	color: #ffffff;
+	width: 200px;
+	height: 70px;
+	flex-wrap: wrap;
+	align-content: center;
+	font-size: 20px;
+	font-weight: 900;
+}
+
+.dindinResulTotal {
+	font-size: 24px;
+	font-weight: bolder;
+}
+
+.dindinResulTotal span {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.parcelaTotal {
+	margin-left: 6px;
+}
+
+/* 08006080181 */
+.textoNumero {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	text-align: center;
+	color: #ffffff;
+	font-size: 21px;
+	margin: 0;
+}
+
+.divContato {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 21px;
+	height: 100px;
+}
+
+.contato {
+	display: flex;
+	padding-right: 36px;
+	padding-left: 16px;
+	flex-direction: row;
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 15px;
+	text-align: center;
+	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
+	box-shadow: 0px 4.14218px 41.4218px rgba(0, 0, 0, 0.5);
+	border-radius: 50px;
+	color: #ffffff;
+	text-shadow: 0px 2.08721px 26.0901px #ffffff;
+	height: 70%;
+	align-items: center;
+}
+
+.phone-icon {
+	width: 27px;
+	margin-right: 9px;
+	margin-bottom: 0;
+	height: 27px;
+	background-color: #ffffff;
+	border-radius: 50%;
+}
+
+.logoCreditoReal {
+	width: 100px;
+	margin: 0;
+}

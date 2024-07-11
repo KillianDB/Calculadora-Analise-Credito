@@ -5,7 +5,11 @@ import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 
-export function CalculatorINSS4() {
+interface CalculatorINSS4Props {
+	isChecked: boolean;
+}
+
+export function CalculatorINSS4({ isChecked }: CalculatorINSS4Props) {
 	const [results, setResults] = useState([""]);
 	const [totais, setTotais] = useState([""]);
 	const label: string = "SALÁRIO: ";

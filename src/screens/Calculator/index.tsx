@@ -5,6 +5,9 @@ import { CalculatorINSS2 } from "../../components/Calculators/CalculatorINSS2";
 import { CalculatorINSS3 } from "../../components/Calculators/CalculatorINSS3";
 import { CalculatorINSS4 } from "../../components/Calculators/CalculatorINSS4";
 import { CalculatorINSS5 } from "../../components/Calculators/CalculatorINSS5";
+import html2canvas from "html2canvas";
+import Modal from "react-modal";
+import { CalculatorIMGResult } from "../CalculatorIMGResult";
 // import generatePNGResult from "../../../backend/generatePNGResult";
 // import templateINSS1 from "../../assets/TESTE.svg";
 
@@ -12,8 +15,14 @@ function Calculator() {
 	const [menu, setMenu] = useState("");
 	const [submenu, setSubmenu] = useState("");
 	const [allInputsFilled, setAllInputsFilled] = useState(false);
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [resultValues, setResultValues] = useState([]);
+	const [finalResult, setFinalResult] = useState<string[]>([]);
+	const [modalIsOpen, setModalIsOpen] = useState(false);
+	const [isChecked, setIsChecked] = useState(false);
+
+	function toggleCheckbox() {
+		console.log("isChecked", isChecked);
+		setIsChecked(!isChecked);
+	}
 
 	function handleMenuChange(newMenu: React.SetStateAction<string>) {
 		setMenu(newMenu);
@@ -24,10 +33,11 @@ function Calculator() {
 	function filterSubmenuOptions(menu: string) {
 		if (menu === "INSS") {
 			return [
-				"Possibilidades Gerais",
-				"Cálculo Salário Cliente",
-				"Cálculo Salário Cliente Sem Cartões",
-				"Cálculo Valor Solicitado",
+				// "Possibilidades Gerais",
+				// "Cálculo Salário Cliente",
+				// "Cálculo Salário Cliente Sem Cartões",
+				// "Cálculo Valor Solicitado",
+				"Submenu",
 				"Cálculo por Margem Disponível",
 			];
 		} else if (menu === "LOAS REP LEGAL") {
@@ -42,7 +52,7 @@ function Calculator() {
 	}
 
 	function renderCalculatorByMenus(menu: string, submenu: string) {
-		if (menu === "" || submenu === "") {
+		if (menu === "" || submenu === "" || submenu === "Submenu") {
 			return (
 				<>
 					<div className='calculatorComponentDiv'>
@@ -56,16 +66,21 @@ function Calculator() {
 			menu === "INSS" &&
 			submenu === "Cálculo por Margem Disponível"
 		) {
-			return <CalculatorINSS1 setAllInputsFilled={setAllInputsFilled} />;
+			return (
+				<CalculatorINSS1
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+				/>
+			);
 		} else if (menu === "INSS" && submenu === "Cálculo Valor Solicitado") {
-			return <CalculatorINSS2 setAllInputsFilled={setAllInputsFilled} />;
+			return <CalculatorINSS2 />;
 		} else if (
 			menu === "INSS" &&
 			submenu === "Cálculo Salário Cliente Sem Cartões"
 		) {
-			return <CalculatorINSS3 />;
+			return <CalculatorINSS3 isChecked={isChecked} />;
 		} else if (menu === "INSS" && submenu === "Cálculo Salário Cliente") {
-			return <CalculatorINSS4 />;
+			return <CalculatorINSS4 isChecked={isChecked} />;
 		} else if (menu === "INSS" && submenu === "Possibilidades Gerais") {
 			return <CalculatorINSS5 />;
 		}
@@ -79,22 +94,33 @@ function Calculator() {
 		renderCalculatorByMenus(menu, newSubmenu.toString());
 	}
 
-	function handleResultDownload(
-		menu: string,
-		submenu: string,
-		values: string[]
-	) {
+	function handleResultDownload() {
 		return () => {
-			alert("Baixando resultado...");
-			// generatePNGResult(
-			// 	"menu1",
-			// 	"submenu1",
-			// 	["Bem-vindo, TESTE", "Resultado 1", "Resultado 2"],
-			// 	templateINSS1
-			// );
-			console.log(menu, submenu, values);
+			setModalIsOpen(true);
 		};
 	}
+
+	const handleDownloadImage = () => {
+		const element = document.getElementById("calculatorIMGResult");
+		console.log("entrou pra baixa a imagem", element);
+
+		if (element === null) {
+			alert("Não foi possível baixar a imagem");
+			return;
+		}
+		html2canvas(element).then(
+			(canvas: { toDataURL: (arg0: string) => string }) => {
+				const link = document.createElement("a");
+				link.href = canvas.toDataURL("image/png");
+				link.download = "calculator_result.png";
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link);
+			}
+		);
+		console.log("saiu do html2canvas");
+	};
+
 	return (
 		<>
 			<div className='headerCalculator'>
@@ -105,9 +131,9 @@ function Calculator() {
 					>
 						<option value=''>Menu</option>
 						<option value='INSS'>INSS</option>
-						<option value='LOAS REP LEGAL'>LOAS REP LEGAL</option>
+						{/* <option value='LOAS REP LEGAL'>LOAS REP LEGAL</option>
 						<option value='EXERCITO'>EXÉRCITO</option>
-						<option value='PREFEITURA'>PREFEITURA</option>
+						<option value='PREFEITURA'>PREFEITURA</option> */}
 					</select>
 					<select
 						onChange={(e) =>
@@ -123,24 +149,46 @@ function Calculator() {
 					</select>
 					{submenu.slice(0, 15) === "Cálculo Salário" && (
 						<label className='checkboxDiv'>
-							<input type='checkbox' className='checkbox' />
+							<input
+								type='checkbox'
+								checked={isChecked}
+								onChange={toggleCheckbox}
+								className='checkbox'
+							/>
 							Bônus após três meses
 						</label>
 					)}
 					{allInputsFilled && (
-						<button
-							className='buttonBaixarResultado'
-							onClick={handleResultDownload(
-								menu,
-								submenu,
-								resultValues
-							)}
-						>
-							Baixar Resultado
-						</button>
+						<div>
+							<button
+								className='buttonBaixarResultado'
+								onClick={handleResultDownload()}
+							>
+								Baixar Resultado
+							</button>
+						</div>
 					)}
 				</div>
 				<img src='/logo-square.svg' id='calculatorLogo' alt='Logo' />
+
+				{/* Modal para exibir o resultado */}
+				<Modal
+					isOpen={modalIsOpen}
+					onRequestClose={() => setModalIsOpen(false)}
+				>
+					<CalculatorIMGResult
+						menu={menu}
+						submenu={submenu}
+						values={finalResult}
+					/>
+					<button
+						className='buttonModalDownload'
+						onClick={handleDownloadImage}
+					>
+						Baixar Imagem
+					</button>
+					{/* <button onClick={() => setModalIsOpen(false)}>Close</button> */}
+				</Modal>
 			</div>
 			{renderCalculatorByMenus(menu, submenu)}
 		</>

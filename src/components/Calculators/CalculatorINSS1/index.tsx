@@ -5,7 +5,13 @@ import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 
-export function CalculatorINSS1({ setAllInputsFilled }) {
+export function CalculatorINSS1({
+	setAllInputsFilled,
+	setFinalResult,
+}: {
+	setAllInputsFilled: (filled: boolean) => void;
+	setFinalResult: (result: string[]) => void;
+}) {
 	const [results, setResults] = useState([
 		"VALOR EMPRÉSTIMO: R$00000,00",
 		"PARCELA - R$ 0000,00",
@@ -54,6 +60,18 @@ export function CalculatorINSS1({ setAllInputsFilled }) {
 		if (result != "no valid labels" && result != undefined) {
 			setResults(result.slice(0, 10));
 			setTotal(result.slice(10, 13));
+			const finalResult = [
+				"Bem vindo, Cliente CR",
+				`Valor Empréstimo R$ ${result[0].split("$ ")[1]}`,
+				`Valor Parcela R$ ${result[1].split("$ ")[1]} 84x`,
+				`Valor Cartão INSS R$ ${result[2].split("$ ")[1]}`,
+				`Valor Parcela R$ ${result[3].split("$ ")[1]} 84x`,
+				`Valor Cartão Enviado R$ ${result[8].split("$ ")[1]}`,
+				`Valor Parcela R$ ${result[9].split("$ ")[1]} 84x`,
+				`R$ ${result[10].split("$ ")[1]}`,
+				`R$ ${result[11].split("$ ")[1]} 84x`,
+			];
+			setFinalResult(finalResult);
 		}
 	}
 

@@ -4,7 +4,7 @@ import CalculatorInput from "../../CalculatorInput";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 
-export function CalculatorINSS2({ setAllInputsFilled }) {
+export function CalculatorINSS2() {
 	const [totais, setTotais] = useState([
 		"TOTAL: R$ 0,00",
 		"PARCELA - R$ 0,00",

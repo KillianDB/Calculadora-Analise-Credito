@@ -17,7 +17,7 @@ function App() {
 			{/* <Route path='/home' element={<Home />} /> */}
 			{/* <Route path='/admin/home' element={<AdminHome />} /> */}
 			<Route path='/calculadora' element={<Calculator />} />
-			<Route path='*' element={<Calculator />} />
+			{/* <Route path='*' element={<Calculator />} /> */}
 			{/* <Route
 				path='/calculadora/resultado'
 				element={

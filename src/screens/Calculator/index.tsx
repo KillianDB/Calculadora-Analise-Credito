@@ -5,11 +5,9 @@ import { CalculatorINSS2 } from "../../components/Calculators/CalculatorINSS2";
 import { CalculatorINSS3 } from "../../components/Calculators/CalculatorINSS3";
 import { CalculatorINSS4 } from "../../components/Calculators/CalculatorINSS4";
 import { CalculatorINSS5 } from "../../components/Calculators/CalculatorINSS5";
-import html2canvas from "html2canvas";
+// import html2canvas from "html2canvas";
 import Modal from "react-modal";
 import { CalculatorIMGResult } from "../CalculatorIMGResult";
-// import generatePNGResult from "../../../backend/generatePNGResult";
-// import templateINSS1 from "../../assets/TESTE.svg";
 
 function Calculator() {
 	const [menu, setMenu] = useState("");
@@ -33,11 +31,10 @@ function Calculator() {
 	function filterSubmenuOptions(menu: string) {
 		if (menu === "INSS") {
 			return [
-				// "Possibilidades Gerais",
-				// "Cálculo Salário Cliente",
-				// "Cálculo Salário Cliente Sem Cartões",
-				// "Cálculo Valor Solicitado",
-				"Submenu",
+				"Possibilidades Gerais",
+				"Cálculo Salário Cliente",
+				"Cálculo Salário Cliente Sem Cartões",
+				"Cálculo Valor Solicitado",
 				"Cálculo por Margem Disponível",
 			];
 		} else if (menu === "LOAS REP LEGAL") {
@@ -97,29 +94,34 @@ function Calculator() {
 	function handleResultDownload() {
 		return () => {
 			setModalIsOpen(true);
+			// const resultUrl = `/calculadora/resultado?result=${encodeURIComponent(
+			// 	JSON.stringify(finalResult)
+			// )}`;
+			// window.open(resultUrl, "_blank");
 		};
 	}
 
-	const handleDownloadImage = () => {
-		const element = document.getElementById("calculatorIMGResult");
-		console.log("entrou pra baixa a imagem", element);
+	// const handleDownloadImage = () => {
+	// 	const element = document.getElementById("calculatorIMGResult");
+	// 	console.log("entrou pra baixa a imagem", element);
 
-		if (element === null) {
-			alert("Não foi possível baixar a imagem");
-			return;
-		}
-		html2canvas(element).then(
-			(canvas: { toDataURL: (arg0: string) => string }) => {
-				const link = document.createElement("a");
-				link.href = canvas.toDataURL("image/png");
-				link.download = "calculator_result.png";
-				document.body.appendChild(link);
-				link.click();
-				document.body.removeChild(link);
-			}
-		);
-		console.log("saiu do html2canvas");
-	};
+	// 	if (element === null) {
+	// 		alert("Não foi possível baixar a imagem");
+	// 		return;
+	// 	}
+	// 	html2canvas(element).then(
+	// 		(canvas: { toDataURL: (arg0: string) => string }) => {
+	// 			const link = document.createElement("a");
+	// 			link.href = canvas.toDataURL("image/png");
+	// 			link.download = "calculator_result.png";
+	// 			document.body.appendChild(link);
+	// 			link.click();
+	// 			document.body.removeChild(link);
+	// 			console.log("LINK", link);
+	// 		}
+	// 	);
+	// 	console.log("saiu do html2canvas");
+	// };
 
 	return (
 		<>
@@ -164,7 +166,7 @@ function Calculator() {
 								className='buttonBaixarResultado'
 								onClick={handleResultDownload()}
 							>
-								Baixar Resultado
+								Visualizar Resultado
 							</button>
 						</div>
 					)}
@@ -181,12 +183,12 @@ function Calculator() {
 						submenu={submenu}
 						values={finalResult}
 					/>
-					<button
+					{/* <button
 						className='buttonModalDownload'
 						onClick={handleDownloadImage}
 					>
 						Baixar Imagem
-					</button>
+					</button>  */}
 					{/* <button onClick={() => setModalIsOpen(false)}>Close</button> */}
 				</Modal>
 			</div>

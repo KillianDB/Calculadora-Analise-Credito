@@ -64,10 +64,18 @@ export function CalculatorINSS1({
 				"Bem vindo, Cliente CR",
 				`Valor Empréstimo R$ ${result[0].split("$ ")[1]}`,
 				`Valor Parcela R$ ${result[1].split("$ ")[1]} 84x`,
-				`Valor Cartão INSS R$ ${result[2].split("$ ")[1]}`,
-				`Valor Parcela R$ ${result[3].split("$ ")[1]} 84x`,
-				`Valor Cartão Enviado R$ ${result[8].split("$ ")[1]}`,
-				`Valor Parcela R$ ${result[9].split("$ ")[1]} 84x`,
+				`Valor Cartão R$ ${
+					result[2].split("$ ")[1] + result[6].split("$ ")[1]
+				}`,
+				`Valor Parcela R$ ${
+					result[3].split("$ ")[1] + result[7].split("$ ")[1]
+				} 84x`,
+				`Valor Cartão Enviado R$ ${
+					result[4].split("$ ")[1] + result[8].split("$ ")[1]
+				}`,
+				`Valor Parcela R$ ${
+					result[5].split("$ ")[1] + result[9].split("$ ")[1]
+				} 84x`,
 				`R$ ${result[10].split("$ ")[1]}`,
 				`R$ ${result[11].split("$ ")[1]} 84x`,
 			];

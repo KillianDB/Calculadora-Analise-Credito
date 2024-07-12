@@ -33,6 +33,10 @@ export function calculate(
 			emprestimoT + cartaoINSST + cartaoEIT + cartaoBT + cartaoEBT;
 		const totalP: number =
 			emprestimoP + cartaoINSSP + cartaoEIP + cartaoBP + cartaoEBP;
+		const somacartao = cartaoINSST + cartaoBT;
+		const somaparcela = cartaoINSSP + cartaoBP;
+		const somaenviado = cartaoEIT + cartaoEBT;
+		const somaprcelaen = cartaoEIP + cartaoEBP;
 
 		return [
 			"VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
@@ -53,6 +57,10 @@ export function calculate(
 			"TOTAL: R$ " + formatNumber(totalT),
 			" PARCELA - R$ " + formatNumber(totalP),
 			" 84x",
+			formatNumber(somacartao),
+			formatNumber(somaparcela),
+			formatNumber(somaenviado),
+			formatNumber(somaprcelaen),
 		];
 	} else if (menu == "INSS" && submenu == "Cálculo Valor Solicitado") {
 		if (!(values[0].label == "VALOR DE EMPRÉSTIMO SOLICITADO: ")) {

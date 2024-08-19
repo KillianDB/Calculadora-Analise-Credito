@@ -1,4 +1,9 @@
-import { Dispatch, Key, SetStateAction, useEffect, useState } from "react";
+import {
+	//  Dispatch,
+	Key,
+	// SetStateAction, useEffect,
+	useState,
+} from "react";
 import { calculate } from "../../../utils/calculate";
 import CalculatorInput from "../../CalculatorInput";
 import { CalculatorTitle } from "../../CalculatorTitle";
@@ -15,9 +20,9 @@ import "./calculatorINSS2.css";
 // 	setFinalResult,
 // }) =>
 export function CalculatorINSS2() {
-	const [values, setValues] = useState([
-		{ label: "VALOR DE EMPRÉSTIMO SOLICITADO: ", value: "" },
-	]);
+	// const [values, setValues] = useState([
+	// 	{ label: "VALOR DE EMPRÉSTIMO SOLICITADO: ", value: "" },
+	// ]);
 	const [totais, setTotais] = useState([
 		"TOTAL: R$ 0,00",
 		"PARCELA - R$ 0,00",
@@ -41,7 +46,7 @@ export function CalculatorINSS2() {
 	const label = "VALOR DE EMPRÉSTIMO SOLICITADO: ";
 
 	function handleInputValue(label: string, value: string) {
-		setValues([{ label, value }]);
+		// setValues([{ label, value }]);
 		const result = calculate("INSS", "Cálculo Valor Solicitado", [
 			{ label, value },
 		]);

@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import {
+	// useEffect,
+	useState,
+} from "react";
 import { calculate } from "../../../utils/calculate";
 import CalculatorInput from "../../CalculatorInput";
 import { CalculatorResult } from "../../CalculatorResult";
@@ -16,7 +19,7 @@ export function CalculatorINSS3({
 }: // setAllInputsFilled,
 // setFinalResult,
 CalculatorINSS3Props) {
-	const [values, setValues] = useState([{ label: "SALÁRIO: ", value: "" }]);
+	// const [values, setValues] = useState([{ label: "SALÁRIO: ", value: "" }]);
 	const [results, setResults] = useState([
 		"VALOR EMPRÉSTIMO: R$00000,00",
 		"VALOR MARGEM EMPRÉSTIMO: R$00000,00",
@@ -37,7 +40,7 @@ CalculatorINSS3Props) {
 	const label: string = "SALÁRIO: ";
 
 	function handleInputValue(label: string, value: string) {
-		setValues([{ label, value }]);
+		// setValues([{ label, value }]);
 		const result = calculate(
 			"INSS",
 			"Cálculo Salário Cliente Sem Cartões",

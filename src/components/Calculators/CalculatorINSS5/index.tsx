@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import {
+	// useEffect,
+	useState,
+} from "react";
 import { calculate } from "../../../utils/calculate";
 import CalculatorInput from "../../CalculatorInput";
 import { CalculatorResult } from "../../CalculatorResult";
@@ -7,13 +10,13 @@ import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS5.css";
 
 export function CalculatorINSS5() {
-// 	{
-// 	setAllInputsFilled,
-// 	setFinalResult,
-// }: {
-// 	setAllInputsFilled: (filled: boolean) => void;
-// 	setFinalResult: (result: string[]) => void;
-// }
+	// 	{
+	// 	setAllInputsFilled,
+	// 	setFinalResult,
+	// }: {
+	// 	setAllInputsFilled: (filled: boolean) => void;
+	// 	setFinalResult: (result: string[]) => void;
+	// }
 	const [results, setResults] = useState([
 		"VALOR EMPRESTIMO: R$ 00.000,00",
 		"PARCELA: R$ 000,00",

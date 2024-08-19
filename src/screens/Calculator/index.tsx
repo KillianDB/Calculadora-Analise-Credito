@@ -79,7 +79,12 @@ function Calculator() {
 		} else if (menu === "INSS" && submenu === "Cálculo Salário Cliente") {
 			return <CalculatorINSS4 isChecked={isChecked} />;
 		} else if (menu === "INSS" && submenu === "Possibilidades Gerais") {
-			return <CalculatorINSS5 />;
+			return (
+				<CalculatorINSS5
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+				/>
+			);
 		}
 	}
 

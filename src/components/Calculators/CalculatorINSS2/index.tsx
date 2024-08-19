@@ -1,10 +1,23 @@
-import { Key, useState } from "react";
+import { Dispatch, Key, SetStateAction, useEffect, useState } from "react";
 import { calculate } from "../../../utils/calculate";
 import CalculatorInput from "../../CalculatorInput";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
+import "./calculatorINSS2.css";
 
+// interface CalculatorINSS2Props {
+// 	setAllInputsFilled: Dispatch<SetStateAction<boolean>>;
+// 	setFinalResult: Dispatch<SetStateAction<string[]>>;
+// }
+
+// export const CalculatorINSS2: React.FC<CalculatorINSS2Props> = ({
+// 	setAllInputsFilled,
+// 	setFinalResult,
+// }) =>
 export function CalculatorINSS2() {
+	const [values, setValues] = useState([
+		{ label: "VALOR DE EMPRÉSTIMO SOLICITADO: ", value: "" },
+	]);
 	const [totais, setTotais] = useState([
 		"TOTAL: R$ 0,00",
 		"PARCELA - R$ 0,00",
@@ -28,12 +41,15 @@ export function CalculatorINSS2() {
 	const label = "VALOR DE EMPRÉSTIMO SOLICITADO: ";
 
 	function handleInputValue(label: string, value: string) {
+		setValues([{ label, value }]);
 		const result = calculate("INSS", "Cálculo Valor Solicitado", [
 			{ label, value },
 		]);
 		if (result !== "no valid labels" && result !== undefined) {
 			setTotais(result);
 		}
+		// const finalResult: string[] = [];
+		// setFinalResult(finalResult);
 	}
 
 	function chunkArray(array: string[], chunkSize: number) {
@@ -44,10 +60,15 @@ export function CalculatorINSS2() {
 		return result;
 	}
 
+	// useEffect(() => {
+	// 	const allFilled = values.every((item) => item.value !== "");
+	// 	setAllInputsFilled(allFilled);
+	// }, [values, setAllInputsFilled]);
+
 	const chunkedTotais = chunkArray(totais, 3);
 
 	return (
-		<div className='calculatorComponentDiv'>
+		<div className='calculatorComponentDiv' id='calculatorComponentDivTwo'>
 			<CalculatorTitle menu='INSS' submenu='Cálculo Valor Solicitado' />
 			<div className='inputsContainer'>
 				<CalculatorInput
@@ -56,7 +77,7 @@ export function CalculatorINSS2() {
 					onChange={(e) => handleInputValue(label, e.target.value)}
 				/>
 			</div>
-			<section className='answerContainer'>
+			<section className='answerContainer' id='answerContainerTwo'>
 				{chunkedTotais.map((chunk, index) => (
 					<div
 						key={index}

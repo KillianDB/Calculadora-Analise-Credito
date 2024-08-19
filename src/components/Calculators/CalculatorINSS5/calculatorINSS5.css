@@ -1,0 +1,110 @@
+#root {
+	background-color: #ffffff;
+}
+
+.inputsContainer {
+	padding: 16px;
+}
+
+.resultsContainerPossibilidades {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	/* grid-template-columns: 1fr 2fr 2fr 2fr; */
+	/* grid-template-rows: repeat(4, auto); */
+	column-gap: 100px;
+	padding-left: 80px;
+	row-gap: 10px;
+	height: max-content;
+	align-content: flex-start;
+}
+
+.calculatorResultPossibilidades {
+	align-self: flex-start;
+	font-weight: 500;
+	font-size: 14px;
+	position: sticky;
+}
+
+.calculatorComponentDivPossibilidades {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	flex-wrap: wrap;
+	width: 80vw;
+}
+
+.mainContainerPossibilidades {
+	display: flex;
+	width: 80vw;
+	align-items: center;
+	box-shadow: 0.2px 0.2px 11px 0px #d9d9d9;
+	flex-direction: column;
+}
+
+.secondContainerPossibilidades {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 80vw;
+	align-self: center;
+	box-shadow: 0.2px 0.2px 11px 0px #d9d9d9;
+}
+
+.mainSecondContainerPossibilidades {
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	flex-wrap: wrap;
+	width: 80vw;
+	align-self: center;
+	box-shadow: 0.2px 0.2px 11px 0px #d9d9d9;
+	padding-top: 1vw;
+	justify-content: space-evenly;
+}
+
+.mainSecondContainerPossibilidades input {
+	width: 240px;
+}
+
+.parcelasPossibilidades,
+.saldoPossibilidades,
+.possibilidadesPossibilidades {
+	display: flex;
+	flex-direction: column;
+}
+
+.possibilidadesPossibilidades .calculatorResult {
+	margin-bottom: 21px;
+}
+
+.resultadosPossibilidades {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+}
+
+.resultadosPossibilidades .calculatorResult {
+	padding: 12px;
+	margin-left: 21px;
+}
+
+#obs {
+	padding-left: 21px;
+	padding-right: 21px;
+	text-align: center;
+}
+
+#trocoLiquidoDiv {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin-bottom: 21px;
+	width: 100%;
+}
+
+#trocoLiquidoDiv h2,
+p {
+	margin: 0;
+	padding: 0;
+}

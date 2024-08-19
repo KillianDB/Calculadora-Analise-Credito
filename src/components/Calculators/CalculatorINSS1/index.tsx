@@ -15,13 +15,13 @@ export function CalculatorINSS1({
 	const [results, setResults] = useState([
 		"VALOR EMPRÉSTIMO: R$00000,00",
 		"PARCELA - R$ 0000,00",
-		"VALOR CARTÃO INSS: R$ 00000,00",
+		"VALOR CARTÃO INSS: R$ 000,00",
 		"PARCELA - R$ 0000,00",
-		"VALOR CARTÃO ENVIADO: R$ 00000,00",
+		"VALOR CARTÃO ENVIADO: R$ 000,00",
 		"PARCELA - R$ 0000,00",
-		"VALOR CARTÃO BENEFÍCIO: R$ 00000,00",
+		"VALOR CARTÃO BENEFÍCIO: R$ 000,00",
 		"PARCELA - R$ 0000,00",
-		"VALOR CARTÃO ENVIADO: R$ 00000,00",
+		"VALOR CARTÃO ENVIADO: R$ 000,00",
 		"PARCELA - R$ 0000,00",
 	]);
 	const [totais, setTotal] = useState([

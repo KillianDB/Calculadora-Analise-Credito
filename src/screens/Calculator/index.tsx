@@ -81,8 +81,8 @@ function Calculator() {
 		} else if (menu === "INSS" && submenu === "Possibilidades Gerais") {
 			return (
 				<CalculatorINSS5
-					setAllInputsFilled={setAllInputsFilled}
-					setFinalResult={setFinalResult}
+				// setAllInputsFilled={setAllInputsFilled}
+				// setFinalResult={setFinalResult}
 				/>
 			);
 		}

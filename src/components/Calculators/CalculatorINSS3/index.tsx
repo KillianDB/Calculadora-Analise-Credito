@@ -51,9 +51,28 @@ export function CalculatorINSS3({
 			console.log("RESULT ", result);
 			console.log("RESULTS ", results);
 			console.log("TOTAL ", totais);
+			if (!isChecked) {
+				const finalResult: string[] = [
+					"Bem vindo, Cliente CR",
+					`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
+					`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
+					`${result[2].split(" R$ ")[1]}`,
+					`${result[3].split(" R$ ")[1]} 84x`,
+				];
+				setFinalResult(finalResult);
+			} else {
+				const finalResult: string[] = [
+					"Bem vindo, Cliente CR",
+					`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
+					`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
+					`${result[2].split(" R$ ")[1]}`,
+					`${result[3].split(" R$ ")[1]} 84x`,
+					`${result[9].split(" R$ ")[1]}`,
+					`${result[10].split(" R$ ")[1]} 84x`,
+				];
+				setFinalResult(finalResult);
+			}
 		}
-		const finalResult: string[] = [];
-		setFinalResult(finalResult);
 	}
 
 	useEffect(() => {

@@ -4,6 +4,7 @@ import CalculatorInput from "../../CalculatorInput";
 import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
+import { formatNumber } from "../../../utils/formatNumbers";
 
 export function CalculatorINSS1({
 	setAllInputsFilled,
@@ -62,46 +63,31 @@ export function CalculatorINSS1({
 			setTotal(result.slice(10, 13));
 			const finalResult = [
 				"Bem vindo, Cliente CR",
-				`Valor Empréstimo R$ ${result[0].split("$ ")[1]}`,
-				`Valor Parcela R$ ${result[1].split("$ ")[1]} 84x`,
-				`Valor Cartão R$ ${
-					// parseFloat(
-					result[13]
-					// +
-					// )
-					// parseFloat(
-					// result[6].split("$ ")[1]
-					// )
-				}`,
-				`Valor Parcela R$ ${
-					// parseFloat(
-					result[14]
-					//  +
-					// )
-					// parseFloat(
-					// result[7].split("$ ")[1]
-					// )
-				} 84x`,
-				`Valor Cartão Enviado R$ ${
-					// parseFloat(
-					result[15]
-					// )
-					// parseFloat(
-					// result[8].split("$ ")[1]
-					// )
-				}`,
-				`Valor Parcela R$ ${
-					// parseFloat(
-					result[16]
-					// )
-					// parseFloat(
-					// result[9].split("$ ")[1]
-					// )
-				} 84x`,
-				`R$ ${result[10].split("$ ")[1]}`,
-				`R$ ${result[11].split("$ ")[1]} 84x`,
+				`Valor Empréstimo R$ ${formatNumber(
+					+result[0].split("$ ")[1]
+				)}`,
+				`Valor Parcela R$ ${formatNumber(
+					+result[1].split("$ ")[1]
+				)} 84x`,
+				`Valor Cartão R$ ${formatNumber(
+					parseFloat(result[2].split("$ ")[1]) +
+						parseFloat(result[6].split("$ ")[1])
+				)}`,
+				`Valor Parcela R$ ${formatNumber(
+					parseFloat(result[3].split("$ ")[1]) +
+						parseFloat(result[7].split("$ ")[1])
+				)} 84x`,
+				`Valor Cartão Enviado R$ ${formatNumber(
+					parseFloat(result[4].split("$ ")[1]) +
+						parseFloat(result[8].split("$ ")[1])
+				)}`,
+				`Valor Parcela R$ ${formatNumber(
+					parseFloat(result[5].split("$ ")[1]) +
+						parseFloat(result[9].split("$ ")[1])
+				)} 84x`,
+				`R$ ${formatNumber(+result[10].split("$ ")[1])}`,
+				`R$ ${formatNumber(+result[11].split("$ ")[1])} 84x`,
 			];
-			// console.log("A", +result[2].split("$ ")[1]);
 			setFinalResult(finalResult);
 		}
 	}

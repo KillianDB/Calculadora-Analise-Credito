@@ -1,7 +1,8 @@
 import {
 	//  Dispatch,
 	Key,
-	// SetStateAction, useEffect,
+	// SetStateAction,
+	useEffect,
 	useState,
 } from "react";
 import { calculate } from "../../../utils/calculate";
@@ -9,20 +10,18 @@ import CalculatorInput from "../../CalculatorInput";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS2.css";
+import { formatNumber } from "../../../utils/formatNumbers";
 
-// interface CalculatorINSS2Props {
-// 	setAllInputsFilled: Dispatch<SetStateAction<boolean>>;
-// 	setFinalResult: Dispatch<SetStateAction<string[]>>;
-// }
-
-// export const CalculatorINSS2: React.FC<CalculatorINSS2Props> = ({
-// 	setAllInputsFilled,
-// 	setFinalResult,
-// }) =>
-export function CalculatorINSS2() {
-	// const [values, setValues] = useState([
-	// 	{ label: "VALOR DE EMPRÉSTIMO SOLICITADO: ", value: "" },
-	// ]);
+export function CalculatorINSS2({
+	setAllInputsFilled,
+	setFinalResult,
+}: {
+	setAllInputsFilled: (filled: boolean) => void;
+	setFinalResult: (result: string[]) => void;
+}) {
+	const [values, setValues] = useState([
+		{ label: "VALOR DE EMPRÉSTIMO SOLICITADO: ", value: "" },
+	]);
 	const [totais, setTotais] = useState([
 		"TOTAL: R$ 0,00",
 		"PARCELA - R$ 0,00",
@@ -46,15 +45,20 @@ export function CalculatorINSS2() {
 	const label = "VALOR DE EMPRÉSTIMO SOLICITADO: ";
 
 	function handleInputValue(label: string, value: string) {
-		// setValues([{ label, value }]);
+		setValues([{ label, value }]);
 		const result = calculate("INSS", "Cálculo Valor Solicitado", [
 			{ label, value },
 		]);
 		if (result !== "no valid labels" && result !== undefined) {
 			setTotais(result);
 		}
-		// const finalResult: string[] = [];
-		// setFinalResult(finalResult);
+		//se for 84x bota esse no total e parcela
+		const finalResult: string[] = [
+			"Bem vindo, Cliente CR",
+			"Valor Empréstimo Solicitado R$ ",
+			formatNumber(+result![0].split(" R")[1]),
+		];
+		setFinalResult(finalResult);
 	}
 
 	function chunkArray(array: string[], chunkSize: number) {
@@ -65,10 +69,10 @@ export function CalculatorINSS2() {
 		return result;
 	}
 
-	// useEffect(() => {
-	// 	const allFilled = values.every((item) => item.value !== "");
-	// 	setAllInputsFilled(allFilled);
-	// }, [values, setAllInputsFilled]);
+	useEffect(() => {
+		const allFilled = values.every((item) => item.value !== "");
+		setAllInputsFilled(allFilled);
+	}, [values, setAllInputsFilled]);
 
 	const chunkedTotais = chunkArray(totais, 3);
 

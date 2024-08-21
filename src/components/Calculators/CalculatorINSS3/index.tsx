@@ -1,7 +1,4 @@
-import {
-	// useEffect,
-	useState,
-} from "react";
+import { useEffect, useState } from "react";
 import { calculate } from "../../../utils/calculate";
 import CalculatorInput from "../../CalculatorInput";
 import { CalculatorResult } from "../../CalculatorResult";
@@ -10,16 +7,16 @@ import CalculatorTotal from "../../CalculatorTotal";
 
 interface CalculatorINSS3Props {
 	isChecked: boolean;
-	// setAllInputsFilled: (filled: boolean) => void;
-	// setFinalResult: (result: string[]) => void;
+	setAllInputsFilled: (filled: boolean) => void;
+	setFinalResult: (result: string[]) => void;
 }
 
 export function CalculatorINSS3({
 	isChecked,
-}: // setAllInputsFilled,
-// setFinalResult,
-CalculatorINSS3Props) {
-	// const [values, setValues] = useState([{ label: "SALÁRIO: ", value: "" }]);
+	setAllInputsFilled,
+	setFinalResult,
+}: CalculatorINSS3Props) {
+	const [values, setValues] = useState([{ label: "SALÁRIO: ", value: "" }]);
 	const [results, setResults] = useState([
 		"VALOR EMPRÉSTIMO: R$00000,00",
 		"VALOR MARGEM EMPRÉSTIMO: R$00000,00",
@@ -40,7 +37,7 @@ CalculatorINSS3Props) {
 	const label: string = "SALÁRIO: ";
 
 	function handleInputValue(label: string, value: string) {
-		// setValues([{ label, value }]);
+		setValues([{ label, value }]);
 		const result = calculate(
 			"INSS",
 			"Cálculo Salário Cliente Sem Cartões",
@@ -55,14 +52,14 @@ CalculatorINSS3Props) {
 			console.log("RESULTS ", results);
 			console.log("TOTAL ", totais);
 		}
-		// const finalResult: string[] = [];
-		// setFinalResult(finalResult);
+		const finalResult: string[] = [];
+		setFinalResult(finalResult);
 	}
 
-	// useEffect(() => {
-	// 	const allFilled = values.every((item) => item.value !== "");
-	// 	setAllInputsFilled(allFilled);
-	// }, [values, setAllInputsFilled]);
+	useEffect(() => {
+		const allFilled = values.every((item) => item.value !== "");
+		setAllInputsFilled(allFilled);
+	}, [values, setAllInputsFilled]);
 
 	return (
 		<div className='calculatorComponentDiv'>

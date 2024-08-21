@@ -1,7 +1,4 @@
-import {
-	// useEffect,
-	useState,
-} from "react";
+import { useEffect, useState } from "react";
 import { calculate } from "../../../utils/calculate";
 import CalculatorInput from "../../CalculatorInput";
 import { CalculatorResult } from "../../CalculatorResult";
@@ -9,14 +6,13 @@ import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS5.css";
 
-export function CalculatorINSS5() {
-	// 	{
-	// 	setAllInputsFilled,
-	// 	setFinalResult,
-	// }: {
-	// 	setAllInputsFilled: (filled: boolean) => void;
-	// 	setFinalResult: (result: string[]) => void;
-	// }
+export function CalculatorINSS5({
+	setAllInputsFilled,
+	setFinalResult,
+}: {
+	setAllInputsFilled: (filled: boolean) => void;
+	setFinalResult: (result: string[]) => void;
+}) {
 	const [results, setResults] = useState([
 		"VALOR EMPRESTIMO: R$ 00.000,00",
 		"PARCELA: R$ 000,00",
@@ -144,10 +140,10 @@ export function CalculatorINSS5() {
 		},
 	]);
 
-	// useEffect(() => {
-	// 	const allFilled = values.slice(0, 3).every((item) => item.value !== "");
-	// 	setAllInputsFilled(allFilled);
-	// }, [values, setAllInputsFilled]);
+	useEffect(() => {
+		const allFilled = values.slice(0, 3).every((item) => item.value !== "");
+		setAllInputsFilled(allFilled);
+	}, [values, setAllInputsFilled]);
 
 	function handleInputValue(label: string, value: string) {
 		const updatedValues = values.map((item) =>
@@ -162,16 +158,16 @@ export function CalculatorINSS5() {
 			setResultTotalPossibilidade(result.slice(22, 25));
 			setResultsTrocoLiquido(result[25]);
 			setTotal(result.slice(26, 30));
-			// const finalResult = [
-			// 	"Bem vindo, Cliente CR",
-			// 	`Valor Empréstimo R$ ${result[0].split("$ ")[1]}`,
-			// 	`Valor Parcela R$ ${result[1].split("$ ")[1]} 84x`,
-			// 	`Valor Cartão R$ ${result[13]}`,
-			// 	`Valor Parcela R$ ${result[14]} 84x`,
-			// 	`Valor Cartão Enviado R$ ${result[15]}`,
-			// 	`Valor Parcela R$ ${result[16]} 84x`,
-			// ];
-			// setFinalResult(finalResult);
+			const finalResult = [
+				"Bem vindo, Cliente CR",
+				`Valor Empréstimo R$ ${result[0].split("$ ")[1]}`,
+				`Valor Parcela R$ ${result[1].split("$ ")[1]} 84x`,
+				`Valor Cartão R$ ${result[13]}`,
+				`Valor Parcela R$ ${result[14]} 84x`,
+				`Valor Cartão Enviado R$ ${result[15]}`,
+				`Valor Parcela R$ ${result[16]} 84x`,
+			];
+			setFinalResult(finalResult);
 		}
 	}
 

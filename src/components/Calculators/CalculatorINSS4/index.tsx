@@ -1,7 +1,4 @@
-import {
-	// useEffect,
-	useState,
-} from "react";
+import { useEffect, useState } from "react";
 import { calculate } from "../../../utils/calculate";
 import CalculatorInput from "../../CalculatorInput";
 import { CalculatorResult } from "../../CalculatorResult";
@@ -11,16 +8,16 @@ import "./calculatorINSS4.css";
 
 interface CalculatorINSS4Props {
 	isChecked: boolean;
-	// setAllInputsFilled: (filled: boolean) => void;
-	// setFinalResult: (result: string[]) => void;
+	setAllInputsFilled: (filled: boolean) => void;
+	setFinalResult: (result: string[]) => void;
 }
 
 export function CalculatorINSS4({
 	isChecked,
-}: // setAllInputsFilled,
-// setFinalResult,
-CalculatorINSS4Props) {
-	// const [values, setValues] = useState([{ label: "SALÁRIO: ", value: "" }]);
+	setAllInputsFilled,
+	setFinalResult,
+}: CalculatorINSS4Props) {
+	const [values, setValues] = useState([{ label: "SALÁRIO: ", value: "" }]);
 	const [results, setResults] = useState([
 		"VALOR EMPRÉSTIMO: R$00.000,00",
 		"VALOR MARGEM EMPRÉSTIMO: R$00.000,00",
@@ -49,7 +46,7 @@ CalculatorINSS4Props) {
 	const label: string = "SALÁRIO: ";
 
 	function handleInputValue(label: string, value: string) {
-		// setValues([{ label, value }]);
+		setValues([{ label, value }]);
 		const result = calculate("INSS", "Cálculo Salário Cliente", [
 			{ label, value },
 		]);
@@ -59,14 +56,14 @@ CalculatorINSS4Props) {
 			setResults(result.slice(0, 8).concat(result.slice(11, 16)));
 			setTotais(result.slice(8, 11).concat(result.slice(16, 19)));
 		}
-		// const finalResult: string[] = [];
-		// setFinalResult(finalResult);
+		const finalResult: string[] = [];
+		setFinalResult(finalResult);
 	}
 
-	// useEffect(() => {
-	// 	const allFilled = values.every((item) => item.value !== "");
-	// 	setAllInputsFilled(allFilled);
-	// }, [values, setAllInputsFilled]);
+	useEffect(() => {
+		const allFilled = values.every((item) => item.value !== "");
+		setAllInputsFilled(allFilled);
+	}, [values, setAllInputsFilled]);
 
 	return (
 		<div

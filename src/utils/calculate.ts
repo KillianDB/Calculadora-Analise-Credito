@@ -320,6 +320,15 @@ export function calculate(
 			"TOTAL: R$ " + formatNumber(total),
 			" PARCELA - R$ " + formatNumber(parcela),
 			" 84x",
+			//soma total cartão
+			formatNumber(inss + beneficios + comprasinss + comprasbeneficios),
+			//soma parcela cartão
+			formatNumber(
+				parcelainss +
+					parcelacomprasinss +
+					parcelabeneficios +
+					parcelacomprasbeneficios
+			),
 		];
 	}
 }

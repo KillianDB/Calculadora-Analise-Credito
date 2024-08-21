@@ -5,9 +5,9 @@ import { CalculatorINSS2 } from "../../components/Calculators/CalculatorINSS2";
 import { CalculatorINSS3 } from "../../components/Calculators/CalculatorINSS3";
 import { CalculatorINSS4 } from "../../components/Calculators/CalculatorINSS4";
 import { CalculatorINSS5 } from "../../components/Calculators/CalculatorINSS5";
-// import html2canvas from "html2canvas";
 import Modal from "react-modal";
 import { CalculatorIMGResult } from "../CalculatorIMGResult";
+import axios from "axios";
 
 function Calculator() {
 	const [menu, setMenu] = useState("");
@@ -70,19 +70,36 @@ function Calculator() {
 				/>
 			);
 		} else if (menu === "INSS" && submenu === "Cálculo Valor Solicitado") {
-			return <CalculatorINSS2 />;
+			return (
+				<CalculatorINSS2
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+				/>
+			);
 		} else if (
 			menu === "INSS" &&
 			submenu === "Cálculo Salário Cliente Sem Cartões"
 		) {
-			return <CalculatorINSS3 isChecked={isChecked} />;
+			return (
+				<CalculatorINSS3
+					isChecked={isChecked}
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+				/>
+			);
 		} else if (menu === "INSS" && submenu === "Cálculo Salário Cliente") {
-			return <CalculatorINSS4 isChecked={isChecked} />;
+			return (
+				<CalculatorINSS4
+					isChecked={isChecked}
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+				/>
+			);
 		} else if (menu === "INSS" && submenu === "Possibilidades Gerais") {
 			return (
 				<CalculatorINSS5
-				// setAllInputsFilled={setAllInputsFilled}
-				// setFinalResult={setFinalResult}
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
 				/>
 			);
 		}
@@ -97,36 +114,31 @@ function Calculator() {
 	}
 
 	function handleResultDownload() {
-		return () => {
-			setModalIsOpen(true);
-			// const resultUrl = `/calculadora/resultado?result=${encodeURIComponent(
-			// 	JSON.stringify(finalResult)
-			// )}`;
-			// window.open(resultUrl, "_blank");
-		};
+		setModalIsOpen(true);
 	}
 
-	// const handleDownloadImage = () => {
-	// 	const element = document.getElementById("calculatorIMGResult");
-	// 	console.log("entrou pra baixa a imagem", element);
+	const handleDownloadImage = () => {
+		const element = document.getElementById("calculatorIMGResult");
+		if (element) {
+			console.log("Baixando a imagem");
 
-	// 	if (element === null) {
-	// 		alert("Não foi possível baixar a imagem");
-	// 		return;
-	// 	}
-	// 	html2canvas(element).then(
-	// 		(canvas: { toDataURL: (arg0: string) => string }) => {
-	// 			const link = document.createElement("a");
-	// 			link.href = canvas.toDataURL("image/png");
-	// 			link.download = "calculator_result.png";
-	// 			document.body.appendChild(link);
-	// 			link.click();
-	// 			document.body.removeChild(link);
-	// 			console.log("LINK", link);
-	// 		}
-	// 	);
-	// 	console.log("saiu do html2canvas");
-	// };
+			axios
+				.post("http://localhost:3000/calculator/image", {
+					menu,
+					submenu,
+					element: element.outerHTML,
+				})
+				.then((response) => {
+					console.log("Imagem baixada com sucesso!", response.data);
+				})
+				.catch((error) => {
+					console.error("Erro ao gerar a imagem:", error.message);
+				});
+		} else {
+			console.log("Não foi possível encontrar o elemento ", element);
+			alert("Não foi possível encontrar o elemento para gerar a imagem.");
+		}
+	};
 
 	return (
 		<>
@@ -169,7 +181,7 @@ function Calculator() {
 						<div>
 							<button
 								className='buttonBaixarResultado'
-								onClick={handleResultDownload()}
+								onClick={handleResultDownload}
 							>
 								Visualizar Resultado
 							</button>
@@ -182,18 +194,25 @@ function Calculator() {
 				<Modal
 					isOpen={modalIsOpen}
 					onRequestClose={() => setModalIsOpen(false)}
+					className='modalCalculator'
 				>
+					<h2
+						className='close-button'
+						onClick={() => setModalIsOpen(false)}
+					>
+						X
+					</h2>
 					<CalculatorIMGResult
 						menu={menu}
 						submenu={submenu}
 						values={finalResult}
 					/>
-					{/* <button
+					<button
 						className='buttonModalDownload'
 						onClick={handleDownloadImage}
 					>
 						Baixar Imagem
-					</button>  */}
+					</button>
 					{/* <button onClick={() => setModalIsOpen(false)}>Close</button> */}
 				</Modal>
 			</div>

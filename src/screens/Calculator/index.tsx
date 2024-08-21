@@ -123,11 +123,14 @@ function Calculator() {
 			console.log("Baixando a imagem");
 
 			axios
-				.post("http://localhost:3000/calculator/image", {
-					menu,
-					submenu,
-					element: element.outerHTML,
-				})
+				.post(
+					"https://creditorealbackend-1ch9vv0q.b4a.run/calculator/image",
+					{
+						menu,
+						submenu,
+						element: element.outerHTML,
+					}
+				)
 				.then((response) => {
 					console.log("Imagem baixada com sucesso!", response.data);
 				})

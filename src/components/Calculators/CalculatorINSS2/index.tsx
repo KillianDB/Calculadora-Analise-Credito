@@ -1,16 +1,9 @@
-import {
-	//  Dispatch,
-	Key,
-	// SetStateAction,
-	useEffect,
-	useState,
-} from "react";
+import { Key, useEffect, useState } from "react";
 import { calculate } from "../../../utils/calculate";
 import CalculatorInput from "../../CalculatorInput";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS2.css";
-import { formatNumber } from "../../../utils/formatNumbers";
 
 export function CalculatorINSS2({
 	setAllInputsFilled,
@@ -55,8 +48,9 @@ export function CalculatorINSS2({
 		//se for 84x bota esse no total e parcela
 		const finalResult: string[] = [
 			"Bem vindo, Cliente CR",
-			"Valor Empréstimo Solicitado R$ ",
-			formatNumber(+result![0].split(" R")[1]),
+			`Valor Empréstimo Solicitado R$ ${result![0].split(" R$ ")[1]}`,
+			`${result![0].split(" R$ ")[1]}`,
+			`${result![1].split(" - R$ ")[1]} 84x`,
 		];
 		setFinalResult(finalResult);
 	}

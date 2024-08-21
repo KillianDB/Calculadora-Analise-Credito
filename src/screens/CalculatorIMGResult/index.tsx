@@ -264,6 +264,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 					<div className='calculatorIMGResultTotalINSS2'>
 						<div>VALOR TOTAL</div>
 						<div className='dindinResulTotalINSS2'>
+							R$
 							{values[values.length - 2]}
 						</div>
 					</div>
@@ -271,9 +272,9 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						<div className='parcelaTotalINSS2'>PARCELA TOTAL</div>
 						<div className='dindinResulTotalINSS2'>
 							R$
-							{values[values.length - 1].split(" ")[1]}{" "}
+							{values[values.length - 1].split(" ")[0]}{" "}
 							<span>
-								{values[values.length - 1].split(" ")[2]}
+								{values[values.length - 1].split(" ")[1]}
 							</span>
 						</div>
 					</div>

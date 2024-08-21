@@ -63,30 +63,26 @@ export function CalculatorINSS1({
 			setTotal(result.slice(10, 13));
 			const finalResult = [
 				"Bem vindo, Cliente CR",
-				`Valor Empréstimo R$ ${formatNumber(
-					+result[0].split("$ ")[1]
-				)}`,
-				`Valor Parcela R$ ${formatNumber(
-					+result[1].split("$ ")[1]
-				)} 84x`,
+				`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
+				`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
 				`Valor Cartão R$ ${formatNumber(
-					parseFloat(result[2].split("$ ")[1]) +
-						parseFloat(result[6].split("$ ")[1])
+					parseFloat(result[2].split(" R$ ")[1]) +
+						parseFloat(result[6].split(" R$ ")[1])
 				)}`,
 				`Valor Parcela R$ ${formatNumber(
-					parseFloat(result[3].split("$ ")[1]) +
-						parseFloat(result[7].split("$ ")[1])
+					parseFloat(result[3].split(" R$ ")[1]) +
+						parseFloat(result[7].split(" R$ ")[1])
 				)} 84x`,
 				`Valor Cartão Enviado R$ ${formatNumber(
-					parseFloat(result[4].split("$ ")[1]) +
-						parseFloat(result[8].split("$ ")[1])
+					parseFloat(result[4].split(" R$ ")[1]) +
+						parseFloat(result[8].split(" R$ ")[1])
 				)}`,
 				`Valor Parcela R$ ${formatNumber(
-					parseFloat(result[5].split("$ ")[1]) +
-						parseFloat(result[9].split("$ ")[1])
+					parseFloat(result[5].split(" R$ ")[1]) +
+						parseFloat(result[9].split(" R$ ")[1])
 				)} 84x`,
-				`R$ ${formatNumber(+result[10].split("$ ")[1])}`,
-				`R$ ${formatNumber(+result[11].split("$ ")[1])} 84x`,
+				`R$ ${result[10].split(" R$ ")[1]}`,
+				`R$ ${result[11].split(" R$ ")[1]} 84x`,
 			];
 			setFinalResult(finalResult);
 		}

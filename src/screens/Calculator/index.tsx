@@ -132,6 +132,7 @@ function Calculator() {
 					}
 				)
 				.then((response) => {
+					window.location.href = response.data.downloadURL;
 					console.log("Imagem baixada com sucesso!", response.data);
 				})
 				.catch((error) => {

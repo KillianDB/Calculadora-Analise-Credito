@@ -158,14 +158,27 @@ export function CalculatorINSS5({
 			setResultTotalPossibilidade(result.slice(22, 25));
 			setResultsTrocoLiquido(result[25]);
 			setTotal(result.slice(26, 30));
+
 			const finalResult = [
 				"Bem vindo, Cliente CR",
 				`Valor Empréstimo R$ ${result[0].split("$ ")[1]}`,
 				`Valor Parcela R$ ${result[1].split("$ ")[1]} 84x`,
-				`Valor Cartão R$ ${result[13]}`,
-				`Valor Parcela R$ ${result[14]} 84x`,
-				`Valor Cartão Enviado R$ ${result[15]}`,
-				`Valor Parcela R$ ${result[16]} 84x`,
+				`Valor Cartão R$ ${
+					+result[3].split("$ ")[1] + +result[9].split("$ ")[1]
+				}`,
+				`Parcela Cartão R$ ${
+					+result[4].split(" R$ ") + +result[10].split(" R$ ")
+				} 84x`,
+				`Valor Compras R$ ${
+					+result[6].split(" R$ ")[1] + +result[12].split(" R$ ")[1]
+				}`,
+				`Parcela Compras R$ ${
+					+result[7].split(" R$ ")[1] + +result[13].split(" R$ ")[1]
+				} 84x`,
+				`Portabilidade Aproximada R$ ${result[25].split(" R$ ")[1]}`,
+				"Parcela Não Altera",
+				`${result[26].split(" R$ ")[1]}`,
+				`${result[27].split(" R$ ")[1]} 84x`,
 			];
 			setFinalResult(finalResult);
 		}

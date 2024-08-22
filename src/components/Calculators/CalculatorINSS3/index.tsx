@@ -48,9 +48,7 @@ export function CalculatorINSS3({
 		if (result != "no valid labels" && result != undefined) {
 			setResults(result.slice(0, 2).concat(result.slice(5, 9)));
 			setTotal(result.slice(2, 5).concat(result.slice(9, 12)));
-			console.log("RESULT ", result);
-			console.log("RESULTS ", results);
-			console.log("TOTAL ", totais);
+
 			if (!isChecked) {
 				const finalResult: string[] = [
 					"Bem vindo, Cliente CR",
@@ -67,6 +65,10 @@ export function CalculatorINSS3({
 					`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
 					`${result[2].split(" R$ ")[1]}`,
 					`${result[3].split(" R$ ")[1]} 84x`,
+					`R$ ${
+						+result[9].split(" R$ ")[1] -
+						+result[2].split(" R$ ")[1]
+					}`,
 					`${result[9].split(" R$ ")[1]}`,
 					`${result[10].split(" R$ ")[1]} 84x`,
 				];

@@ -795,3 +795,1209 @@
 	width: 30px; /* Ajustado */
 	margin: 0;
 }
+
+/*!INSS Cálculo Salário Cliente Sem Cartão*/
+.bodyIMGResultINSS3 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: #ffffff;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+}
+
+.calculatorIMGResultINSS3 {
+	width: 225px; /* Ajustado */
+	height: 500px; /* Ajustado */
+	background: #ffffff;
+	overflow: hidden;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+}
+
+.calculatorIMGResultTitleINSS3 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	text-align: center;
+	color: #265064;
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.textoPropostaDeINSS3 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-size: 24px; /* Ajustado */
+	text-align: center;
+	color: #265064;
+	margin: 0;
+}
+
+.textoCreditoINSS3 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-size: 30px; /* Ajustado */
+	text-align: center;
+	color: #f99401;
+	margin: 0;
+}
+
+.textoConsignadoINSS3 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-size: 24px; /* Ajustado */
+	margin: 0;
+	text-align: center;
+	color: #265064;
+}
+
+.calculatorIMGResultLabelDivINSS3 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: rgba(133, 130, 130, 0.5);
+}
+
+.calculatorIMGResultLeftINSS3 {
+	box-sizing: border-box;
+	background: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(38, 80, 100, 0.7) 0%,
+			rgba(38, 80, 100, 0.35) 70%,
+			rgba(38, 80, 100, 0.35) 100%
+		),
+		#265064;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+	/* border-radius: 14px; Ajustado */
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 800;
+	font-size: 8px; /* Ajustado */
+	align-content: center;
+	color: #ffffff;
+	width: 98%;
+	padding-left: 7px; /* Ajustado */
+	padding-right: 0;
+}
+
+.calculatorIMGResultRightINSS3 {
+	background: none;
+	border-radius: 3px; /* Ajustado */
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 400;
+	text-align: center;
+	color: #ffffff;
+	font-size: 8px; /* Ajustado */
+}
+
+.calculatorIMGResultRightINSS3 span {
+	color: #f99401;
+}
+
+.logoCreditoRealINSS3 {
+	background: url(logo-square.svg);
+}
+
+.caixaNumeroINSS3 {
+	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
+	border-radius: 12px; /* Ajustado */
+}
+
+.caixaValorTotalINSS3 {
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	border-radius: 12px; /* Ajustado */
+}
+
+.textoValorTotalINSS3 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 45px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+}
+
+.numeroValorTotalINSS3 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 55px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+	border: 0.5px solid #ffffff; /* Ajustado */
+}
+
+.caixaParcelaTotalINSS3 {
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	border-radius: 12px; /* Ajustado */
+}
+
+.textoParcelaTotalINSS3 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 45px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+}
+
+.numeroParcelaTotalINSS3 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 55px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+	border: 0.5px solid #ffffff; /* Ajustado */
+}
+
+.relativeDivINSS3 {
+	/* position: relative; */
+}
+
+.caixaValoresPequenaINSS3 {
+	background: linear-gradient(0deg, #2e2e2e 0%, #625d5d 50%, #625d5d 100%);
+	border-radius: 1px; /* Ajustado */
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 9px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+	padding: 6px; /* Ajustado */
+	margin-top: 3px; /* Ajustado */
+	width: fit-content;
+	align-self: center;
+}
+
+.calculatorIMGResultDivINSS3 {
+	/* position: absolute;
+	top: -50%; */
+	background: linear-gradient(
+		90deg,
+		rgba(133, 130, 130, 0.57) 0%,
+		rgba(133, 130, 130, 0.57) 50%,
+		#949494 100%
+	);
+	border-radius: 3px; /* Ajustado */
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 18px; /* Ajustado */
+	row-gap: 8px; /* Ajustado */
+	justify-items: center;
+	align-content: space-evenly;
+	height: 113px; /* Ajustado */
+	width: fit-content;
+	align-self: center;
+	padding: 10px; /* Ajustado */
+}
+
+.calculatorIMGResultValuesINSS3 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	color: #ffffff;
+	font-size: 7px; /* Ajustado */
+}
+
+.calculatorIMGResultValuesINSS3 text {
+	width: 10px; /* Ajustado */
+	color: #ffffff;
+	margin-bottom: 10px; /* Ajustado */
+}
+
+.calculatorIMGResultValuesINSS3 button {
+	font-size: 7px; /* Ajustado */
+	width: 79px; /* Ajustado */
+	margin: 0;
+	margin-top: 2px; /* Ajustado */
+	height: fit-content;
+	padding: 3px; /* Ajustado */
+}
+
+.calculatorIMGResultContratacaoINSS3 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px; /* Ajustado */
+	text-align: center;
+	color: #000000;
+	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
+}
+
+.calculatorIMGResultEnderecosINSS3 {
+	box-sizing: border-box;
+	background: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(38, 80, 100, 0.7) 0%,
+			rgba(38, 80, 100, 0.35) 70%,
+			rgba(38, 80, 100, 0.175) 100%
+		),
+		linear-gradient(180deg, #4da2ca 0%, #397997 50%, #265064 100%);
+	border-radius: 6px; /* Ajustado */
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 6px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+	display: flex;
+	flex-direction: row;
+}
+
+.calculatorIMGResultEnderecosLeftINSS3 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+}
+
+.calculatorIMGResultEnderecosRightINSS3 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+}
+
+.calculatorIMGResultEnderecoINSS3 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 6px 0; /* Ajustado */
+	height: 10px; /* Ajustado */
+	width: 79px; /* Ajustado */
+	font-size: 6px; /* Ajustado */
+}
+
+.calculatorIMGResultEnderecoINSS3 img {
+	border-radius: 18px; /* Ajustado */
+	width: 10px; /* Ajustado */
+	margin-bottom: 0;
+	margin-right: 6px; /* Ajustado */
+}
+
+.calculatorIMGResultEnderecoINSS3 p {
+	margin: 0;
+	font-size: 6px; /* Ajustado */
+}
+
+.calculatorIMGResultTotaisINSS3 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 19px; /* Ajustado */
+}
+
+.calculatorIMGResultTotalINSS3,
+.calculatorIMGResultSubtotalINSS3 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 12px 0; /* Ajustado */
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	border-radius: 3px; /* Ajustado */
+	color: #ffffff;
+	width: 92px; /* Ajustado */
+	height: 28px; /* Ajustado */
+	flex-wrap: wrap;
+	align-content: center;
+	font-size: 9px; /* Ajustado */
+	font-weight: 900;
+}
+
+.dindinResulTotalINSS3 {
+	font-size: 11px; /* Ajustado */
+	font-weight: bolder;
+}
+
+.dindinResulTotalINSS3 span {
+	font-size: 9px; /* Ajustado */
+	font-weight: 500;
+}
+
+.parcelaTotalINSS3 {
+	margin-left: 7px; /* Ajustado */
+}
+
+.divContatoINSS3 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 12px; /* Ajustado */
+	height: 41px; /* Ajustado */
+}
+
+.contatoINSS3 {
+	display: flex;
+	padding-right: 13px; /* Ajustado */
+	padding-left: 3px; /* Ajustado */
+	flex-direction: row;
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 9px; /* Ajustado */
+	text-align: center;
+	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
+	border-radius: 14px; /* Ajustado */
+	color: #ffffff;
+	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
+	height: 12px; /* Ajustado */
+	align-items: center;
+}
+
+.phone-iconINSS3 {
+	width: 11px; /* Ajustado */
+	margin-right: 3px; /* Ajustado */
+	margin-bottom: 0;
+	height: 11px; /* Ajustado */
+	background-color: #ffffff;
+	border-radius: 50%;
+}
+
+.textoNumeroINSS3 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	text-align: center;
+	color: #ffffff;
+	font-size: 9px; /* Ajustado */
+	margin: 0;
+}
+
+.logoCreditoRealINSS3 {
+	width: 22px; /* Ajustado */
+	margin: 0;
+}
+
+/*!INSS Cálculo Salário Cliente*/
+.bodyIMGResultINSS4 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: #ffffff;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+}
+
+.calculatorIMGResultINSS4 {
+	width: 225px; /* Ajustado */
+	height: 500px; /* Ajustado */
+	background: #ffffff;
+	overflow: hidden;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+}
+
+.calculatorIMGResultTitleINSS4 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	text-align: center;
+	color: #265064;
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.textoPropostaDeINSS4 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-size: 24px; /* Ajustado */
+	text-align: center;
+	color: #265064;
+	margin: 0;
+}
+
+.textoCreditoINSS4 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-size: 30px; /* Ajustado */
+	text-align: center;
+	color: #f99401;
+	margin: 0;
+}
+
+.textoConsignadoINSS4 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-size: 24px; /* Ajustado */
+	margin: 0;
+	text-align: center;
+	color: #265064;
+}
+
+.calculatorIMGResultLabelDivINSS4 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: rgba(133, 130, 130, 0.5);
+}
+
+.calculatorIMGResultLeftINSS4 {
+	box-sizing: border-box;
+	background: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(38, 80, 100, 0.7) 0%,
+			rgba(38, 80, 100, 0.35) 70%,
+			rgba(38, 80, 100, 0.35) 100%
+		),
+		#265064;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+	/* border-radius: 14px; Ajustado */
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 800;
+	font-size: 8px; /* Ajustado */
+	align-content: center;
+	color: #ffffff;
+	width: 98%;
+	padding-left: 7px; /* Ajustado */
+	padding-right: 0;
+}
+
+.calculatorIMGResultRightINSS4 {
+	background: none;
+	border-radius: 3px; /* Ajustado */
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 400;
+	text-align: center;
+	color: #ffffff;
+	font-size: 8px; /* Ajustado */
+}
+
+.calculatorIMGResultRightINSS4 span {
+	color: #f99401;
+}
+
+.logoCreditoRealINSS4 {
+	background: url(logo-square.svg);
+}
+
+.caixaNumeroINSS4 {
+	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
+	border-radius: 12px; /* Ajustado */
+}
+
+.caixaValorTotalINSS4 {
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	border-radius: 12px; /* Ajustado */
+}
+
+.textoValorTotalINSS4 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 45px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+}
+
+.numeroValorTotalINSS4 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 55px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+	border: 0.5px solid #ffffff; /* Ajustado */
+}
+
+.caixaParcelaTotalINSS4 {
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	border-radius: 12px; /* Ajustado */
+}
+
+.textoParcelaTotalINSS4 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 45px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+}
+
+.numeroParcelaTotalINSS4 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 55px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+	border: 0.5px solid #ffffff; /* Ajustado */
+}
+
+.relativeDivINSS4 {
+	/* position: relative; */
+}
+
+.caixaValoresPequenaINSS4 {
+	background: linear-gradient(0deg, #2e2e2e 0%, #625d5d 50%, #625d5d 100%);
+	border-radius: 1px; /* Ajustado */
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 9px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+	padding: 6px; /* Ajustado */
+	margin-top: 3px; /* Ajustado */
+	width: fit-content;
+	align-self: center;
+}
+
+.calculatorIMGResultDivINSS4 {
+	/* position: absolute;
+	top: -50%; */
+	background: linear-gradient(
+		90deg,
+		rgba(133, 130, 130, 0.57) 0%,
+		rgba(133, 130, 130, 0.57) 50%,
+		#949494 100%
+	);
+	border-radius: 3px; /* Ajustado */
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 18px; /* Ajustado */
+	row-gap: 8px; /* Ajustado */
+	justify-items: center;
+	align-content: space-evenly;
+	height: 113px; /* Ajustado */
+	width: fit-content;
+	align-self: center;
+	padding: 10px; /* Ajustado */
+}
+
+.calculatorIMGResultValuesINSS4 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	color: #ffffff;
+	font-size: 7px; /* Ajustado */
+}
+
+.calculatorIMGResultValuesINSS4 text {
+	width: 10px; /* Ajustado */
+	color: #ffffff;
+	margin-bottom: 10px; /* Ajustado */
+}
+
+.calculatorIMGResultValuesINSS4 button {
+	font-size: 7px; /* Ajustado */
+	width: 79px; /* Ajustado */
+	margin: 0;
+	margin-top: 2px; /* Ajustado */
+	height: fit-content;
+	padding: 3px; /* Ajustado */
+}
+
+.calculatorIMGResultContratacaoINSS4 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px; /* Ajustado */
+	text-align: center;
+	color: #000000;
+	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
+}
+
+.calculatorIMGResultEnderecosINSS4 {
+	box-sizing: border-box;
+	background: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(38, 80, 100, 0.7) 0%,
+			rgba(38, 80, 100, 0.35) 70%,
+			rgba(38, 80, 100, 0.175) 100%
+		),
+		linear-gradient(180deg, #4da2ca 0%, #397997 50%, #265064 100%);
+	border-radius: 6px; /* Ajustado */
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 6px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+	display: flex;
+	flex-direction: row;
+}
+
+.calculatorIMGResultEnderecosLeftINSS4 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+}
+
+.calculatorIMGResultEnderecosRightINSS4 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+}
+
+.calculatorIMGResultEnderecoINSS4 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 6px 0; /* Ajustado */
+	height: 10px; /* Ajustado */
+	width: 79px; /* Ajustado */
+	font-size: 6px; /* Ajustado */
+}
+
+.calculatorIMGResultEnderecoINSS4 img {
+	border-radius: 18px; /* Ajustado */
+	width: 10px; /* Ajustado */
+	margin-bottom: 0;
+	margin-right: 6px; /* Ajustado */
+}
+
+.calculatorIMGResultEnderecoINSS4 p {
+	margin: 0;
+	font-size: 6px; /* Ajustado */
+}
+
+.calculatorIMGResultTotaisINSS4 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 19px; /* Ajustado */
+}
+
+.calculatorIMGResultTotalINSS4,
+.calculatorIMGResultSubtotalINSS4 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 12px 0; /* Ajustado */
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	border-radius: 3px; /* Ajustado */
+	color: #ffffff;
+	width: 92px; /* Ajustado */
+	height: 28px; /* Ajustado */
+	flex-wrap: wrap;
+	align-content: center;
+	font-size: 9px; /* Ajustado */
+	font-weight: 900;
+}
+
+.dindinResulTotalINSS4 {
+	font-size: 11px; /* Ajustado */
+	font-weight: bolder;
+}
+
+.dindinResulTotalINSS4 span {
+	font-size: 9px; /* Ajustado */
+	font-weight: 500;
+}
+
+.parcelaTotalINSS4 {
+	margin-left: 7px; /* Ajustado */
+}
+
+.divContatoINSS4 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 12px; /* Ajustado */
+	height: 41px; /* Ajustado */
+}
+
+.contatoINSS4 {
+	display: flex;
+	padding-right: 13px; /* Ajustado */
+	padding-left: 3px; /* Ajustado */
+	flex-direction: row;
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 9px; /* Ajustado */
+	text-align: center;
+	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
+	border-radius: 14px; /* Ajustado */
+	color: #ffffff;
+	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
+	height: 12px; /* Ajustado */
+	align-items: center;
+}
+
+.phone-iconINSS4 {
+	width: 11px; /* Ajustado */
+	margin-right: 3px; /* Ajustado */
+	margin-bottom: 0;
+	height: 11px; /* Ajustado */
+	background-color: #ffffff;
+	border-radius: 50%;
+}
+
+.textoNumeroINSS4 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	text-align: center;
+	color: #ffffff;
+	font-size: 9px; /* Ajustado */
+	margin: 0;
+}
+
+.logoCreditoRealINSS4 {
+	width: 22px; /* Ajustado */
+	margin: 0;
+}
+
+/*!INSS Possibilidades Gerais*/
+.bodyIMGResultINSS5 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: #ffffff;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+}
+
+.calculatorIMGResultINSS5 {
+	width: 225px; /* Ajustado */
+	height: 500px; /* Ajustado */
+	background: #ffffff;
+	overflow: hidden;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+}
+
+.calculatorIMGResultTitleINSS5 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	text-align: center;
+	color: #265064;
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.textoPropostaDeINSS5 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-size: 24px; /* Ajustado */
+	text-align: center;
+	color: #265064;
+	margin: 0;
+}
+
+.textoCreditoINSS5 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-size: 30px; /* Ajustado */
+	text-align: center;
+	color: #f99401;
+	margin: 0;
+}
+
+.textoConsignadoINSS5 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-size: 24px; /* Ajustado */
+	margin: 0;
+	text-align: center;
+	color: #265064;
+}
+
+.calculatorIMGResultLabelDivINSS5 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: rgba(133, 130, 130, 0.5);
+}
+
+.calculatorIMGResultLeftINSS5 {
+	box-sizing: border-box;
+	background: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(38, 80, 100, 0.7) 0%,
+			rgba(38, 80, 100, 0.35) 70%,
+			rgba(38, 80, 100, 0.35) 100%
+		),
+		#265064;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+	/* border-radius: 14px; Ajustado */
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 800;
+	font-size: 8px; /* Ajustado */
+	align-content: center;
+	color: #ffffff;
+	width: 98%;
+	padding-left: 7px; /* Ajustado */
+	padding-right: 0;
+}
+
+.calculatorIMGResultRightINSS5 {
+	background: none;
+	border-radius: 3px; /* Ajustado */
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 400;
+	text-align: center;
+	color: #ffffff;
+	font-size: 8px; /* Ajustado */
+}
+
+.calculatorIMGResultRightINSS5 span {
+	color: #f99401;
+}
+
+.logoCreditoRealINSS5 {
+	background: url(logo-square.svg);
+}
+
+.caixaNumeroINSS5 {
+	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
+	border-radius: 12px; /* Ajustado */
+}
+
+.caixaValorTotalINSS5 {
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	border-radius: 12px; /* Ajustado */
+}
+
+.textoValorTotalINSS5 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 45px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+}
+
+.numeroValorTotalINSS5 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 55px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+	border: 0.5px solid #ffffff; /* Ajustado */
+}
+
+.caixaParcelaTotalINSS5 {
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	border-radius: 12px; /* Ajustado */
+}
+
+.textoParcelaTotalINSS5 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 45px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+}
+
+.numeroParcelaTotalINSS5 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 55px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+	border: 0.5px solid #ffffff; /* Ajustado */
+}
+
+.relativeDivINSS5 {
+	/* position: relative; */
+}
+
+.caixaValoresPequenaINSS5 {
+	background: linear-gradient(0deg, #2e2e2e 0%, #625d5d 50%, #625d5d 100%);
+	border-radius: 1px; /* Ajustado */
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 9px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+	padding: 6px; /* Ajustado */
+	margin-top: 3px; /* Ajustado */
+	width: fit-content;
+	align-self: center;
+}
+
+.calculatorIMGResultDivINSS5 {
+	/* position: absolute;
+	top: -50%; */
+	background: linear-gradient(
+		90deg,
+		rgba(133, 130, 130, 0.57) 0%,
+		rgba(133, 130, 130, 0.57) 50%,
+		#949494 100%
+	);
+	border-radius: 3px; /* Ajustado */
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 18px; /* Ajustado */
+	row-gap: 8px; /* Ajustado */
+	justify-items: center;
+	align-content: space-evenly;
+	height: 113px; /* Ajustado */
+	width: fit-content;
+	align-self: center;
+	padding: 10px; /* Ajustado */
+}
+
+.calculatorIMGResultValuesINSS5 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	color: #ffffff;
+	font-size: 7px; /* Ajustado */
+}
+
+.calculatorIMGResultValuesINSS5 text {
+	width: 10px; /* Ajustado */
+	color: #ffffff;
+	margin-bottom: 10px; /* Ajustado */
+}
+
+.calculatorIMGResultValuesINSS5 button {
+	font-size: 7px; /* Ajustado */
+	width: 79px; /* Ajustado */
+	margin: 0;
+	margin-top: 2px; /* Ajustado */
+	height: fit-content;
+	padding: 3px; /* Ajustado */
+}
+
+.calculatorIMGResultContratacaoINSS5 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px; /* Ajustado */
+	text-align: center;
+	color: #000000;
+	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
+}
+
+.calculatorIMGResultEnderecosINSS5 {
+	box-sizing: border-box;
+	background: radial-gradient(
+			50% 50% at 50% 50%,
+			rgba(38, 80, 100, 0.7) 0%,
+			rgba(38, 80, 100, 0.35) 70%,
+			rgba(38, 80, 100, 0.175) 100%
+		),
+		linear-gradient(180deg, #4da2ca 0%, #397997 50%, #265064 100%);
+	border-radius: 6px; /* Ajustado */
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 6px; /* Ajustado */
+	text-align: center;
+	color: #ffffff;
+	display: flex;
+	flex-direction: row;
+}
+
+.calculatorIMGResultEnderecosLeftINSS5 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+}
+
+.calculatorIMGResultEnderecosRightINSS5 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+}
+
+.calculatorIMGResultEnderecoINSS5 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 6px 0; /* Ajustado */
+	height: 10px; /* Ajustado */
+	width: 79px; /* Ajustado */
+	font-size: 6px; /* Ajustado */
+}
+
+.calculatorIMGResultEnderecoINSS5 img {
+	border-radius: 18px; /* Ajustado */
+	width: 10px; /* Ajustado */
+	margin-bottom: 0;
+	margin-right: 6px; /* Ajustado */
+}
+
+.calculatorIMGResultEnderecoINSS5 p {
+	margin: 0;
+	font-size: 6px; /* Ajustado */
+}
+
+.calculatorIMGResultTotaisINSS5 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 19px; /* Ajustado */
+}
+
+.calculatorIMGResultTotalINSS5,
+.calculatorIMGResultSubtotalINSS5 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 12px 0; /* Ajustado */
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	border-radius: 3px; /* Ajustado */
+	color: #ffffff;
+	width: 92px; /* Ajustado */
+	height: 28px; /* Ajustado */
+	flex-wrap: wrap;
+	align-content: center;
+	font-size: 9px; /* Ajustado */
+	font-weight: 900;
+}
+
+.dindinResulTotalINSS5 {
+	font-size: 11px; /* Ajustado */
+	font-weight: bolder;
+}
+
+.dindinResulTotalINSS5 span {
+	font-size: 9px; /* Ajustado */
+	font-weight: 500;
+}
+
+.parcelaTotalINSS5 {
+	margin-left: 7px; /* Ajustado */
+}
+
+.divContatoINSS5 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 12px; /* Ajustado */
+	height: 41px; /* Ajustado */
+}
+
+.contatoINSS5 {
+	display: flex;
+	padding-right: 13px; /* Ajustado */
+	padding-left: 3px; /* Ajustado */
+	flex-direction: row;
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 9px; /* Ajustado */
+	text-align: center;
+	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
+	border-radius: 14px; /* Ajustado */
+	color: #ffffff;
+	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
+	height: 12px; /* Ajustado */
+	align-items: center;
+}
+
+.phone-iconINSS5 {
+	width: 11px; /* Ajustado */
+	margin-right: 3px; /* Ajustado */
+	margin-bottom: 0;
+	height: 11px; /* Ajustado */
+	background-color: #ffffff;
+	border-radius: 50%;
+}
+
+.textoNumeroINSS5 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	text-align: center;
+	color: #ffffff;
+	font-size: 9px; /* Ajustado */
+	margin: 0;
+}
+
+.logoCreditoRealINSS5 {
+	width: 22px; /* Ajustado */
+	margin: 0;
+}

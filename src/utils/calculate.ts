@@ -68,23 +68,41 @@ export function calculate(
 		const x24 = +values[0].value * 0.0527;
 
 		return [
+			//[0]
 			"TOTAL: R$ " + formatNumber(+values[0].value),
+			//[1]
 			" PARCELA - R$ " + formatNumber(x84),
+			//[2]
 			" 84x",
+			//[3]
 			"TOTAL: R$ " + formatNumber(+values[0].value),
+			//[4]
 			" PARCELA - R$ " + formatNumber(x72),
+			//[5]
 			" 72x",
+			//[6]
 			"TOTAL: R$ " + formatNumber(+values[0].value),
+			//[7]
 			" PARCELA - R$ " + formatNumber(x60),
+			//[8]
 			" 60x",
+			//[9]
 			"TOTAL: R$ " + formatNumber(+values[0].value),
+			//[10]
 			" PARCELA - R$ " + formatNumber(x48),
+			//[11]
 			" 48x",
+			//[12]
 			"TOTAL: R$ " + formatNumber(+values[0].value),
+			//[13]
 			" PARCELA - R$ " + formatNumber(x36),
+			//[14]
 			" 36x",
+			//[15]
 			"TOTAL: R$ " + formatNumber(+values[0].value),
+			//[16]
 			" PARCELA - R$ " + formatNumber(x24),
+			//[17]
 			" 24x",
 		];
 	} else if (

@@ -44,15 +44,28 @@ export function CalculatorINSS2({
 		]);
 		if (result !== "no valid labels" && result !== undefined) {
 			setTotais(result);
+			const finalResult: string[] = [
+				//[0]
+				"Bem vindo, Cliente CR",
+				//[1]
+				`Valor Empréstimo Solicitado R$ ${result[0].split(" R$ ")[1]}`,
+				//[2]
+				`${result[0].split(" R$ ")[1]}`,
+				//[3]
+				`${result[1].split(" - R$ ")[1]} 84x`,
+				//[4]
+				`${result[4].split(" - R$ ")[1]} 72x`,
+				//[5]
+				`${result[7].split(" - R$ ")[1]} 60x`,
+				//[6]
+				`${result[10].split(" - R$ ")[1]} 48x`,
+				//[7]
+				`${result[13].split(" - R$ ")[1]} 36x`,
+				//[8]
+				`${result[16].split(" - R$ ")[1]} 24x`,
+			];
+			setFinalResult(finalResult);
 		}
-		//se for 84x bota esse no total e parcela
-		const finalResult: string[] = [
-			"Bem vindo, Cliente CR",
-			`Valor Empréstimo Solicitado R$ ${result![0].split(" R$ ")[1]}`,
-			`${result![0].split(" R$ ")[1]}`,
-			`${result![1].split(" - R$ ")[1]} 84x`,
-		];
-		setFinalResult(finalResult);
 	}
 
 	function chunkArray(array: string[], chunkSize: number) {

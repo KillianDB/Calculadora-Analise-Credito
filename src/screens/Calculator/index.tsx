@@ -15,7 +15,9 @@ function Calculator() {
 	const [allInputsFilled, setAllInputsFilled] = useState(false);
 	const [finalResult, setFinalResult] = useState<string[]>([]);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
+	const [parcelModalIsOpen, setParcelModalIsOpen] = useState(false);
 	const [isChecked, setIsChecked] = useState(false);
+	const [parcelas, setParcelas] = useState("");
 
 	function toggleCheckbox() {
 		console.log("isChecked", isChecked);
@@ -114,7 +116,15 @@ function Calculator() {
 	}
 
 	function handleResultDownload() {
-		setModalIsOpen(true);
+		if (
+			menu === "INSS" &&
+			submenu === "Cálculo Valor Solicitado" &&
+			parcelas == ""
+		) {
+			setParcelModalIsOpen(true);
+		} else {
+			setModalIsOpen(true);
+		}
 	}
 
 	const handleDownloadImage = () => {
@@ -193,6 +203,41 @@ function Calculator() {
 					)}
 				</div>
 				<img src='/logo-square.svg' id='calculatorLogo' alt='Logo' />
+				{/* Modal para escolher a quantidade de parcelas */}
+				<Modal
+					isOpen={parcelModalIsOpen}
+					onRequestClose={() => setParcelModalIsOpen(false)}
+					className='modalCalculator'
+				>
+					<h2
+						className='close-button'
+						onClick={() => {
+							setParcelas("");
+							setParcelModalIsOpen(false);
+						}}
+					>
+						X
+					</h2>
+					<h2>
+						Selecione o número de parcelas do resultado que deseja
+						baixar para enviar para o cliente
+					</h2>
+					<select onChange={(e) => setParcelas(e.target.value)}>
+						<option value=''>Selecione</option>
+						<option value='84'>84x (84 parcelas)</option>
+						<option value='72'>72x (72 parcelas)</option>
+						<option value='60'>60x (60 parcelas)</option>
+						<option value='48'>48x (48 parcelas)</option>
+						<option value='36'>36x (36 parcelas)</option>
+						<option value='24'>24x (24 parcelas)</option>
+					</select>
+					<button
+						className='buttonModalDownload'
+						onClick={handleResultDownload}
+					>
+						Confirmar
+					</button>
+				</Modal>
 
 				{/* Modal para exibir o resultado */}
 				<Modal
@@ -202,7 +247,10 @@ function Calculator() {
 				>
 					<h2
 						className='close-button'
-						onClick={() => setModalIsOpen(false)}
+						onClick={() => {
+							setParcelas("");
+							setModalIsOpen(false);
+						}}
 					>
 						X
 					</h2>
@@ -211,6 +259,7 @@ function Calculator() {
 						submenu={submenu}
 						values={finalResult}
 						isChecked={isChecked}
+						parcelas={parcelas}
 					/>
 					<button
 						className='buttonModalDownload'

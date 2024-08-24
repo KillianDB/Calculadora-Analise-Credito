@@ -5,6 +5,7 @@ interface CalculatorIMGResultProps {
 	submenu: string;
 	values: string[];
 	isChecked: boolean;
+	parcelas: string;
 }
 
 export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
@@ -12,6 +13,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 	submenu,
 	values,
 	isChecked,
+	parcelas,
 }) => {
 	console.log("values ", values);
 	const valuesWithoutFirst = values.slice(1, values.length - 2);
@@ -177,19 +179,15 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 				{/* <section className='relativeDivINSS2'> */}
 				<div className='caixaValoresPequenaINSS2'>VALORES</div>
 				<div className='calculatorIMGResultDivINSS2'>
-					{valuesWithoutFirst.map((value, index) => {
-						const label = value.split("R")[0];
-						const valueR = value.split("R")[1];
-						return (
-							<div
-								className='calculatorIMGResultValuesINSS2'
-								key={index}
-							>
-								{label}
-								<button>R{valueR}</button>
-							</div>
-						);
-					})}
+					{
+						<div
+							className='calculatorIMGResultValuesINSS2'
+							key={values[1].split("R")[0]}
+						>
+							{values[1].split("R")[0]}
+							<button>R{values[1].split("R")[1]}</button>
+						</div>
+					}
 				</div>
 				{/* </section> */}
 				<h2 className='calculatorIMGResultContratacaoINSS2'>
@@ -268,17 +266,28 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						<div>VALOR TOTAL</div>
 						<div className='dindinResulTotalINSS2'>
 							R$
-							{values[values.length - 2]}
+							{values[values.length - 7]}
 						</div>
 					</div>
 					<div className='calculatorIMGResultSubtotalINSS2'>
 						<div className='parcelaTotalINSS2'>PARCELA TOTAL</div>
 						<div className='dindinResulTotalINSS2'>
+							{/* //falta trocar no calculate e no INSS2 finalResult */}
 							R$
-							{values[values.length - 1].split(" ")[0]}{" "}
-							<span>
-								{values[values.length - 1].split(" ")[1]}
-							</span>
+							{parcelas == "84"
+								? values[values.length - 6].split(" ")[0]
+								: parcelas == "72"
+								? values[values.length - 5].split(" ")[0]
+								: parcelas == "60"
+								? values[values.length - 4].split(" ")[0]
+								: parcelas == "48"
+								? values[values.length - 3].split(" ")[0]
+								: parcelas == "36"
+								? values[values.length - 2].split(" ")[0]
+								: parcelas == "24"
+								? values[values.length - 1].split(" ")[0]
+								: values[values.length - 6].split(" ")[0]}{" "}
+							<span>{parcelas + "x"}</span>
 						</div>
 					</div>
 				</section>

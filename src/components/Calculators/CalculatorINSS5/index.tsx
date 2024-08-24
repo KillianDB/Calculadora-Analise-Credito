@@ -58,22 +58,22 @@ export function CalculatorINSS5({
 		"VALOR MARGEM CARTÃO BENEFÍCIO: ",
 	];
 	const labelsParcela: string[] = [
-		"PARCELA -1",
-		"PARCELA -2",
-		"PARCELA -3",
-		"PARCELA -4",
-		"PARCELA -5",
-		"PARCELA -6",
-		"PARCELA -7",
+		"PARCELA-1",
+		"PARCELA-2",
+		"PARCELA-3",
+		"PARCELA-4",
+		"PARCELA-5",
+		"PARCELA-6",
+		"PARCELA-7",
 	];
 	const labelsSaldo: string[] = [
-		"SALDO DEVEDOR -1",
-		"SALDO DEVEDOR -2",
-		"SALDO DEVEDOR -3",
-		"SALDO DEVEDOR -4",
-		"SALDO DEVEDOR -5",
-		"SALDO DEVEDOR -6",
-		"SALDO DEVEDOR -7",
+		"SALDO DEVEDOR-1",
+		"SALDO DEVEDOR-2",
+		"SALDO DEVEDOR-3",
+		"SALDO DEVEDOR-4",
+		"SALDO DEVEDOR-5",
+		"SALDO DEVEDOR-6",
+		"SALDO DEVEDOR-7",
 	];
 	const [values, setValues] = useState([
 		{ label: "VALOR MARGEM EMPRÉSTIMO: ", value: "" },
@@ -163,20 +163,12 @@ export function CalculatorINSS5({
 				"Bem vindo, Cliente CR",
 				`Valor Empréstimo R$ ${result[0].split("$ ")[1]}`,
 				`Valor Parcela R$ ${result[1].split("$ ")[1]} 84x`,
-				`Valor Cartão R$ ${
-					+result[3].split("$ ")[1] + +result[9].split("$ ")[1]
-				}`,
-				`Parcela Cartão R$ ${
-					+result[4].split(" R$ ") + +result[10].split(" R$ ")
-				} 84x`,
-				`Valor Compras R$ ${
-					+result[6].split(" R$ ")[1] + +result[12].split(" R$ ")[1]
-				}`,
-				`Parcela Compras R$ ${
-					+result[7].split(" R$ ")[1] + +result[13].split(" R$ ")[1]
-				} 84x`,
+				`Valor Cartão R$ ${result[29]}`,
+				`Parcela Cartão R$ ${result[30]} 84x`,
+				`Valor Compras R$ ${result[31]}`,
+				`Parcela Compras R$ ${result[32]} 84x`,
 				`Portabilidade Aproximada R$ ${result[25].split(" R$ ")[1]}`,
-				"Parcela Não Altera",
+				"Parcela RNão Altera",
 				`${result[26].split(" R$ ")[1]}`,
 				`${result[27].split(" R$ ")[1]} 84x`,
 			];

@@ -4,15 +4,18 @@ interface CalculatorIMGResultProps {
 	menu: string;
 	submenu: string;
 	values: string[];
+	isChecked: boolean;
 }
 
 export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 	menu,
 	submenu,
 	values,
+	isChecked,
 }) => {
 	console.log("values ", values);
 	const valuesWithoutFirst = values.slice(1, values.length - 2);
+	const valuesWithoutFirstAndLast = values.slice(1, values.length - 5);
 	if (menu === "INSS" && submenu === "Cálculo por Margem Disponível") {
 		return (
 			<div className='calculatorIMGResultINSS1' id='calculatorIMGResult'>
@@ -300,7 +303,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 		menu === "INSS" &&
 		submenu === "Cálculo Salário Cliente Sem Cartões"
 	) {
-		return (
+		return isChecked ? (
 			<div className='calculatorIMGResultINSS3' id='calculatorIMGResult'>
 				<div className='calculatorIMGResultTitleINSS3'>
 					<h1 className='textoPropostaDeINSS3'> Proposta de </h1>
@@ -319,7 +322,172 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 				{/* <section className='relativeDivINSS3'> */}
 				<div className='caixaValoresPequenaINSS3'>VALORES</div>
 				<div className='calculatorIMGResultDivINSS3'>
-					{valuesWithoutFirst.map((value, index) => {
+					{valuesWithoutFirstAndLast.map((value, index) => {
+						const label = value.split("R")[0];
+						const valueR = value.split("R")[1];
+						return (
+							<div
+								className='calculatorIMGResultValuesINSS3'
+								key={index}
+							>
+								{label}
+								<button>R{valueR}</button>
+							</div>
+						);
+					})}
+				</div>
+				{/* </section> */}
+				<h2 className='calculatorIMGResultContratacaoINSS3'>
+					Faça sua contratação presencial em uma de nossas lojas
+				</h2>
+				<section className='calculatorIMGResultEnderecosINSS3'>
+					<div className='calculatorIMGResultEnderecosLeftINSS3'>
+						<div className='calculatorIMGResultEnderecoINSS3'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS3'
+								alt=''
+							/>
+							<p className='textoBomRetiroINSS3'>
+								Bom Retiro do Sul - RS
+							</p>
+						</div>
+						<div className='calculatorIMGResultEnderecoINSS3'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS3'
+								alt=''
+							/>
+							<p className='textoLajeadoINSS3'>Lajeado - RS</p>
+						</div>
+						<div className='calculatorIMGResultEnderecoINSS3'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS3'
+								alt=''
+							/>
+							<p className='textoVenancioAiresINSS3'>
+								Venâncio Aires - RS
+							</p>
+						</div>
+						<div className='calculatorIMGResultEnderecoINSS3'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS3'
+								alt=''
+							/>
+							<p className='textoHolambraINSS3'>Holambra - SP</p>
+						</div>
+					</div>
+					<div className='calculatorIMGResultEnderecosRightINSS3'>
+						<div className='calculatorIMGResultEnderecoINSS3'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS3'
+								alt=''
+							/>
+							<p className='textoSapucaiaINSS3'>
+								Sapucaia do Sul
+							</p>
+						</div>
+						<div className='calculatorIMGResultEnderecoINSS3'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS3'
+								alt=''
+							/>
+							<p className='textoEstanciaINSS3'>Estância Velha</p>
+						</div>
+						<div className='calculatorIMGResultEnderecoINSS3'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS3'
+								alt=''
+							/>
+							<p className='textoTeutoniaINSS3'>Teutônia</p>
+						</div>
+					</div>
+				</section>
+				<section className='calculatorIMGResultSubtotaisINSS3'>
+					<div className='calculatorIMGResultSubtotalINSS3'>
+						<div className='parcelaTotalINSS3'>SUBTOTAL</div>
+						<div className='dindinResulTotalINSS3'>
+							R${values[values.length - 5].split(" ")[0]}{" "}
+						</div>
+					</div>
+					{/* <div className='calculatorIMGResultSubtotalParcelaINSS3'>
+						<div className='parcelaTotalINSS3'>PARCELA</div>
+						<div className='dindinResulTotalINSS3'>
+							R$
+							{values[values.length - 1].split(" ")[0]}{" "}
+							<span>
+								{values[values.length - 1].split(" ")[1]}
+							</span>
+						</div>
+					</div> */}
+					<div className='calculatorIMGResultLiberadoINSS3'>
+						<div className='textLiberadoINSS3'>
+							Após 03 parcelas libera o valor aproximado de
+							<br></br>
+							<span>R${values[values.length - 3]}</span>
+							<br></br> sem alterar o valor da parcela!
+						</div>
+					</div>
+				</section>
+				<section className='calculatorIMGResultTotaisINSS3'>
+					<div className='calculatorIMGResultTotalINSS3'>
+						<div>VALOR TOTAL</div>
+						<div className='dindinResulTotalINSS3'>
+							R${values[values.length - 2]}
+						</div>
+					</div>
+					<div className='calculatorIMGResultParcelaINSS3'>
+						<div className='parcelaTotalINSS3'>PARCELA TOTAL</div>
+						<div className='dindinResulTotalINSS3'>
+							R$
+							{values[values.length - 1].split(" ")[0]}{" "}
+							<span>
+								{values[values.length - 1].split(" ")[1]}
+							</span>
+						</div>
+					</div>
+				</section>
+				<section className='divContatoINSS3'>
+					<div className='contatoINSS3'>
+						<img
+							src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/phone.png?alt=media&token=bf099d75-3044-4115-850a-d31c70c974b6'
+							alt=''
+							className='phone-iconINSS3'
+						/>
+						<p className='textoNumeroINSS3'>08006080181</p>
+					</div>
+					<img
+						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
+						alt=''
+						className='logoCreditoRealINSS3'
+					/>
+				</section>
+			</div>
+		) : (
+			<div className='calculatorIMGResultINSS3' id='calculatorIMGResult'>
+				<div className='calculatorIMGResultTitleINSS3'>
+					<h1 className='textoPropostaDeINSS3'> Proposta de </h1>
+					<h1 className='textoCreditoINSS3'> CRÉDITO </h1>
+					<h1 className='textoConsignadoINSS3'> Consignado </h1>
+				</div>
+				<div className='calculatorIMGResultLabelDivINSS3'>
+					<div className='calculatorIMGResultLeftINSS3'>
+						{values[0]}
+					</div>
+					<div className='calculatorIMGResultRightINSS3'>
+						Segue abaixo a <span>simulação prévia</span> de valores
+						disponíveis no seu benefício <span>{menu}</span>
+					</div>
+				</div>
+				{/* <section className='relativeDivINSS3'> */}
+				<div className='caixaValoresPequenaINSS3'>VALORES</div>
+				<div className='calculatorIMGResultDivINSS3'>
+					{valuesWithoutFirstAndLast.map((value, index) => {
 						const label = value.split("R")[0];
 						const valueR = value.split("R")[1];
 						return (
@@ -409,16 +577,16 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 					<div className='calculatorIMGResultTotalINSS3'>
 						<div>VALOR TOTAL</div>
 						<div className='dindinResulTotalINSS3'>
-							{values[values.length - 2]}
+							R${values[values.length - 5]}
 						</div>
 					</div>
 					<div className='calculatorIMGResultSubtotalINSS3'>
 						<div className='parcelaTotalINSS3'>PARCELA TOTAL</div>
 						<div className='dindinResulTotalINSS3'>
 							R$
-							{values[values.length - 1].split(" ")[1]}{" "}
+							{values[values.length - 1].split(" ")[0]}{" "}
 							<span>
-								{values[values.length - 1].split(" ")[2]}
+								{values[values.length - 1].split(" ")[1]}
 							</span>
 						</div>
 					</div>
@@ -441,7 +609,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 			</div>
 		);
 	} else if (menu === "INSS" && submenu === "Cálculo Salário Cliente") {
-		return (
+		return isChecked ? (
 			<div className='calculatorIMGResultINSS4' id='calculatorIMGResult'>
 				<div className='calculatorIMGResultTitleINSS4'>
 					<h1 className='textoPropostaDeINSS4'> Proposta de </h1>
@@ -460,7 +628,172 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 				{/* <section className='relativeDivINSS4'> */}
 				<div className='caixaValoresPequenaINSS4'>VALORES</div>
 				<div className='calculatorIMGResultDivINSS4'>
-					{valuesWithoutFirst.map((value, index) => {
+					{valuesWithoutFirstAndLast.map((value, index) => {
+						const label = value.split("R")[0];
+						const valueR = value.split("R")[1];
+						return (
+							<div
+								className='calculatorIMGResultValuesINSS4'
+								key={index}
+							>
+								{label}
+								<button>R{valueR}</button>
+							</div>
+						);
+					})}
+				</div>
+				{/* </section> */}
+				<h2 className='calculatorIMGResultContratacaoINSS4'>
+					Faça sua contratação presencial em uma de nossas lojas
+				</h2>
+				<section className='calculatorIMGResultEnderecosINSS4'>
+					<div className='calculatorIMGResultEnderecosLeftINSS4'>
+						<div className='calculatorIMGResultEnderecoINSS4'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS4'
+								alt=''
+							/>
+							<p className='textoBomRetiroINSS4'>
+								Bom Retiro do Sul - RS
+							</p>
+						</div>
+						<div className='calculatorIMGResultEnderecoINSS4'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS4'
+								alt=''
+							/>
+							<p className='textoLajeadoINSS4'>Lajeado - RS</p>
+						</div>
+						<div className='calculatorIMGResultEnderecoINSS4'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS4'
+								alt=''
+							/>
+							<p className='textoVenancioAiresINSS4'>
+								Venâncio Aires - RS
+							</p>
+						</div>
+						<div className='calculatorIMGResultEnderecoINSS4'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS4'
+								alt=''
+							/>
+							<p className='textoHolambraINSS4'>Holambra - SP</p>
+						</div>
+					</div>
+					<div className='calculatorIMGResultEnderecosRightINSS4'>
+						<div className='calculatorIMGResultEnderecoINSS4'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS4'
+								alt=''
+							/>
+							<p className='textoSapucaiaINSS4'>
+								Sapucaia do Sul
+							</p>
+						</div>
+						<div className='calculatorIMGResultEnderecoINSS4'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS4'
+								alt=''
+							/>
+							<p className='textoEstanciaINSS4'>Estância Velha</p>
+						</div>
+						<div className='calculatorIMGResultEnderecoINSS4'>
+							<img
+								src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/location-icon.jpeg?alt=media&token=c519c2b6-df3a-4784-b66b-089eed28ed99'
+								className='iconeLocationINSS4'
+								alt=''
+							/>
+							<p className='textoTeutoniaINSS4'>Teutônia</p>
+						</div>
+					</div>
+				</section>
+				<section className='calculatorIMGResultSubtotaisINSS3'>
+					<div className='calculatorIMGResultSubtotalINSS3'>
+						<div className='parcelaTotalINSS3'>SUBTOTAL</div>
+						<div className='dindinResulTotalINSS3'>
+							R${values[values.length - 5].split(" ")[0]}{" "}
+						</div>
+					</div>
+					{/* <div className='calculatorIMGResultSubtotalParcelaINSS3'>
+						<div className='parcelaTotalINSS3'>PARCELA</div>
+						<div className='dindinResulTotalINSS3'>
+							R$
+							{values[values.length - 1].split(" ")[0]}{" "}
+							<span>
+								{values[values.length - 1].split(" ")[1]}
+							</span>
+						</div>
+					</div> */}
+					<div className='calculatorIMGResultLiberadoINSS3'>
+						<div className='textLiberadoINSS3'>
+							Após 03 parcelas libera o valor aproximado de
+							<br></br>
+							<span>{values[values.length - 3]}</span>
+							<br></br> sem alterar o valor da parcela!
+						</div>
+					</div>
+				</section>
+				<section className='calculatorIMGResultTotaisINSS4'>
+					<div className='calculatorIMGResultTotalINSS4'>
+						<div>VALOR TOTAL</div>
+						<div className='dindinResulTotalINSS4'>
+							R${values[values.length - 2]}
+						</div>
+					</div>
+					<div className='calculatorIMGResultSubtotalINSS4'>
+						<div className='parcelaTotalINSS4'>PARCELA TOTAL</div>
+						<div className='dindinResulTotalINSS4'>
+							R$
+							{values[values.length - 1].split(" ")[0]}{" "}
+							<span>
+								{values[values.length - 1].split(" ")[1]}
+							</span>
+						</div>
+					</div>
+				</section>
+				<section className='divContatoINSS4'>
+					<div className='contatoINSS4'>
+						<img
+							src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/phone.png?alt=media&token=bf099d75-3044-4115-850a-d31c70c974b6'
+							alt=''
+							className='phone-iconINSS4'
+						/>
+						<p className='textoNumeroINSS4'>08006080181</p>
+					</div>
+					<img
+						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
+						alt=''
+						className='logoCreditoRealINSS4'
+					/>
+				</section>
+			</div>
+		) : (
+			<div className='calculatorIMGResultINSS4' id='calculatorIMGResult'>
+				<div className='calculatorIMGResultTitleINSS4'>
+					<h1 className='textoPropostaDeINSS4'> Proposta de </h1>
+					<h1 className='textoCreditoINSS4'> CRÉDITO </h1>
+					<h1 className='textoConsignadoINSS4'> Consignado </h1>
+				</div>
+				<div className='calculatorIMGResultLabelDivINSS4'>
+					<div className='calculatorIMGResultLeftINSS4'>
+						{values[0]}
+					</div>
+					<div className='calculatorIMGResultRightINSS4'>
+						Segue abaixo a <span>simulação prévia</span> de valores
+						disponíveis no seu benefício <span>{menu}</span>
+					</div>
+				</div>
+				{/* <section className='relativeDivINSS4'> */}
+				<div className='caixaValoresPequenaINSS4'>VALORES</div>
+				<div className='calculatorIMGResultDivINSS4'>
+					{valuesWithoutFirstAndLast.map((value, index) => {
 						const label = value.split("R")[0];
 						const valueR = value.split("R")[1];
 						return (
@@ -557,9 +890,9 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						<div className='parcelaTotalINSS4'>PARCELA TOTAL</div>
 						<div className='dindinResulTotalINSS4'>
 							R$
-							{values[values.length - 1].split(" ")[1]}{" "}
+							{values[values.length - 1].split(" ")[0]}{" "}
 							<span>
-								{values[values.length - 1].split(" ")[2]}
+								{values[values.length - 1].split(" ")[1]}
 							</span>
 						</div>
 					</div>
@@ -610,7 +943,11 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 								key={index}
 							>
 								{label}
-								<button>R{valueR}</button>
+								<button>
+									{valueR && valueR.charAt(0) !== "N"
+										? "R" + valueR
+										: valueR}
+								</button>
 							</div>
 						);
 					})}
@@ -691,16 +1028,16 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 					<div className='calculatorIMGResultTotalINSS5'>
 						<div>VALOR TOTAL</div>
 						<div className='dindinResulTotalINSS5'>
-							{values[values.length - 2]}
+							R${values[values.length - 2]}
 						</div>
 					</div>
 					<div className='calculatorIMGResultSubtotalINSS5'>
 						<div className='parcelaTotalINSS5'>PARCELA TOTAL</div>
 						<div className='dindinResulTotalINSS5'>
 							R$
-							{values[values.length - 1].split(" ")[1]}{" "}
+							{values[values.length - 1].split(" ")[0]}{" "}
 							<span>
-								{values[values.length - 1].split(" ")[2]}
+								{values[values.length - 1].split(" ")[1]}
 							</span>
 						</div>
 					</div>

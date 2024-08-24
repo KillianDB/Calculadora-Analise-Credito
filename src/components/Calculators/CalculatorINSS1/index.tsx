@@ -65,10 +65,7 @@ export function CalculatorINSS1({
 				"Bem vindo, Cliente CR",
 				`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
 				`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
-				`Valor Cartão R$ ${formatNumber(
-					parseFloat(result[2].split(" R$ ")[1]) +
-						parseFloat(result[6].split(" R$ ")[1])
-				)}`,
+				`Valor Cartão R$ ${result[13]}`,
 				`Valor Parcela R$ ${formatNumber(
 					parseFloat(result[3].split(" R$ ")[1]) +
 						parseFloat(result[7].split(" R$ ")[1])

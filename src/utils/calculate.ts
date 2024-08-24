@@ -53,6 +53,8 @@ export function calculate(
 			"TOTAL: R$ " + formatNumber(totalT),
 			" PARCELA - R$ " + formatNumber(totalP),
 			" 84x",
+			//soma total cartão
+			formatNumber(cartaoINSST + cartaoBT),
 		];
 	} else if (menu == "INSS" && submenu == "Cálculo Valor Solicitado") {
 		if (!(values[0].label == "VALOR DE EMPRÉSTIMO SOLICITADO: ")) {
@@ -142,27 +144,52 @@ export function calculate(
 		const parcelaComExtra = totalP;
 
 		return [
+			//[0]
 			"VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
+			//[1]
 			"VALOR MARGEM EMPRÉSTIMO: R$ " + formatNumber(emprestimoP),
+			//[2]
 			"VALOR CARTÃO INSS: R$ " + formatNumber(cartaoT),
+			//[3]
 			"VALOR MARGEM CARTÃO INSS: R$ " + formatNumber(cartaoP),
+			//[4]
 			"VALOR CARTÃO BENEFÍCIO: R$ " + formatNumber(cartaoT),
+			//[5]
 			"VALOR MARGEM CARTÃO BENEFÍCIO: R$ " + formatNumber(cartaoP),
+			//[6]
 			"VALOR CARTÃO ENVIADO: R$ " + formatNumber(enviadoT),
+			//[7]
 			"VALOR MARGEM CARTÃO ENVIADO: R$ " + formatNumber(enviadoP),
+			//[8]
 			"TOTAL: R$ " + formatNumber(total),
+			//[9]
 			" PARCELA - R$ " + formatNumber(totalP),
+			//[10]
 			" 84x ",
+			//[11]
 			"SALDO DEVEDOR (APROXIMADO): R$ " + formatNumber(saldo),
+			//[12]
 			"PARCELA: R$ " + formatNumber(parcela),
+			//[13]
 			"VALOR REDUÇÃO DE JUROS (VALOR LÍQUIDO APROXIMADO): R$ " +
 				formatNumber(reducao),
+			//[14]
 			"LIBERA + O VALOR (APROXIMADO) DE: R$ " +
 				formatNumber(valorLiberado),
+			//[15]
 			" APÓS 03 PARCELAS PAGAS NA REDUÇÃO DE JUROS SEM ALTERAR A PARCELA.",
+			//[16]
 			"TOTAL: R$ " + formatNumber(totalExtra),
+			//[17]
 			" PARCELA - R$ " + formatNumber(parcelaComExtra),
-			" 84x ",
+			//[18]
+			"84x",
+			//[19] soma total cartão
+			formatNumber(cartaoT + cartaoT),
+			//[20] soma parcela cartão
+			formatNumber(cartaoP + cartaoP),
+			//[21] soma total cartão enviado
+			formatNumber(enviadoT + enviadoT),
 		];
 	} else if (menu == "INSS" && submenu == "Possibilidades Gerais") {
 		if (
@@ -170,20 +197,20 @@ export function calculate(
 			!(values[1].label == "VALOR MARGEM CARTÃO INSS: ") ||
 			!(
 				values[2].label == "VALOR MARGEM CARTÃO BENEFÍCIO: " ||
-				!(values[3].label == "PARCELA -1") ||
-				!(values[4].label == "PARCELA -2") ||
-				!(values[5].label == "PARCELA -3") ||
-				!(values[6].label == "PARCELA -4") ||
-				!(values[7].label == "PARCELA -5") ||
-				!(values[8].label == "PARCELA -6") ||
-				!(values[9].label == "PARCELA -7") ||
-				!(values[10].label == "SALDO DEVEDOR -1") ||
-				!(values[11].label == "SALDO DEVEDOR -2") ||
-				!(values[12].label == "SALDO DEVEDOR -3") ||
-				!(values[13].label == "SALDO DEVEDOR -4") ||
-				!(values[14].label == "SALDO DEVEDOR -5") ||
-				!(values[15].label == "SALDO DEVEDOR -6") ||
-				!(values[16].label == "SALDO DEVEDOR -7")
+				!(values[3].label == "PARCELA-1") ||
+				!(values[4].label == "PARCELA-2") ||
+				!(values[5].label == "PARCELA-3") ||
+				!(values[6].label == "PARCELA-4") ||
+				!(values[7].label == "PARCELA-5") ||
+				!(values[8].label == "PARCELA-6") ||
+				!(values[9].label == "PARCELA-7") ||
+				!(values[10].label == "SALDO DEVEDOR-1") ||
+				!(values[11].label == "SALDO DEVEDOR-2") ||
+				!(values[12].label == "SALDO DEVEDOR-3") ||
+				!(values[13].label == "SALDO DEVEDOR-4") ||
+				!(values[14].label == "SALDO DEVEDOR-5") ||
+				!(values[15].label == "SALDO DEVEDOR-6") ||
+				!(values[16].label == "SALDO DEVEDOR-7")
 			)
 		) {
 			return "no valid labels";
@@ -320,15 +347,14 @@ export function calculate(
 			"TOTAL: R$ " + formatNumber(total),
 			" PARCELA - R$ " + formatNumber(parcela),
 			" 84x",
-			//soma total cartão
-			formatNumber(inss + beneficios + comprasinss + comprasbeneficios),
-			//soma parcela cartão
-			formatNumber(
-				parcelainss +
-					parcelacomprasinss +
-					parcelabeneficios +
-					parcelacomprasbeneficios
-			),
+			//[29] soma total cartão
+			formatNumber(inss + beneficios),
+			//[30] soma parcela cartão
+			formatNumber(parcelainss + parcelabeneficios),
+			//[31] soma total compras
+			formatNumber(comprasinss + comprasbeneficios),
+			//[32] soma parcela compras
+			formatNumber(parcelacomprasinss + parcelacomprasbeneficios),
 		];
 	}
 }

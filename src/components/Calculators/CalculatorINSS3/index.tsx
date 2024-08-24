@@ -49,31 +49,32 @@ export function CalculatorINSS3({
 			setResults(result.slice(0, 2).concat(result.slice(5, 9)));
 			setTotal(result.slice(2, 5).concat(result.slice(9, 12)));
 
-			if (!isChecked) {
-				const finalResult: string[] = [
-					"Bem vindo, Cliente CR",
-					`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
-					`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
-					`${result[2].split(" R$ ")[1]}`,
-					`${result[3].split(" R$ ")[1]} 84x`,
-				];
-				setFinalResult(finalResult);
-			} else {
-				const finalResult: string[] = [
-					"Bem vindo, Cliente CR",
-					`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
-					`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
-					`${result[2].split(" R$ ")[1]}`,
-					`${result[3].split(" R$ ")[1]} 84x`,
-					`R$ ${
-						+result[9].split(" R$ ")[1] -
-						+result[2].split(" R$ ")[1]
-					}`,
-					`${result[9].split(" R$ ")[1]}`,
-					`${result[10].split(" R$ ")[1]} 84x`,
-				];
-				setFinalResult(finalResult);
-			}
+			// if (!isChecked) {
+			// 	const finalResult: string[] = [
+			// 		"Bem vindo, Cliente CR",
+			// 		`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
+			// 		`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
+			// 		`${result[2].split(" R$ ")[1]}`,
+			// 		`${result[3].split(" R$ ")[1]} 84x`,
+			// 	];
+			// 	setFinalResult(finalResult);
+			// } else {
+			const finalResult: string[] = [
+				"Bem vindo, Cliente CR",
+				`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
+				`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
+				//total sem extra
+				`${result[2].split(" R$ ")[1]}`,
+				//parcela sem extra
+				`${result[3].split(" R$ ")[1]} 84x`,
+				//liberado
+				`${result[8].split(" R$ ")[1]}`,
+				//total com extra
+				`${result[9].split(" R$ ")[1]}`,
+				`${result[10].split(" R$ ")[1]} 84x`,
+			];
+			setFinalResult(finalResult);
+			// }
 		}
 	}
 

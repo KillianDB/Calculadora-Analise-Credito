@@ -210,6 +210,7 @@ function Calculator() {
 						menu={menu}
 						submenu={submenu}
 						values={finalResult}
+						isChecked={isChecked}
 					/>
 					<button
 						className='buttonModalDownload'

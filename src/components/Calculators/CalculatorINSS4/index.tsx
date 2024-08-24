@@ -56,55 +56,26 @@ export function CalculatorINSS4({
 			setResults(result.slice(0, 8).concat(result.slice(11, 16)));
 			setTotais(result.slice(8, 11).concat(result.slice(16, 19)));
 
-			if (!isChecked) {
-				const finalResult: string[] = [
-					"Bem vindo, Cliente CR",
-					`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
-					`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
-					`Valor Cartão R$ ${
-						+result[2].split(" R$ ")[1] +
-						+result[4].split(" R$ ")[1]
-					}`,
-					`Parcela Cartão R$ ${
-						+result[3].split(" R$ ")[1] +
-						+result[5].split(" R$ ")[1]
-					} 84x`,
-					`Valor Cartão Enviado R$ ${result[6].split(" R$ ")[1]}`,
-					`Parcela Cartão Enviado R$ ${
-						result[7].split(" R$ ")[1]
-					} 84x`,
-					`${result[8].split(" R$ ")[1]}`,
-					`${result[9].split(" R$ ")[1]} 84x`,
-				];
-				setFinalResult(finalResult);
-			} else {
-				const finalResult: string[] = [
-					"Bem vindo, Cliente CR",
-					`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
-					`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
-					`Valor Cartão R$ ${
-						+result[2].split(" R$ ")[1] +
-						+result[4].split(" R$ ")[1]
-					}`,
-					`Parcela Cartão R$ ${
-						+result[3].split(" R$ ")[1] +
-						+result[5].split(" R$ ")[1]
-					} 84x`,
-					`Valor Cartão Enviado R$ ${result[6].split(" R$ ")[1]}`,
-					`Parcela Cartão Enviado R$ ${
-						result[7].split(" R$ ")[1]
-					} 84x`,
-					`${result[8].split(" R$ ")[1]}`,
-					`${result[9].split(" R$ ")[1]} 84x`,
-					`R$ ${
-						+result[16].split(" R$ ")[1] -
-						+result[8].split(" R$ ")[1]
-					}`,
-					`${result[16].split(" R$ ")[1]}`,
-					`${result[17].split(" R$ ")[1]} 84x`,
-				];
-				setFinalResult(finalResult);
-			}
+			const finalResult: string[] = [
+				"Bem vindo, Cliente CR",
+				`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
+				`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
+				`Valor Cartão R$ ${result[19]}`,
+				`Parcela Cartão R$ ${result[20]} 84x`,
+				`Valor Cartão Enviado R$ ${result[6].split(" R$ ")[1]}`,
+				`Parcela Cartão Enviado R$ ${result[7].split(" R$ ")[1]} 84x`,
+				//total sem extra
+				`${result[8].split(" R$ ")[1]}`,
+				//parcela sem extra
+				`${result[9].split(" R$ ")[1]} 84x`,
+				//liberado
+				`R$ ${result[14].split(" R$ ")[1]}`,
+				//total com extra
+				`${result[16].split(" R$ ")[1]}`,
+				//parcela com extra
+				`${result[17].split(" R$ ")[1]} 84x`,
+			];
+			setFinalResult(finalResult);
 		}
 	}
 

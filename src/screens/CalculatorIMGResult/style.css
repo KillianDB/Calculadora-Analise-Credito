@@ -1103,6 +1103,35 @@
 	font-size: 6px; /* Ajustado */
 }
 
+.calculatorIMGResultSubtotaisINSS3 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 19px; /* Ajustado */
+}
+
+.calculatorIMGResultLiberadoINSS3 {
+	width: 60%;
+}
+
+.textLiberadoINSS3 {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 10px; /* Ajustado */
+	text-align: center;
+	color: #000000;
+}
+
+.textLiberadoINSS3 span {
+	font-size: 12px; /* Ajustado */
+	font-weight: 500;
+	color: #ffffff;
+	background-color: #f99401;
+	border-radius: 3px;
+}
+
 .calculatorIMGResultTotaisINSS3 {
 	display: flex;
 	flex-direction: row;
@@ -1111,8 +1140,30 @@
 	margin-top: 19px; /* Ajustado */
 }
 
+.calculatorIMGResultSubtotalINSS3,
+.calculatorIMGResultSubtotalParcelaINSS3 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 12px 0; /* Ajustado */
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	border-radius: 3px; /* Ajustado */
+	color: #ffffff;
+	width: 80px; /* Ajustado */
+	height: 21px; /* Ajustado */
+	flex-wrap: wrap;
+	align-content: center;
+	font-size: 6px; /* Ajustado */
+	font-weight: 900;
+}
+
 .calculatorIMGResultTotalINSS3,
-.calculatorIMGResultSubtotalINSS3 {
+.calculatorIMGResultParcelaINSS3 {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;

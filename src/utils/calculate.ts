@@ -3,7 +3,7 @@ import { formatNumber } from "./formatNumbers";
 export function calculate(
 	menu: string,
 	submenu: string,
-	values: { label: string; value: string }[]
+	values: { label: string; value: number }[]
 ) {
 	if (menu == "INSS" && submenu == "Cálculo por Margem Disponível") {
 		if (
@@ -213,42 +213,15 @@ export function calculate(
 		if (
 			!(values[0].label == "VALOR MARGEM EMPRÉSTIMO: ") ||
 			!(values[1].label == "VALOR MARGEM CARTÃO INSS: ") ||
-			!(
-				values[2].label == "VALOR MARGEM CARTÃO BENEFÍCIO: " ||
-				!(values[3].label == "PARCELA-1") ||
-				!(values[4].label == "PARCELA-2") ||
-				!(values[5].label == "PARCELA-3") ||
-				!(values[6].label == "PARCELA-4") ||
-				!(values[7].label == "PARCELA-5") ||
-				!(values[8].label == "PARCELA-6") ||
-				!(values[9].label == "PARCELA-7") ||
-				!(values[10].label == "SALDO DEVEDOR-1") ||
-				!(values[11].label == "SALDO DEVEDOR-2") ||
-				!(values[12].label == "SALDO DEVEDOR-3") ||
-				!(values[13].label == "SALDO DEVEDOR-4") ||
-				!(values[14].label == "SALDO DEVEDOR-5") ||
-				!(values[15].label == "SALDO DEVEDOR-6") ||
-				!(values[16].label == "SALDO DEVEDOR-7")
-			)
+			!(values[2].label == "VALOR MARGEM CARTÃO BENEFÍCIO: ") ||
+			!(values[3].label == "valor liquido aproximado") ||
+			!(values[4].label == "total parcelas") ||
+			!(values[5].label == "total saldo devedor")
 		) {
 			return "no valid labels";
 		}
-		console.log(
-			"LABELS ",
-			values[0].label,
-			values[1].label,
-			values[2].label,
-			values[3].label,
-			values[11].label
-		);
-		console.log(
-			"VALUES ",
-			values[0].value,
-			values[1].value,
-			values[2].value,
-			values[3].value,
-			values[11].value
-		);
+		// console.log("inputs", values);
+
 		const emprestimo = +values[0].value / 0.02339;
 		const parcelaEmprestimo = +values[0].value;
 		const inss = +values[1].value * 22.67;
@@ -259,70 +232,10 @@ export function calculate(
 		const parcelabeneficios = +values[2].value * 0.7;
 		const comprasbeneficios = beneficios * 0.32;
 		const parcelacomprasbeneficios = +values[2].value * 0.3;
-		let possibilidade1 = 0;
-		let possibilidade2 = 0;
-		let possibilidade3 = 0;
-		let possibilidade4 = 0;
-		let possibilidade5 = 0;
-		let possibilidade6 = 0;
-		let possibilidade7 = 0;
-		let totalParcelas = 0;
-		let totalSaldoDevedor = 0;
-		let valorLiquidoAproximado = 0;
+		const totalParcelas = values[4].value;
+		const totalSaldoDevedor = values[5].value;
+		const valorLiquidoAproximado = values[3].value;
 
-		if (values[3].value != "" && values[10].value != "") {
-			console.log("parcela 1", values[3].value);
-			console.log("saldo devedor 1", values[10].value);
-			possibilidade1 = +values[3].value / 0.0223 - +values[10].value;
-			console.log("possibilidade 1", possibilidade1);
-			if (possibilidade1 > 0) {
-				totalParcelas += +values[3].value;
-				totalSaldoDevedor += +values[10].value;
-				valorLiquidoAproximado += possibilidade1;
-			}
-		} else if (values[4].value != "" && values[11].value != "") {
-			possibilidade2 = +values[4].value / 0.0223 - +values[11].value;
-			if (possibilidade2 > 0) {
-				totalParcelas += +values[4].value;
-				totalSaldoDevedor += +values[11].value;
-				valorLiquidoAproximado += possibilidade2;
-			}
-		} else if (values[5].value != "" && values[12].value != "") {
-			possibilidade3 = +values[5].value / 0.0223 - +values[12].value;
-			if (possibilidade3 > 0) {
-				totalParcelas += +values[5].value;
-				totalSaldoDevedor += +values[12].value;
-				valorLiquidoAproximado += possibilidade3;
-			}
-		} else if (values[6].value != "" && values[13].value != "") {
-			possibilidade4 = +values[6].value / 0.0223 - +values[13].value;
-			if (possibilidade4 > 0) {
-				totalParcelas += +values[6].value;
-				totalSaldoDevedor += +values[13].value;
-				valorLiquidoAproximado += possibilidade4;
-			}
-		} else if (values[7].value != "" && values[14].value != "") {
-			possibilidade5 = +values[7].value / 0.0223 - +values[14].value;
-			if (possibilidade5 > 0) {
-				totalParcelas += +values[7].value;
-				totalSaldoDevedor += +values[14].value;
-				valorLiquidoAproximado += possibilidade5;
-			}
-		} else if (values[8].value != "" && values[15].value != "") {
-			possibilidade6 = +values[8].value / 0.0223 - +values[15].value;
-			if (possibilidade6 > 0) {
-				totalParcelas += +values[8].value;
-				totalSaldoDevedor += +values[15].value;
-				valorLiquidoAproximado += possibilidade6;
-			}
-		} else if (values[9].value != "" && values[16].value != "") {
-			possibilidade7 = +values[9].value / 0.0223 - +values[16].value;
-			if (possibilidade7 > 0) {
-				totalParcelas += +values[9].value;
-				totalSaldoDevedor += +values[16].value;
-				valorLiquidoAproximado += possibilidade7;
-			}
-		}
 		const total =
 			emprestimo +
 			inss +
@@ -334,44 +247,59 @@ export function calculate(
 		const parcela = +values[0].value + +values[1].value + +values[2].value;
 
 		return [
+			//[0]
 			"VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimo),
+			//[1]
 			" PARCELA: R$ " + formatNumber(parcelaEmprestimo),
+			//[2]
 			" 84x",
+			//[3]
 			"VALOR CARTÃO INSS: R$ " + formatNumber(inss),
+			//[4]
 			" PARCELA: R$ " + formatNumber(parcelainss),
+			//[5]
 			" 84x",
+			//[6]
 			"VALOR COMPRAS: R$ " + formatNumber(comprasinss),
+			//[7]
 			" PARCELA: R$ " + formatNumber(parcelacomprasinss),
+			//[8]
 			" 84x",
+			//[9]
 			"VALOR CARTÃO BENEFÍCIO: R$ " + formatNumber(beneficios),
+			//[10]
 			" PARCELA: R$ " + formatNumber(parcelabeneficios),
+			//[11]
 			" 84x",
+			//[12]
 			"VALOR COMPRAS: R$ " + formatNumber(comprasbeneficios),
+			//[13]
 			" PARCELA: R$ " + formatNumber(parcelacomprasbeneficios),
+			//[14]
 			" 84x",
-			"POSSIBILIDADE R$ " + formatNumber(possibilidade1),
-			"POSSILIDADE R$ " + formatNumber(possibilidade2),
-			"POSSIBILIDADE R$ " + formatNumber(possibilidade3),
-			"POSSIBILIDADE R$ " + formatNumber(possibilidade4),
-			"POSSIBILIDADE R$ " + formatNumber(possibilidade5),
-			"POSSIBILIDADE R$ " + formatNumber(possibilidade6),
-			"POSSIBILIDADE R$ " + formatNumber(possibilidade7),
+			//[15]
 			"TOTAL DAS PARCELAS: R$ " + formatNumber(totalParcelas),
+			//[16]
 			"TOTAL SALDO DEVEDOR: R$ " + formatNumber(totalSaldoDevedor),
+			//[17]
 			"VALOR LIQUÍDO APROXIMADO NA PORTABILIDADE: R$ " +
 				formatNumber(valorLiquidoAproximado),
+			//[18]
 			"TROCO LIQUÍDO DA PORTABILIDADE (VALOR APROXIMADO): R$ " +
 				formatNumber(valorLiquidoAproximado),
+			//[19]
 			"TOTAL: R$ " + formatNumber(total),
+			//[20]
 			" PARCELA - R$ " + formatNumber(parcela),
+			//[21]
 			" 84x",
-			//[29] soma total cartão
+			//[22] soma total cartão
 			formatNumber(inss + beneficios),
-			//[30] soma parcela cartão
+			//[23] soma parcela cartão
 			formatNumber(parcelainss + parcelabeneficios),
-			//[31] soma total compras
+			//[24] soma total compras
 			formatNumber(comprasinss + comprasbeneficios),
-			//[32] soma parcela compras
+			//[25] soma parcela compras
 			formatNumber(parcelacomprasinss + parcelacomprasbeneficios),
 		];
 	}

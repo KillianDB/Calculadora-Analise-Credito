@@ -5,6 +5,7 @@ import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS5.css";
+import { formatNumber } from "../../../utils/formatNumbers";
 
 export function CalculatorINSS5({
 	setAllInputsFilled,
@@ -30,14 +31,15 @@ export function CalculatorINSS5({
 		"PARCELA: R$ 000,00",
 		"84x",
 	]);
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [resultsPossibilidade, setResultsPossibilidade] = useState([
-		"POSSIBILIDADE R$ 000,00",
-		"POSSIBILIDADE R$ 000,00",
-		"POSSIBILIDADE R$ 000,00",
-		"POSSIBILIDADE R$ 000,00",
-		"POSSIBILIDADE R$ 000,00",
-		"POSSIBILIDADE R$ 000,00",
-		"POSSIBILIDADE R$ 000,00",
+		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
+		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
+		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
+		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
+		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
+		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
+		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
 	]);
 	const [resultTotalPossibilidade, setResultTotalPossibilidade] = useState([
 		"TOTAL DAS PARCELAS: R$ 000,00",
@@ -75,102 +77,191 @@ export function CalculatorINSS5({
 		"SALDO DEVEDOR-6",
 		"SALDO DEVEDOR-7",
 	];
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [parcelas, setParcelas] = useState([
+		{ label: "PARCELA-1", value: 0 },
+		{ label: "PARCELA-2", value: 0 },
+		{ label: "PARCELA-3", value: 0 },
+		{ label: "PARCELA-4", value: 0 },
+		{ label: "PARCELA-5", value: 0 },
+		{ label: "PARCELA-6", value: 0 },
+		{ label: "PARCELA-7", value: 0 },
+	]);
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [saldos, setSaldos] = useState([
+		{ label: "SALDO DEVEDOR-1", value: 0 },
+		{ label: "SALDO DEVEDOR-2", value: 0 },
+		{ label: "SALDO DEVEDOR-3", value: 0 },
+		{ label: "SALDO DEVEDOR-4", value: 0 },
+		{ label: "SALDO DEVEDOR-5", value: 0 },
+		{ label: "SALDO DEVEDOR-6", value: 0 },
+		{ label: "SALDO DEVEDOR-7", value: 0 },
+	]);
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [possibilidades, setPossibilidades] = useState([
+		{ label: "POSSIBILIDADE-1", value: 0 },
+		{ label: "POSSIBILIDADE-2", value: 0 },
+		{ label: "POSSIBILIDADE-3", value: 0 },
+		{ label: "POSSIBILIDADE-4", value: 0 },
+		{ label: "POSSIBILIDADE-5", value: 0 },
+		{ label: "POSSIBILIDADE-6", value: 0 },
+		{ label: "POSSIBILIDADE-7", value: 0 },
+	]);
 	const [values, setValues] = useState([
-		{ label: "VALOR MARGEM EMPRÉSTIMO: ", value: "" },
-		{ label: "VALOR MARGEM CARTÃO INSS: ", value: "" },
+		{ label: "VALOR MARGEM EMPRÉSTIMO: ", value: 0 },
+		{ label: "VALOR MARGEM CARTÃO INSS: ", value: 0 },
 		{
 			label: "VALOR MARGEM CARTÃO BENEFÍCIO: ",
-			value: "",
+			value: 0,
 		},
-		{
-			label: "PARCELA-1",
-			value: "",
-		},
-		{
-			label: "PARCELA-2",
-			value: "",
-		},
-		{
-			label: "PARCELA-3",
-			value: "",
-		},
-		{
-			label: "PARCELA-4",
-			value: "",
-		},
-		{
-			label: "PARCELA-5",
-			value: "",
-		},
-		{
-			label: "PARCELA-6",
-			value: "",
-		},
-		{
-			label: "PARCELA-7",
-			value: "",
-		},
-		{
-			label: "SALDO DEVEDOR-1",
-			value: "",
-		},
-		{
-			label: "SALDO DEVEDOR-2",
-			value: "",
-		},
-		{
-			label: "SALDO DEVEDOR-3",
-			value: "",
-		},
-		{
-			label: "SALDO DEVEDOR-4",
-			value: "",
-		},
-		{
-			label: "SALDO DEVEDOR-5",
-			value: "",
-		},
-		{
-			label: "SALDO DEVEDOR-6",
-			value: "",
-		},
-		{
-			label: "SALDO DEVEDOR-7",
-			value: "",
-		},
+		{ label: "valor liquido aproximado", value: 0 },
+		{ label: "total parcelas", value: 0 },
+		{ label: "total saldo devedor", value: 0 },
 	]);
 
 	useEffect(() => {
-		const allFilled = values.slice(0, 3).every((item) => item.value !== "");
+		const allFilled = values.slice(0, 3).every((item) => item.value !== 0);
 		setAllInputsFilled(allFilled);
 	}, [values, setAllInputsFilled]);
 
-	function handleInputValue(label: string, value: string) {
-		const updatedValues = values.map((item) =>
-			item.label === label ? { ...item, value } : item
-		);
-		setValues(updatedValues);
-
-		const result = calculate("INSS", "Possibilidades Gerais", values);
-		if (result != "no valid labels" && result != undefined) {
+	function handleInputValue(label: string, value: number) {
+		let result: string[] | "no valid labels" | undefined = [];
+		if (label.includes("PARCELA") || label.includes("SALDO DEVEDOR")) {
+			console.log("ta no if do handleInputValue");
+			console.log("label", label);
+			console.log("value", value);
+			if (label == "PARCELA-1") {
+				parcelas[0].value = value;
+				possibilidades[0].value = value / 0.0223 - saldos[0].value;
+				resultsPossibilidade[0].value = ` R$ ${formatNumber(
+					possibilidades[0].value
+				)}`;
+			} else if (label == "PARCELA-2") {
+				parcelas[1].value = value;
+				possibilidades[1].value = value / 0.0223 - saldos[1].value;
+				resultsPossibilidade[1].value = ` R$ ${formatNumber(
+					possibilidades[1].value
+				)}`;
+			} else if (label == "PARCELA-3") {
+				parcelas[2].value = value;
+				possibilidades[2].value = value / 0.0223 - saldos[2].value;
+				resultsPossibilidade[2].value = ` R$ ${formatNumber(
+					possibilidades[2].value
+				)}`;
+			} else if (label == "PARCELA-4") {
+				parcelas[3].value = value;
+				possibilidades[3].value = value / 0.0223 - saldos[3].value;
+				resultsPossibilidade[3].value = ` R$ ${formatNumber(
+					possibilidades[3].value
+				)}`;
+			} else if (label == "PARCELA-5") {
+				parcelas[4].value = value;
+				possibilidades[4].value = value / 0.0223 - saldos[4].value;
+				resultsPossibilidade[4].value = ` R$ ${formatNumber(
+					possibilidades[4].value
+				)}`;
+			} else if (label == "PARCELA-6") {
+				parcelas[5].value = value;
+				possibilidades[5].value = value / 0.0223 - saldos[5].value;
+				resultsPossibilidade[5].value = ` R$ ${formatNumber(
+					possibilidades[5].value
+				)}`;
+			} else if (label == "PARCELA-7") {
+				parcelas[6].value = value;
+				possibilidades[6].value = value / 0.0223 - saldos[6].value;
+				resultsPossibilidade[6].value = ` R$ ${formatNumber(
+					possibilidades[6].value
+				)}`;
+			} else if (label == "SALDO DEVEDOR-1") {
+				saldos[0].value = value;
+				possibilidades[0].value = parcelas[0].value / 0.0223 - value;
+				resultsPossibilidade[0].value = ` R$ ${formatNumber(
+					possibilidades[0].value
+				)}`;
+			} else if (label == "SALDO DEVEDOR-2") {
+				saldos[1].value = value;
+				possibilidades[1].value = parcelas[1].value / 0.0223 - value;
+				resultsPossibilidade[1].value = ` R$ ${formatNumber(
+					possibilidades[1].value
+				)}`;
+			} else if (label == "SALDO DEVEDOR-3") {
+				saldos[2].value = value;
+				possibilidades[2].value = parcelas[2].value / 0.0223 - value;
+				resultsPossibilidade[2].value = ` R$ ${formatNumber(
+					possibilidades[2].value
+				)}`;
+			} else if (label == "SALDO DEVEDOR-4") {
+				saldos[3].value = value;
+				possibilidades[3].value = parcelas[3].value / 0.0223 - value;
+				resultsPossibilidade[3].value = ` R$ ${formatNumber(
+					possibilidades[3].value
+				)}`;
+			} else if (label == "SALDO DEVEDOR-5") {
+				saldos[4].value = value;
+				possibilidades[4].value = parcelas[4].value / 0.0223 - value;
+				resultsPossibilidade[4].value = ` R$ ${formatNumber(
+					possibilidades[4].value
+				)}`;
+			} else if (label == "SALDO DEVEDOR-6") {
+				saldos[5].value = value;
+				possibilidades[5].value = parcelas[5].value / 0.0223 - value;
+				resultsPossibilidade[5].value = ` R$ ${formatNumber(
+					possibilidades[5].value
+				)}`;
+			} else if (label == "SALDO DEVEDOR-7") {
+				saldos[6].value = value;
+				possibilidades[6].value = parcelas[6].value / 0.0223 - value;
+				resultsPossibilidade[6].value = ` R$ ${formatNumber(
+					possibilidades[6].value
+				)}`;
+			}
+		} else {
+			console.log("ta no else do handleInputValue");
+			console.log("label", label);
+			console.log("value", value);
+			const updatedValues = values.map((item) =>
+				item.label === label ? { ...item, value } : item
+			);
+			setValues(updatedValues);
+		}
+		let portabilidade: number = 0;
+		let totalParcelas: number = 0;
+		let totalSaldoDevedor: number = 0;
+		possibilidades.map((item) => {
+			if (item.label.includes("POSSIBILIDADE") && item.value > 0) {
+				portabilidade += item.value;
+				totalParcelas += parcelas[+item.label.split("-")[1] - 1].value;
+				totalSaldoDevedor +=
+					saldos[+item.label.split("-")[1] - 1].value;
+			}
+		});
+		values[3].value = portabilidade;
+		values[4].value = totalParcelas;
+		values[5].value = totalSaldoDevedor;
+		result = calculate("INSS", "Possibilidades Gerais", values);
+		if (
+			result != "no valid labels" &&
+			result != undefined &&
+			result.length != 0
+		) {
 			setResults(result.slice(0, 15));
-			setResultsPossibilidade(result.slice(15, 22));
-			setResultTotalPossibilidade(result.slice(22, 25));
-			setResultsTrocoLiquido(result[25]);
-			setTotal(result.slice(26, 30));
+			// setResultsPossibilidade(result.slice(15, 22));
+			setResultTotalPossibilidade(result.slice(15, 18));
+			setResultsTrocoLiquido(result[18]);
+			setTotal(result.slice(19, 22));
 
 			const finalResult = [
 				"Bem vindo, Cliente CR",
 				`Valor Empréstimo R$ ${result[0].split("$ ")[1]}`,
 				`Valor Parcela R$ ${result[1].split("$ ")[1]} 84x`,
-				`Valor Cartão R$ ${result[29]}`,
-				`Parcela Cartão R$ ${result[30]} 84x`,
-				`Valor Compras R$ ${result[31]}`,
-				`Parcela Compras R$ ${result[32]} 84x`,
-				`Portabilidade Aproximada R$ ${result[25].split(" R$ ")[1]}`,
+				`Valor Cartão R$ ${result[22]}`,
+				`Parcela Cartão R$ ${result[23]} 84x`,
+				`Valor Compras R$ ${result[24]}`,
+				`Parcela Compras R$ ${result[25]} 84x`,
+				`Portabilidade Aproximada R$ ${formatNumber(portabilidade)}`,
 				"Parcela RNão Altera",
-				`${result[26].split(" R$ ")[1]}`,
-				`${result[27].split(" R$ ")[1]} 84x`,
+				`${result[19].split(" R$ ")[1]}`,
+				`${result[20].split(" R$ ")[1]} 84x`,
 			];
 			setFinalResult(finalResult);
 		}
@@ -186,7 +277,7 @@ export function CalculatorINSS5({
 							key={label}
 							label={label}
 							onChange={(e) =>
-								handleInputValue(label, e.target.value)
+								handleInputValue(label, +e.target.value)
 							}
 						/>
 					))}
@@ -210,7 +301,7 @@ export function CalculatorINSS5({
 								key={label}
 								label={label.split("-")[0]}
 								onChange={(e) =>
-									handleInputValue(label, e.target.value)
+									handleInputValue(label, +e.target.value)
 								}
 							/>
 						))}
@@ -221,15 +312,19 @@ export function CalculatorINSS5({
 								key={label}
 								label={label.split("-")[0]}
 								onChange={(e) =>
-									handleInputValue(label, e.target.value)
+									handleInputValue(label, +e.target.value)
 								}
 							/>
 						))}
 					</div>
 					<div className='possibilidadesPossibilidades'>
-						{resultsPossibilidade.map((result: string) => (
-							<CalculatorResult result={result} />
-						))}
+						{resultsPossibilidade.map(
+							(result: { label: string; value: string }) => (
+								<CalculatorResult
+									result={result.label + result.value}
+								/>
+							)
+						)}
 					</div>
 				</section>
 				<div className='resultadosPossibilidades'>

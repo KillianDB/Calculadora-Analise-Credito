@@ -36,17 +36,17 @@ export function CalculatorINSS1({
 		"VALOR MARGEM CARTÃO BENEFÍCIO: ",
 	];
 	const [values, setValues] = useState([
-		{ label: "VALOR MARGEM EMPRÉSTIMO: ", value: "" },
-		{ label: "VALOR MARGEM CARTÃO INSS: ", value: "" },
-		{ label: "VALOR MARGEM CARTÃO BENEFÍCIO: ", value: "" },
+		{ label: "VALOR MARGEM EMPRÉSTIMO: ", value: 0 },
+		{ label: "VALOR MARGEM CARTÃO INSS: ", value: 0 },
+		{ label: "VALOR MARGEM CARTÃO BENEFÍCIO: ", value: 0 },
 	]);
 
 	useEffect(() => {
-		const allFilled = values.every((item) => item.value !== "");
+		const allFilled = values.every((item) => item.value !== 0);
 		setAllInputsFilled(allFilled);
 	}, [values, setAllInputsFilled]);
 
-	function handleInputValue(label: string, value: string) {
+	function handleInputValue(label: string, value: number) {
 		const updatedValues = values.map((item) =>
 			item.label === label ? { ...item, value } : item
 		);
@@ -64,9 +64,9 @@ export function CalculatorINSS1({
 			const finalResult = [
 				"Bem vindo, Cliente CR",
 				`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
-				`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
+				`Parcela Empréstimo R$ ${result[1].split(" R$ ")[1]} 84x`,
 				`Valor Cartão R$ ${result[13]}`,
-				`Valor Parcela R$ ${formatNumber(
+				`Parcela Cartão R$ ${formatNumber(
 					parseFloat(result[3].split(" R$ ")[1]) +
 						parseFloat(result[7].split(" R$ ")[1])
 				)} 84x`,
@@ -74,7 +74,7 @@ export function CalculatorINSS1({
 					parseFloat(result[4].split(" R$ ")[1]) +
 						parseFloat(result[8].split(" R$ ")[1])
 				)}`,
-				`Valor Parcela R$ ${formatNumber(
+				`Parcela Cartão Enviado R$ ${formatNumber(
 					parseFloat(result[5].split(" R$ ")[1]) +
 						parseFloat(result[9].split(" R$ ")[1])
 				)} 84x`,
@@ -97,7 +97,7 @@ export function CalculatorINSS1({
 						key={label}
 						label={label}
 						onChange={(e) =>
-							handleInputValue(label, e.target.value)
+							handleInputValue(label, +e.target.value)
 						}
 					/>
 				))}

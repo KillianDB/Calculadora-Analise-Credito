@@ -35,24 +35,24 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						disponíveis no seu benefício <span>{menu}</span>
 					</div>
 				</div>
-				{/* <section className='relativeDivINSS1'> */}
-				<div className='caixaValoresPequenaINSS1'>VALORES</div>
 				<div className='calculatorIMGResultDivINSS1'>
-					{valuesWithoutFirst.map((value, index) => {
-						const label = value.split("R")[0];
-						const valueR = value.split("R")[1];
-						return (
-							<div
-								className='calculatorIMGResultValuesINSS1'
-								key={index}
-							>
-								{label}
-								<button>R{valueR}</button>
-							</div>
-						);
-					})}
+					<div className='caixaValoresPequenaINSS1'>Valores</div>
+					<div className='calculatorIMGResultGridINSS1'>
+						{valuesWithoutFirst.map((value, index) => {
+							const label = value.split("R")[0];
+							const valueR = value.split("R")[1];
+							return (
+								<div
+									className='calculatorIMGResultValuesINSS1'
+									key={index}
+								>
+									{label}
+									<button>R{valueR}</button>
+								</div>
+							);
+						})}
+					</div>
 				</div>
-				{/* </section> */}
 				<h2 className='calculatorIMGResultContratacaoINSS1'>
 					Faça sua contratação presencial em uma de nossas lojas
 				</h2>
@@ -103,7 +103,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 								alt=''
 							/>
 							<p className='textoSapucaiaINSS1'>
-								Sapucaia do Sul
+								Sapucaia do Sul - RS
 							</p>
 						</div>
 						<div className='calculatorIMGResultEnderecoINSS1'>
@@ -112,7 +112,9 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 								className='iconeLocationINSS1'
 								alt=''
 							/>
-							<p className='textoEstanciaINSS1'>Estância Velha</p>
+							<p className='textoEstanciaINSS1'>
+								Estância Velha - RS
+							</p>
 						</div>
 						<div className='calculatorIMGResultEnderecoINSS1'>
 							<img
@@ -120,7 +122,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 								className='iconeLocationINSS1'
 								alt=''
 							/>
-							<p className='textoTeutoniaINSS1'>Teutônia</p>
+							<p className='textoTeutoniaINSS1'>Teutônia - RS</p>
 						</div>
 					</div>
 				</section>
@@ -134,7 +136,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 					<div className='calculatorIMGResultSubtotalINSS1'>
 						<div className='parcelaTotalINSS1'>PARCELA TOTAL</div>
 						<div className='dindinResulTotalINSS1'>
-							R$
+							{values[values.length - 1].split(" ")[0]}{" "}
 							{values[values.length - 1].split(" ")[1]}{" "}
 							<span>
 								{values[values.length - 1].split(" ")[2]}
@@ -176,10 +178,9 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						disponíveis no seu benefício <span>{menu}</span>
 					</div>
 				</div>
-				{/* <section className='relativeDivINSS2'> */}
-				<div className='caixaValoresPequenaINSS2'>VALORES</div>
 				<div className='calculatorIMGResultDivINSS2'>
-					{
+					<div className='caixaValoresPequenaINSS2'>Valores</div>
+					<div className='calculatorIMGResultGridINSS2'>
 						<div
 							className='calculatorIMGResultValuesINSS2'
 							key={values[1].split("R")[0]}
@@ -187,9 +188,8 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 							{values[1].split("R")[0]}
 							<button>R{values[1].split("R")[1]}</button>
 						</div>
-					}
+					</div>
 				</div>
-				{/* </section> */}
 				<h2 className='calculatorIMGResultContratacaoINSS2'>
 					Faça sua contratação presencial em uma de nossas lojas
 				</h2>
@@ -328,24 +328,24 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						disponíveis no seu benefício <span>{menu}</span>
 					</div>
 				</div>
-				{/* <section className='relativeDivINSS3'> */}
-				<div className='caixaValoresPequenaINSS3'>VALORES</div>
 				<div className='calculatorIMGResultDivINSS3'>
-					{valuesWithoutFirstAndLast.map((value, index) => {
-						const label = value.split("R")[0];
-						const valueR = value.split("R")[1];
-						return (
-							<div
-								className='calculatorIMGResultValuesINSS3'
-								key={index}
-							>
-								{label}
-								<button>R{valueR}</button>
-							</div>
-						);
-					})}
+					<div className='caixaValoresPequenaINSS3'>Valores</div>
+					<div className='calculatorIMGResultGridINSS3'>
+						{valuesWithoutFirstAndLast.map((value, index) => {
+							const label = value.split("R")[0];
+							const valueR = value.split("R")[1];
+							return (
+								<div
+									className='calculatorIMGResultValuesINSS3'
+									key={index}
+								>
+									{label}
+									<button>R{valueR}</button>
+								</div>
+							);
+						})}
+					</div>
 				</div>
-				{/* </section> */}
 				<h2 className='calculatorIMGResultContratacaoINSS3'>
 					Faça sua contratação presencial em uma de nossas lojas
 				</h2>
@@ -493,24 +493,24 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						disponíveis no seu benefício <span>{menu}</span>
 					</div>
 				</div>
-				{/* <section className='relativeDivINSS3'> */}
-				<div className='caixaValoresPequenaINSS3'>VALORES</div>
 				<div className='calculatorIMGResultDivINSS3'>
-					{valuesWithoutFirstAndLast.map((value, index) => {
-						const label = value.split("R")[0];
-						const valueR = value.split("R")[1];
-						return (
-							<div
-								className='calculatorIMGResultValuesINSS3'
-								key={index}
-							>
-								{label}
-								<button>R{valueR}</button>
-							</div>
-						);
-					})}
+					<div className='caixaValoresPequenaINSS3'>Valores</div>
+					<div className='calculatorIMGResultGridINSS3'>
+						{valuesWithoutFirstAndLast.map((value, index) => {
+							const label = value.split("R")[0];
+							const valueR = value.split("R")[1];
+							return (
+								<div
+									className='calculatorIMGResultValuesINSS3'
+									key={index}
+								>
+									{label}
+									<button>R{valueR}</button>
+								</div>
+							);
+						})}
+					</div>
 				</div>
-				{/* </section> */}
 				<h2 className='calculatorIMGResultContratacaoINSS3'>
 					Faça sua contratação presencial em uma de nossas lojas
 				</h2>
@@ -634,24 +634,24 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						disponíveis no seu benefício <span>{menu}</span>
 					</div>
 				</div>
-				{/* <section className='relativeDivINSS4'> */}
-				<div className='caixaValoresPequenaINSS4'>VALORES</div>
 				<div className='calculatorIMGResultDivINSS4'>
-					{valuesWithoutFirstAndLast.map((value, index) => {
-						const label = value.split("R")[0];
-						const valueR = value.split("R")[1];
-						return (
-							<div
-								className='calculatorIMGResultValuesINSS4'
-								key={index}
-							>
-								{label}
-								<button>R{valueR}</button>
-							</div>
-						);
-					})}
+					<div className='caixaValoresPequenaINSS4'>Valores</div>
+					<div className='calculatorIMGResultGridINSS4'>
+						{valuesWithoutFirstAndLast.map((value, index) => {
+							const label = value.split("R")[0];
+							const valueR = value.split("R")[1];
+							return (
+								<div
+									className='calculatorIMGResultValuesINSS4'
+									key={index}
+								>
+									{label}
+									<button>R{valueR}</button>
+								</div>
+							);
+						})}
+					</div>
 				</div>
-				{/* </section> */}
 				<h2 className='calculatorIMGResultContratacaoINSS4'>
 					Faça sua contratação presencial em uma de nossas lojas
 				</h2>
@@ -799,24 +799,24 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						disponíveis no seu benefício <span>{menu}</span>
 					</div>
 				</div>
-				{/* <section className='relativeDivINSS4'> */}
-				<div className='caixaValoresPequenaINSS4'>VALORES</div>
 				<div className='calculatorIMGResultDivINSS4'>
-					{valuesWithoutFirstAndLast.map((value, index) => {
-						const label = value.split("R")[0];
-						const valueR = value.split("R")[1];
-						return (
-							<div
-								className='calculatorIMGResultValuesINSS4'
-								key={index}
-							>
-								{label}
-								<button>R{valueR}</button>
-							</div>
-						);
-					})}
+					<div className='caixaValoresPequenaINSS4'>Valores</div>
+					<div className='calculatorIMGResultGridINSS4'>
+						{valuesWithoutFirstAndLast.map((value, index) => {
+							const label = value.split("R")[0];
+							const valueR = value.split("R")[1];
+							return (
+								<div
+									className='calculatorIMGResultValuesINSS4'
+									key={index}
+								>
+									{label}
+									<button>R{valueR}</button>
+								</div>
+							);
+						})}
+					</div>
 				</div>
-				{/* </section> */}
 				<h2 className='calculatorIMGResultContratacaoINSS4'>
 					Faça sua contratação presencial em uma de nossas lojas
 				</h2>
@@ -940,28 +940,28 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						disponíveis no seu benefício <span>{menu}</span>
 					</div>
 				</div>
-				{/* <section className='relativeDivINSS5'> */}
-				<div className='caixaValoresPequenaINSS5'>VALORES</div>
 				<div className='calculatorIMGResultDivINSS5'>
-					{valuesWithoutFirst.map((value, index) => {
-						const label = value.split("R")[0];
-						const valueR = value.split("R")[1];
-						return (
-							<div
-								className='calculatorIMGResultValuesINSS5'
-								key={index}
-							>
-								{label}
-								<button>
-									{valueR && valueR.charAt(0) !== "N"
-										? "R" + valueR
-										: valueR}
-								</button>
-							</div>
-						);
-					})}
+					<div className='caixaValoresPequenaINSS5'>Valores</div>
+					<div className='calculatorIMGResultGridINSS5'>
+						{valuesWithoutFirst.map((value, index) => {
+							const label = value.split("R")[0];
+							const valueR = value.split("R")[1];
+							return (
+								<div
+									className='calculatorIMGResultValuesINSS5'
+									key={index}
+								>
+									{label}
+									<button>
+										{valueR && valueR.charAt(0) !== "N"
+											? "R" + valueR
+											: valueR}
+									</button>
+								</div>
+							);
+						})}
+					</div>
 				</div>
-				{/* </section> */}
 				<h2 className='calculatorIMGResultContratacaoINSS5'>
 					Faça sua contratação presencial em uma de nossas lojas
 				</h2>

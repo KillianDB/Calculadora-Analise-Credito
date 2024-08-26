@@ -36,7 +36,7 @@
 .textoPropostaDeINSS1 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 24px; /* Ajustado */
+	font-size: 21px; /* Ajustado */
 	text-align: center;
 	color: #265064;
 	margin: 0;
@@ -45,7 +45,7 @@
 .textoCreditoINSS1 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 30px; /* Ajustado */
+	font-size: 24px; /* Ajustado */
 	text-align: center;
 	color: #f99401;
 	margin: 0;
@@ -54,10 +54,11 @@
 .textoConsignadoINSS1 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 24px; /* Ajustado */
+	font-size: 21px; /* Ajustado */
 	margin: 0;
 	text-align: center;
 	color: #265064;
+	margin-bottom: 10px;
 }
 
 .calculatorIMGResultLabelDivINSS1 {
@@ -68,6 +69,7 @@
 }
 
 .calculatorIMGResultLeftINSS1 {
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.24);
 	box-sizing: border-box;
 	background: radial-gradient(
 			50% 50% at 50% 50%,
@@ -78,15 +80,14 @@
 		#265064;
 	border-top-right-radius: 50px;
 	border-bottom-right-radius: 50px;
-	/* border-radius: 14px; Ajustado */
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 800;
-	font-size: 8px; /* Ajustado */
+	font-size: 9px;
 	align-content: center;
 	color: #ffffff;
-	width: 98%;
-	padding-left: 7px; /* Ajustado */
+	width: 80%;
+	padding-left: 8px;
 	padding-right: 0;
 }
 
@@ -98,15 +99,12 @@
 	font-weight: 400;
 	text-align: center;
 	color: #ffffff;
-	font-size: 8px; /* Ajustado */
+	font-size: 6px;
+	padding: 2px;
 }
 
 .calculatorIMGResultRightINSS1 span {
 	color: #f99401;
-}
-
-.logoCreditoRealINSS1 {
-	background: url(logo-square.svg);
 }
 
 .caixaNumeroINSS1 {
@@ -172,26 +170,40 @@
 	border: 0.5px solid #ffffff; /* Ajustado */
 }
 
-.relativeDivINSS1 {
-	/* position: relative; */
+.calculatorIMGResultGridINSS1 {
+	position: relative;
+	top: -24px;
+	grid-row: 2 / 3;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* Cria duas colunas */
+	gap: 10px; /* Espaçamento entre as colunas */
+	width: 100%; /* Garante que o grid ocupe toda a largura disponível */
 }
 
 .caixaValoresPequenaINSS1 {
 	background: linear-gradient(0deg, #2e2e2e 0%, #625d5d 50%, #625d5d 100%);
-	border-radius: 1px; /* Ajustado */
+	border-radius: 3px;
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 500;
-	font-size: 9px; /* Ajustado */
+	font-size: 12px;
 	text-align: center;
 	color: #ffffff;
-	padding: 6px; /* Ajustado */
-	margin-top: 3px; /* Ajustado */
+	padding: 3px;
+	margin-top: 3px;
 	width: fit-content;
 	align-self: center;
+	grid-row: 1 / 2;
+	position: relative;
+	top: -20px;
 }
 
 .calculatorIMGResultDivINSS1 {
+	position: relative;
+	top: 12px;
+	display: grid;
+	grid-template-rows: auto 1fr;
+	gap: 10px; /* Espaçamento entre VALORES e o grid */
 	/* position: absolute;
 	top: -50%; */
 	background: linear-gradient(
@@ -200,11 +212,11 @@
 		rgba(133, 130, 130, 0.57) 50%,
 		#949494 100%
 	);
-	border-radius: 3px; /* Ajustado */
-	display: grid;
+	border-radius: 12px; /* Ajustado */
+	/* display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	column-gap: 18px; /* Ajustado */
-	row-gap: 8px; /* Ajustado */
+	column-gap: 18px; 
+	row-gap: 8px;  */
 	justify-items: center;
 	align-content: space-evenly;
 	height: 113px; /* Ajustado */
@@ -219,7 +231,7 @@
 	justify-content: space-between;
 	align-items: center;
 	color: #ffffff;
-	font-size: 7px; /* Ajustado */
+	font-size: 8px; /* Ajustado */
 }
 
 .calculatorIMGResultValuesINSS1 text {
@@ -230,21 +242,22 @@
 
 .calculatorIMGResultValuesINSS1 button {
 	font-size: 7px; /* Ajustado */
-	width: 79px; /* Ajustado */
+	width: 70px; /* Ajustado */
 	margin: 0;
 	margin-top: 2px; /* Ajustado */
 	height: fit-content;
-	padding: 3px; /* Ajustado */
+	padding: 4px; /* Ajustado */
 }
 
 .calculatorIMGResultContratacaoINSS1 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: bold;
-	font-size: 12px; /* Ajustado */
+	font-size: 10px;
 	text-align: center;
 	color: #000000;
-	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
+	text-shadow: 0px 0.6px 8.3px #ffffff;
+	margin-top: 16px;
 }
 
 .calculatorIMGResultEnderecosINSS1 {
@@ -260,11 +273,11 @@
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 700;
-	font-size: 6px; /* Ajustado */
 	text-align: center;
 	color: #ffffff;
 	display: flex;
 	flex-direction: row;
+	padding: 4px;
 }
 
 .calculatorIMGResultEnderecosLeftINSS1 {
@@ -287,10 +300,9 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin: 6px 0; /* Ajustado */
-	height: 10px; /* Ajustado */
-	width: 79px; /* Ajustado */
-	font-size: 6px; /* Ajustado */
+	margin: 2px 0;
+	height: 10px;
+	width: 100px;
 }
 
 .calculatorIMGResultEnderecoINSS1 img {
@@ -302,37 +314,38 @@
 
 .calculatorIMGResultEnderecoINSS1 p {
 	margin: 0;
-	font-size: 6px; /* Ajustado */
+	font-size: 8px;
 }
 
 .calculatorIMGResultTotaisINSS1 {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
-	margin-top: 19px; /* Ajustado */
+	margin-top: 16px;
 }
 
 .calculatorIMGResultTotalINSS1,
 .calculatorIMGResultSubtotalINSS1 {
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.24);
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
-	padding: 12px 0; /* Ajustado */
+	justify-content: space-between;
+	padding: 8px 0;
 	background: linear-gradient(
 		180deg,
 		rgba(249, 169, 52, 0.8) 0%,
 		rgba(249, 158, 26, 0.9) 50%,
 		#f99401 100%
 	);
-	border-radius: 3px; /* Ajustado */
+	border-radius: 8px;
 	color: #ffffff;
-	width: 92px; /* Ajustado */
-	height: 28px; /* Ajustado */
+	width: 102px;
+	height: 28px;
 	flex-wrap: wrap;
-	align-content: center;
-	font-size: 9px; /* Ajustado */
-	font-weight: 900;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 600;
 }
 
 .dindinResulTotalINSS1 {
@@ -354,33 +367,30 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 12px; /* Ajustado */
-	height: 41px; /* Ajustado */
+	margin-top: 8px;
+	height: 42px;
 }
 
 .contatoINSS1 {
 	display: flex;
-	padding-right: 13px; /* Ajustado */
-	padding-left: 3px; /* Ajustado */
+	padding-right: 12px;
+	padding-left: 8px;
 	flex-direction: row;
-	font-family: "Roboto Condensed";
-	font-style: normal;
-	font-weight: 700;
-	font-size: 9px; /* Ajustado */
-	text-align: center;
 	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
-	border-radius: 14px; /* Ajustado */
+	border-radius: 14px;
 	color: #ffffff;
-	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
-	height: 12px; /* Ajustado */
+	text-shadow: 0px 0.12px 1.2px #ffffff;
+	height: 24px;
+	width: 104px;
 	align-items: center;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .phone-iconINSS1 {
-	width: 11px; /* Ajustado */
-	margin-right: 3px; /* Ajustado */
+	width: 16px;
+	margin-right: 8px;
 	margin-bottom: 0;
-	height: 11px; /* Ajustado */
+	height: 16px;
 	background-color: #ffffff;
 	border-radius: 50%;
 }
@@ -391,16 +401,16 @@
 	font-weight: 700;
 	text-align: center;
 	color: #ffffff;
-	font-size: 9px; /* Ajustado */
+	font-size: 12px;
 	margin: 0;
 }
 
 .logoCreditoRealINSS1 {
-	width: 22px; /* Ajustado */
+	width: 42px;
 	margin: 0;
 }
 
-/*!INSS Cálculo Valor SOlicitado*/
+/*!INSS Cálculo Valor Solicitado*/
 .bodyIMGResultINSS2 {
 	display: flex;
 	flex-direction: column;
@@ -438,7 +448,7 @@
 .textoPropostaDeINSS2 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 24px; /* Ajustado */
+	font-size: 21px; /* Ajustado */
 	text-align: center;
 	color: #265064;
 	margin: 0;
@@ -447,7 +457,7 @@
 .textoCreditoINSS2 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 30px; /* Ajustado */
+	font-size: 24px; /* Ajustado */
 	text-align: center;
 	color: #f99401;
 	margin: 0;
@@ -456,10 +466,11 @@
 .textoConsignadoINSS2 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 24px; /* Ajustado */
+	font-size: 21px; /* Ajustado */
 	margin: 0;
 	text-align: center;
 	color: #265064;
+	margin-bottom: 10px;
 }
 
 .calculatorIMGResultLabelDivINSS2 {
@@ -470,6 +481,7 @@
 }
 
 .calculatorIMGResultLeftINSS2 {
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.24);
 	box-sizing: border-box;
 	background: radial-gradient(
 			50% 50% at 50% 50%,
@@ -478,18 +490,16 @@
 			rgba(38, 80, 100, 0.35) 100%
 		),
 		#265064;
-
 	border-top-right-radius: 50px;
 	border-bottom-right-radius: 50px;
-	/* border-radius: 14px; Ajustado */
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 800;
-	font-size: 8px; /* Ajustado */
+	font-size: 9px;
 	align-content: center;
 	color: #ffffff;
-	width: 98%;
-	padding-left: 7px; /* Ajustado */
+	width: 80%;
+	padding-left: 8px;
 	padding-right: 0;
 }
 
@@ -501,15 +511,12 @@
 	font-weight: 400;
 	text-align: center;
 	color: #ffffff;
-	font-size: 8px; /* Ajustado */
+	font-size: 6px;
+	padding: 2px;
 }
 
 .calculatorIMGResultRightINSS2 span {
 	color: #f99401;
-}
-
-.logoCreditoRealINSS2 {
-	background: url(logo-square.svg);
 }
 
 .caixaNumeroINSS2 {
@@ -575,39 +582,46 @@
 	border: 0.5px solid #ffffff; /* Ajustado */
 }
 
-.relativeDivINSS2 {
-	/* position: relative; */
+.calculatorIMGResultGridINSS2 {
+	position: relative;
+	top: -12px;
+	width: 100%;
 }
 
 .caixaValoresPequenaINSS2 {
 	background: linear-gradient(0deg, #2e2e2e 0%, #625d5d 50%, #625d5d 100%);
-	border-radius: 1px; /* Ajustado */
+	border-radius: 3px;
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 500;
-	font-size: 9px; /* Ajustado */
+	font-size: 12px;
 	text-align: center;
 	color: #ffffff;
-	padding: 6px; /* Ajustado */
-	margin-top: 3px; /* Ajustado */
+	padding: 3px;
+	margin-top: 3px;
 	width: fit-content;
 	align-self: center;
+	grid-row: 1 / 2;
+	position: relative;
+	top: -20px;
 }
+
 .calculatorIMGResultDivINSS2 {
+	position: relative;
+	top: 16px;
+	display: flex;
 	background: linear-gradient(
 		90deg,
 		rgba(133, 130, 130, 0.57) 0%,
 		rgba(133, 130, 130, 0.57) 50%,
 		#949494 100%
 	);
-	border-radius: 3px;
-	display: grid;
-	justify-items: center;
-	align-content: space-evenly;
-	height: 90px;
-	width: 150px;
-	align-self: center;
-	padding: 24px;
+	border-radius: 12px;
+	height: 42px;
+	width: 200px;
+	padding: 10px;
+	flex-direction: column;
+	align-items: center;
 }
 
 .calculatorIMGResultValuesINSS2 {
@@ -616,7 +630,7 @@
 	justify-content: space-between;
 	align-items: center;
 	color: #ffffff;
-	font-size: 9px; /* Ajustado */
+	font-size: 10px; /* Ajustado */
 }
 
 .calculatorIMGResultValuesINSS2 text {
@@ -631,17 +645,18 @@
 	margin: 0;
 	margin-top: 2px;
 	height: fit-content;
-	padding: 3px;
+	padding: 4px;
 }
 
 .calculatorIMGResultContratacaoINSS2 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: bold;
-	font-size: 12px; /* Ajustado */
+	font-size: 11px; /* Ajustado */
 	text-align: center;
 	color: #000000;
-	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
+	text-shadow: 0px 0.6px 8.3px #ffffff;
+	margin-top: 28px;
 }
 
 .calculatorIMGResultEnderecosINSS2 {
@@ -657,11 +672,11 @@
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 700;
-	font-size: 6px; /* Ajustado */
 	text-align: center;
 	color: #ffffff;
 	display: flex;
 	flex-direction: row;
+	padding: 4px;
 }
 
 .calculatorIMGResultEnderecosLeftINSS2 {
@@ -684,10 +699,9 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin: 6px 0; /* Ajustado */
-	height: 10px; /* Ajustado */
-	width: 79px; /* Ajustado */
-	font-size: 6px; /* Ajustado */
+	margin: 4px 0;
+	height: 10px;
+	width: 100px;
 }
 
 .calculatorIMGResultEnderecoINSS2 img {
@@ -699,7 +713,7 @@
 
 .calculatorIMGResultEnderecoINSS2 p {
 	margin: 0;
-	font-size: 6px; /* Ajustado */
+	font-size: 8px;
 }
 
 .calculatorIMGResultTotaisINSS2 {
@@ -707,29 +721,30 @@
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
-	margin-top: 12px; /* Ajustado */
+	margin-top: 16px;
 }
 
 .calculatorIMGResultTotalINSS2,
 .calculatorIMGResultSubtotalINSS2 {
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.24);
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
-	padding: 12px 0; /* Ajustado */
+	justify-content: space-between;
+	padding: 8px 0;
 	background: linear-gradient(
 		180deg,
 		rgba(249, 169, 52, 0.8) 0%,
 		rgba(249, 158, 26, 0.9) 50%,
 		#f99401 100%
 	);
-	border-radius: 3px; /* Ajustado */
+	border-radius: 8px;
 	color: #ffffff;
-	width: 92px; /* Ajustado */
-	height: 28px; /* Ajustado */
+	width: 102px;
+	height: 28px;
 	flex-wrap: wrap;
 	align-items: center;
-	font-size: 9px; /* Ajustado */
-	font-weight: 900;
+	font-size: 10px;
+	font-weight: 600;
 }
 
 .dindinResulTotalINSS2 {
@@ -751,32 +766,30 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	height: 41px; /* Ajustado */
-	width: 95%;
+	margin-top: 8px;
+	height: 42px;
 }
+
 .contatoINSS2 {
 	display: flex;
-	padding-right: 13px;
-	padding-left: 3px;
+	padding-right: 12px;
+	padding-left: 8px;
 	flex-direction: row;
-	font-family: "Roboto Condensed";
-	font-style: normal;
-	font-weight: 700;
-	font-size: 12px;
-	text-align: center;
 	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
 	border-radius: 14px;
 	color: #ffffff;
-	text-shadow: 0px 0.6px 8.3px #ffffff;
-	height: 16px;
+	text-shadow: 0px 0.12px 1.2px #ffffff;
+	height: 24px;
+	width: 104px;
 	align-items: center;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .phone-iconINSS2 {
-	width: 11px; /* Ajustado */
-	margin-right: 3px; /* Ajustado */
+	width: 16px;
+	margin-right: 8px;
 	margin-bottom: 0;
-	height: 11px; /* Ajustado */
+	height: 16px;
 	background-color: #ffffff;
 	border-radius: 50%;
 }
@@ -787,12 +800,12 @@
 	font-weight: 700;
 	text-align: center;
 	color: #ffffff;
-	font-size: 9px; /* Ajustado */
+	font-size: 12px;
 	margin: 0;
 }
 
 .logoCreditoRealINSS2 {
-	width: 30px; /* Ajustado */
+	width: 42px;
 	margin: 0;
 }
 
@@ -834,7 +847,7 @@
 .textoPropostaDeINSS3 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 24px; /* Ajustado */
+	font-size: 21px; /* Ajustado */
 	text-align: center;
 	color: #265064;
 	margin: 0;
@@ -843,7 +856,7 @@
 .textoCreditoINSS3 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 30px; /* Ajustado */
+	font-size: 24px; /* Ajustado */
 	text-align: center;
 	color: #f99401;
 	margin: 0;
@@ -852,10 +865,11 @@
 .textoConsignadoINSS3 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 24px; /* Ajustado */
+	font-size: 21px; /* Ajustado */
 	margin: 0;
 	text-align: center;
 	color: #265064;
+	margin-bottom: 10px;
 }
 
 .calculatorIMGResultLabelDivINSS3 {
@@ -866,6 +880,7 @@
 }
 
 .calculatorIMGResultLeftINSS3 {
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.24);
 	box-sizing: border-box;
 	background: radial-gradient(
 			50% 50% at 50% 50%,
@@ -876,15 +891,14 @@
 		#265064;
 	border-top-right-radius: 50px;
 	border-bottom-right-radius: 50px;
-	/* border-radius: 14px; Ajustado */
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 800;
-	font-size: 8px; /* Ajustado */
+	font-size: 9px;
 	align-content: center;
 	color: #ffffff;
-	width: 98%;
-	padding-left: 7px; /* Ajustado */
+	width: 80%;
+	padding-left: 8px;
 	padding-right: 0;
 }
 
@@ -896,15 +910,12 @@
 	font-weight: 400;
 	text-align: center;
 	color: #ffffff;
-	font-size: 8px; /* Ajustado */
+	font-size: 6px;
+	padding: 2px;
 }
 
 .calculatorIMGResultRightINSS3 span {
 	color: #f99401;
-}
-
-.logoCreditoRealINSS3 {
-	background: url(logo-square.svg);
 }
 
 .caixaNumeroINSS3 {
@@ -970,45 +981,52 @@
 	border: 0.5px solid #ffffff; /* Ajustado */
 }
 
-.relativeDivINSS3 {
-	/* position: relative; */
+.calculatorIMGResultGridINSS3 {
+	position: relative;
+	top: -24px;
+	grid-row: 2 / 3;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* Cria duas colunas */
+	gap: 10px; /* Espaçamento entre as colunas */
+	width: 100%; /* Garante que o grid ocupe toda a largura disponível */
 }
 
 .caixaValoresPequenaINSS3 {
 	background: linear-gradient(0deg, #2e2e2e 0%, #625d5d 50%, #625d5d 100%);
-	border-radius: 1px; /* Ajustado */
+	border-radius: 3px;
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 500;
-	font-size: 9px; /* Ajustado */
+	font-size: 12px;
 	text-align: center;
 	color: #ffffff;
-	padding: 6px; /* Ajustado */
-	margin-top: 3px; /* Ajustado */
+	padding: 3px;
+	margin-top: 3px;
 	width: fit-content;
 	align-self: center;
+	grid-row: 1 / 2;
+	position: relative;
+	top: -20px;
 }
 
 .calculatorIMGResultDivINSS3 {
-	/* position: absolute;
-	top: -50%; */
 	background: linear-gradient(
 		90deg,
 		rgba(133, 130, 130, 0.57) 0%,
 		rgba(133, 130, 130, 0.57) 50%,
 		#949494 100%
 	);
-	border-radius: 3px; /* Ajustado */
+	border-radius: 12px;
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	column-gap: 18px; /* Ajustado */
-	row-gap: 8px; /* Ajustado */
+	column-gap: 18px;
+	row-gap: 8px;
 	justify-items: center;
 	align-content: space-evenly;
-	height: 113px; /* Ajustado */
-	width: fit-content;
+	height: 40px;
+	width: 90%;
 	align-self: center;
-	padding: 10px; /* Ajustado */
+	padding: 10px;
+	margin-top: 21px;
 }
 
 .calculatorIMGResultValuesINSS3 {
@@ -1017,7 +1035,7 @@
 	justify-content: space-between;
 	align-items: center;
 	color: #ffffff;
-	font-size: 7px; /* Ajustado */
+	font-size: 8px; /* Ajustado */
 }
 
 .calculatorIMGResultValuesINSS3 text {
@@ -1028,11 +1046,11 @@
 
 .calculatorIMGResultValuesINSS3 button {
 	font-size: 7px; /* Ajustado */
-	width: 79px; /* Ajustado */
+	width: 70px; /* Ajustado */
 	margin: 0;
 	margin-top: 2px; /* Ajustado */
 	height: fit-content;
-	padding: 3px; /* Ajustado */
+	padding: 4px; /* Ajustado */
 }
 
 .calculatorIMGResultContratacaoINSS3 {
@@ -1058,11 +1076,11 @@
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 700;
-	font-size: 6px; /* Ajustado */
 	text-align: center;
 	color: #ffffff;
 	display: flex;
 	flex-direction: row;
+	padding: 4px;
 }
 
 .calculatorIMGResultEnderecosLeftINSS3 {
@@ -1085,10 +1103,9 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin: 6px 0; /* Ajustado */
-	height: 10px; /* Ajustado */
-	width: 79px; /* Ajustado */
-	font-size: 6px; /* Ajustado */
+	margin: 2px 0;
+	height: 10px;
+	width: 100px;
 }
 
 .calculatorIMGResultEnderecoINSS3 img {
@@ -1100,7 +1117,15 @@
 
 .calculatorIMGResultEnderecoINSS3 p {
 	margin: 0;
-	font-size: 6px; /* Ajustado */
+	font-size: 8px;
+}
+
+.calculatorIMGResultTotaisINSS3 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	margin-top: 16px;
 }
 
 .calculatorIMGResultSubtotaisINSS3 {
@@ -1108,36 +1133,7 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 19px; /* Ajustado */
-}
-
-.calculatorIMGResultLiberadoINSS3 {
-	width: 60%;
-}
-
-.textLiberadoINSS3 {
-	font-family: "Roboto Condensed";
-	font-style: normal;
-	font-weight: 700;
-	font-size: 10px; /* Ajustado */
-	text-align: center;
-	color: #000000;
-}
-
-.textLiberadoINSS3 span {
-	font-size: 12px; /* Ajustado */
-	font-weight: 500;
-	color: #ffffff;
-	background-color: #f99401;
-	border-radius: 3px;
-}
-
-.calculatorIMGResultTotaisINSS3 {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	margin-top: 19px; /* Ajustado */
+	margin-top: 19px;
 }
 
 .calculatorIMGResultSubtotalINSS3,
@@ -1162,26 +1158,46 @@
 	font-weight: 900;
 }
 
+.textLiberadoINSS3 {
+	font-family: Roboto Condensed;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 9px;
+	text-align: center;
+	color: #000;
+}
+
+.textLiberadoINSS3 span {
+	font-size: 9px;
+	font-weight: 500;
+	color: #fff;
+	background-color: #f99401;
+	border-radius: 8px;
+	padding: 0px 2.4px;
+}
+
 .calculatorIMGResultTotalINSS3,
+.calculatorIMGResultSubtotalINSS3,
 .calculatorIMGResultParcelaINSS3 {
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.24);
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
-	padding: 12px 0; /* Ajustado */
+	justify-content: space-between;
+	padding: 8px 0;
 	background: linear-gradient(
 		180deg,
 		rgba(249, 169, 52, 0.8) 0%,
 		rgba(249, 158, 26, 0.9) 50%,
 		#f99401 100%
 	);
-	border-radius: 3px; /* Ajustado */
+	border-radius: 8px;
 	color: #ffffff;
-	width: 92px; /* Ajustado */
-	height: 28px; /* Ajustado */
+	width: 102px;
+	height: 28px;
 	flex-wrap: wrap;
-	align-content: center;
-	font-size: 9px; /* Ajustado */
-	font-weight: 900;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 600;
 }
 
 .dindinResulTotalINSS3 {
@@ -1203,33 +1219,30 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 12px; /* Ajustado */
-	height: 41px; /* Ajustado */
+	margin-top: 8px;
+	height: 42px;
 }
 
 .contatoINSS3 {
 	display: flex;
-	padding-right: 13px; /* Ajustado */
-	padding-left: 3px; /* Ajustado */
+	padding-right: 12px;
+	padding-left: 8px;
 	flex-direction: row;
-	font-family: "Roboto Condensed";
-	font-style: normal;
-	font-weight: 700;
-	font-size: 9px; /* Ajustado */
-	text-align: center;
 	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
-	border-radius: 14px; /* Ajustado */
+	border-radius: 14px;
 	color: #ffffff;
-	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
-	height: 12px; /* Ajustado */
+	text-shadow: 0px 0.12px 1.2px #ffffff;
+	height: 24px;
+	width: 104px;
 	align-items: center;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .phone-iconINSS3 {
-	width: 11px; /* Ajustado */
-	margin-right: 3px; /* Ajustado */
+	width: 16px;
+	margin-right: 8px;
 	margin-bottom: 0;
-	height: 11px; /* Ajustado */
+	height: 16px;
 	background-color: #ffffff;
 	border-radius: 50%;
 }
@@ -1240,12 +1253,12 @@
 	font-weight: 700;
 	text-align: center;
 	color: #ffffff;
-	font-size: 9px; /* Ajustado */
+	font-size: 12px;
 	margin: 0;
 }
 
 .logoCreditoRealINSS3 {
-	width: 22px; /* Ajustado */
+	width: 42px;
 	margin: 0;
 }
 
@@ -1287,7 +1300,7 @@
 .textoPropostaDeINSS4 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 24px; /* Ajustado */
+	font-size: 21px; /* Ajustado */
 	text-align: center;
 	color: #265064;
 	margin: 0;
@@ -1296,7 +1309,7 @@
 .textoCreditoINSS4 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 30px; /* Ajustado */
+	font-size: 24px; /* Ajustado */
 	text-align: center;
 	color: #f99401;
 	margin: 0;
@@ -1305,10 +1318,11 @@
 .textoConsignadoINSS4 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 24px; /* Ajustado */
+	font-size: 21px; /* Ajustado */
 	margin: 0;
 	text-align: center;
 	color: #265064;
+	margin-bottom: 10px;
 }
 
 .calculatorIMGResultLabelDivINSS4 {
@@ -1319,6 +1333,7 @@
 }
 
 .calculatorIMGResultLeftINSS4 {
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.24);
 	box-sizing: border-box;
 	background: radial-gradient(
 			50% 50% at 50% 50%,
@@ -1329,15 +1344,14 @@
 		#265064;
 	border-top-right-radius: 50px;
 	border-bottom-right-radius: 50px;
-	/* border-radius: 14px; Ajustado */
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 800;
-	font-size: 8px; /* Ajustado */
+	font-size: 9px;
 	align-content: center;
 	color: #ffffff;
-	width: 98%;
-	padding-left: 7px; /* Ajustado */
+	width: 80%;
+	padding-left: 8px;
 	padding-right: 0;
 }
 
@@ -1349,15 +1363,12 @@
 	font-weight: 400;
 	text-align: center;
 	color: #ffffff;
-	font-size: 8px; /* Ajustado */
+	font-size: 6px;
+	padding: 2px;
 }
 
 .calculatorIMGResultRightINSS4 span {
 	color: #f99401;
-}
-
-.logoCreditoRealINSS4 {
-	background: url(logo-square.svg);
 }
 
 .caixaNumeroINSS4 {
@@ -1423,37 +1434,45 @@
 	border: 0.5px solid #ffffff; /* Ajustado */
 }
 
-.relativeDivINSS4 {
-	/* position: relative; */
+.calculatorIMGResultGridINSS4 {
+	position: relative;
+	top: -24px;
+	grid-row: 2 / 3;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* Cria duas colunas */
+	gap: 10px; /* Espaçamento entre as colunas */
+	width: 100%; /* Garante que o grid ocupe toda a largura disponível */
 }
 
 .caixaValoresPequenaINSS4 {
 	background: linear-gradient(0deg, #2e2e2e 0%, #625d5d 50%, #625d5d 100%);
-	border-radius: 1px; /* Ajustado */
+	border-radius: 3px;
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 500;
-	font-size: 9px; /* Ajustado */
+	font-size: 12px;
 	text-align: center;
 	color: #ffffff;
-	padding: 6px; /* Ajustado */
-	margin-top: 3px; /* Ajustado */
+	padding: 3px;
+	margin-top: 3px;
 	width: fit-content;
 	align-self: center;
+	grid-row: 1 / 2;
+	position: relative;
+	top: -21px;
 }
 
 .calculatorIMGResultDivINSS4 {
-	/* position: absolute;
-	top: -50%; */
+	position: relative;
+	top: 10px;
 	background: linear-gradient(
 		90deg,
 		rgba(133, 130, 130, 0.57) 0%,
 		rgba(133, 130, 130, 0.57) 50%,
 		#949494 100%
 	);
-	border-radius: 3px; /* Ajustado */
+	border-radius: 12px; /* Ajustado */
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
 	column-gap: 18px; /* Ajustado */
 	row-gap: 8px; /* Ajustado */
 	justify-items: center;
@@ -1470,7 +1489,7 @@
 	justify-content: space-between;
 	align-items: center;
 	color: #ffffff;
-	font-size: 7px; /* Ajustado */
+	font-size: 8px; /* Ajustado */
 }
 
 .calculatorIMGResultValuesINSS4 text {
@@ -1481,11 +1500,11 @@
 
 .calculatorIMGResultValuesINSS4 button {
 	font-size: 7px; /* Ajustado */
-	width: 79px; /* Ajustado */
+	width: 70px; /* Ajustado */
 	margin: 0;
 	margin-top: 2px; /* Ajustado */
 	height: fit-content;
-	padding: 3px; /* Ajustado */
+	padding: 4px; /* Ajustado */
 }
 
 .calculatorIMGResultContratacaoINSS4 {
@@ -1496,6 +1515,7 @@
 	text-align: center;
 	color: #000000;
 	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
+	margin-top: 21px;
 }
 
 .calculatorIMGResultEnderecosINSS4 {
@@ -1511,11 +1531,11 @@
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 700;
-	font-size: 6px; /* Ajustado */
 	text-align: center;
 	color: #ffffff;
 	display: flex;
 	flex-direction: row;
+	padding: 4px;
 }
 
 .calculatorIMGResultEnderecosLeftINSS4 {
@@ -1538,10 +1558,9 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin: 6px 0; /* Ajustado */
-	height: 10px; /* Ajustado */
-	width: 79px; /* Ajustado */
-	font-size: 6px; /* Ajustado */
+	margin: 2px 0;
+	height: 10px;
+	width: 100px;
 }
 
 .calculatorIMGResultEnderecoINSS4 img {
@@ -1553,19 +1572,19 @@
 
 .calculatorIMGResultEnderecoINSS4 p {
 	margin: 0;
-	font-size: 6px; /* Ajustado */
+	font-size: 8px;
 }
 
 .calculatorIMGResultTotaisINSS4 {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
-	margin-top: 19px; /* Ajustado */
+	margin-top: 16px;
 }
 
-.calculatorIMGResultTotalINSS4,
-.calculatorIMGResultSubtotalINSS4 {
+.calculatorIMGResultSubtotalINSS4,
+.calculatorIMGResultSubtotalParcelaINSS4 {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
@@ -1578,12 +1597,35 @@
 	);
 	border-radius: 3px; /* Ajustado */
 	color: #ffffff;
-	width: 92px; /* Ajustado */
-	height: 28px; /* Ajustado */
+	width: 80px; /* Ajustado */
+	height: 21px; /* Ajustado */
 	flex-wrap: wrap;
 	align-content: center;
-	font-size: 9px; /* Ajustado */
+	font-size: 6px; /* Ajustado */
 	font-weight: 900;
+}
+
+.calculatorIMGResultTotalINSS4,
+.calculatorIMGResultSubtotalINSS4 {
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.24);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 8px 0;
+	background: linear-gradient(
+		180deg,
+		rgba(249, 169, 52, 0.8) 0%,
+		rgba(249, 158, 26, 0.9) 50%,
+		#f99401 100%
+	);
+	border-radius: 8px;
+	color: #ffffff;
+	width: 102px;
+	height: 28px;
+	flex-wrap: wrap;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 600;
 }
 
 .dindinResulTotalINSS4 {
@@ -1605,33 +1647,30 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 12px; /* Ajustado */
-	height: 41px; /* Ajustado */
+	margin-top: 8px;
+	height: 42px;
 }
 
 .contatoINSS4 {
 	display: flex;
-	padding-right: 13px; /* Ajustado */
-	padding-left: 3px; /* Ajustado */
+	padding-right: 12px;
+	padding-left: 8px;
 	flex-direction: row;
-	font-family: "Roboto Condensed";
-	font-style: normal;
-	font-weight: 700;
-	font-size: 9px; /* Ajustado */
-	text-align: center;
 	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
-	border-radius: 14px; /* Ajustado */
+	border-radius: 14px;
 	color: #ffffff;
-	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
-	height: 12px; /* Ajustado */
+	text-shadow: 0px 0.12px 1.2px #ffffff;
+	height: 24px;
+	width: 104px;
 	align-items: center;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .phone-iconINSS4 {
-	width: 11px; /* Ajustado */
-	margin-right: 3px; /* Ajustado */
+	width: 16px;
+	margin-right: 8px;
 	margin-bottom: 0;
-	height: 11px; /* Ajustado */
+	height: 16px;
 	background-color: #ffffff;
 	border-radius: 50%;
 }
@@ -1642,12 +1681,12 @@
 	font-weight: 700;
 	text-align: center;
 	color: #ffffff;
-	font-size: 9px; /* Ajustado */
+	font-size: 12px;
 	margin: 0;
 }
 
 .logoCreditoRealINSS4 {
-	width: 22px; /* Ajustado */
+	width: 42px;
 	margin: 0;
 }
 
@@ -1689,7 +1728,7 @@
 .textoPropostaDeINSS5 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 24px; /* Ajustado */
+	font-size: 21px; /* Ajustado */
 	text-align: center;
 	color: #265064;
 	margin: 0;
@@ -1698,7 +1737,7 @@
 .textoCreditoINSS5 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 30px; /* Ajustado */
+	font-size: 24px; /* Ajustado */
 	text-align: center;
 	color: #f99401;
 	margin: 0;
@@ -1707,10 +1746,11 @@
 .textoConsignadoINSS5 {
 	font-family: "Roboto Condensed";
 	font-style: normal;
-	font-size: 24px; /* Ajustado */
+	font-size: 21px; /* Ajustado */
 	margin: 0;
 	text-align: center;
 	color: #265064;
+	margin-bottom: 10px;
 }
 
 .calculatorIMGResultLabelDivINSS5 {
@@ -1721,6 +1761,7 @@
 }
 
 .calculatorIMGResultLeftINSS5 {
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.24);
 	box-sizing: border-box;
 	background: radial-gradient(
 			50% 50% at 50% 50%,
@@ -1731,15 +1772,14 @@
 		#265064;
 	border-top-right-radius: 50px;
 	border-bottom-right-radius: 50px;
-	/* border-radius: 14px; Ajustado */
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 800;
-	font-size: 8px; /* Ajustado */
+	font-size: 9px;
 	align-content: center;
 	color: #ffffff;
-	width: 98%;
-	padding-left: 7px; /* Ajustado */
+	width: 80%;
+	padding-left: 8px;
 	padding-right: 0;
 }
 
@@ -1751,15 +1791,11 @@
 	font-weight: 400;
 	text-align: center;
 	color: #ffffff;
-	font-size: 8px; /* Ajustado */
+	font-size: 6px;
+	padding: 2px;
 }
-
 .calculatorIMGResultRightINSS5 span {
 	color: #f99401;
-}
-
-.logoCreditoRealINSS5 {
-	background: url(logo-square.svg);
 }
 
 .caixaNumeroINSS5 {
@@ -1825,45 +1861,53 @@
 	border: 0.5px solid #ffffff; /* Ajustado */
 }
 
-.relativeDivINSS5 {
-	/* position: relative; */
+.calculatorIMGResultGridINSS5 {
+	position: relative;
+	top: -24px;
+	grid-row: 2 / 3;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* Cria duas colunas */
+	gap: 10px; /* Espaçamento entre as colunas */
+	width: 100%; /* Garante que o grid ocupe toda a largura disponível */
 }
 
 .caixaValoresPequenaINSS5 {
 	background: linear-gradient(0deg, #2e2e2e 0%, #625d5d 50%, #625d5d 100%);
-	border-radius: 1px; /* Ajustado */
+	border-radius: 3px;
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 500;
-	font-size: 9px; /* Ajustado */
+	font-size: 12px;
 	text-align: center;
 	color: #ffffff;
-	padding: 6px; /* Ajustado */
-	margin-top: 3px; /* Ajustado */
+	padding: 3px;
+	margin-top: 3px;
 	width: fit-content;
 	align-self: center;
+	grid-row: 1 / 2;
+	position: relative;
+	top: -20px;
 }
 
 .calculatorIMGResultDivINSS5 {
-	/* position: absolute;
-	top: -50%; */
 	background: linear-gradient(
 		90deg,
 		rgba(133, 130, 130, 0.57) 0%,
 		rgba(133, 130, 130, 0.57) 50%,
 		#949494 100%
 	);
-	border-radius: 3px; /* Ajustado */
+	border-radius: 12px;
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	column-gap: 18px; /* Ajustado */
-	row-gap: 8px; /* Ajustado */
+	column-gap: 18px;
+	row-gap: 8px;
 	justify-items: center;
 	align-content: space-evenly;
-	height: 113px; /* Ajustado */
+	height: 138px;
 	width: fit-content;
 	align-self: center;
-	padding: 10px; /* Ajustado */
+	padding: 10px;
+	position: relative;
+	top: 10px;
 }
 
 .calculatorIMGResultValuesINSS5 {
@@ -1872,7 +1916,7 @@
 	justify-content: space-between;
 	align-items: center;
 	color: #ffffff;
-	font-size: 7px; /* Ajustado */
+	font-size: 8px; /* Ajustado */
 }
 
 .calculatorIMGResultValuesINSS5 text {
@@ -1883,11 +1927,11 @@
 
 .calculatorIMGResultValuesINSS5 button {
 	font-size: 7px; /* Ajustado */
-	width: 79px; /* Ajustado */
+	width: 70px; /* Ajustado */
 	margin: 0;
 	margin-top: 2px; /* Ajustado */
 	height: fit-content;
-	padding: 3px; /* Ajustado */
+	padding: 4px; /* Ajustado */
 }
 
 .calculatorIMGResultContratacaoINSS5 {
@@ -1898,6 +1942,7 @@
 	text-align: center;
 	color: #000000;
 	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
+	margin-top: 21px;
 }
 
 .calculatorIMGResultEnderecosINSS5 {
@@ -1913,11 +1958,11 @@
 	font-family: "Roboto Condensed";
 	font-style: normal;
 	font-weight: 700;
-	font-size: 6px; /* Ajustado */
 	text-align: center;
 	color: #ffffff;
 	display: flex;
 	flex-direction: row;
+	padding: 4px;
 }
 
 .calculatorIMGResultEnderecosLeftINSS5 {
@@ -1940,10 +1985,9 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin: 6px 0; /* Ajustado */
-	height: 10px; /* Ajustado */
-	width: 79px; /* Ajustado */
-	font-size: 6px; /* Ajustado */
+	margin: 2px 0;
+	height: 10px;
+	width: 100px;
 }
 
 .calculatorIMGResultEnderecoINSS5 img {
@@ -1955,37 +1999,38 @@
 
 .calculatorIMGResultEnderecoINSS5 p {
 	margin: 0;
-	font-size: 6px; /* Ajustado */
+	font-size: 8px;
 }
 
 .calculatorIMGResultTotaisINSS5 {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
-	margin-top: 19px; /* Ajustado */
+	margin-top: 16px;
 }
 
 .calculatorIMGResultTotalINSS5,
 .calculatorIMGResultSubtotalINSS5 {
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.24);
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
-	padding: 12px 0; /* Ajustado */
+	justify-content: space-between;
+	padding: 8px 0;
 	background: linear-gradient(
 		180deg,
 		rgba(249, 169, 52, 0.8) 0%,
 		rgba(249, 158, 26, 0.9) 50%,
 		#f99401 100%
 	);
-	border-radius: 3px; /* Ajustado */
+	border-radius: 8px;
 	color: #ffffff;
-	width: 92px; /* Ajustado */
-	height: 28px; /* Ajustado */
+	width: 102px;
+	height: 28px;
 	flex-wrap: wrap;
-	align-content: center;
-	font-size: 9px; /* Ajustado */
-	font-weight: 900;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 600;
 }
 
 .dindinResulTotalINSS5 {
@@ -2007,33 +2052,30 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 12px; /* Ajustado */
-	height: 41px; /* Ajustado */
+	margin-top: 8px;
+	height: 42px;
 }
 
 .contatoINSS5 {
 	display: flex;
-	padding-right: 13px; /* Ajustado */
-	padding-left: 3px; /* Ajustado */
+	padding-right: 12px;
+	padding-left: 8px;
 	flex-direction: row;
-	font-family: "Roboto Condensed";
-	font-style: normal;
-	font-weight: 700;
-	font-size: 9px; /* Ajustado */
-	text-align: center;
 	background: linear-gradient(0deg, #2e2e2e 0%, #949494 100%);
-	border-radius: 14px; /* Ajustado */
+	border-radius: 14px;
 	color: #ffffff;
-	text-shadow: 0px 0.6px 8.3px #ffffff; /* Ajustado */
-	height: 12px; /* Ajustado */
+	text-shadow: 0px 0.12px 1.2px #ffffff;
+	height: 24px;
+	width: 104px;
 	align-items: center;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .phone-iconINSS5 {
-	width: 11px; /* Ajustado */
-	margin-right: 3px; /* Ajustado */
+	width: 16px;
+	margin-right: 8px;
 	margin-bottom: 0;
-	height: 11px; /* Ajustado */
+	height: 16px;
 	background-color: #ffffff;
 	border-radius: 50%;
 }
@@ -2044,11 +2086,11 @@
 	font-weight: 700;
 	text-align: center;
 	color: #ffffff;
-	font-size: 9px; /* Ajustado */
+	font-size: 12px;
 	margin: 0;
 }
 
 .logoCreditoRealINSS5 {
-	width: 22px; /* Ajustado */
+	width: 42px;
 	margin: 0;
 }

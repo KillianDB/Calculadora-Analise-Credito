@@ -142,8 +142,9 @@ function Calculator() {
 					}
 				)
 				.then((response) => {
-					window.location.href = response.data.downloadURL;
-					console.log("Imagem baixada com sucesso!", response.data);
+					console.log("Imagem gerada com sucesso!", response.data);
+					// window.location.href = response.data.downloadURL;
+					// console.log("Redirecionando", response.data);
 				})
 				.catch((error) => {
 					console.error("Erro ao gerar a imagem:", error.message);

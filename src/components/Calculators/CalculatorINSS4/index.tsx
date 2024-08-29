@@ -17,7 +17,7 @@ export function CalculatorINSS4({
 	setAllInputsFilled,
 	setFinalResult,
 }: CalculatorINSS4Props) {
-	const [values, setValues] = useState([{ label: "SALÁRIO: ", value: "" }]);
+	const [values, setValues] = useState([{ label: "SALÁRIO: ", value: 0 }]);
 	const [results, setResults] = useState([
 		"VALOR EMPRÉSTIMO: R$00.000,00",
 		"VALOR MARGEM EMPRÉSTIMO: R$00.000,00",
@@ -45,7 +45,7 @@ export function CalculatorINSS4({
 	]);
 	const label: string = "SALÁRIO: ";
 
-	function handleInputValue(label: string, value: string) {
+	function handleInputValue(label: string, value: number) {
 		setValues([{ label, value }]);
 		const result = calculate("INSS", "Cálculo Salário Cliente", [
 			{ label, value },
@@ -80,7 +80,7 @@ export function CalculatorINSS4({
 	}
 
 	useEffect(() => {
-		const allFilled = values.every((item) => item.value !== "");
+		const allFilled = values.every((item) => item.value !== 0);
 		setAllInputsFilled(allFilled);
 	}, [values, setAllInputsFilled]);
 
@@ -93,7 +93,7 @@ export function CalculatorINSS4({
 			<div className='inputsContainer' id='inputsContainerINSS4'>
 				<CalculatorInput
 					label={label}
-					onChange={(e) => handleInputValue(label, e.target.value)}
+					onChange={(e) => handleInputValue(label, +e.target.value)}
 				/>
 			</div>
 			{!isChecked ? (

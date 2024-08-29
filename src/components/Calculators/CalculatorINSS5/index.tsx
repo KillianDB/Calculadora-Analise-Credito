@@ -32,7 +32,7 @@ export function CalculatorINSS5({
 		"84x",
 	]);
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [resultsPossibilidade, setResultsPossibilidade] = useState([
+	const [resultsPossibilidade] = useState([
 		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
 		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
 		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
@@ -78,7 +78,7 @@ export function CalculatorINSS5({
 		"SALDO DEVEDOR-7",
 	];
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [parcelas, setParcelas] = useState([
+	const [parcelas] = useState([
 		{ label: "PARCELA-1", value: 0 },
 		{ label: "PARCELA-2", value: 0 },
 		{ label: "PARCELA-3", value: 0 },
@@ -88,7 +88,7 @@ export function CalculatorINSS5({
 		{ label: "PARCELA-7", value: 0 },
 	]);
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [saldos, setSaldos] = useState([
+	const [saldos] = useState([
 		{ label: "SALDO DEVEDOR-1", value: 0 },
 		{ label: "SALDO DEVEDOR-2", value: 0 },
 		{ label: "SALDO DEVEDOR-3", value: 0 },
@@ -98,7 +98,7 @@ export function CalculatorINSS5({
 		{ label: "SALDO DEVEDOR-7", value: 0 },
 	]);
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [possibilidades, setPossibilidades] = useState([
+	const [possibilidades] = useState([
 		{ label: "POSSIBILIDADE-1", value: 0 },
 		{ label: "POSSIBILIDADE-2", value: 0 },
 		{ label: "POSSIBILIDADE-3", value: 0 },

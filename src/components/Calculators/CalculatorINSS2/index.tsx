@@ -13,7 +13,7 @@ export function CalculatorINSS2({
 	setFinalResult: (result: string[]) => void;
 }) {
 	const [values, setValues] = useState([
-		{ label: "VALOR DE EMPRÉSTIMO SOLICITADO: ", value: "" },
+		{ label: "VALOR DE EMPRÉSTIMO SOLICITADO: ", value: 0 },
 	]);
 	const [totais, setTotais] = useState([
 		"TOTAL: R$ 0,00",
@@ -37,7 +37,7 @@ export function CalculatorINSS2({
 	]);
 	const label = "VALOR DE EMPRÉSTIMO SOLICITADO: ";
 
-	function handleInputValue(label: string, value: string) {
+	function handleInputValue(label: string, value: number) {
 		setValues([{ label, value }]);
 		const result = calculate("INSS", "Cálculo Valor Solicitado", [
 			{ label, value },
@@ -77,7 +77,7 @@ export function CalculatorINSS2({
 	}
 
 	useEffect(() => {
-		const allFilled = values.every((item) => item.value !== "");
+		const allFilled = values.every((item) => item.value !== 0);
 		setAllInputsFilled(allFilled);
 	}, [values, setAllInputsFilled]);
 
@@ -90,7 +90,7 @@ export function CalculatorINSS2({
 				<CalculatorInput
 					key={label}
 					label={label}
-					onChange={(e) => handleInputValue(label, e.target.value)}
+					onChange={(e) => handleInputValue(label, +e.target.value)}
 				/>
 			</div>
 			<section className='answerContainer' id='answerContainerTwo'>

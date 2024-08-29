@@ -134,7 +134,7 @@ function Calculator() {
 
 			axios
 				.post(
-					"https://creditorealbackend-1ch9vv0q.b4a.run/calculator/image",
+					"https://calculadora.reallcredito.com.br/calculator/image",
 					{
 						menu,
 						submenu,

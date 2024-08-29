@@ -143,6 +143,8 @@ function Calculator() {
 				)
 				.then((response) => {
 					console.log("Imagem gerada com sucesso!", response.data);
+					const link = document.createElement("a");
+					link.href = response.data.downloadURL;
 					// window.location.href = response.data.downloadURL;
 					// console.log("Redirecionando", response.data);
 				})

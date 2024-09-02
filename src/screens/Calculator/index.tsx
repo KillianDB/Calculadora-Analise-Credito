@@ -139,6 +139,10 @@ function Calculator() {
 						menu,
 						submenu,
 						element: element.outerHTML,
+					},
+					{headers:{
+						'Access-Control-Allow-Origin':'*',
+					}
 					}
 				)
 				.then((response) => {

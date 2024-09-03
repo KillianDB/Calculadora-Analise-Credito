@@ -134,24 +134,26 @@ function Calculator() {
 
 			axios
 				.post(
-					// "https://calculadora.reallcredito.com.br/calculator/image",
-					"http://localhost:3000/calculator/image",
+					"https://calculadora.reallcredito.com.br/calculator/image",
+					// "http://localhost:3000/calculator/image",
 					{
 						menu,
 						submenu,
 						element: element.outerHTML,
-					},
-					{headers:{
-						'Access-Control-Allow-Origin':'*',
 					}
-					}
+					// {
+					// 	headers: {
+					// 		"Access-Control-Allow-Origin": "*",
+					// 	},
+					// }
 				)
 				.then((response) => {
-					alert("Imagem gerada com sucesso!", response.data.downloadURL);
-					// const link = document.createElement("a");
-					// link.href = response.data.downloadURL;
-					// window.location.href = response.data.downloadURL;
-					// console.log("Redirecionando", response.data);
+					const link = document.createElement("a");
+					link.href = response.data;
+					link.target = "_blank";
+					link.rel = "noopener noreferrer";
+					link.click();
+					console.log("Redirecionando", response.data);
 				})
 				.catch((error) => {
 					console.error("Erro ao gerar a imagem:", error.message);

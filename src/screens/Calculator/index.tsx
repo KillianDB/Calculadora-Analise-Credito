@@ -135,11 +135,17 @@ function Calculator() {
 			axios
 				.post(
 					"https://calculadora.reallcredito.com.br/calculator/image",
+					// "http://localhost:3000/calculator/image",
 					{
 						menu,
 						submenu,
 						element: element.outerHTML,
 					}
+					// {
+					// 	headers: {
+					// 		"Access-Control-Allow-Origin": "*",
+					// 	},
+					// }
 				)
 				.then((response) => {
 					// console.log("Imagem gerada com sucesso!", response.data);

@@ -142,11 +142,12 @@ function Calculator() {
 					}
 				)
 				.then((response) => {
-					console.log("Imagem gerada com sucesso!", response.data);
-					const link = document.createElement("a");
-					link.href = response.data.downloadURL;
-					// window.location.href = response.data.downloadURL;
-					// console.log("Redirecionando", response.data);
+					// console.log("Imagem gerada com sucesso!", response.data);
+					// const link = document.createElement("a");
+					// link.href = response.data.downloadURL;
+					// link.click();
+					window.open(response.data, "_blank");
+					console.log("Redirecionando", response.data);
 				})
 				.catch((error) => {
 					console.error("Erro ao gerar a imagem:", error.message);

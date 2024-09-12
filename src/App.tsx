@@ -7,6 +7,7 @@ import { Home } from "./screens/Home";
 import { AdminHome } from "./screens/AdminHome";
 import Calculator from "./screens/Calculator";
 import { CreateUser } from "./screens/CreateUser";
+import { Equipes } from "./screens/Equipes";
 
 function App() {
 	return (
@@ -15,6 +16,7 @@ function App() {
 			<Route path='/home' element={<Home />} />
 			<Route path='/admin/home' element={<AdminHome />} />
 			<Route path='/calculadora' element={<Calculator />} />
+			<Route path='/equipes' element={<Equipes />} />
 			{/* <Route path='*' element={<Calculator />} /> */}
 			<Route path='/criar-funcionario' element={<CreateUser />} />
 			{/* <Route path='*' element={<NotFoundScreen />}/> */}

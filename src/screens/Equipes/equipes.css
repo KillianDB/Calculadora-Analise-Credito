@@ -1,0 +1,146 @@
+/* adminHome.css */
+
+/* Estilo para o header */
+.header_equipes {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	/* justify-content: flex-end; */
+	align-items: center;
+	/* padding: 10px 20px; */
+	height: fit-content;
+	background-color: #ffffff;
+}
+
+#seta-voltar-equipes {
+	width: 30px;
+	margin: 0 20px;
+}
+
+/* Estilo para o logo */
+#equipes-logo {
+	height: 50px;
+	margin: 0 20px;
+}
+
+/* Estilo para o main */
+main {
+	display: flex;
+	flex-direction: column;
+	height: 80vh;
+	padding: 20px;
+	background-color: #ffffff;
+	/* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+	margin: 0 20px;
+	border-radius: 8px;
+}
+
+.equipes_section {
+	display: grid;
+	grid-template-columns: 3fr 3fr;
+	gap: 20px;
+	height: 70vh;
+}
+
+.equipe_equipes {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.membro_equipes {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.membro_equipes img {
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	margin: 0 10px;
+}
+
+.membro_equipes button {
+	width: 100px;
+	height: 30px;
+	font-size: small;
+}
+
+/* Estilo para a lista de equipes */
+main section:nth-of-type(2) {
+	display: grid;
+	grid-template-columns: 3fr 3fr;
+	gap: 20px;
+	height: 70vh;
+}
+
+main section:nth-of-type(2) > div {
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: #f8f9fa;
+}
+
+main section:nth-of-type(2) h3 {
+	margin: 0 0 10px 0;
+}
+
+main section:nth-of-type(2) h6 {
+	margin: 5px 0;
+}
+
+/* Estilo para o botão de editar */
+main section:nth-of-type(2) .BlueButton {
+	margin-top: 10px;
+}
+
+/* Estilo para a imagem de bloquear membro */
+main section:nth-of-type(2) img {
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+/* Estilo para o modal */
+.Modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #ffffff;
+	padding: 20px;
+	/* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+	border-radius: 8px;
+	z-index: 1000;
+}
+
+.Modal label {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.Modal input,
+.Modal select {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.Modal .BlueButton {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	background-color: #007bff;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.Modal .BlueButton:hover {
+	background-color: #0056b3;
+}

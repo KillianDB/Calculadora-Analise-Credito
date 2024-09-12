@@ -11,12 +11,8 @@ export default function ResultadoAnalise(results: resultadoAnalise[]) {
 	const navigate = useNavigate();
 
 	function handleObtainCredit() {
-		console.log("Obtendo crédito");
+		//ver qual o banco e direcionar pro link do banco
 	}
-
-	const handleBackClick = () => {
-		navigate(-1);
-	};
 
 	return (
 		<>
@@ -24,7 +20,7 @@ export default function ResultadoAnalise(results: resultadoAnalise[]) {
 				<img
 					src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/seta-voltar.svg?alt=media&token=cf46113a-32c9-4f5d-a2bb-7c0047289d63'
 					className='seta-voltar'
-					onClick={handleBackClick}
+					onClick={() => navigate(-1)}
 				/>
 				<img
 					src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-comprido.svg?alt=media&token=135c3133-5dad-40be-a694-c2a143de847b'

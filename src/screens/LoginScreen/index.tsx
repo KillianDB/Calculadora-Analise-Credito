@@ -1,84 +1,72 @@
-// import React, { useState } from "react";
-// import "./loginScreen.css";
-// import { auth } from "../../config/firebase";
-// import { Link, useNavigate } from "react-router-dom";
-// import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import React, { useState } from "react";
+import "./loginScreen.css";
+import { Link, useNavigate } from "react-router-dom";
+import BackgroundFullGradient from "../../components/BackgroundFullGradient";
+import axios from "axios";
 
-// interface LoginState {
-// 	email: string;
-// 	password: string;
-// }
+export function LoginScreen() {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
 
-// export function LoginScreen() {
-// 	const [credentials, setCredentials] = useState<LoginState>({
-// 		email: "",
-// 		password: "",
-// 	});
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		try {
+			const login = await axios.post(
+				"https://calculadora.reallcredito.com.br/login",
+				{
+					email,
+					password,
+				}
+			);
 
-// 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// 	const [signInWithEmailAndPassword, user, loading, error] =
-// 		useSignInWithEmailAndPassword(auth);
+			if (login.status !== 200) {
+				console.error("Erro ao logar");
+				return login;
+			}
 
-// 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-// 		setCredentials({
-// 			...credentials,
-// 			[event.target.name]: event.target.value,
-// 		});
-// 	};
+			if (login.data.role === "admin") {
+				navigate("/admin/home");
+			} else {
+				navigate("/home");
+			}
+		} catch (error) {
+			console.error("Authentication Error:", error);
+		} finally {
+			setEmail("");
+			setPassword("");
+		}
+	};
 
-// 	const navigate = useNavigate();
-
-// 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-// 		event.preventDefault();
-// 		try {
-// 			await signInWithEmailAndPassword(
-// 				credentials.email,
-// 				credentials.password
-// 			);
-// 			// Handle successful login (optional)
-// 			if (
-// 				credentials.email == "creditorreal@gmail.com" ||
-// 				credentials.email == "admin@email.com"
-// 			) {
-// 				navigate("/admin/home");
-// 			} else {
-// 				navigate("/home");
-// 			}
-// 		} catch (error) {
-// 			console.error("Authentication Error:", error);
-// 		} finally {
-// 			setCredentials({ email: "", password: "" });
-// 		}
-// 	};
-
-// 	return (
-// 		<>
-// 			<main>
-// 				<img src='/logo-square.svg' />
-// 				<form onSubmit={handleSubmit}>
-// 					<h3>Login</h3>
-// 					<section>
-// 						<label>Email</label>
-// 						<input
-// 							type='email'
-// 							name='email'
-// 							value={credentials.email}
-// 							onChange={handleChange}
-// 						/>
-// 					</section>
-// 					<section>
-// 						<label>Senha</label>
-// 						<input
-// 							type='password'
-// 							name='password'
-// 							value={credentials.password}
-// 							onChange={handleChange}
-// 						/>
-// 					</section>
-// 					<button type='submit'>Entrar</button>
-// 					<Link to='/redefinir-senha'>Esqueceu sua senha?</Link>
-// 				</form>
-// 			</main>
-// 		</>
-// 	);
-// }
+	return (
+		<>
+			<BackgroundFullGradient />
+			<main>
+				<img src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814' />
+				<form onSubmit={handleSubmit}>
+					<h3>Login</h3>
+					<section>
+						<label>Email</label>
+						<input
+							type='email'
+							name='email'
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+					</section>
+					<section>
+						<label>Senha</label>
+						<input
+							type='password'
+							name='password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+					</section>
+					<button type='submit'>Entrar</button>
+					<Link to='/redefinir-senha'>Esqueceu sua senha?</Link>
+				</form>
+			</main>
+		</>
+	);
+}

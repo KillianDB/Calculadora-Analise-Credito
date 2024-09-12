@@ -1,0 +1,27 @@
+#sucesso-logo {
+	margin-left: 60vw;
+	margin-bottom: 0;
+}
+
+.main-sucesso {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.dados-sucesso {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#sucesso {
+	margin: 0;
+}
+
+#sucesso-button {
+	margin: 0;
+	border-radius: 12px;
+}

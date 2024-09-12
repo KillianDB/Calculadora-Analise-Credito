@@ -212,7 +212,11 @@ function Calculator() {
 						</div>
 					)}
 				</div>
-				<img src='/logo-square.svg' id='calculatorLogo' alt='Logo' />
+				<img
+					src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
+					id='calculatorLogo'
+					alt='Logo'
+				/>
 				{/* Modal para escolher a quantidade de parcelas */}
 				<Modal
 					isOpen={parcelModalIsOpen}

@@ -154,7 +154,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						<p className='textoNumeroINSS1'>08006080181</p>
 					</div>
 					<img
-						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
+						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/ohttps://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
 						alt=''
 						className='logoCreditoRealINSS1'
 					/>
@@ -301,7 +301,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						<p className='textoNumeroINSS2'>08006080181</p>
 					</div>
 					<img
-						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
+						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/ohttps://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
 						alt=''
 						className='logoCreditoRealINSS2'
 					/>
@@ -471,7 +471,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						<p className='textoNumeroINSS3'>08006080181</p>
 					</div>
 					<img
-						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
+						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/ohttps://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
 						alt=''
 						className='logoCreditoRealINSS3'
 					/>
@@ -610,7 +610,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						<p className='textoNumeroINSS3'>08006080181</p>
 					</div>
 					<img
-						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
+						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/ohttps://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
 						alt=''
 						className='logoCreditoRealINSS3'
 					/>
@@ -777,7 +777,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						<p className='textoNumeroINSS4'>08006080181</p>
 					</div>
 					<img
-						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
+						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/ohttps://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
 						alt=''
 						className='logoCreditoRealINSS4'
 					/>
@@ -916,7 +916,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						<p className='textoNumeroINSS4'>08006080181</p>
 					</div>
 					<img
-						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
+						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/ohttps://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
 						alt=''
 						className='logoCreditoRealINSS4'
 					/>
@@ -1061,7 +1061,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
 						<p className='textoNumeroINSS5'>08006080181</p>
 					</div>
 					<img
-						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
+						src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/ohttps://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
 						alt=''
 						className='logoCreditoRealINSS5'
 					/>

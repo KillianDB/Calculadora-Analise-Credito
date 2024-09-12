@@ -1,10 +1,126 @@
 #admin-home-logo {
 	margin-left: 60vw;
+	margin-bottom: 0;
 }
 
-p {
-	align-self: center;
-	margin-left: 36vw;
+.admin-home-main-div {
+	width: 100vw;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.admin-home-top-section {
+	display: flex;
+	flex-direction: row;
+	height: 40vh;
+	width: 100vw;
+	align-items: center;
+	justify-content: center;
+}
+
+.absolute-metrics {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+}
+
+.total-clientes,
+.total-call {
+	text-align: center;
+	box-shadow: 0px 0px 1px 0px #5c5b5b;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 10px;
+}
+
+.number-absolut {
+	font-size: 1.2em;
 	font-weight: bolder;
-	font-size: 2em;
+	color: #265064;
+}
+
+.destaque-text {
+	color: #f99401;
+}
+
+.bar-graphic {
+	width: 30%;
+	margin-left: 4vw;
+}
+
+.pizza-graphic {
+	width: 30%;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.tituloGraficoPizza {
+	font-weight: bolder;
+	font-size: 0.8em;
+	text-align: center;
+}
+
+.spanTituloGraficoPizza {
+	color: #f99401;
+}
+
+.admin-home-bottom-section {
+	display: flex;
+	flex-direction: row;
+	height: 40vh;
+	width: 100vw;
+	justify-content: center;
+	align-items: center;
+}
+
+.clients-list {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	margin: 10px;
+	margin-right: 4vw;
+	box-shadow: 0px 0px 1px 0px #5c5b5b;
+	border-radius: 10px;
+	width: 50vw;
+	align-self: center;
+}
+
+.client-card {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.tag_cliente_pensionista {
+	border: #008000 1px solid;
+	border-radius: 15px;
+	padding: 5px;
+	color: #008000;
+}
+
+.tag_cliente_geral {
+	border: #0000ff 1px solid;
+	border-radius: 15px;
+	padding: 5px;
+	color: #0000ff;
+}
+
+.tag_cliente_aposentado {
+	border: #f99401 1px solid;
+	border-radius: 15px;
+	padding: 5px;
+	color: #f99401;
+}
+
+.admin_home_buttons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }

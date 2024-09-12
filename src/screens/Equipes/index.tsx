@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import BlueButton from "../../components/BlueButton";
 import Modal from "react-modal";
 import "./equipes.css";
+import { useNavigate } from "react-router-dom";
 
 export function Equipes() {
+	const navigate = useNavigate();
 	const [modalOpen, setModalOpen] = useState(false);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -150,6 +152,7 @@ export function Equipes() {
 		<>
 			<div className='header_equipes'>
 				<img
+					onClick={() => navigate("/admin/home")}
 					src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/seta-voltar.svg?alt=media&token=cf46113a-32c9-4f5d-a2bb-7c0047289d63'
 					id='seta-voltar-equipes'
 				/>

@@ -30,6 +30,15 @@
 	/* overflow-x: hidden; */
 }
 
+.resultAnalisis-main-div-empty {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 60vh;
+	width: 100vw;
+}
+
 .resultAnalise-componente {
 	margin-bottom: 20px; /* Espaçamento entre os componentes */
 }

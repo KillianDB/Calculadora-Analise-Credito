@@ -8,12 +8,14 @@ import axios from "axios";
 export function Home() {
 	const navigate = useNavigate();
 	const [inputs, setInputs] = useState({
+		name: "",
 		cpf: "",
-		nome: "",
+		birthday: "",
 		cep: "",
-		tipoCliente: "",
-		renda: "",
-		dataNascimento: "",
+		profissionalClass: "",
+		income: 0,
+		cellphone: "",
+		gender: "",
 	});
 
 	function handleInputChange(
@@ -29,7 +31,7 @@ export function Home() {
 		console.log(label, value);
 	}
 
-	async function handleGenerateAnalisis() {
+	async function handleGenerateAnalysis() {
 		console.log("Gerando análise");
 		console.log("inputs ", inputs);
 
@@ -42,7 +44,7 @@ export function Home() {
 			);
 			if (response.status !== 200) {
 				console.error("Erro ao gerar análise");
-				return;
+				return response;
 			}
 			navigate("/resultado-analise", { state: response.data });
 		} catch (error) {
@@ -79,53 +81,72 @@ export function Home() {
 					title='Insira os dados do cliente'
 					inputs={[
 						{
-							label: "cpf",
+							label: "Nome",
+							name: "name",
+							type: "text",
+							value: inputs.name,
+							onChange: handleInputChange,
+						},
+						{
+							label: "CPF",
 							name: "cpf",
 							type: "text",
 							value: inputs.cpf,
 							onChange: handleInputChange,
 						},
 						{
-							label: "nome",
-							name: "nome",
-							type: "text",
-							value: inputs.nome,
-							onChange: handleInputChange,
-						},
-						{
-							label: "cep",
+							label: "CEP",
 							name: "cep",
 							type: "text",
 							value: inputs.cep,
 							onChange: handleInputChange,
 						},
 						{
-							label: "tipoCliente",
-							name: "tipoCliente",
+							label: "Categoria Profissional",
+							name: "profissionalClass",
 							type: "select",
-							value: inputs.tipoCliente,
+							value: inputs.profissionalClass,
 							onChange: handleInputChange,
-							options: ["Assalariado", "Outro"],
+							options: [
+								"Assalariado",
+								"Pensionista",
+								"Aposentado",
+							],
 						},
 						{
-							label: "renda",
-							name: "renda",
-							type: "text",
-							value: inputs.renda,
+							label: "Renda",
+							name: "income",
+							type: "number",
+							value: inputs.income.toString(),
 							onChange: handleInputChange,
 						},
 						{
-							label: "dataNascimento",
-							name: "dataNascimento",
+							label: "Data de Nascimento",
+							name: "birthday",
 							type: "date",
-							value: inputs.dataNascimento,
+							value: inputs.birthday,
 							onChange: handleInputChange,
+						},
+						{
+							label: "Celular",
+							name: "cellphone",
+							type: "text",
+							value: inputs.cellphone,
+							onChange: handleInputChange,
+						},
+						{
+							label: "Gênero",
+							name: "gender",
+							type: "select",
+							value: inputs.gender,
+							onChange: handleInputChange,
+							options: ["FEMININO", "MASCULINO"],
 						},
 					]}
 					button={
 						<OrangeButton
 							text='Gerar análise'
-							onClick={handleGenerateAnalisis}
+							onClick={handleGenerateAnalysis}
 						/>
 					}
 				/>

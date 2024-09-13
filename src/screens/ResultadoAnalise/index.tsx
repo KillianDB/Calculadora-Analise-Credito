@@ -1,17 +1,38 @@
 import OrangeButton from "../../components/OrangeButton";
 import ResultadoAnaliseComponente from "../../components/ResultadoAnalise";
 import "./style.css";
-import { useNavigate } from "react-router-dom";
-interface resultadoAnalise {
-	title: string;
-	subtitle: string;
-	values: { label: string; value: string }[];
-}
-export default function ResultadoAnalise(results: resultadoAnalise[]) {
+import {
+	// useLocation,
+	useNavigate,
+} from "react-router-dom";
+
+export default function ResultadoAnalise() {
+	// const location = useLocation();
+	// const responseData = location.state;
+	const responseData = [
+		{
+			banco: "Crefaz",
+			tipo: "Crédito Pessoal",
+			analise: true,
+			link: "https://www.crefaz.com.br/",
+		},
+		{
+			banco: "Via Certa",
+			tipo: "Crédito Pessoal",
+			analise: true,
+			link: "https://acerta-sistema-dev.web.app/",
+		},
+		{
+			banco: "Crédito Real",
+			tipo: "FGTS",
+			analise: true,
+			link: "https://www.creditoreal.com.br/",
+		},
+	];
 	const navigate = useNavigate();
 
-	function handleObtainCredit() {
-		//ver qual o banco e direcionar pro link do banco
+	function handleObtainCredit(link: string) {
+		window.open(link, "_blank");
 	}
 
 	return (
@@ -27,117 +48,42 @@ export default function ResultadoAnalise(results: resultadoAnalise[]) {
 					id='result-logo'
 				/>
 			</div>
-			<div className='resultAnalisis-main-div'>
-				{results.map(
-					(result: {
-						title: string;
-						subtitle: string;
-						values: { label: string; value: string }[];
-					}) => (
-						<ResultadoAnaliseComponente
-							title={result.title}
-							subtitle={result.subtitle}
-							values={result.values}
-							button={
-								<OrangeButton
-									text='Obter'
-									onClick={handleObtainCredit}
+			{responseData ? (
+				<div className='resultAnalisis-main-div-empty'>
+					<h1>Resultado da análise</h1>
+					<div className='resultAnalisis-main-div'>
+						{responseData.map(
+							(response: {
+								banco: string;
+								tipo: string;
+								analise: boolean;
+								link: string;
+							}) => (
+								<ResultadoAnaliseComponente
+									title={response.banco}
+									subtitle={response.tipo}
+									values={response.analise}
+									button={
+										<OrangeButton
+											text='Obter'
+											onClick={() =>
+												handleObtainCredit(
+													response.link
+												)
+											}
+										/>
+									}
 								/>
-							}
-						/>
-					)
-				)}
-				{/* <ResultadoAnaliseComponente
-					title='Crédito Pessoal'
-					subtitle='Banco Pan'
-					values={[
-						{ label: "Valor Total: ", value: "R$ 100000,00" },
-						{ label: "Taxa de Juros: ", value: "10,0%" },
-						{ label: "Vencimento: ", value: "17/08/2025" },
-					]}
-					button={
-						<OrangeButton
-							text='Obter'
-							onClick={handleObtainCredit}
-						/>
-					}
-				/>
-				<ResultadoAnaliseComponente
-					title='Crédito Pessoal'
-					subtitle='Grana Pix'
-					values={[
-						{ label: "Valor Total: ", value: "R$ 100000,00" },
-						{ label: "Taxa de Juros: ", value: "10,0%" },
-						{ label: "Vencimento: ", value: "17/08/2025" },
-					]}
-					button={
-						<OrangeButton
-							text='Obter'
-							onClick={handleObtainCredit}
-						/>
-					}
-				/>
-				<ResultadoAnaliseComponente
-					title='INSS'
-					subtitle='ICRED'
-					values={[
-						{ label: "Valor Total: ", value: "R$ 100000,00" },
-						{ label: "Taxa de Juros: ", value: "10,0%" },
-						{ label: "Vencimento: ", value: "17/08/2025" },
-					]}
-					button={
-						<OrangeButton
-							text='Obter'
-							onClick={handleObtainCredit}
-						/>
-					}
-				/>
-				<ResultadoAnaliseComponente
-					title='Crédito Pessoal'
-					subtitle='Banco Pan'
-					values={[
-						{ label: "Valor Total: ", value: "R$ 100000,00" },
-						{ label: "Taxa de Juros: ", value: "10,0%" },
-						{ label: "Vencimento: ", value: "17/08/2025" },
-					]}
-					button={
-						<OrangeButton
-							text='Obter'
-							onClick={handleObtainCredit}
-						/>
-					}
-				/>
-				<ResultadoAnaliseComponente
-					title='Crédito Pessoal'
-					subtitle='Grana Pix'
-					values={[
-						{ label: "Valor Total: ", value: "R$ 100000,00" },
-						{ label: "Taxa de Juros: ", value: "10,0%" },
-						{ label: "Vencimento: ", value: "17/08/2025" },
-					]}
-					button={
-						<OrangeButton
-							text='Obter'
-							onClick={handleObtainCredit}
-						/>
-					}
-				/>
-				<ResultadoAnaliseComponente
-					title='INSS'
-					subtitle='ICRED'
-					values={[
-						{ label: "Valor Total: ", value: "R$ 100000,00" },
-						{ label: "Taxa de Juros: ", value: "10,0%" },
-						{ label: "Vencimento: ", value: "17/08/2025" },
-					]}
-					button={
-						<OrangeButton
-							text='Obter'
-							onClick={handleObtainCredit}
-						/>
-					}
-				/> */}
-			</div>
+							)
+						)}
+					</div>
+				</div>
+			) : (
+				<div className='resultAnalisis-main-div-empty'>
+					<h1>Resultado da análise</h1>
+					<p>Não há resultados para exibir</p>
+				</div>
+			)}
 		</>
 	);
 }

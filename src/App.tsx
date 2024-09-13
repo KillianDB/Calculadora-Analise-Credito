@@ -8,6 +8,7 @@ import { AdminHome } from "./screens/AdminHome";
 import Calculator from "./screens/Calculator";
 import { CreateUser } from "./screens/CreateUser";
 import { Equipes } from "./screens/Equipes";
+import ResultadoAnalise from "./screens/ResultadoAnalise";
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 			<Route path='/admin/home' element={<AdminHome />} />
 			<Route path='/calculadora' element={<Calculator />} />
 			<Route path='/equipes' element={<Equipes />} />
+			<Route path='/resultado-analise' element={<ResultadoAnalise />} />
 			{/* <Route path='*' element={<Calculator />} /> */}
 			<Route path='/criar-funcionario' element={<CreateUser />} />
 			{/* <Route path='*' element={<NotFoundScreen />}/> */}

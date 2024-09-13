@@ -4,7 +4,7 @@ import "./ResultadoAnalise.css";
 interface ResultadoAnaliseProps {
 	title: string;
 	subtitle: string;
-	values: { label: string; value: string }[];
+	values: boolean;
 	button: ReactNode;
 }
 
@@ -16,14 +16,10 @@ export default function ResultadoAnaliseComponente({
 }: ResultadoAnaliseProps) {
 	return (
 		<div className='resultado-analise'>
-			<h2>{title}</h2>
-			<h2>{subtitle}</h2>
-			{values.map((input, index) => (
-				<div key={index}>
-					<label>{input.label}</label>
-					<span>{input.value}</span>
-				</div>
-			))}
+			<h2>
+				{title} - {subtitle}
+			</h2>
+			{values === true ? <p>Pré Aprovado</p> : <p>Não Aprovado</p>}
 			{button}
 		</div>
 	);

@@ -6,8 +6,9 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 100%;
-	max-width: 900px;
+	justify-content: center;
+	width: 240px;
+	height: 160px;
 	margin: 0 auto; /* Centraliza o componente horizontalmente */
 }
 
@@ -15,9 +16,13 @@
 	color: #265064; /* Título em azul */
 	text-align: center;
 	margin: 0;
+	height: 80px;
 }
 
-.resultado-analise section {
+.resultado-analise p {
+	text-align: center;
+	margin: 0;
+	font-size: larger;
 }
 
 .resultado-analise section div {

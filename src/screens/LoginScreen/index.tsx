@@ -26,8 +26,8 @@ export function LoginScreen() {
 			}
 
 			if (login.data.role === "admin") {
-				// navigate("/admin/home");
-				navigate("/calculadora");
+				navigate("/admin/home");
+				// navigate("/calculadora");
 			} else {
 				navigate("/home");
 			}

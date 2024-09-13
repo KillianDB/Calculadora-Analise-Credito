@@ -44,7 +44,9 @@ export function Home() {
 			);
 			if (response.status !== 200) {
 				console.error("Erro ao gerar análise");
-				navigate("/resultado-analise", { state: response.data });
+				setTimeout(() => {
+					navigate("/resultado-analise", { state: response.data });
+				}, 3000);
 				return response;
 			}
 			navigate("/resultado-analise", { state: response.data });

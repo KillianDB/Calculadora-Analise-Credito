@@ -183,10 +183,10 @@ export function AdminHome() {
 
 	return (
 		<>
-			<img
+			{/* <img
 				src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-comprido.svg?alt=media&token=135c3133-5dad-40be-a694-c2a143de847b'
 				id='admin-home-logo'
-			/>
+			/> */}
 			<div className='admin-home-main-div'>
 				<SideMenu type='admin' />
 				<section className='admin-home-top-section'>

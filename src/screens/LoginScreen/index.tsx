@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../utils/UserContext";
 import axios from "axios";
 import { useState } from "react";
+import BackgroundFullGradient from "../../components/BackgroundFullGradient";
 
 export default function LoginScreen() {
 	const navigate = useNavigate();
@@ -35,25 +36,46 @@ export default function LoginScreen() {
 	};
 
 	return (
-		<div>
-			<h1>Login</h1>
-			<input
-				type='email'
-				placeholder='Email'
-				value={loginData.email}
-				onChange={(e) =>
-					setLoginData({ ...loginData, email: e.target.value })
-				}
-			/>
-			<input
-				type='password'
-				placeholder='Password'
-				value={loginData.password}
-				onChange={(e) =>
-					setLoginData({ ...loginData, password: e.target.value })
-				}
-			/>
-			<button onClick={handleLogin}>Login</button>
-		</div>
+		<>
+			<BackgroundFullGradient />
+			<main>
+				<img src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814' />
+				<form onSubmit={handleLogin}>
+					<h3>Login</h3>
+					<section>
+						<label>Email</label>
+						<input
+							type='email'
+							name='email'
+							value={loginData.email}
+							onChange={(e) =>
+								setLoginData({
+									...loginData,
+									email: e.target.value,
+								})
+							}
+						/>
+					</section>
+					<section>
+						<label>Senha</label>
+						<input
+							type='password'
+							name='password'
+							value={loginData.password}
+							onChange={(e) =>
+								setLoginData({
+									...loginData,
+									password: e.target.value,
+								})
+							}
+						/>
+					</section>
+					<button onClick={handleLogin} type='submit'>
+						Entrar
+					</button>
+					<Link to='/redefinir-senha'>Esqueceu sua senha?</Link>
+				</form>
+			</main>
+		</>
 	);
 }

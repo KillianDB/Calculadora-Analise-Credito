@@ -24,9 +24,11 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 	});
 
 	useEffect(() => {
+		console.log("useEffect to get user data");
 		const fetchUser = async () => {
 			if (user && user.token) {
 				try {
+					console.log("user has token, fetching user data");
 					const response = await fetch(
 						"https://calculadora.reallcredito.com.br/auth",
 						{

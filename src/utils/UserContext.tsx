@@ -37,9 +37,10 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 					);
 					if (response.ok) {
 						const userData = await response.json();
+						console.log("User data:", userData);
 						setUser({ token: user.token, ...userData });
+						console.log("user: ", user);
 					} else {
-						// Handle token expiration or invalid token
 						logout();
 					}
 				} catch (error) {

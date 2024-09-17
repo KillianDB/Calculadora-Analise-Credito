@@ -16,7 +16,7 @@ function App() {
 	return (
 		<UserProvider>
 			<Routes>
-				<Route path='/' element={<LoginScreen />} />
+				<Route path='*' element={<LoginScreen />} />
 				{/* <Route path='/home' element={<Home />} /> */}
 				{/* <Route path='/admin/home' element={<AdminHome />} /> */}
 				<Route path='/calculadora' element={<Calculator />} />

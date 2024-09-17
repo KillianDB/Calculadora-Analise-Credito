@@ -1,7 +1,13 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
+import axios from "axios";
 
 interface User {
 	token: string;
+	id?: string;
+	name?: string;
+	email?: string;
+	role?: string;
+	userType?: string;
 }
 
 interface UserContextType {
@@ -24,12 +30,10 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 	});
 
 	useEffect(() => {
-		console.log("useEffect to get user data");
 		const fetchUser = async () => {
 			if (user && user.token) {
 				try {
-					console.log("user has token, fetching user data");
-					const response = await fetch(
+					const response = await axios.get(
 						"https://calculadora.reallcredito.com.br/auth",
 						{
 							headers: {
@@ -37,16 +41,16 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 							},
 						}
 					);
-					if (response.ok) {
-						const userData = await response.json();
+					if (response.status === 200) {
+						const userData = response;
 						console.log("User data:", userData);
 						setUser({ token: user.token, ...userData });
-						console.log("user: ", user);
 					} else {
+						console.error("Erro ao verificar usuário", response);
 						logout();
 					}
 				} catch (error) {
-					console.error("Failed to fetch user data:", error);
+					console.error("Erro ao verificar usuário", error);
 					logout();
 				}
 			}
@@ -72,6 +76,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 	);
 };
 
+// Custom hook to use the UserContext
 export const useUser = () => {
 	const context = useContext(UserContext);
 	if (!context) {

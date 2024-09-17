@@ -1,82 +1,58 @@
-import React, { useState, useContext } from "react";
-import { UserContext } from "../../utils/UserContext";
-import "./loginScreen.css";
-import { Link, useNavigate } from "react-router-dom";
-import BackgroundFullGradient from "../../components/BackgroundFullGradient";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../utils/UserContext";
 import axios from "axios";
+import { useState } from "react";
 
-export function LoginScreen() {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const userContext = useContext(UserContext);
+export default function LoginScreen() {
 	const navigate = useNavigate();
+	const { setUser } = useUser();
+	const [loginData, setLoginData] = useState({ email: "", password: "" });
 
-	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
+	const handleLogin = async () => {
 		try {
-			const login = await axios.post(
-				"https://calculadora.reallcredito.com.br/auth",
-				{
-					email,
-					password,
-				}
+			const response = await axios.post(
+				"https://calculadora.reallcredito.com.br/auth/login",
+				loginData
 			);
 
-			if (login.status !== 200) {
-				console.error("Erro ao logar");
-				return login;
-			}
+			if (response.status === 200) {
+				const { token, role } = response.data;
+				localStorage.setItem("token", token);
+				setUser({ token });
 
-			localStorage.setItem("token", login.data.token);
-			if (userContext) {
-				userContext.login(login.data.token);
+				if (role === "admin") {
+					navigate("/calculadora");
+				} else {
+					navigate("/home");
+				}
 			} else {
-				console.error("UserContext is undefined");
-			}
-
-			if (login.data.role === "admin") {
-				// navigate("/admin/home");
-				navigate("/calculadora");
-			} else {
-				navigate("/home");
+				console.error("Erro ao fazer login", response);
 			}
 		} catch (error) {
-			console.error("Authentication Error:", error);
-		} finally {
-			setEmail("");
-			setPassword("");
+			console.error("Erro ao fazer login", error);
 		}
 	};
 
 	return (
-		<>
-			<BackgroundFullGradient />
-			<main>
-				<img src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814' />
-				<form onSubmit={handleSubmit}>
-					<h3>Login</h3>
-					<section>
-						<label>Email</label>
-						<input
-							type='email'
-							name='email'
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-					</section>
-					<section>
-						<label>Senha</label>
-						<input
-							type='password'
-							name='password'
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-					</section>
-					<button type='submit'>Entrar</button>
-					<Link to='/redefinir-senha'>Esqueceu sua senha?</Link>
-				</form>
-			</main>
-		</>
+		<div>
+			<h1>Login</h1>
+			<input
+				type='email'
+				placeholder='Email'
+				value={loginData.email}
+				onChange={(e) =>
+					setLoginData({ ...loginData, email: e.target.value })
+				}
+			/>
+			<input
+				type='password'
+				placeholder='Password'
+				value={loginData.password}
+				onChange={(e) =>
+					setLoginData({ ...loginData, password: e.target.value })
+				}
+			/>
+			<button onClick={handleLogin}>Login</button>
+		</div>
 	);
 }

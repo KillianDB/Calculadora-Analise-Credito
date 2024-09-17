@@ -2,7 +2,7 @@ import "./App.css";
 // import UsersScreen from './screens/UsersScreen';
 // import NotFoundScreen from './screens/NotFoundScreen';
 import { Routes, Route } from "react-router-dom";
-import { LoginScreen } from "./screens/LoginScreen";
+import LoginScreen from "./screens/LoginScreen";
 import { Home } from "./screens/Home";
 import { AdminHome } from "./screens/AdminHome";
 import Calculator from "./screens/Calculator";

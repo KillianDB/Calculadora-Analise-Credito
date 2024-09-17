@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../../utils/UserContext";
 import "./loginScreen.css";
 import { Link, useNavigate } from "react-router-dom";
 import BackgroundFullGradient from "../../components/BackgroundFullGradient";
@@ -7,6 +8,7 @@ import axios from "axios";
 export function LoginScreen() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const userContext = useContext(UserContext);
 	const navigate = useNavigate();
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -23,6 +25,13 @@ export function LoginScreen() {
 			if (login.status !== 200) {
 				console.error("Erro ao logar");
 				return login;
+			}
+
+			localStorage.setItem("token", login.data.token);
+			if (userContext) {
+				userContext.login(login.data.token);
+			} else {
+				console.error("UserContext is undefined");
 			}
 
 			if (login.data.role === "admin") {

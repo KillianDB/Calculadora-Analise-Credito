@@ -11,7 +11,7 @@ export default function LoginScreen() {
 	const handleLogin = async () => {
 		try {
 			const response = await axios.post(
-				"https://calculadora.reallcredito.com.br/auth/login",
+				"https://calculadora.reallcredito.com.br/auth",
 				loginData
 			);
 

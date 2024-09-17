@@ -76,6 +76,10 @@ export function AdminHome() {
 						},
 					}
 				);
+				const contentType = response.headers.get("content-type");
+				if (!contentType || !contentType.includes("application/json")) {
+					throw new Error("A resposta não é um JSON válido");
+				}
 				const data = await response.json();
 				setTotalClientes(data);
 			} catch (error) {
@@ -94,6 +98,10 @@ export function AdminHome() {
 						},
 					}
 				);
+				const contentType = response.headers.get("content-type");
+				if (!contentType || !contentType.includes("application/json")) {
+					throw new Error("A resposta não é um JSON válido");
+				}
 				const data = await response.json();
 				setClientesEmContato(data);
 			} catch (error) {
@@ -112,6 +120,10 @@ export function AdminHome() {
 						},
 					}
 				);
+				const contentType = response.headers.get("content-type");
+				if (!contentType || !contentType.includes("application/json")) {
+					throw new Error("A resposta não é um JSON válido");
+				}
 				const data: PieValues = await response.json();
 				setPieValues(data);
 			} catch (error) {
@@ -130,6 +142,10 @@ export function AdminHome() {
 						},
 					}
 				);
+				const contentType = response.headers.get("content-type");
+				if (!contentType || !contentType.includes("application/json")) {
+					throw new Error("A resposta não é um JSON válido");
+				}
 				const data: BarValues = await response.json();
 				setBarValues(data);
 			} catch (error) {
@@ -148,6 +164,10 @@ export function AdminHome() {
 						},
 					}
 				);
+				const contentType = response.headers.get("content-type");
+				if (!contentType || !contentType.includes("application/json")) {
+					throw new Error("A resposta não é um JSON válido");
+				}
 				const data = await response.json();
 				setClients(data);
 			} catch (error) {

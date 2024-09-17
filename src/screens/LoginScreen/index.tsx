@@ -21,7 +21,7 @@ export default function LoginScreen() {
 
 				if (user !== null) {
 					if (user.role === "admin") {
-						navigate("/admin");
+						navigate("/admin/home");
 					} else {
 						navigate("/home");
 					}

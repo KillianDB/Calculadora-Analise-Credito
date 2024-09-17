@@ -2,19 +2,50 @@ import { useNavigate } from "react-router-dom";
 import OrangeButton from "../../components/OrangeButton";
 import SubmitCard from "../../components/SubmitCard";
 import "../AlterarSenha/AlterarSenha.css";
-import { useState } from "react";
-import { useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../utils/UserContext";
+import axios from "axios";
 
 export default function CodeConfirmation() {
 	const navigate = useNavigate();
 	const [code, setCode] = useState("");
 	const userContext = useContext(UserContext);
-	if (!userContext || !userContext.user) {
-		console.error("User context is not defined");
-		return null;
-	}
-	const { user } = userContext;
+	const [userData, setUserData] = useState({
+		id: "",
+		name: "",
+		email: "",
+		role: "",
+		userType: "",
+	});
+
+	useEffect(() => {
+		if (!userContext || !userContext.user) {
+			console.error("User context is not defined");
+			navigate("/login");
+			return;
+		}
+
+		const { user } = userContext;
+
+		axios
+			.get("https://calculadora.reallcredito.com.br/auth", {
+				headers: {
+					Authorization: `Bearer ${user.token}`,
+				},
+			})
+			.then((response) => {
+				if (response.status !== 200) {
+					console.error("Erro ao verificar usuário", response);
+					navigate("/login");
+				} else {
+					setUserData(response.data);
+				}
+			})
+			.catch((error) => {
+				console.error("Erro ao verificar usuário", error);
+				navigate("/login");
+			});
+	}, [userContext, navigate]);
 
 	async function handleCheckCode() {
 		const response = await fetch(
@@ -45,7 +76,7 @@ export default function CodeConfirmation() {
 
 			<section className='main-alterar-senha'>
 				<SubmitCard
-					title={`Enviamos o código de verificação para o Email: ${user.email}`}
+					title={`Enviamos o código de verificação para o Email: ${userData.email}`}
 					inputs={[
 						{
 							label: "Digite o código enviado abaixo",

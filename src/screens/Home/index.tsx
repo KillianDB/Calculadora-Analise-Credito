@@ -3,9 +3,17 @@ import OrangeButton from "../../components/OrangeButton";
 import SubmitCard from "../../components/SubmitCard";
 import "./home.css";
 import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../utils/UserContext.tsx";
 import axios from "axios";
+import { SideMenu } from "../../components/SideMenu/index.tsx";
 
 export function Home() {
+	const { user } = useContext(UserContext) ?? { user: undefined };
+	if (!user) {
+		throw new Error("User not found");
+	}
+
 	const navigate = useNavigate();
 	const [inputs, setInputs] = useState({
 		name: "",
@@ -39,17 +47,23 @@ export function Home() {
 			const response = await axios.post(
 				"https://calculadora.reallcredito.com.br/banks",
 				{
-					...inputs,
+					headers: {
+						Authorization: `Bearer ${user?.token}`,
+					},
+					body: {
+						birthday: inputs.birthday,
+						cellphone: inputs.cellphone,
+						cpf: inputs.cpf,
+						cep: inputs.cep,
+						name: inputs.name,
+						profissionalClass: inputs.profissionalClass,
+						income: inputs.income,
+						gender: inputs.gender,
+					},
 				}
 			);
-			if (response.status !== 200) {
-				console.error("Erro ao gerar análise");
-				setTimeout(() => {
-					navigate("/resultado-analise", { state: response.data });
-				}, 3000);
-				return response;
-			}
-			navigate("/resultado-analise", { state: response.data });
+
+			navigate("/loading", { state: response });
 		} catch (error) {
 			console.error("Error submitting data:", error);
 		}
@@ -61,6 +75,7 @@ export function Home() {
 				src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-comprido.svg?alt=media&token=135c3133-5dad-40be-a694-c2a143de847b'
 				id='home-logo'
 			/>
+			<SideMenu type='member' />
 			<div className='home-main-div'>
 				<section className='analisis-buttons-div'>
 					<img
@@ -111,9 +126,9 @@ export function Home() {
 							value: inputs.profissionalClass,
 							onChange: handleInputChange,
 							options: [
-								"Assalariado",
-								"Pensionista",
-								"Aposentado",
+								"ASSALARIADO",
+								"PENSIONISTA",
+								"APOSENTADO",
 							],
 						},
 						{
@@ -126,8 +141,8 @@ export function Home() {
 						{
 							label: "Data de Nascimento",
 							name: "birthday",
-							type: "date",
 							value: inputs.birthday,
+							type: "date",
 							onChange: handleInputChange,
 						},
 						{

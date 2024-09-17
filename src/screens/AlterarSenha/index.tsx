@@ -10,7 +10,7 @@ export default function AlterarSenha() {
 
 	async function handleEnviarEmail() {
 		const change = await fetch(
-			"https://calculadora.reallcredito.com.br/member/email/senha",
+			"https://calculadora.reallcredito.com.br/auth/email",
 			{
 				method: "POST",
 				headers: {

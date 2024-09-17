@@ -302,5 +302,78 @@ export function calculate(
 			//[25] soma parcela compras
 			formatNumber(parcelacomprasinss + parcelacomprasbeneficios),
 		];
+	} else if (
+		menu == "LOAS REP LEGAL" &&
+		submenu == "Cálculo Salário LOAS/BPC"
+	) {
+		console.log("values", values);
+		if (!(values[0].label == "SALÁRIO: ")) {
+			return "no valid labels";
+		}
+
+		const emprestimoP = +values[0].value * 0.3;
+		const emprestimoT = emprestimoP / 0.02339;
+		const parcelaTotalINSS = +values[0].value * 0.05;
+		const INSSP = parcelaTotalINSS * 0.7;
+		const INSST = parcelaTotalINSS * 22.67;
+		const enviadoT = INSST * 0.32;
+		const enviadoP = parcelaTotalINSS * 0.3;
+		const total = emprestimoT + INSST + enviadoT;
+		const totalP = emprestimoP + INSSP + enviadoP;
+
+		const valorLiberado = 2000;
+		const totalExtra = total + valorLiberado;
+		const parcelaComExtra = totalP;
+
+		return [
+			//[0]
+			"VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
+			//[1]
+			"VALOR MARGEM EMPRÉSTIMO: R$ " + formatNumber(emprestimoP),
+			//[2]
+			"VALOR CARTÃO INSS: R$ " + formatNumber(INSST),
+			//[3]
+			"VALOR MARGEM CARTÃO INSS: R$ " + formatNumber(INSSP),
+			//[4]
+			"VALOR CARTÃO ENVIADO: R$ " + formatNumber(enviadoT),
+			//[5]
+			"VALOR MARGEM CARTÃO ENVIADO: R$ " + formatNumber(enviadoP),
+			//[6]
+			"TOTAL: R$ " + formatNumber(total),
+			//[7]
+			" PARCELA - R$ " + formatNumber(totalP),
+			//[8]
+			" 84x ",
+			//[9]
+			"LIBERA + O VALOR (APROXIMADO) DE: R$ " +
+				formatNumber(valorLiberado),
+			//[10]
+			"TOTAL: R$ " + formatNumber(totalExtra),
+			//[11]
+			" PARCELA - R$ " + formatNumber(parcelaComExtra),
+			//[12]
+			"84x",
+		];
+	} else if (
+		menu == "Exército" &&
+		submenu == "Cálculo por Margem Disponível"
+	) {
+		if (!(values[0].label == "VALOR MARGEM EMPRÉSTIMO: ")) {
+			return "no valid labels";
+		}
+
+		const emprestimoT = +values[0].value / 0.0402;
+		const emprestimoP = +values[0].value;
+
+		const totalT = emprestimoT;
+		const totalP = emprestimoP;
+
+		return [
+			"VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
+			"PARCELA: R$ " + formatNumber(emprestimoP),
+			"TOTAL: R$ " + formatNumber(totalT),
+			"PARCELA: R$ " + formatNumber(totalP),
+			"72x",
+		];
 	}
 }

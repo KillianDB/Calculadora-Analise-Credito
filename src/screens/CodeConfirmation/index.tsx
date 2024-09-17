@@ -18,7 +18,7 @@ export default function CodeConfirmation() {
 
 	async function handleCheckCode() {
 		const response = await fetch(
-			"https://calculadora.reallcredito.com.br/member/validate/code",
+			"https://calculadora.reallcredito.com.br/auth/validate/code",
 			{
 				method: "POST",
 				headers: {

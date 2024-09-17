@@ -9,7 +9,7 @@ export function CreateUser() {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [office, setOffice] = useState("");
-	const [userType, setUserType] = useState("");
+	// const [userType, setUserType] = useState("");
 	const [role, setRole] = useState("");
 	// const [cpf, setCPF] = useState(0);
 	// const [address, setAddress] = useState("");
@@ -19,7 +19,7 @@ export function CreateUser() {
 		try {
 			axios.post("https://calculadora.reallcredito.com.br/member", {
 				name,
-				userType,
+				// userType,
 				role,
 				email,
 				password,
@@ -56,10 +56,11 @@ export function CreateUser() {
 			<label>Cargo</label>
 			<Select
 				options={[
+					{ value: "admin", label: "Administrador" },
+					{ value: "manager", label: "Gerente" },
 					{ value: "seller", label: "Vendedor" },
 					{ value: "operational", label: "Operacional" },
-					{ value: "admin", label: "Administrador" },
-					{ value: "enterprise", label: "Empresa Externa" },
+					{ value: "enterprise", label: "Empresa Parceira" },
 				]}
 				onChange={(e) => setRole(e.target.value)}
 			></Select>
@@ -85,15 +86,15 @@ export function CreateUser() {
 				]}
 				onChange={(e) => setOffice(e.target.value)}
 			></Select>
-			<label>Tipo de usuário</label>
-			<Select
+			{/* <label>Tipo de usuário</label> */}
+			{/* <Select
 				options={[
 					{ value: "member", label: "Equipe CR" },
 					{ value: "enterprise", label: "Empresa" },
 					{ value: "admin", label: "Administrador" },
 				]}
 				onChange={(e) => setUserType(e.target.value)}
-			></Select>
+			></Select> */}
 			<BlueButton onClick={create} text='Adicionar funcionário' />
 		</form>
 	);

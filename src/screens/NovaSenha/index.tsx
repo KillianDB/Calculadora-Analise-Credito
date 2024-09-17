@@ -16,7 +16,7 @@ export default function NovaSenha() {
 		}
 
 		const response = await fetch(
-			"https://calculadora.reallcredito.com.br/member/password",
+			"https://calculadora.reallcredito.com.br/auth/password",
 			{
 				method: "POST",
 				headers: {

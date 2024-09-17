@@ -8,6 +8,9 @@ import { CalculatorINSS5 } from "../../components/Calculators/CalculatorINSS5";
 import Modal from "react-modal";
 import { CalculatorIMGResult } from "../CalculatorIMGResult";
 import axios from "axios";
+import { CalculatorLOAS } from "../../components/Calculators/CalculatorLOAS";
+import { CalculatorExercito1 } from "../../components/Calculators/CalculatorExercito1";
+import { SideMenu } from "../../components/SideMenu";
 
 function Calculator() {
 	const [menu, setMenu] = useState("");
@@ -33,6 +36,7 @@ function Calculator() {
 	function filterSubmenuOptions(menu: string) {
 		if (menu === "INSS") {
 			return [
+				"Submenu",
 				"Possibilidades Gerais",
 				"Cálculo Salário Cliente",
 				"Cálculo Salário Cliente Sem Cartões",
@@ -40,17 +44,22 @@ function Calculator() {
 				"Cálculo por Margem Disponível",
 			];
 		} else if (menu === "LOAS REP LEGAL") {
-			return ["Cálculo Salário LOAS/BPC"];
-		} else if (menu === "EXERCITO") {
-			return ["Possibilidades Gerais", "Cálculo por Margem Disponível"];
+			return ["Submenu", "Cálculo Salário LOAS/BPC"];
+		} else if (menu === "Exército") {
+			return [
+				"Submenu",
+				"Possibilidades Gerais",
+				"Cálculo por Margem Disponível",
+			];
 		} else if (menu === "PREFEITURA") {
-			return ["DAYCOVAL", "ASPECIR", "SANTANDER", "VALOR"];
+			return ["Submenu", "DAYCOVAL", "ASPECIR", "SANTANDER", "VALOR"];
 		} else {
 			return ["Submenu"];
 		}
 	}
 
 	function renderCalculatorByMenus(menu: string, submenu: string) {
+		console.log("menu", menu);
 		if (menu === "" || submenu === "" || submenu === "Submenu") {
 			return (
 				<>
@@ -104,6 +113,27 @@ function Calculator() {
 					setFinalResult={setFinalResult}
 				/>
 			);
+		} else if (
+			menu === "LOAS REP LEGAL" &&
+			submenu === "Cálculo Salário LOAS/BPC"
+		) {
+			return (
+				<CalculatorLOAS
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+					isChecked={isChecked}
+				/>
+			);
+		} else if (
+			menu == "Exército" &&
+			submenu == "Cálculo por Margem Disponível"
+		) {
+			return (
+				<CalculatorExercito1
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+				/>
+			);
 		}
 	}
 
@@ -123,6 +153,7 @@ function Calculator() {
 		) {
 			setParcelModalIsOpen(true);
 		} else {
+			console.log("final result", finalResult);
 			setModalIsOpen(true);
 		}
 	}
@@ -140,11 +171,6 @@ function Calculator() {
 						submenu,
 						element: element.outerHTML,
 					}
-					// {
-					// 	headers: {
-					// 		"Access-Control-Allow-Origin": "*",
-					// 	},
-					// }
 				)
 				.then((response) => {
 					// console.log("Imagem gerada com sucesso!", response.data);
@@ -173,9 +199,9 @@ function Calculator() {
 					>
 						<option value=''>Menu</option>
 						<option value='INSS'>INSS</option>
-						{/* <option value='LOAS REP LEGAL'>LOAS REP LEGAL</option>
-						<option value='EXERCITO'>EXÉRCITO</option>
-						<option value='PREFEITURA'>PREFEITURA</option> */}
+						<option value='LOAS REP LEGAL'>LOAS REP LEGAL</option>
+						<option value='Exército'>Exército</option>
+						<option value='PREFEITURA'>PREFEITURA</option>
 					</select>
 					<select
 						onChange={(e) =>
@@ -283,6 +309,7 @@ function Calculator() {
 					{/* <button onClick={() => setModalIsOpen(false)}>Close</button> */}
 				</Modal>
 			</div>
+			<SideMenu type='member' />
 			{renderCalculatorByMenus(menu, submenu)}
 		</>
 	);

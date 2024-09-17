@@ -13,7 +13,7 @@ export function LoginScreen() {
 		event.preventDefault();
 		try {
 			const login = await axios.post(
-				"https://calculadora.reallcredito.com.br/login",
+				"https://calculadora.reallcredito.com.br/auth",
 				{
 					email,
 					password,
@@ -26,8 +26,8 @@ export function LoginScreen() {
 			}
 
 			if (login.data.role === "admin") {
-				navigate("/admin/home");
-				// navigate("/calculadora");
+				// navigate("/admin/home");
+				navigate("/calculadora");
 			} else {
 				navigate("/home");
 			}

@@ -1,0 +1,65 @@
+.asideSideMenu {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	height: 100vh;
+	width: 250px;
+	background-color: #f1f1f1;
+}
+
+.navSideMenu {
+	flex: 0.8;
+}
+
+.ulSideMenu {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.liSideMenu {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 8px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #f99401;
+	width: 120px;
+}
+
+.liSideMenu:hover {
+	background-color: #f5a224ff;
+}
+
+.aSideMenu a {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	color: #f99401;
+	transition: 0.5s;
+	border: 1px solid #f99401;
+	border-radius: 30px;
+	width: 120px;
+	height: fit-content;
+	padding: 8px;
+	display: flex;
+	justify-content: center;
+}
+
+.buttonSideMenu {
+	font-size: 21px;
+	width: 120px;
+	margin-left: 10px;
+	margin-top: 10px;
+	background-color: rgba(255, 38, 0, 0.745);
+	border: none;
+	color: white;
+}

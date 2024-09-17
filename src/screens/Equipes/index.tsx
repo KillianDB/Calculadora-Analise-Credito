@@ -3,15 +3,28 @@ import BlueButton from "../../components/BlueButton";
 import Modal from "react-modal";
 import "./equipes.css";
 import { useNavigate } from "react-router-dom";
+import { SideMenu } from "../../components/SideMenu";
 
 export function Equipes() {
 	const navigate = useNavigate();
 	const [modalOpen, setModalOpen] = useState(false);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
-	const [userType, setUserType] = useState("");
+	// const [userType, setUserType] = useState("");
 	const [role, setRole] = useState("");
-	const [equipes, setEquipes] = useState([
+	interface Membro {
+		id: string;
+		nome: string;
+		email: string;
+		status: string;
+	}
+
+	interface Equipe {
+		equipe: string;
+		membros: Membro[];
+	}
+
+	const [equipes, setEquipes] = useState<Equipe[]>([
 		{
 			equipe: "Teutônia",
 			membros: [
@@ -29,7 +42,57 @@ export function Equipes() {
 				},
 			],
 		},
-
+		{
+			equipe: "Holambra",
+			membros: [
+				{
+					id: "1",
+					nome: "João",
+					email: "joao@email.com",
+					status: "Ativo",
+				},
+				{
+					id: "2",
+					nome: "Maria",
+					email: "maria@email.com",
+					status: "Ativo",
+				},
+			],
+		},
+		{
+			equipe: "Venancio Aires",
+			membros: [
+				{
+					id: "1",
+					nome: "João",
+					email: "joao@email.com",
+					status: "Ativo",
+				},
+				{
+					id: "2",
+					nome: "Maria",
+					email: "maria@email.com",
+					status: "Ativo",
+				},
+			],
+		},
+		{
+			equipe: "Estancia Velha",
+			membros: [
+				{
+					id: "1",
+					nome: "João",
+					email: "joao@email.com",
+					status: "Ativo",
+				},
+				{
+					id: "2",
+					nome: "Maria",
+					email: "maria@email.com",
+					status: "Ativo",
+				},
+			],
+		},
 		{
 			equipe: "Lajeado",
 			membros: [
@@ -47,9 +110,8 @@ export function Equipes() {
 				},
 			],
 		},
-
 		{
-			equipe: "Sapucaia",
+			equipe: "Sapucaia do Sul",
 			membros: [
 				{
 					id: "1",
@@ -65,9 +127,8 @@ export function Equipes() {
 				},
 			],
 		},
-
 		{
-			equipe: "Montenegro",
+			equipe: "Estrela",
 			membros: [
 				{
 					id: "1",
@@ -85,9 +146,28 @@ export function Equipes() {
 		},
 	]);
 
-	const editarMembro = async () => {
+	const [filteredEquipes, setFilteredEquipes] = useState<Equipe[]>([]);
+
+	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const searchTerm = e.target.value.toLowerCase();
+		const filtered = equipes
+			.map((equipe) => {
+				const filteredMembros = equipe.membros.filter((membro) =>
+					membro.nome.toLowerCase().includes(searchTerm)
+				);
+				return {
+					...equipe,
+					membros: filteredMembros,
+				};
+			})
+			.filter((equipe) => equipe.membros.length > 0);
+		setFilteredEquipes(filtered);
+		return filteredEquipes;
+	};
+
+	const editarMembro = async (membro: { id: string }) => {
 		const response = await fetch(
-			"https://calculadora.reallcredito.com.br/member/edit",
+			`https://calculadora.reallcredito.com.br/member/${membro.id}`,
 			{
 				method: "PUT",
 				headers: {
@@ -96,7 +176,7 @@ export function Equipes() {
 				body: JSON.stringify({
 					name,
 					email,
-					userType,
+					// userType,
 					role,
 				}),
 			}
@@ -137,8 +217,13 @@ export function Equipes() {
 		const fetchEquipes = async () => {
 			try {
 				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/equipes"
+					"https://calculadora.reallcredito.com.br/member/all/escritorio"
 				);
+				if (response.status !== 200) {
+					console.error("Error fetching equipes:", response);
+					setEquipes([]);
+					return;
+				}
 				const data = await response.json();
 				setEquipes(data);
 			} catch (error) {
@@ -161,11 +246,16 @@ export function Equipes() {
 					id='equipes-logo'
 				/>
 			</div>
+			<SideMenu type='admin' />
 
 			<main className='main_equipes'>
 				<h1>Equipe</h1>
 				<section>
-					<input type='text' placeholder='Buscar' />
+					<input
+						type='text'
+						placeholder='Buscar'
+						onChange={handleSearch}
+					/>
 				</section>
 				<section className='equipes_section'>
 					{equipes.map((equipe) => (
@@ -178,7 +268,9 @@ export function Equipes() {
 									<h6>{membro.status}</h6>
 									<BlueButton
 										text='Editar'
-										onClick={() => setModalOpen(true)}
+										onClick={() => {
+											setModalOpen(true);
+										}}
 									/>
 									<img
 										src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/slash.svg?alt=media&token=d49903be-229f-4b6a-b540-c67467ed599e'
@@ -206,21 +298,29 @@ export function Equipes() {
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 						/>
-						<select
+						{/* <select
 							value={userType}
 							onChange={(e) => setUserType(e.target.value)}
 						>
-							<option value='admin'>Admin</option>
-							<option value='user'>User</option>
-						</select>
+							<option value='admin'>Administrador</option>
+							<option value='member'>Colaborador</option>
+							<option value='manager'>Gerente</option>
+							<option value='enterprise'>Empresa Parceira</option>
+						</select> */}
 						<select
 							value={role}
 							onChange={(e) => setRole(e.target.value)}
 						>
-							<option value='admin'>Admin</option>
-							<option value='user'>User</option>
+							<option value='admin'>Administrador</option>
+							<option value='manager'>Gerente</option>
+							<option value='operational'>Operacional</option>
+							<option value='seller'>Vendedor</option>
+							<option value='enterprise'>Empresa Parceira</option>
 						</select>
-						<BlueButton text='Salvar' onClick={editarMembro} />
+						<BlueButton
+							text='Salvar'
+							onClick={() => editarMembro}
+						/>
 					</Modal>
 				)}
 			</main>

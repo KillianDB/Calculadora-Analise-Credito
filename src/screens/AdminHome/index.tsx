@@ -5,6 +5,7 @@ import "./adminHome.css";
 import { useEffect, useState } from "react";
 import PieChart from "../../components/PizzaChart";
 import BarChart from "../../components/BarChart";
+import { SideMenu } from "../../components/SideMenu";
 
 interface PieValues {
 	clientesGerais: number;
@@ -31,7 +32,7 @@ export function AdminHome() {
 			id: number;
 			name: string;
 			type: string;
-			action: string;
+			status: string;
 			date: string;
 			hour: string;
 		}[]
@@ -40,7 +41,7 @@ export function AdminHome() {
 			id: 1,
 			name: "João",
 			type: "pensionista",
-			action: "Entrou em contato",
+			status: "Entrou em contato",
 			date: "09/09/2024",
 			hour: "14:00",
 		},
@@ -48,7 +49,7 @@ export function AdminHome() {
 			id: 2,
 			name: "Maria",
 			type: "geral",
-			action: "Entrou em contato",
+			status: "Entrou em contato",
 			date: "09/09/2024",
 			hour: "13:00",
 		},
@@ -56,7 +57,7 @@ export function AdminHome() {
 			id: 3,
 			name: "José",
 			type: "aposentado",
-			action: "Fez simulação geral",
+			status: "Fez simulação geral",
 			date: "09/09/2024",
 			hour: "12:00",
 		},
@@ -132,6 +133,7 @@ export function AdminHome() {
 				id='admin-home-logo'
 			/>
 			<div className='admin-home-main-div'>
+				<SideMenu type='admin' />
 				<section className='admin-home-top-section'>
 					<div className='absolute-metrics'>
 						<div className='total-clientes'>
@@ -196,7 +198,7 @@ export function AdminHome() {
 								<h6 className={`tag_cliente_ ${client.type}`}>
 									{client.type}
 								</h6>
-								<h6>{client.action}</h6>
+								<h6>{client.status}</h6>
 								<h6>{client.date}</h6>
 								<h6>{client.hour}</h6>
 							</div>

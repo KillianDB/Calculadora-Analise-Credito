@@ -17,7 +17,7 @@ export default function LoginScreen() {
 
 			if (response.status === 200) {
 				const { token } = response.data;
-				const user = login(token);
+				const user = await login(token);
 
 				if (user !== null) {
 					if (user.role === "admin") {

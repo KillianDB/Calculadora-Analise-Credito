@@ -13,7 +13,7 @@ interface User {
 interface UserContextType {
 	user: User | null;
 	setUser: React.Dispatch<React.SetStateAction<User | null>>;
-	login: (token: string) => User | null;
+	login: (token: string) => Promise<User | null>;
 	logout: () => void;
 }
 
@@ -60,10 +60,34 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 		fetchUser();
 	}, [user]);
 
-	const login = (token: string): User | null => {
+	const login = async (token: string): Promise<User | null> => {
 		localStorage.setItem("token", token);
 		const newUser = { token };
 		setUser(newUser);
+		//acionar a função de fetchUser
+		//retorna o usuário
+		try {
+			const response = await axios.get(
+				"https://calculadora.reallcredito.com.br/auth",
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			if (response.status === 200) {
+				const userData = response.data;
+				console.log("User data:", userData);
+				setUser({ token, ...userData });
+				return userData;
+			} else {
+				console.error("Erro ao verificar usuário", response);
+				logout();
+			}
+		} catch (error) {
+			console.error("Erro ao verificar usuário", error);
+			logout();
+		}
 		return newUser;
 	};
 

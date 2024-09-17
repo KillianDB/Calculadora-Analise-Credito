@@ -67,7 +67,14 @@ export function AdminHome() {
 		async function fetchTotalClientes() {
 			try {
 				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/client/total"
+					"https://calculadora.reallcredito.com.br/client/total",
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem(
+								"token"
+							)}`,
+						},
+					}
 				);
 				const data = await response.json();
 				setTotalClientes(data);
@@ -78,7 +85,14 @@ export function AdminHome() {
 		async function fetchClientesContato() {
 			try {
 				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/client/emContato"
+					"https://calculadora.reallcredito.com.br/client/emContato",
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem(
+								"token"
+							)}`,
+						},
+					}
 				);
 				const data = await response.json();
 				setClientesEmContato(data);
@@ -89,7 +103,14 @@ export function AdminHome() {
 		async function graficoPizza() {
 			try {
 				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/client/totalPerType"
+					"https://calculadora.reallcredito.com.br/client/totalPerType",
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem(
+								"token"
+							)}`,
+						},
+					}
 				);
 				const data: PieValues = await response.json();
 				setPieValues(data);
@@ -100,7 +121,14 @@ export function AdminHome() {
 		async function graficoBar() {
 			try {
 				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/analysis/totalPerType"
+					"https://calculadora.reallcredito.com.br/analysis/totalPerType",
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem(
+								"token"
+							)}`,
+						},
+					}
 				);
 				const data: BarValues = await response.json();
 				setBarValues(data);
@@ -111,7 +139,14 @@ export function AdminHome() {
 		async function fetchClients() {
 			try {
 				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/client/lastActions"
+					"https://calculadora.reallcredito.com.br/client/lastActions",
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem(
+								"token"
+							)}`,
+						},
+					}
 				);
 				const data = await response.json();
 				setClients(data);

@@ -21,11 +21,12 @@ export default function LoginScreen() {
 				const user = await login(token);
 
 				if (user !== null) {
-					if (user.role === "admin") {
-						navigate("/admin/home");
-					} else {
-						navigate("/home");
-					}
+					// if (user.role === "admin") {
+					// 	navigate("/admin/home");
+					// } else {
+					// 	navigate("/home");
+					// }
+					navigate("/calculadora");
 				}
 			} else {
 				console.error("Erro ao fazer login", response);

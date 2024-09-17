@@ -42,7 +42,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 						}
 					);
 					if (response.status === 200) {
-						const userData = response;
+						const userData = response.data;
 						console.log("User data:", userData);
 						setUser({ token: user.token, ...userData });
 					} else {

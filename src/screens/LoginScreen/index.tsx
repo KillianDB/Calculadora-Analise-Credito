@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function LoginScreen() {
 	const navigate = useNavigate();
-	const { setUser } = useUser();
+	const { login } = useUser();
 	const [loginData, setLoginData] = useState({ email: "", password: "" });
 
 	const handleLogin = async () => {
@@ -16,15 +16,9 @@ export default function LoginScreen() {
 			);
 
 			if (response.status === 200) {
-				const { token, role } = response.data;
-				localStorage.setItem("token", token);
-				setUser({ token });
-
-				if (role === "admin") {
-					navigate("/calculadora");
-				} else {
-					navigate("/home");
-				}
+				const { token } = response.data;
+				login(token);
+				navigate("/home");
 			} else {
 				console.error("Erro ao fazer login", response);
 			}

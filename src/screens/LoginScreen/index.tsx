@@ -17,8 +17,15 @@ export default function LoginScreen() {
 
 			if (response.status === 200) {
 				const { token } = response.data;
-				login(token);
-				navigate("/home");
+				const user = login(token);
+
+				if (user !== null) {
+					if (user.role === "admin") {
+						navigate("/admin");
+					} else {
+						navigate("/home");
+					}
+				}
 			} else {
 				console.error("Erro ao fazer login", response);
 			}

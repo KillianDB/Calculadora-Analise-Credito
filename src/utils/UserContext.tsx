@@ -13,7 +13,7 @@ interface User {
 interface UserContextType {
 	user: User | null;
 	setUser: React.Dispatch<React.SetStateAction<User | null>>;
-	login: (token: string) => void;
+	login: (token: string) => User | null;
 	logout: () => void;
 }
 
@@ -45,6 +45,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 						const userData = response.data;
 						console.log("User data:", userData);
 						setUser({ token: user.token, ...userData });
+						return userData;
 					} else {
 						console.error("Erro ao verificar usuário", response);
 						logout();
@@ -59,9 +60,11 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 		fetchUser();
 	}, [user]);
 
-	const login = (token: string) => {
+	const login = (token: string): User | null => {
 		localStorage.setItem("token", token);
-		setUser({ token });
+		const newUser = { token };
+		setUser(newUser);
+		return newUser;
 	};
 
 	const logout = () => {

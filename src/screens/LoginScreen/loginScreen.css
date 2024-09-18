@@ -5,16 +5,29 @@ main {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	position: relative;
+	/* position: relative; */
 	z-index: 1;
 }
 
-img {
+.mainLogin {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	/* position: relative; */
+	z-index: 1;
+}
+
+.loginLogoImg {
 	width: 60vh;
 	margin-bottom: 21vh;
 }
 
-form {
+.formLogin {
+	display: flex;
+	flex-direction: column;
 	width: 30%;
 	margin-left: 21vw;
 	align-items: center;

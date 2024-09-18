@@ -39,10 +39,13 @@ export default function LoginScreen() {
 	return (
 		<>
 			<BackgroundFullGradient />
-			<main>
-				<img src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814' />
-				<form onSubmit={handleLogin}>
-					<h3>Login</h3>
+			<main className='mainLogin'>
+				<img
+					className='loginLogoImg'
+					src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
+				/>
+				<form className='formLogin' onSubmit={handleLogin}>
+					<h3 id='h3-login'>Login</h3>
 					<section>
 						<label>Email</label>
 						<input

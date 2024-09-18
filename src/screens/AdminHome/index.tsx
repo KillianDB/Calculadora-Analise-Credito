@@ -5,7 +5,7 @@ import "./adminHome.css";
 import { useEffect, useState } from "react";
 import PieChart from "../../components/PizzaChart";
 import BarChart from "../../components/BarChart";
-import { SideMenu } from "../../components/SideMenu";
+// import { SideMenu } from "../../components/SideMenu";
 
 interface PieValues {
 	clientesGerais: number;
@@ -188,7 +188,7 @@ export function AdminHome() {
 				id='admin-home-logo'
 			/> */}
 			<div className='admin-home-main-div'>
-				<SideMenu type='admin' />
+				{/* <SideMenu type='admin' /> */}
 				<section className='admin-home-top-section'>
 					<div className='absolute-metrics'>
 						<div className='total-clientes'>

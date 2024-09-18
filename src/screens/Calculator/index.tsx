@@ -10,7 +10,7 @@ import { CalculatorIMGResult } from "../CalculatorIMGResult";
 import axios from "axios";
 import { CalculatorLOAS } from "../../components/Calculators/CalculatorLOAS";
 import { CalculatorExercito1 } from "../../components/Calculators/CalculatorExercito1";
-import { SideMenu } from "../../components/SideMenu";
+// import { SideMenu } from "../../components/SideMenu";
 
 function Calculator() {
 	const [menu, setMenu] = useState("");
@@ -309,7 +309,7 @@ function Calculator() {
 					{/* <button onClick={() => setModalIsOpen(false)}>Close</button> */}
 				</Modal>
 			</div>
-			<SideMenu type='member' />
+			{/* <SideMenu type='member' /> */}
 			{renderCalculatorByMenus(menu, submenu)}
 		</>
 	);

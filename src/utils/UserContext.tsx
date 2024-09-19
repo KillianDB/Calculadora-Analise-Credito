@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useState, useContext } from "react";
 import axios from "axios";
 
 interface User {
@@ -28,37 +28,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 		const token = localStorage.getItem("token");
 		return token ? { token } : null;
 	});
-
-	useEffect(() => {
-		const fetchUser = async () => {
-			if (user && user.token) {
-				try {
-					const response = await axios.get(
-						"https://calculadora.reallcredito.com.br/auth",
-						{
-							headers: {
-								Authorization: `Bearer ${user.token}`,
-							},
-						}
-					);
-					if (response.status === 200) {
-						const userData = response.data;
-						console.log("User data:", userData);
-						setUser({ token: user.token, ...userData });
-						return userData;
-					} else {
-						console.error("Erro ao verificar usuário", response);
-						logout();
-					}
-				} catch (error) {
-					console.error("Erro ao verificar usuário", error);
-					logout();
-				}
-			}
-		};
-
-		fetchUser();
-	}, [user]);
 
 	const login = async (token: string): Promise<User | null> => {
 		localStorage.setItem("token", token);

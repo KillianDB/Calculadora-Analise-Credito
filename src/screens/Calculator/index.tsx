@@ -10,6 +10,8 @@ import { CalculatorIMGResult } from "../CalculatorIMGResult";
 import axios from "axios";
 import { CalculatorLOAS } from "../../components/Calculators/CalculatorLOAS";
 import { CalculatorExercito1 } from "../../components/Calculators/CalculatorExercito1";
+import { CalculatorExercito2 } from "../../components/Calculators/CalculatorExercito2";
+import { CalculatorPrefeitura } from "../../components/Calculators/CalculatorPrefeituras";
 // import { SideMenu } from "../../components/SideMenu";
 
 function Calculator() {
@@ -134,6 +136,45 @@ function Calculator() {
 					setFinalResult={setFinalResult}
 				/>
 			);
+		} else if (menu == "Exército" && submenu == "Possibilidades Gerais") {
+			return (
+				<CalculatorExercito2
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+				/>
+			);
+		} else if (menu == "PREFEITURA" && submenu == "DAYCOVAL") {
+			return (
+				<CalculatorPrefeitura
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+					banco='DAYCOVAL'
+				/>
+			);
+		} else if (menu == "PREFEITURA" && submenu == "ASPECIR") {
+			return (
+				<CalculatorPrefeitura
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+					banco='ASPECIR'
+				/>
+			);
+		} else if (menu == "PREFEITURA" && submenu == "SANTANDER") {
+			return (
+				<CalculatorPrefeitura
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+					banco='SANTANDER'
+				/>
+			);
+		} else if (menu == "PREFEITURA" && submenu == "VALOR") {
+			return (
+				<CalculatorPrefeitura
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+					banco='VALOR'
+				/>
+			);
 		}
 	}
 
@@ -147,9 +188,10 @@ function Calculator() {
 
 	function handleResultDownload() {
 		if (
-			menu === "INSS" &&
-			submenu === "Cálculo Valor Solicitado" &&
-			parcelas == ""
+			(menu === "INSS" &&
+				submenu === "Cálculo Valor Solicitado" &&
+				parcelas == "") ||
+			(menu === "PREFEITURA" && parcelas == "")
 		) {
 			setParcelModalIsOpen(true);
 		} else {

@@ -32,7 +32,7 @@ export function CalculatorINSS5({
 		"84x",
 	]);
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [resultsPossibilidade] = useState([
+	const [resultsPossibilidade, setResultsPossibilidade] = useState([
 		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
 		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
 		{ label: "POSSIBILIDADE", value: " R$ 000,00" },
@@ -59,26 +59,8 @@ export function CalculatorINSS5({
 		"VALOR MARGEM CARTÃO INSS: ",
 		"VALOR MARGEM CARTÃO BENEFÍCIO: ",
 	];
-	const labelsParcela: string[] = [
-		"PARCELA-1",
-		"PARCELA-2",
-		"PARCELA-3",
-		"PARCELA-4",
-		"PARCELA-5",
-		"PARCELA-6",
-		"PARCELA-7",
-	];
-	const labelsSaldo: string[] = [
-		"SALDO DEVEDOR-1",
-		"SALDO DEVEDOR-2",
-		"SALDO DEVEDOR-3",
-		"SALDO DEVEDOR-4",
-		"SALDO DEVEDOR-5",
-		"SALDO DEVEDOR-6",
-		"SALDO DEVEDOR-7",
-	];
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [parcelas] = useState([
+	const [parcelas, setParcelas] = useState([
 		{ label: "PARCELA-1", value: 0 },
 		{ label: "PARCELA-2", value: 0 },
 		{ label: "PARCELA-3", value: 0 },
@@ -88,7 +70,7 @@ export function CalculatorINSS5({
 		{ label: "PARCELA-7", value: 0 },
 	]);
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [saldos] = useState([
+	const [saldos, setSaldos] = useState([
 		{ label: "SALDO DEVEDOR-1", value: 0 },
 		{ label: "SALDO DEVEDOR-2", value: 0 },
 		{ label: "SALDO DEVEDOR-3", value: 0 },
@@ -98,7 +80,7 @@ export function CalculatorINSS5({
 		{ label: "SALDO DEVEDOR-7", value: 0 },
 	]);
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [possibilidades] = useState([
+	const [possibilidades, setPossibilidades] = useState([
 		{ label: "POSSIBILIDADE-1", value: 0 },
 		{ label: "POSSIBILIDADE-2", value: 0 },
 		{ label: "POSSIBILIDADE-3", value: 0 },
@@ -131,98 +113,325 @@ export function CalculatorINSS5({
 			console.log("label", label);
 			console.log("value", value);
 			if (label == "PARCELA-1") {
-				parcelas[0].value = value;
-				possibilidades[0].value = value / 0.0223 - saldos[0].value;
-				resultsPossibilidade[0].value = ` R$ ${formatNumber(
-					possibilidades[0].value
-				)}`;
+				setParcelas((prevState) => {
+					prevState[0].value = value;
+					return [...prevState];
+				});
+				// parcelas[0].value = value;
+				setPossibilidades((prevState) => {
+					prevState[0].value = value / 0.0223 - saldos[0].value;
+					return [...prevState];
+				});
+				// possibilidades[0].value = value / 0.0223 - saldos[0].value;
+				setResultsPossibilidade((prevState) => {
+					prevState[0].value = ` R$ ${formatNumber(
+						value / 0.0223 - saldos[0].value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[0].value = ` R$ ${formatNumber(
+				// 	possibilidades[0].value
+				// )}`;
 			} else if (label == "PARCELA-2") {
-				parcelas[1].value = value;
-				possibilidades[1].value = value / 0.0223 - saldos[1].value;
-				resultsPossibilidade[1].value = ` R$ ${formatNumber(
-					possibilidades[1].value
-				)}`;
+				setParcelas((prevState) => {
+					prevState[1].value = value;
+					return [...prevState];
+				});
+				// parcelas[1].value = value;
+				setPossibilidades((prevState) => {
+					prevState[1].value = value / 0.0223 - saldos[1].value;
+					return [...prevState];
+				});
+				// possibilidades[1].value = value / 0.0223 - saldos[1].value;
+				setResultsPossibilidade((prevState) => {
+					prevState[1].value = ` R$ ${formatNumber(
+						value / 0.0223 - saldos[1].value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[1].value = ` R$ ${formatNumber(
+				// 	possibilidades[1].value
+				// )}`;
 			} else if (label == "PARCELA-3") {
-				parcelas[2].value = value;
-				possibilidades[2].value = value / 0.0223 - saldos[2].value;
-				resultsPossibilidade[2].value = ` R$ ${formatNumber(
-					possibilidades[2].value
-				)}`;
+				setParcelas((prevState) => {
+					prevState[2].value = value;
+					return [...prevState];
+				});
+				// parcelas[2].value = value;
+				setPossibilidades((prevState) => {
+					prevState[2].value = value / 0.0223 - saldos[2].value;
+					return [...prevState];
+				});
+				// possibilidades[2].value = value / 0.0223 - saldos[2].value;
+				setResultsPossibilidade((prevState) => {
+					prevState[2].value = ` R$ ${formatNumber(
+						value / 0.0223 - saldos[2].value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[2].value = ` R$ ${formatNumber(
+				// 	possibilidades[2].value
+				// )}`;
 			} else if (label == "PARCELA-4") {
-				parcelas[3].value = value;
-				possibilidades[3].value = value / 0.0223 - saldos[3].value;
-				resultsPossibilidade[3].value = ` R$ ${formatNumber(
-					possibilidades[3].value
-				)}`;
+				setParcelas((prevState) => {
+					prevState[3].value = value;
+					return [...prevState];
+				});
+				// parcelas[3].value = value;
+				setPossibilidades((prevState) => {
+					prevState[3].value = value / 0.0223 - saldos[3].value;
+					return [...prevState];
+				});
+				// possibilidades[3].value = value / 0.0223 - saldos[3].value;
+				setResultsPossibilidade((prevState) => {
+					prevState[3].value = ` R$ ${formatNumber(
+						value / 0.0223 - saldos[3].value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[3].value = ` R$ ${formatNumber(
+				// 	possibilidades[3].value
+				// )}`;
 			} else if (label == "PARCELA-5") {
-				parcelas[4].value = value;
-				possibilidades[4].value = value / 0.0223 - saldos[4].value;
-				resultsPossibilidade[4].value = ` R$ ${formatNumber(
-					possibilidades[4].value
-				)}`;
+				setParcelas((prevState) => {
+					prevState[4].value = value;
+					return [...prevState];
+				});
+				// parcelas[4].value = value;
+				setPossibilidades((prevState) => {
+					prevState[4].value = value / 0.0223 - saldos[4].value;
+					return [...prevState];
+				});
+				// possibilidades[4].value = value / 0.0223 - saldos[4].value;
+				setResultsPossibilidade((prevState) => {
+					prevState[4].value = ` R$ ${formatNumber(
+						value / 0.0223 - saldos[4].value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[4].value = ` R$ ${formatNumber(
+				// 	possibilidades[4].value
+				// )}`;
 			} else if (label == "PARCELA-6") {
-				parcelas[5].value = value;
-				possibilidades[5].value = value / 0.0223 - saldos[5].value;
-				resultsPossibilidade[5].value = ` R$ ${formatNumber(
-					possibilidades[5].value
-				)}`;
+				setParcelas((prevState) => {
+					prevState[5].value = value;
+					return [...prevState];
+				});
+				// parcelas[5].value = value;
+				setPossibilidades((prevState) => {
+					prevState[5].value = value / 0.0223 - saldos[5].value;
+					return [...prevState];
+				});
+				// possibilidades[5].value = value / 0.0223 - saldos[5].value;
+				setResultsPossibilidade((prevState) => {
+					prevState[5].value = ` R$ ${formatNumber(
+						value / 0.0223 - saldos[5].value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[5].value = ` R$ ${formatNumber(
+				// 	possibilidades[5].value
+				// )}`;
 			} else if (label == "PARCELA-7") {
-				parcelas[6].value = value;
-				possibilidades[6].value = value / 0.0223 - saldos[6].value;
-				resultsPossibilidade[6].value = ` R$ ${formatNumber(
-					possibilidades[6].value
-				)}`;
+				setParcelas((prevState) => {
+					prevState[6].value = value;
+					return [...prevState];
+				});
+				// parcelas[6].value = value;
+				setPossibilidades((prevState) => {
+					prevState[6].value = value / 0.0223 - saldos[6].value;
+					return [...prevState];
+				});
+				// possibilidades[6].value = value / 0.0223 - saldos[6].value;
+				setResultsPossibilidade((prevState) => {
+					prevState[6].value = ` R$ ${formatNumber(
+						value / 0.0223 - saldos[6].value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[6].value = ` R$ ${formatNumber(
+				// 	possibilidades[6].value
+				// )}`;
 			} else if (label == "SALDO DEVEDOR-1") {
-				saldos[0].value = value;
-				possibilidades[0].value = parcelas[0].value / 0.0223 - value;
-				resultsPossibilidade[0].value = ` R$ ${formatNumber(
-					possibilidades[0].value
-				)}`;
+				setSaldos((prevState) => {
+					prevState[0].value = value;
+					return [...prevState];
+				});
+				// saldos[0].value = value;
+				setPossibilidades((prevState) => {
+					prevState[0].value = parcelas[0].value / 0.0223 - value;
+					return [...prevState];
+				});
+				// possibilidades[0].value = parcelas[0].value / 0.0223 - value;
+				setResultsPossibilidade((prevState) => {
+					prevState[0].value = ` R$ ${formatNumber(
+						parcelas[0].value / 0.0223 - value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[0].value = ` R$ ${formatNumber(
+				// 	possibilidades[0].value
+				// )}`;
 			} else if (label == "SALDO DEVEDOR-2") {
-				saldos[1].value = value;
-				possibilidades[1].value = parcelas[1].value / 0.0223 - value;
-				resultsPossibilidade[1].value = ` R$ ${formatNumber(
-					possibilidades[1].value
-				)}`;
+				setSaldos((prevState) => {
+					prevState[1].value = value;
+					return [...prevState];
+				});
+				// saldos[1].value = value;
+				setPossibilidades((prevState) => {
+					prevState[1].value = parcelas[1].value / 0.0223 - value;
+					return [...prevState];
+				});
+				// possibilidades[1].value = parcelas[1].value / 0.0223 - value;
+				setResultsPossibilidade((prevState) => {
+					prevState[1].value = ` R$ ${formatNumber(
+						parcelas[1].value / 0.0223 - value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[1].value = ` R$ ${formatNumber(
+				// 	possibilidades[1].value
+				// )}`;
 			} else if (label == "SALDO DEVEDOR-3") {
-				saldos[2].value = value;
-				possibilidades[2].value = parcelas[2].value / 0.0223 - value;
-				resultsPossibilidade[2].value = ` R$ ${formatNumber(
-					possibilidades[2].value
-				)}`;
+				setSaldos((prevState) => {
+					prevState[2].value = value;
+					return [...prevState];
+				});
+				// saldos[2].value = value;
+				setPossibilidades((prevState) => {
+					prevState[2].value = parcelas[2].value / 0.0223 - value;
+					return [...prevState];
+				});
+				// possibilidades[2].value = parcelas[2].value / 0.0223 - value;
+				setResultsPossibilidade((prevState) => {
+					prevState[2].value = `R$ ${formatNumber(
+						possibilidades[2].value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[2].value = ` R$ ${formatNumber(
+				// 	possibilidades[2].value
+				// )}`;
 			} else if (label == "SALDO DEVEDOR-4") {
-				saldos[3].value = value;
-				possibilidades[3].value = parcelas[3].value / 0.0223 - value;
-				resultsPossibilidade[3].value = ` R$ ${formatNumber(
-					possibilidades[3].value
-				)}`;
+				setSaldos((prevState) => {
+					prevState[3].value = value;
+					return [...prevState];
+				});
+				// saldos[3].value = value;
+				setPossibilidades((prevState) => {
+					prevState[3].value = parcelas[3].value / 0.0223 - value;
+					return [...prevState];
+				});
+				// possibilidades[3].value = parcelas[3].value / 0.0223 - value;
+				setResultsPossibilidade((prevState) => {
+					prevState[3].value = `R$ ${formatNumber(
+						possibilidades[3].value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[3].value = ` R$ ${formatNumber(
+				// 	possibilidades[3].value
+				// )}`;
 			} else if (label == "SALDO DEVEDOR-5") {
-				saldos[4].value = value;
-				possibilidades[4].value = parcelas[4].value / 0.0223 - value;
-				resultsPossibilidade[4].value = ` R$ ${formatNumber(
-					possibilidades[4].value
-				)}`;
+				setSaldos((prevState) => {
+					prevState[4].value = value;
+					return [...prevState];
+				});
+				// saldos[4].value = value;
+				setPossibilidades((prevState) => {
+					prevState[4].value = parcelas[4].value / 0.0223 - value;
+					return [...prevState];
+				});
+				// possibilidades[4].value = parcelas[4].value / 0.0223 - value;
+				setResultsPossibilidade((prevState) => {
+					prevState[4].value = ` R$ ${formatNumber(
+						possibilidades[4].value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[4].value = ` R$ ${formatNumber(
+				// 	possibilidades[4].value
+				// )}`;
 			} else if (label == "SALDO DEVEDOR-6") {
-				saldos[5].value = value;
-				possibilidades[5].value = parcelas[5].value / 0.0223 - value;
-				resultsPossibilidade[5].value = ` R$ ${formatNumber(
-					possibilidades[5].value
-				)}`;
+				setSaldos((prevState) => {
+					prevState[5].value = value;
+					return [...prevState];
+				});
+				// saldos[5].value = value;
+				setPossibilidades((prevState) => {
+					prevState[5].value = parcelas[5].value / 0.0223 - value;
+					return [...prevState];
+				});
+				// possibilidades[5].value = parcelas[5].value / 0.0223 - value;
+				setResultsPossibilidade((prevState) => {
+					prevState[5].value = ` R$ ${formatNumber(
+						possibilidades[5].value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[5].value = ` R$ ${formatNumber(
+				// 	possibilidades[5].value
+				// )}`;
 			} else if (label == "SALDO DEVEDOR-7") {
-				saldos[6].value = value;
-				possibilidades[6].value = parcelas[6].value / 0.0223 - value;
-				resultsPossibilidade[6].value = ` R$ ${formatNumber(
-					possibilidades[6].value
-				)}`;
+				setSaldos((prevState) => {
+					prevState[6].value = value;
+					return [...prevState];
+				});
+				// saldos[6].value = value;
+				setPossibilidades((prevState) => {
+					prevState[6].value = parcelas[6].value / 0.0223 - value;
+					return [...prevState];
+				});
+				// possibilidades[6].value = parcelas[6].value / 0.0223 - value;
+				setResultsPossibilidade((prevState) => {
+					prevState[6].value = ` R$ ${formatNumber(
+						parcelas[6].value / 0.0223 - value
+					)}`;
+					return [...prevState];
+				});
+				// resultsPossibilidade[6].value = ` R$ ${formatNumber(
+				// 	possibilidades[6].value
+				// )}`;
 			}
 		} else {
 			console.log("ta no else do handleInputValue");
 			console.log("label", label);
 			console.log("value", value);
-			const updatedValues = values.map((item) =>
-				item.label === label ? { ...item, value } : item
-			);
-			setValues(updatedValues);
+			if (label == "VALOR MARGEM EMPRÉSTIMO: ") {
+				setValues((prevState) => {
+					prevState[0].value = value;
+					return [...prevState];
+				});
+			} else if (label == "VALOR MARGEM CARTÃO INSS: ") {
+				setValues((prevState) => {
+					prevState[1].value = value;
+					return [...prevState];
+				});
+			} else if (label == "VALOR MARGEM CARTÃO BENEFÍCIO: ") {
+				setValues((prevState) => {
+					prevState[2].value = value;
+					return [...prevState];
+				});
+			} else if (label == "valor liquido aproximado") {
+				setValues((prevState) => {
+					prevState[3].value = value;
+					return [...prevState];
+				});
+			} else if (label == "total parcelas") {
+				setValues((prevState) => {
+					prevState[4].value = value;
+					return [...prevState];
+				});
+			} else if (label == "total saldo devedor") {
+				setValues((prevState) => {
+					prevState[5].value = value;
+					return [...prevState];
+				});
+			}
+			// const updatedValues = values.map((item) =>
+			// 	item.label === label ? { ...item, value } : item
+			// );
+			// setValues(updatedValues);
 		}
 		let portabilidade: number = 0;
 		let totalParcelas: number = 0;
@@ -235,9 +444,21 @@ export function CalculatorINSS5({
 					saldos[+item.label.split("-")[1] - 1].value;
 			}
 		});
-		values[3].value = portabilidade;
-		values[4].value = totalParcelas;
-		values[5].value = totalSaldoDevedor;
+		setValues((prevState) => {
+			prevState[3].value = portabilidade;
+			return [...prevState];
+		});
+		// values[3].value = portabilidade;
+		setValues((prevState) => {
+			prevState[4].value = totalParcelas;
+			return [...prevState];
+		});
+		// values[4].value = totalParcelas;
+		setValues((prevState) => {
+			prevState[5].value = totalSaldoDevedor;
+			return [...prevState];
+		});
+		// values[5].value = totalSaldoDevedor;
 		result = calculate("INSS", "Possibilidades Gerais", values);
 		if (
 			result != "no valid labels" &&
@@ -296,23 +517,29 @@ export function CalculatorINSS5({
 				<h4>Calculadora de Portabilidade</h4>
 				<section className='mainSecondContainerPossibilidades'>
 					<div className='parcelasPossibilidades'>
-						{labelsParcela.map((label: string) => (
+						{parcelas.map((parcela) => (
 							<CalculatorInput
-								key={label}
-								label={label.split("-")[0]}
+								key={parcela.label}
+								label={parcela.label.split("-")[0]}
 								onChange={(e) =>
-									handleInputValue(label, +e.target.value)
+									handleInputValue(
+										parcela.label,
+										+e.target.value
+									)
 								}
 							/>
 						))}
 					</div>
 					<div className='saldoPossibilidades'>
-						{labelsSaldo.map((label: string) => (
+						{saldos.map((saldo) => (
 							<CalculatorInput
-								key={label}
-								label={label.split("-")[0]}
+								key={saldo.label}
+								label={saldo.label.split("-")[0]}
 								onChange={(e) =>
-									handleInputValue(label, +e.target.value)
+									handleInputValue(
+										saldo.label,
+										+e.target.value
+									)
 								}
 							/>
 						))}

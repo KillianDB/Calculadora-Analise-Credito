@@ -9,20 +9,18 @@
 	background-color: #ffffff;
 }
 
-.inputsContainer {
+.inputsContainerExercito {
 	padding: 16px;
 }
 
 .resultsContainerPossibilidadesExercito {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	/* grid-template-columns: 1fr 2fr 2fr 2fr; */
 	/* grid-template-rows: repeat(4, auto); */
 	column-gap: 100px;
 	padding-left: 80px;
-	row-gap: 10px;
-	height: max-content;
-	align-content: flex-start;
+	width: 90%;
 }
 
 .calculatorResultPossibilidadesExercito {
@@ -37,13 +35,13 @@
 	flex-direction: column;
 	align-self: center;
 	flex-wrap: wrap;
-	width: 80vw;
+	width: 90vw;
 	box-shadow: 0.2px 0.2px 11px 0px #d9d9d9;
 }
 
 .mainContainerPossibilidadesExercito {
 	display: flex;
-	width: 80vw;
+	width: 90vw;
 	align-items: center;
 	flex-direction: column;
 }
@@ -53,7 +51,7 @@
 	flex-direction: column;
 	align-items: center;
 	flex-wrap: wrap;
-	width: 80vw;
+	width: 90vw;
 	align-self: center;
 }
 
@@ -62,25 +60,38 @@
 	flex-direction: row;
 	align-content: center;
 	flex-wrap: wrap;
-	width: 80vw;
+	width: 90vw;
 	align-self: center;
 	padding-top: 1vw;
 	justify-content: space-evenly;
 }
 
 .mainSecondContainerPossibilidadesExercito input {
-	width: 240px;
+	width: 200px;
 }
 
-.parcelasPossibilidades,
-.saldoPossibilidades,
-.possibilidadesPossibilidades {
+.parcelasPossibilidadesExercito,
+.prazosPossibilidadesExercito,
+.jurosPossibilidadesExercito {
 	display: flex;
 	flex-direction: column;
+	width: 18%;
 }
 
-.possibilidadesPossibilidadesExercito .calculatorResultExercito {
-	margin-bottom: 21px;
+.possibilidadesPossibilidadesExercito {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 0;
+	width: 18%;
+	justify-content: space-around;
+}
+
+.obsExercito {
+	background-color: #265064;
+	padding: 4px;
+	color: white;
+	font-weight: 600;
+	text-align: center;
 }
 
 .resultadosPossibilidadesExercito {
@@ -89,18 +100,12 @@
 	align-items: stretch;
 }
 
-.resultadosPossibilidades .calculatorResult {
+.resultadosPossibilidadesExercito .calculatorResultExercito {
 	padding: 12px;
 	margin-left: 21px;
 }
 
-#obs {
-	padding-left: 21px;
-	padding-right: 21px;
-	text-align: center;
-}
-
-#trocoLiquidoDiv {
+#trocoLiquidoDivExercito {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -108,7 +113,7 @@
 	width: 100%;
 }
 
-#trocoLiquidoDiv h2,
+#trocoLiquidoDivExercito h2,
 p {
 	margin: 0;
 	padding: 0;

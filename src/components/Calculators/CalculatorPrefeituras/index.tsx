@@ -1,8 +1,9 @@
 import { Key, useEffect, useState } from "react";
-import { calculate } from "../../../utils/calculate";
 import CalculatorInput from "../../CalculatorInput";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
+import "./prefeituras.css";
+import { formatNumber } from "../../../utils/formatNumbers";
 
 export function CalculatorPrefeitura({
 	setAllInputsFilled,
@@ -14,61 +15,92 @@ export function CalculatorPrefeitura({
 	banco: string;
 }) {
 	const [values, setValues] = useState([
-		{ label: "VALOR DE EMPRÉSTIMO SOLICITADO: ", value: 0 },
+		{ label: "CÁLCULO DE VALOR  POR PARCELA: ", value: 0 },
 	]);
 	const [result, setResult] = useState(["VALOR LIBERADO:", "R$ 0,00", "84x"]);
 	const [totais, setTotais] = useState([
 		"TOTAL: R$ 0,00",
 		"PARCELA - R$ 0,00",
 		"84x",
-		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
-		"72x",
-		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
-		"60x",
-		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
-		"48x",
-		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
-		"36x",
-		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
-		"24x",
+		// "TOTAL: R$ 0,00",
+		// "PARCELA - R$ 0,00",
+		// "72x",
+		// "TOTAL: R$ 0,00",
+		// "PARCELA - R$ 0,00",
+		// "60x",
+		// "TOTAL: R$ 0,00",
+		// "PARCELA - R$ 0,00",
+		// "48x",
+		// "TOTAL: R$ 0,00",
+		// "PARCELA - R$ 0,00",
+		// "36x",
+		// "TOTAL: R$ 0,00",
+		// "PARCELA - R$ 0,00",
+		// "24x",
 	]);
-	const label = "VALOR MARGEM DE EMPRÉSTIMO SOLICITADO: ";
 
 	function handleInputValue(label: string, value: number) {
 		setValues([{ label, value }]);
-		const result = calculate("PREFEITURAS", banco, [{ label, value }]);
-		if (result !== "no valid labels" && result !== undefined) {
-			setResult(result.slice(0, 3));
-			setTotais(result.slice(3));
-			const finalResult: string[] = [
-				//[0]
-				"Bem vindo, Cliente CR",
-				//[1]
-				`Valor Empréstimo R$ ${values[0].value}`,
-				//[2]
-				`Valor Parcela R$ ${result[1].split(" - R$ ")[1]}`,
-				//[3]
-				`${result[2]}`,
-				//[4]
-				`${result[3].split(" - R$ ")[1]} 84x`,
-				//[5]
-				`${result[4].split(" - R$ ")[1]} 72x`,
-				//[6]
-				`${result[5].split(" - R$ ")[1]} 60x`,
-				//[7]
-				`${result[6].split(" - R$ ")[1]} 48x`,
-				//[8]
-				`${result[7].split(" - R$ ")[1]} 36x`,
-				//[9]
-				`${result[8].split(" - R$ ")[1]} 24x`,
-			];
-			setFinalResult(finalResult);
+
+		if (banco === "VALOR") {
+			setResult([
+				"VALOR LIBERADO:",
+				`R$ ${formatNumber(value / 0.0749)}`,
+				"84x",
+			]);
+			setTotais([
+				`TOTAL: R$ ${formatNumber(value / 0.0387)}`,
+				`PARCELA - R$ ${value}`,
+				"84x",
+			]);
+		} else if (banco === "DAYCOVAL" || banco === "SANTANDER") {
+			setResult([
+				"VALOR LIBERADO:",
+				`R$ ${formatNumber(value / 0.0295)}`,
+				"84x",
+			]);
+			setTotais([
+				`TOTAL: R$ ${formatNumber(value / 0.0387)}`,
+				`PARCELA - R$ ${value}`,
+				"84x",
+			]);
+		} else if (banco === "ASPECIR") {
+			setResult([
+				"VALOR LIBERADO:",
+				`R$ ${formatNumber(value / 0.032057)}`,
+				"84x",
+			]);
+			setTotais([
+				`TOTAL: R$ ${formatNumber(value / 0.0387)}`,
+				`PARCELA - R$ ${value}`,
+				"84x",
+			]);
 		}
+
+		const finalResult: string[] = [
+			//[0]
+			"Bem vindo, Cliente CR",
+			//[1]
+			`Valor Empréstimo R$ ${formatNumber(value / 0.032057)}`,
+			//[2]
+			`Valor Parcela R$ ${value} 84x`,
+			//[3]
+			`${formatNumber(value / 0.0387)}`,
+			//[4]
+			`${value} 84x`,
+			// //[5]
+			// `${result[4].split(" - R$ ")[1]} 72x`,
+			// //[6]
+			// `${result[5].split(" - R$ ")[1]} 60x`,
+			// //[7]
+			// `${result[6].split(" - R$ ")[1]} 48x`,
+			// //[8]
+			// `${result[7].split(" - R$ ")[1]} 36x`,
+			// //[9]
+			// `${result[8].split(" - R$ ")[1]} 24x`,
+		];
+		setFinalResult(finalResult);
+		console.log("finalResult", finalResult);
 	}
 
 	function chunkArray(array: string[], chunkSize: number) {
@@ -85,23 +117,35 @@ export function CalculatorPrefeitura({
 	}, [values, setAllInputsFilled]);
 
 	const chunkedTotais = chunkArray(totais, 3);
+	const chunkedLiberado = chunkArray(result.slice(0, 3), 3);
 
 	return (
 		<div className='calculatorComponentDiv' id='calculatorComponentDivTwo'>
 			<CalculatorTitle menu='Prefeituras' submenu={banco} />
 			<div className='inputsContainer'>
 				<CalculatorInput
-					key={label}
-					label={label}
-					onChange={(e) => handleInputValue(label, +e.target.value)}
+					key={values[0].label}
+					label={values[0].label}
+					onChange={(e) =>
+						handleInputValue(values[0].label, +e.target.value)
+					}
 				/>
 			</div>
 
 			<section className='answerContainer' id='answerContainerTwo'>
-				<div className='totaisContainer'>
-					{result[0]} {result[1]} {result[2]}
-				</div>
-				<h3>
+				{chunkedLiberado.map((chunk, index) => (
+					<div key={index} className='totaisContainer'>
+						{chunk.map(
+							(
+								total: string,
+								subIndex: Key | null | undefined
+							) => (
+								<CalculatorTotal key={subIndex} total={total} />
+							)
+						)}
+					</div>
+				))}
+				<h3 className='atencaoPrefeituras'>
 					ATENÇÃO: Enviar simulação no prazo abaixo de 84x somente
 					quando o cliente solicitar - Comissão diminui os prazos
 					menores.

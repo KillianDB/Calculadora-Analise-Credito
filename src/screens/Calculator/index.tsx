@@ -47,7 +47,7 @@ function Calculator() {
 			];
 		} else if (menu === "LOAS REP LEGAL") {
 			return ["Submenu", "Cálculo Salário LOAS/BPC"];
-		} else if (menu === "Exército") {
+		} else if (menu === "EXERCITO") {
 			return [
 				"Submenu",
 				"Possibilidades Gerais",
@@ -127,7 +127,7 @@ function Calculator() {
 				/>
 			);
 		} else if (
-			menu == "Exército" &&
+			menu == "EXERCITO" &&
 			submenu == "Cálculo por Margem Disponível"
 		) {
 			return (
@@ -136,7 +136,7 @@ function Calculator() {
 					setFinalResult={setFinalResult}
 				/>
 			);
-		} else if (menu == "Exército" && submenu == "Possibilidades Gerais") {
+		} else if (menu == "EXERCITO" && submenu == "Possibilidades Gerais") {
 			return (
 				<CalculatorExercito2
 					setAllInputsFilled={setAllInputsFilled}
@@ -188,10 +188,11 @@ function Calculator() {
 
 	function handleResultDownload() {
 		if (
-			(menu === "INSS" &&
-				submenu === "Cálculo Valor Solicitado" &&
-				parcelas == "") ||
-			(menu === "PREFEITURA" && parcelas == "")
+			menu === "INSS" &&
+			submenu === "Cálculo Valor Solicitado" &&
+			parcelas == ""
+			// ||
+			// (menu === "PREFEITURA" && parcelas == "")
 		) {
 			setParcelModalIsOpen(true);
 		} else {
@@ -242,7 +243,7 @@ function Calculator() {
 						<option value=''>Menu</option>
 						<option value='INSS'>INSS</option>
 						<option value='LOAS REP LEGAL'>LOAS REP LEGAL</option>
-						<option value='Exército'>Exército</option>
+						<option value='EXERCITO'>EXERCITO</option>
 						<option value='PREFEITURA'>PREFEITURA</option>
 					</select>
 					<select

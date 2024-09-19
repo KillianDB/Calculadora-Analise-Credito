@@ -54,11 +54,6 @@ export function CalculatorINSS5({
 		"PARCELA - R$ 000,00",
 		"84x",
 	]);
-	const labels: string[] = [
-		"VALOR MARGEM EMPRÉSTIMO: ",
-		"VALOR MARGEM CARTÃO INSS: ",
-		"VALOR MARGEM CARTÃO BENEFÍCIO: ",
-	];
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [parcelas, setParcelas] = useState([
 		{ label: "PARCELA-1", value: 0 },
@@ -96,9 +91,9 @@ export function CalculatorINSS5({
 			label: "VALOR MARGEM CARTÃO BENEFÍCIO: ",
 			value: 0,
 		},
-		{ label: "valor liquido aproximado", value: 0 },
-		{ label: "total parcelas", value: 0 },
-		{ label: "total saldo devedor", value: 0 },
+		// { label: "valor liquido aproximado", value: 0 },
+		// { label: "total parcelas", value: 0 },
+		// { label: "total saldo devedor", value: 0 },
 	]);
 
 	useEffect(() => {
@@ -493,12 +488,12 @@ export function CalculatorINSS5({
 			<section className='mainContainerPossibilidades'>
 				<CalculatorTitle menu='INSS' submenu='Possibilidades Gerais' />
 				<div className='inputsContainer'>
-					{labels.map((label: string) => (
+					{values.map((value) => (
 						<CalculatorInput
-							key={label}
-							label={label}
+							key={value.label}
+							label={value.label}
 							onChange={(e) =>
-								handleInputValue(label, +e.target.value)
+								handleInputValue(value.label, +e.target.value)
 							}
 						/>
 					))}

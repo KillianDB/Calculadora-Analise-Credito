@@ -376,4 +376,8 @@ export function calculate(
 			"72x",
 		];
 	}
+	// else if (menu == "Exército" && submenu == "Possibilidades Gerais") {
+	// 	let emprestimoT = values[0].value/0.02385;
+
+	// }
 }

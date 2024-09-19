@@ -63,15 +63,15 @@ export function CalculatorLOAS({
 				`Valor Cartão Enviado R$ ${result[4].split(" R$ ")[1]}`,
 				`Parcela Cartão Enviado R$ ${result[5].split(" R$ ")[1]} 84x`,
 				//total sem extra
-				`${totais[0].split(" R$ ")[1]}`,
+				`${result[6].split(" R$ ")[1]}`,
 				//parcela sem extra
-				`${totais[1].split(" R$ ")[1]} 84x`,
+				`${result[7].split(" R$ ")[1]} 84x`,
 				//liberado
-				`R$ ${results[6].split(" R$ ")[1]}`,
+				`R$ ${result[9].split(" R$ ")[1]}`,
 				//total com extra
-				`${totais[3].split(" R$ ")[1]}`,
+				`${result[10].split(" R$ ")[1]}`,
 				//parcela com extra
-				`${totais[4].split(" R$ ")[1]} 84x`,
+				`${result[7].split(" R$ ")[1]} 84x`,
 			];
 			setFinalResult(finalResult);
 		}

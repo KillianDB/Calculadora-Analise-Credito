@@ -9,7 +9,9 @@ import Input from "../../components/Input";
 export default function LoginScreen() {
 	const navigate = useNavigate();
 	// const { login } = useUser();
-	const [loginData, setLoginData] = useState({ email: "", password: "" });
+	// const [loginData, setLoginData] = useState({ email: "", password: "" });
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
 	const handleLogin = async () => {
 		try {
@@ -53,13 +55,8 @@ export default function LoginScreen() {
 						<Input
 							label='Email'
 							type='email'
-							value={loginData.email}
-							onChange={(e) =>
-								setLoginData({
-									...loginData,
-									email: e.target.value,
-								})
-							}
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 						/>
 					</section>
 					<section>
@@ -67,13 +64,8 @@ export default function LoginScreen() {
 						<Input
 							label='Senha'
 							type='password'
-							value={loginData.password}
-							onChange={(e) =>
-								setLoginData({
-									...loginData,
-									password: e.target.value,
-								})
-							}
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
 						/>
 						{/* <input
 							type='password'

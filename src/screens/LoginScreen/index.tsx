@@ -1,36 +1,38 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useUser } from "../../utils/UserContext";
-import axios from "axios";
+// import { useUser } from "../../utils/UserContext";
+// import axios from "axios";
 import { useState } from "react";
 import BackgroundFullGradient from "../../components/BackgroundFullGradient";
+import "./loginScreen.css";
+import Input from "../../components/Input";
 
 export default function LoginScreen() {
 	const navigate = useNavigate();
-	const { login } = useUser();
+	// const { login } = useUser();
 	const [loginData, setLoginData] = useState({ email: "", password: "" });
 
 	const handleLogin = async () => {
 		try {
-			const response = await axios.post(
-				"https://calculadora.reallcredito.com.br/auth",
-				loginData
-			);
+			// const response = await axios.post(
+			// 	"https://calculadora.reallcredito.com.br/auth",
+			// 	loginData
+			// );
 
-			if (response.status === 200) {
-				const { token } = response.data;
-				const user = await login(token);
+			// if (response.status === 200) {
+			// 	const { token } = response.data;
+			// 	const user = await login(token);
 
-				if (user !== null) {
-					// if (user.role === "admin") {
-					// 	navigate("/admin/home");
-					// } else {
-					// 	navigate("/home");
-					// }
-					navigate("/calculadora");
-				}
-			} else {
-				console.error("Erro ao fazer login", response);
-			}
+			// 	if (user !== null) {
+			// 		if (user.role === "admin") {
+			// 			navigate("/admin/home");
+			// 		} else {
+			// 			navigate("/home");
+			// 		}
+			navigate("/calculadora");
+			// 	}
+			// } else {
+			// 	console.error("Erro ao fazer login", response);
+			// }
 		} catch (error) {
 			console.error("Erro ao fazer login", error);
 		}
@@ -47,10 +49,10 @@ export default function LoginScreen() {
 				<form className='formLogin' onSubmit={handleLogin}>
 					<h3 id='h3-login'>Login</h3>
 					<section>
-						<label>Email</label>
-						<input
+						{/* <label>Email</label> */}
+						<Input
+							label='Email'
 							type='email'
-							name='email'
 							value={loginData.email}
 							onChange={(e) =>
 								setLoginData({
@@ -61,8 +63,19 @@ export default function LoginScreen() {
 						/>
 					</section>
 					<section>
-						<label>Senha</label>
-						<input
+						{/* <label>Senha</label> */}
+						<Input
+							label='Senha'
+							type='password'
+							value={loginData.password}
+							onChange={(e) =>
+								setLoginData({
+									...loginData,
+									password: e.target.value,
+								})
+							}
+						/>
+						{/* <input
 							type='password'
 							name='password'
 							value={loginData.password}
@@ -72,7 +85,7 @@ export default function LoginScreen() {
 									password: e.target.value,
 								})
 							}
-						/>
+						/> */}
 					</section>
 					<button onClick={handleLogin} type='submit'>
 						Entrar

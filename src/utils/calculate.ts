@@ -213,10 +213,11 @@ export function calculate(
 		if (
 			!(values[0].label == "VALOR MARGEM EMPRÉSTIMO: ") ||
 			!(values[1].label == "VALOR MARGEM CARTÃO INSS: ") ||
-			!(values[2].label == "VALOR MARGEM CARTÃO BENEFÍCIO: ") ||
-			!(values[3].label == "valor liquido aproximado") ||
-			!(values[4].label == "total parcelas") ||
-			!(values[5].label == "total saldo devedor")
+			!(values[2].label == "VALOR MARGEM CARTÃO BENEFÍCIO: ")
+			// ||
+			// !(values[3].label == "valor liquido aproximado") ||
+			// !(values[4].label == "total parcelas") ||
+			// !(values[5].label == "total saldo devedor")
 		) {
 			return "no valid labels";
 		}

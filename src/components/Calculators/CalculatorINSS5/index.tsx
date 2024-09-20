@@ -91,9 +91,9 @@ export function CalculatorINSS5({
 			label: "VALOR MARGEM CARTÃO BENEFÍCIO: ",
 			value: 0,
 		},
-		// { label: "valor liquido aproximado", value: 0 },
-		// { label: "total parcelas", value: 0 },
-		// { label: "total saldo devedor", value: 0 },
+		{ label: "valor liquido aproximado", value: 0 },
+		{ label: "total parcelas", value: 0 },
+		{ label: "total saldo devedor", value: 0 },
 	]);
 
 	useEffect(() => {
@@ -488,7 +488,7 @@ export function CalculatorINSS5({
 			<section className='mainContainerPossibilidades'>
 				<CalculatorTitle menu='INSS' submenu='Possibilidades Gerais' />
 				<div className='inputsContainer'>
-					{values.map((value) => (
+					{values.slice(0, 3).map((value) => (
 						<CalculatorInput
 							key={value.label}
 							label={value.label}

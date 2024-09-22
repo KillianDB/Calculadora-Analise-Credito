@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-// import { useUser } from "../../utils/UserContext";
-// import axios from "axios";
+import { useUser } from "../../utils/UserContext";
+import axios from "axios";
 import { useState } from "react";
 import BackgroundFullGradient from "../../components/BackgroundFullGradient";
 import "./loginScreen.css";
@@ -8,33 +8,36 @@ import Input from "../../components/Input";
 
 export default function LoginScreen() {
 	const navigate = useNavigate();
-	// const { login } = useUser();
+	const { login } = useUser();
 	// const [loginData, setLoginData] = useState({ email: "", password: "" });
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	const handleLogin = async () => {
 		try {
-			// const response = await axios.post(
-			// 	"https://calculadora.reallcredito.com.br/auth",
-			// 	loginData
-			// );
+			const response = await axios.post(
+				"https://calculadora.reallcredito.com.br/auth",
+				{
+					email,
+					password,
+				}
+			);
 
-			// if (response.status === 200) {
-			// 	const { token } = response.data;
-			// 	const user = await login(token);
+			if (response.status === 200) {
+				const { token } = response.data;
+				const user = await login(token);
 
-			// 	if (user !== null) {
-			// 		if (user.role === "admin") {
-			// 			navigate("/admin/home");
-			// 		} else {
-			// 			navigate("/home");
-			// 		}
-			navigate("/calculadora");
-			// 	}
-			// } else {
-			// 	console.error("Erro ao fazer login", response);
-			// }
+				if (user !== null) {
+					// 		if (user.role === "admin") {
+					// 			navigate("/admin/home");
+					// 		} else {
+					// 			navigate("/home");
+					// 		}
+					navigate("/calculadora");
+				}
+			} else {
+				console.error("Erro ao fazer login", response);
+			}
 		} catch (error) {
 			console.error("Erro ao fazer login", error);
 		}

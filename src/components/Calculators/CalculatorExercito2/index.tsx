@@ -88,9 +88,9 @@ export function CalculatorExercito2({
 	]);
 
 	useEffect(() => {
-		handleSetParcelas("PARCELAS-1", 0, 1);
-		handleSetTaxas("TAXA DE JUROS-1", 0, 1);
-		handleSetPrazos("PRAZOS-1", 1, 1);
+		handleSetParcelas(0, 1);
+		handleSetTaxas(0, 1);
+		handleSetPrazos(1, 1);
 	}, []);
 
 	useEffect(() => {
@@ -108,7 +108,7 @@ export function CalculatorExercito2({
 		}
 	}, [parcelas, prazos, taxas, indexCalc]);
 
-	const handleSetParcelas = (label: string, value: number, index: number) => {
+	const handleSetParcelas = (value: number, index: number) => {
 		setIndexCalc(index);
 		setParcelas((prevState) => {
 			const newState = [...prevState];
@@ -117,7 +117,7 @@ export function CalculatorExercito2({
 			return newState;
 		});
 	};
-	const handleSetPrazos = (label: string, value: number, index: number) => {
+	const handleSetPrazos = (value: number, index: number) => {
 		setIndexCalc(index);
 		setPrazos((prevState) => {
 			const newState = [...prevState];
@@ -126,7 +126,7 @@ export function CalculatorExercito2({
 			return newState;
 		});
 	};
-	const handleSetTaxas = (label: string, value: number, index: number) => {
+	const handleSetTaxas = (value: number, index: number) => {
 		setIndexCalc(index);
 		setTaxas((prevState) => {
 			const newState = [...prevState];
@@ -299,7 +299,6 @@ export function CalculatorExercito2({
 								label={parcela.label.split("-")[0]}
 								onChange={(e) =>
 									handleSetParcelas(
-										parcela.label,
 										+e.target.value,
 										parcela.index
 									)
@@ -314,7 +313,6 @@ export function CalculatorExercito2({
 								label={prazo.label.split("-")[0]}
 								onChange={(e) =>
 									handleSetPrazos(
-										prazo.label,
 										+e.target.value,
 										prazo.index
 									)
@@ -329,7 +327,6 @@ export function CalculatorExercito2({
 								label={taxa.label.split("-")[0]}
 								onChange={(e) =>
 									handleSetTaxas(
-										taxa.label,
 										parseFloat(
 											e.target.value.replace(",", ".")
 										),

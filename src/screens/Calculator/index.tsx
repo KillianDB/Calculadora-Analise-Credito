@@ -226,8 +226,10 @@ function Calculator() {
 				// const link = document.createElement("a");
 				// link.href = response.data.downloadURL;
 				// link.click();
-				window.open(response.data, "_blank");
-				console.log("Redirecionando", response.data);
+				if (response.status === 200) {
+					window.open(response.data, "_blank");
+					console.log("Redirecionando", response.data);
+				}
 				// })
 			} catch (error) {
 				console.error("Erro ao gerar a imagem:", error);

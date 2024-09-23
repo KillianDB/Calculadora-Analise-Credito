@@ -25,17 +25,19 @@ export default function LoginScreen() {
 			);
 
 			if (response.status === 200) {
+				navigate("/calculadora");
 				const { token } = response.data.token;
-				const user = await login(token);
+				// const user =
+				await login(token);
 
-				if (user !== null) {
-					// 		if (user.role === "admin") {
-					// 			navigate("/admin/home");
-					// 		} else {
-					// 			navigate("/home");
-					// 		}
-					navigate("/calculadora");
-				}
+				// if (user !== null) {
+				// 		if (user.role === "admin") {
+				// 			navigate("/admin/home");
+				// 		} else {
+				// 			navigate("/home");
+				// 		}
+				// 	navigate("/calculadora");
+				// }
 			} else {
 				console.error("Erro ao fazer login", response);
 			}

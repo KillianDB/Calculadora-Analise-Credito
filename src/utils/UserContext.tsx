@@ -30,6 +30,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 	});
 
 	const login = async (token: string): Promise<User | null> => {
+		console.log("Token:", token);
 		localStorage.setItem("token", token);
 		const newUser = { token };
 		setUser(newUser);

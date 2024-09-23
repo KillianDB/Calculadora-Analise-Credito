@@ -206,6 +206,7 @@ function Calculator() {
 		const element = document.getElementById("calculatorIMGResult");
 		if (element) {
 			console.log("Baixando a imagem");
+			console.log("token", token);
 
 			axios
 				.post(

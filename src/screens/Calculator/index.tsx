@@ -202,13 +202,13 @@ function Calculator() {
 		}
 	}
 
-	const handleDownloadImage = () => {
+	const handleDownloadImage = async () => {
 		const element = document.getElementById("calculatorIMGResult");
 		if (element) {
 			console.log("Baixando a imagem");
 			console.log("token", token);
 
-			axios
+			await axios
 				.post(
 					"https://calculadora.reallcredito.com.br/calculator/image",
 					{

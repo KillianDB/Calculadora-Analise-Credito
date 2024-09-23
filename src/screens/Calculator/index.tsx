@@ -212,13 +212,13 @@ function Calculator() {
 				.post(
 					"https://calculadora.reallcredito.com.br/calculator/image",
 					{
+						menu,
+						submenu,
+						element: element.outerHTML,
+					},
+					{
 						headers: {
-							Authorization: `Bearer ${token}`,
-						},
-						body: {
-							menu,
-							submenu,
-							element: element.outerHTML,
+							Authorization: `Bearer ${token}`, // Corrigido aqui
 						},
 					}
 				)

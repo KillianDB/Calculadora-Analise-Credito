@@ -13,7 +13,8 @@ export default function LoginScreen() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const handleLogin = async () => {
+	const handleLogin = async (event: { preventDefault: () => void }) => {
+		event.preventDefault();
 		try {
 			console.log("email", email);
 			const response = await axios.post(
@@ -85,9 +86,7 @@ export default function LoginScreen() {
 							}
 						/> */}
 					</section>
-					<button onClick={handleLogin} type='submit'>
-						Entrar
-					</button>
+					<button onClick={handleLogin}>Entrar</button>
 					<Link to='/redefinir-senha'>Esqueceu sua senha?</Link>
 				</form>
 			</main>

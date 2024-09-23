@@ -27,7 +27,8 @@ export default function LoginScreen() {
 
 			if (response.status === 200) {
 				navigate("/calculadora");
-				const { token } = response.data.token;
+				console.log("Login efetuado com sucesso", response);
+				const { token } = response.data;
 				// const user =
 				await login(token);
 

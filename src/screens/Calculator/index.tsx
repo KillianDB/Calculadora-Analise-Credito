@@ -23,6 +23,7 @@ function Calculator() {
 	const [parcelModalIsOpen, setParcelModalIsOpen] = useState(false);
 	const [isChecked, setIsChecked] = useState(false);
 	const [parcelas, setParcelas] = useState("");
+	const token = localStorage.getItem("token");
 
 	function toggleCheckbox() {
 		console.log("isChecked", isChecked);
@@ -210,9 +211,14 @@ function Calculator() {
 				.post(
 					"https://calculadora.reallcredito.com.br/calculator/image",
 					{
-						menu,
-						submenu,
-						element: element.outerHTML,
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+						body: {
+							menu,
+							submenu,
+							element: element.outerHTML,
+						},
 					}
 				)
 				.then((response) => {

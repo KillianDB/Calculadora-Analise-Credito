@@ -15,6 +15,7 @@ export default function LoginScreen() {
 
 	const handleLogin = async () => {
 		try {
+			console.log("email", email);
 			const response = await axios.post(
 				"https://calculadora.reallcredito.com.br/auth",
 				{
@@ -24,7 +25,7 @@ export default function LoginScreen() {
 			);
 
 			if (response.status === 200) {
-				const { token } = response.data;
+				const { token } = response.data.token;
 				const user = await login(token);
 
 				if (user !== null) {

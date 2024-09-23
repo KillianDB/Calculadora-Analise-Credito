@@ -227,7 +227,8 @@ function Calculator() {
 				// link.href = response.data.downloadURL;
 				// link.click();
 				if (response.status === 200) {
-					window.open(response.data, "_blank");
+					window.location.href = response.data;
+					// window.open(response.data, "_blank");
 					console.log("Redirecionando", response.data);
 				}
 				// })

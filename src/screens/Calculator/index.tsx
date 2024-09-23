@@ -207,9 +207,8 @@ function Calculator() {
 		if (element) {
 			console.log("Baixando a imagem");
 			console.log("token", token);
-
-			await axios
-				.post(
+			try {
+				const response = await axios.post(
 					"https://calculadora.reallcredito.com.br/calculator/image",
 					{
 						menu,
@@ -218,21 +217,21 @@ function Calculator() {
 					},
 					{
 						headers: {
-							Authorization: `Bearer ${token}`, // Corrigido aqui
+							Authorization: `Bearer ${token}`,
 						},
 					}
-				)
-				.then((response) => {
-					// console.log("Imagem gerada com sucesso!", response.data);
-					// const link = document.createElement("a");
-					// link.href = response.data.downloadURL;
-					// link.click();
-					window.open(response.data, "_blank");
-					console.log("Redirecionando", response.data);
-				})
-				.catch((error) => {
-					console.error("Erro ao gerar a imagem:", error.message);
-				});
+				);
+				// .then((response) => {
+				// console.log("Imagem gerada com sucesso!", response.data);
+				// const link = document.createElement("a");
+				// link.href = response.data.downloadURL;
+				// link.click();
+				window.open(response.data, "_blank");
+				console.log("Redirecionando", response.data);
+				// })
+			} catch (error) {
+				console.error("Erro ao gerar a imagem:", error);
+			}
 		} else {
 			console.log("Não foi possível encontrar o elemento ", element);
 			alert("Não foi possível encontrar o elemento para gerar a imagem.");

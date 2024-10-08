@@ -1,8 +1,19 @@
-body {
+/* body {
 	background: #ffffff;
 	box-shadow: inset 0px -50px 50px -50px #f99401;
 	margin: 0;
 	min-height: 100vh;
+} */
+
+.body_colaborators {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	width: 100vw;
+	padding: 0;
+	background-color: #ffffff;
+	margin: 0;
+	border-radius: 8px;
 }
 
 .headerCalculator {
@@ -16,6 +27,7 @@ body {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	margin-right: 8px;
 }
 
 .checkbox {
@@ -34,9 +46,9 @@ body {
 .divMenus {
 	display: flex;
 	flex-direction: row;
-	width: 70vw;
+	width: 100vw;
 	justify-content: center;
-	margin-right: 12vw;
+	margin: 2vh 0 2vh 0;
 }
 
 #calculatorLogo {
@@ -66,7 +78,7 @@ body {
 	flex-wrap: wrap;
 	width: 80vw;
 	align-self: center;
-	height: 88vh;
+	height: 70vh;
 	justify-content: space-between;
 	background: white;
 	border-radius: 12px;
@@ -88,6 +100,7 @@ body {
 	flex-direction: column;
 	align-items: flex-end;
 	align-self: center;
+	padding-top: 8px;
 }
 
 .answerContainer {
@@ -96,7 +109,7 @@ body {
 	flex-wrap: wrap;
 	align-items: center;
 	align-self: center;
-	height: 48.6vh;
+	height: 37vh;
 	width: 100%;
 	background-color: white;
 	border-radius: 12px;
@@ -107,9 +120,10 @@ body {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 200px;
-	row-gap: 10px;
+	row-gap: 4px;
 	height: max-content;
 	align-content: flex-start;
+	padding: 0 4px 0 4px;
 }
 
 .totaisContainer {
@@ -118,12 +132,11 @@ body {
 	background-color: hsl(36, 99%, 49%);
 	max-width: 100%;
 	min-width: 99.5%;
-	height: 6vh;
-	padding: 4px;
-	border-radius: 12px;
+	height: 4vh;
+	padding: 2px;
+	border-radius: 8px;
 	align-items: center;
 	justify-content: space-around;
-	margin-bottom: 16px;
 	margin: 0;
 }
 

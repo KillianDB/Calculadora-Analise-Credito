@@ -19,9 +19,17 @@ input {
 	background-color: #d9d9d9;
 	border: none;
 	border-radius: 10px;
-	width: 300px;
-	height: 36px;
+	width: 200px;
+	height: 28px;
 	margin-bottom: 2vh;
+}
+
+.linha {
+	background-color: #d9d9d9;
+	width: 80%;
+	align-self: center;
+	justify-self: center;
+	height: 1px;
 }
 
 label {
@@ -60,12 +68,12 @@ select {
 	padding-bottom: 9px;
 	border-radius: 30px;
 	font-weight: bold;
-	font-size: 16px;
+	font-family: "Inter";
+	font-size: 14px;
 	color: #2e2e2e;
 	margin-right: 2vw;
 	height: fit-content;
 	width: fit-content;
 	align-self: center;
 	text-align: center;
-	/* border: 2px solid #2e2e2e; */
 }

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { calculate } from "../../../utils/calculate";
-import CalculatorInput from "../../CalculatorInput";
 import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS4.css";
+import { MoneyInput } from "../../MoneyInput";
 
 interface CalculatorINSS4Props {
 	isChecked: boolean;
@@ -36,11 +36,11 @@ export function CalculatorINSS4({
 	]);
 	const [totais, setTotais] = useState([
 		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"84x",
 		"TOTAL: R$ 0,00",
 		"(com redução)",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"84x",
 	]);
 	const label: string = "SALÁRIO: ";
@@ -88,16 +88,26 @@ export function CalculatorINSS4({
 		<div
 			className='calculatorComponentDiv'
 			id='calculatorComponentDivINSS4'
+			style={isChecked ? { height: "70vh" } : { height: "49vh" }}
 		>
 			<CalculatorTitle menu='INSS' submenu='Cálculo Salário Cliente' />
 			<div className='inputsContainer' id='inputsContainerINSS4'>
-				<CalculatorInput
+				<MoneyInput
+					key={label}
 					label={label}
-					onChange={(e) => handleInputValue(label, +e.target.value)}
+					value={
+						typeof values[0].value === "string"
+							? parseFloat(values[0].value)
+							: values[0].value
+					}
+					addOnBefore='R$'
+					onChange={(e) =>
+						handleInputValue(values[0].label, +e.target.value)
+					}
 				/>
 			</div>
 			{!isChecked ? (
-				<div className='answerContainer'>
+				<div className='answerContainer' style={{ height: "31vh" }}>
 					<div className='resultsContainer'>
 						<CalculatorResult result={results[0]} />
 						<CalculatorResult result={results[1]} />
@@ -135,6 +145,7 @@ export function CalculatorINSS4({
 						<CalculatorResult result={results[8]} />
 						<CalculatorResult result={results[9]} />
 						<CalculatorResult result={results[10]} />
+						<p></p>
 						<CalculatorResult result={results[11]} />
 						<p>
 							APÓS 03 PARCELAS PAGAS NA REDUÇÃO DE JUROS SEM

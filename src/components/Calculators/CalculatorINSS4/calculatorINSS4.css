@@ -8,11 +8,12 @@
 
 #answerContainerINSS4 {
 	height: fit-content;
-	font-size: 10px;
+	/* font-size: 10px; */
 	margin: 0;
 	padding: 0;
 }
 
-#answerContainerINSS4 h2 {
-	font-size: 12px;
+#answerContainerINSS4 h2,
+p {
+	font-size: 10px;
 }

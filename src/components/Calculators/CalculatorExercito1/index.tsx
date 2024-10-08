@@ -4,6 +4,7 @@ import CalculatorInput from "../../CalculatorInput";
 import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
+import { MoneyInput } from "../../MoneyInput";
 
 interface CalculatorExercito1Props {
 	setAllInputsFilled: (filled: boolean) => void;
@@ -64,6 +65,19 @@ export function CalculatorExercito1({
 				submenu='Cálculo por Margem Disponível'
 			/>
 			<div className='inputsContainer'>
+				<MoneyInput
+					key={values[0].label}
+					label={values[0].label}
+					value={
+						typeof values[0].value === "string"
+							? parseFloat(values[0].value)
+							: values[0].value
+					}
+					addOnBefore='R$'
+					onChange={(e) =>
+						handleInputValue(values[0].label, +e.target.value)
+					}
+				/>
 				<CalculatorInput
 					label={label}
 					onChange={(e) => handleInputValue(label, +e.target.value)}

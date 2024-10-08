@@ -4,6 +4,7 @@
 
 .inputsContainer {
 	padding: 16px;
+	width: 400px;
 }
 
 .resultsContainerPossibilidades {
@@ -72,6 +73,7 @@
 .possibilidadesPossibilidades {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-evenly;
 }
 
 .possibilidadesPossibilidades .calculatorResult {

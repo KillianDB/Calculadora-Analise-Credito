@@ -1,9 +1,9 @@
 import { Key, useEffect, useState } from "react";
 import { calculate } from "../../../utils/calculate";
-import CalculatorInput from "../../CalculatorInput";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS2.css";
+import { MoneyInput } from "../../MoneyInput";
 
 export function CalculatorINSS2({
 	setAllInputsFilled,
@@ -17,22 +17,22 @@ export function CalculatorINSS2({
 	]);
 	const [totais, setTotais] = useState([
 		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"84x",
 		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"72x",
 		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"60x",
 		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"48x",
 		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"36x",
 		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"24x",
 	]);
 	const label = "VALOR DE EMPRÉSTIMO SOLICITADO: ";
@@ -87,9 +87,15 @@ export function CalculatorINSS2({
 		<div className='calculatorComponentDiv' id='calculatorComponentDivTwo'>
 			<CalculatorTitle menu='INSS' submenu='Cálculo Valor Solicitado' />
 			<div className='inputsContainer'>
-				<CalculatorInput
+				<MoneyInput
 					key={label}
 					label={label}
+					value={
+						typeof values[0].value === "string"
+							? parseFloat(values[0].value)
+							: values[0].value
+					}
+					addOnBefore='R$'
 					onChange={(e) => handleInputValue(label, +e.target.value)}
 				/>
 			</div>

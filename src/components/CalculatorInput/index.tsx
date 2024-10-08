@@ -1,18 +1,19 @@
 import "./CalculatorInput.css";
+import { Input, InputProps } from "antd";
 
-interface CalculatorInputProps {
+export interface CalculatorInputProps extends InputProps {
 	label: string;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CalculatorInput: React.FC<CalculatorInputProps> = ({
 	label,
-	onChange,
+	...props
 }) => {
 	return (
 		<div className='calculatorInputDiv'>
 			<label>{label}</label>
-			<input type='number' onChange={onChange}></input>
+			<Input {...props} />
 		</div>
 	);
 };

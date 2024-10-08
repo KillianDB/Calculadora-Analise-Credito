@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { calculate } from "../../../utils/calculate";
-import CalculatorInput from "../../CalculatorInput";
 import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
+import { MoneyInput } from "../../MoneyInput";
 
 interface CalculatorINSS3Props {
 	isChecked: boolean;
@@ -27,11 +27,11 @@ export function CalculatorINSS3({
 	]);
 	const [totais, setTotal] = useState([
 		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"84x",
 		"TOTAL: R$ 0,00",
 		"(com redução)",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"84x",
 	]);
 	const label: string = "SALÁRIO: ";
@@ -84,20 +84,30 @@ export function CalculatorINSS3({
 	}, [values, setAllInputsFilled]);
 
 	return (
-		<div className='calculatorComponentDiv'>
+		<div
+			className='calculatorComponentDiv'
+			style={isChecked ? { height: "70vh" } : { height: "44vh" }}
+		>
 			<CalculatorTitle
 				menu='INSS'
 				submenu='Cálculo Salário Cliente Sem Cartões'
 			/>
 			<div className='inputsContainer'>
-				<CalculatorInput
+				<MoneyInput
+					key={label}
 					label={label}
+					value={
+						typeof values[0].value === "string"
+							? parseFloat(values[0].value)
+							: values[0].value
+					}
+					addOnBefore='R$'
 					onChange={(e) => handleInputValue(label, +e.target.value)}
 				/>
 			</div>
 
 			{!isChecked ? (
-				<div className='answerContainer'>
+				<div className='answerContainer' style={{ height: "11vh" }}>
 					<div className='resultsContainer'>
 						<CalculatorResult result={results[0]} />
 						<CalculatorResult result={results[1]} />
@@ -123,6 +133,7 @@ export function CalculatorINSS3({
 						<CalculatorResult result={results[2]} />
 						<CalculatorResult result={results[3]} />
 						<CalculatorResult result={results[4]} />
+						<p></p>
 						<CalculatorResult result={results[5]} />
 						<p>
 							APÓS 03 PARCELAS PAGAS NA REDUÇÃO DE JUROS SEM

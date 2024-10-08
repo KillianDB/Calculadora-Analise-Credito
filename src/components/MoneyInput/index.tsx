@@ -23,10 +23,23 @@ export function MoneyInput({
 
 	function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const valueRemoved = e.target.value.replace(",", "");
-		const newValue =
+		let newValue = "";
+		// if (valueRemoved.length > 5) {
+		// 	console.log("valueRemoved.length mais que 5", valueRemoved);
+		// 	newValue =
+		// 		valueRemoved.slice(0, valueRemoved.length - 5) +
+		// 		"." +
+		// 		valueRemoved.slice(1, valueRemoved.length - 2) +
+		// 		"," +
+		// 		valueRemoved.slice(valueRemoved.length - 2);
+		// 	console.log("newValue", newValue);
+		// } else {
+		newValue =
 			valueRemoved.slice(0, valueRemoved.length - 2) +
 			"." +
 			valueRemoved.slice(valueRemoved.length - 2);
+		// }
+		console.log("newValue no onchange", newValue);
 		onChange({
 			...e,
 			target: {

@@ -1,0 +1,31 @@
+.menuAdminDiv {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: flex-end;
+	width: 100vw;
+}
+
+.menuAdminDiv .menuText {
+	list-style: none;
+	padding-bottom: 2vh;
+}
+
+.menuGeralDiv {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: flex-end;
+	width: 100vw;
+}
+
+.menuGeralDiv .menuText {
+	list-style: none;
+	padding-bottom: 2vh;
+}
+
+.menuLogo {
+	margin-left: 0;
+	margin-bottom: 0;
+	height: 12vh;
+}

@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import BlueButton from "../../components/BlueButton";
 import Modal from "react-modal";
 import "./equipes.css";
-import { useNavigate } from "react-router-dom";
-import { SideMenu } from "../../components/SideMenu";
+import Menu from "../../components/Menu";
+import axios from "axios";
+import OrangeButton from "../../components/OrangeButton";
 
 export function Equipes() {
-	const navigate = useNavigate();
-	const [modalOpen, setModalOpen] = useState(false);
+	const [editMemberModalOpen, setEditMemberModalOpen] = useState(false);
+	const [addMemberModalOpen, setAddMemberModalOpen] = useState(false);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
-	// const [userType, setUserType] = useState("");
+	const [telefone, setTelefone] = useState("");
+	const [imagem, setImagem] = useState<File | null>(null);
 	const [role, setRole] = useState("");
 	interface Membro {
 		id: string;
@@ -146,23 +148,46 @@ export function Equipes() {
 		},
 	]);
 
-	const [filteredEquipes, setFilteredEquipes] = useState<Equipe[]>([]);
+	// const [filteredEquipes, setFilteredEquipes] = useState<Equipe[]>([]);
 
-	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const searchTerm = e.target.value.toLowerCase();
-		const filtered = equipes
-			.map((equipe) => {
-				const filteredMembros = equipe.membros.filter((membro) =>
-					membro.nome.toLowerCase().includes(searchTerm)
-				);
-				return {
-					...equipe,
-					membros: filteredMembros,
-				};
-			})
-			.filter((equipe) => equipe.membros.length > 0);
-		setFilteredEquipes(filtered);
-		return filteredEquipes;
+	// const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+	// 	const searchTerm = e.target.value.toLowerCase();
+	// 	const filtered = equipes
+	// 		.map((equipe) => {
+	// 			const filteredMembros = equipe.membros.filter((membro) =>
+	// 				membro.nome.toLowerCase().includes(searchTerm)
+	// 			);
+	// 			return {
+	// 				...equipe,
+	// 				membros: filteredMembros,
+	// 			};
+	// 		})
+	// 		.filter((equipe) => equipe.membros.length > 0);
+	// 	setFilteredEquipes(filtered);
+	// 	return filteredEquipes;
+	// };
+
+	const adicionarMembro = async () => {
+		const response = await axios.post(
+			"https://calculadora.reallcredito.com.br/member",
+			{
+				name,
+				email,
+				telefone,
+				imagem,
+				role,
+			}
+		);
+
+		if (response.status !== 200) {
+			console.error("Erro ao adicionar membro");
+			alert(response);
+			setAddMemberModalOpen(false);
+			return;
+		}
+		alert(response);
+		setAddMemberModalOpen(false);
+		return;
 	};
 
 	const editarMembro = async (membro: { id: string }) => {
@@ -185,11 +210,11 @@ export function Equipes() {
 		if (response.status !== 200) {
 			console.error("Erro ao editar membro");
 			alert(response);
-			setModalOpen(false);
+			setEditMemberModalOpen(false);
 			return;
 		}
 		alert(response);
-		setModalOpen(false);
+		setEditMemberModalOpen(false);
 		return;
 	};
 
@@ -235,28 +260,31 @@ export function Equipes() {
 
 	return (
 		<>
-			<div className='header_equipes'>
-				<img
-					onClick={() => navigate("/admin/home")}
-					src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/seta-voltar.svg?alt=media&token=cf46113a-32c9-4f5d-a2bb-7c0047289d63'
-					id='seta-voltar-equipes'
-				/>
-				<img
-					src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-comprido.svg?alt=media&token=135c3133-5dad-40be-a694-c2a143de847b'
-					id='equipes-logo'
-				/>
-			</div>
-			<SideMenu type='admin' />
-
 			<main className='main_equipes'>
-				<h1>Equipe</h1>
-				<section>
+				<Menu type='admin' />
+				<div className='linha'></div>
+
+				{/* <section className='section_buscar'>
 					<input
 						type='text'
 						placeholder='Buscar'
 						onChange={handleSearch}
 					/>
-				</section>
+				</section> */}
+				<div className='filtros_equipes'>
+					<select>
+						<option defaultValue='Geral'>Geral</option>
+						{equipes.map((equipe) => (
+							<option defaultValue='Geral' value={equipe.equipe}>
+								{equipe.equipe}
+							</option>
+						))}
+					</select>
+					<OrangeButton
+						text='Adicionar membro'
+						onClick={() => setAddMemberModalOpen(true)}
+					/>
+				</div>
 				<section className='equipes_section'>
 					{equipes.map((equipe) => (
 						<div className='equipe_equipes'>
@@ -265,13 +293,24 @@ export function Equipes() {
 								<div className='membro_equipes'>
 									<h6>{membro.nome}</h6>
 									<h6>{membro.email}</h6>
-									<h6>{membro.status}</h6>
-									<BlueButton
-										text='Editar'
-										onClick={() => {
-											setModalOpen(true);
+									<h6
+										style={{
+											color:
+												membro.status === "Ativo"
+													? "green"
+													: "red",
 										}}
-									/>
+									>
+										{membro.status}
+									</h6>
+									<button
+										className='button_editar'
+										onClick={() => {
+											setEditMemberModalOpen(true);
+										}}
+									>
+										Editar
+									</button>
 									<img
 										src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/slash.svg?alt=media&token=d49903be-229f-4b6a-b540-c67467ed599e'
 										onClick={() =>
@@ -283,8 +322,84 @@ export function Equipes() {
 						</div>
 					))}
 				</section>
-				{modalOpen && (
-					<Modal isOpen={modalOpen}>
+				{addMemberModalOpen && (
+					<Modal
+						isOpen={addMemberModalOpen}
+						className='modalCalculator'
+					>
+						<h2
+							className='close-button'
+							onClick={() => {
+								setAddMemberModalOpen(false);
+							}}
+						>
+							X
+						</h2>
+						<label>Adicionar Membro</label>
+						<input
+							type='text'
+							placeholder='Nome'
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+						/>
+						<input
+							type='email'
+							placeholder='Email'
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+						<select
+							value={role}
+							onChange={(e) => setRole(e.target.value)}
+						>
+							<option value='admin'>Administrador</option>
+							<option value='manager'>Gerente</option>
+							<option value='operational'>Operacional</option>
+							<option value='seller'>Vendedor</option>
+							<option value='enterprise'>Empresa Parceira</option>
+						</select>
+						{role === "enterprise" && (
+							<>
+								<input
+									type='file'
+									accept='image/*'
+									onChange={(e) =>
+										setImagem(
+											e.target.files
+												? e.target.files[0]
+												: null
+										)
+									}
+								/>
+								<input
+									type='phone'
+									placeholder='telefone'
+									value={telefone}
+									onChange={(e) =>
+										setTelefone(e.target.value)
+									}
+								></input>
+							</>
+						)}
+						<OrangeButton
+							text='Salvar'
+							onClick={() => adicionarMembro}
+						/>
+					</Modal>
+				)}
+				{editMemberModalOpen && (
+					<Modal
+						isOpen={editMemberModalOpen}
+						className='modalCalculator'
+					>
+						<h2
+							className='close-button'
+							onClick={() => {
+								setEditMemberModalOpen(false);
+							}}
+						>
+							X
+						</h2>
 						<label>Editar Membro</label>
 						<input
 							type='text'
@@ -298,15 +413,6 @@ export function Equipes() {
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 						/>
-						{/* <select
-							value={userType}
-							onChange={(e) => setUserType(e.target.value)}
-						>
-							<option value='admin'>Administrador</option>
-							<option value='member'>Colaborador</option>
-							<option value='manager'>Gerente</option>
-							<option value='enterprise'>Empresa Parceira</option>
-						</select> */}
 						<select
 							value={role}
 							onChange={(e) => setRole(e.target.value)}
@@ -315,7 +421,6 @@ export function Equipes() {
 							<option value='manager'>Gerente</option>
 							<option value='operational'>Operacional</option>
 							<option value='seller'>Vendedor</option>
-							<option value='enterprise'>Empresa Parceira</option>
 						</select>
 						<BlueButton
 							text='Salvar'

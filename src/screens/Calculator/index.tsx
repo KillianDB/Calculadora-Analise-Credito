@@ -10,8 +10,9 @@ import { CalculatorIMGResult } from "../CalculatorIMGResult";
 import axios from "axios";
 import { CalculatorLOAS } from "../../components/Calculators/CalculatorLOAS";
 import { CalculatorExercito1 } from "../../components/Calculators/CalculatorExercito1";
-import { CalculatorExercito2 } from "../../components/Calculators/CalculatorExercito2";
+// import { CalculatorExercito2 } from "../../components/Calculators/CalculatorExercito2";
 import { CalculatorPrefeitura } from "../../components/Calculators/CalculatorPrefeituras";
+import Menu from "../../components/Menu";
 // import { SideMenu } from "../../components/SideMenu";
 
 function Calculator() {
@@ -137,14 +138,16 @@ function Calculator() {
 					setFinalResult={setFinalResult}
 				/>
 			);
-		} else if (menu == "EXERCITO" && submenu == "Possibilidades Gerais") {
-			return (
-				<CalculatorExercito2
-					setAllInputsFilled={setAllInputsFilled}
-					setFinalResult={setFinalResult}
-				/>
-			);
-		} else if (menu == "PREFEITURA" && submenu == "DAYCOVAL") {
+		}
+		//  else if (menu == "EXERCITO" && submenu == "Possibilidades Gerais") {
+		// 	return (
+		// 		<CalculatorExercito2
+		// 			setAllInputsFilled={setAllInputsFilled}
+		// 			setFinalResult={setFinalResult}
+		// 		/>
+		// 	);
+		// }
+		else if (menu == "PREFEITURA" && submenu == "DAYCOVAL") {
 			return (
 				<CalculatorPrefeitura
 					setAllInputsFilled={setAllInputsFilled}
@@ -243,11 +246,14 @@ function Calculator() {
 
 	return (
 		<>
-			<div className='headerCalculator'>
+			<main className='body_colaborators'>
+				<Menu type='colaborator' />
+				<div className='linha'></div>
+
 				<div className='divMenus'>
 					<select
 						onChange={(e) => handleMenuChange(e.target.value)}
-						defaultValue='Menu'
+						title='Menu'
 					>
 						<option value=''>Menu</option>
 						<option value='INSS'>INSS</option>
@@ -289,11 +295,6 @@ function Calculator() {
 						</div>
 					)}
 				</div>
-				<img
-					src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
-					id='calculatorLogo'
-					alt='Logo'
-				/>
 				{/* Modal para escolher a quantidade de parcelas */}
 				<Modal
 					isOpen={parcelModalIsOpen}
@@ -360,9 +361,10 @@ function Calculator() {
 					</button>
 					{/* <button onClick={() => setModalIsOpen(false)}>Close</button> */}
 				</Modal>
-			</div>
-			{/* <SideMenu type='member' /> */}
-			{renderCalculatorByMenus(menu, submenu)}
+				{/* </div> */}
+				{/* <SideMenu type='member' /> */}
+				{renderCalculatorByMenus(menu, submenu)}
+			</main>
 		</>
 	);
 }

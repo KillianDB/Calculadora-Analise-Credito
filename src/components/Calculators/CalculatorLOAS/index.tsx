@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { calculate } from "../../../utils/calculate";
-import CalculatorInput from "../../CalculatorInput";
 import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "../CalculatorINSS4/calculatorINSS4.css";
+import { MoneyInput } from "../../MoneyInput";
 
 interface CalculatorLOASProps {
 	isChecked: boolean;
@@ -31,14 +31,13 @@ export function CalculatorLOAS({
 	]);
 	const [totais, setTotais] = useState([
 		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"84x",
 		"TOTAL: R$ 0,00",
 		"(com redução)",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"84x",
 	]);
-	const label: string = "SALÁRIO: ";
 
 	function handleInputValue(label: string, value: number) {
 		setValues([{ label, value }]);
@@ -92,9 +91,18 @@ export function CalculatorLOAS({
 				submenu='Cálculo Salário LOAS/BPC'
 			/>
 			<div className='inputsContainer' id='inputsContainerINSS4'>
-				<CalculatorInput
-					label={label}
-					onChange={(e) => handleInputValue(label, +e.target.value)}
+				<MoneyInput
+					key={values[0].label}
+					label={values[0].label}
+					value={
+						typeof values[0].value === "string"
+							? parseFloat(values[0].value)
+							: values[0].value
+					}
+					addOnBefore='R$'
+					onChange={(e) =>
+						handleInputValue(values[0].label, +e.target.value)
+					}
 				/>
 			</div>
 			{!isChecked ? (

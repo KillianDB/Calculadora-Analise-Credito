@@ -1,3 +1,7 @@
+canvas {
+	height: 250px;
+}
+
 #admin-home-logo {
 	margin-left: 60vw;
 	margin-bottom: 0;
@@ -5,11 +9,12 @@
 
 .admin-home-main-div {
 	width: 100vw;
-	height: 80vh;
+	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	background-color: white;
 }
 
 .admin-home-top-section {
@@ -53,10 +58,12 @@
 
 .pizza-graphic {
 	width: 30%;
+	/* width: 40%; */
 	height: 200px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 }
 
 .tituloGraficoPizza {

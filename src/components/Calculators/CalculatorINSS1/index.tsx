@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { calculate } from "../../../utils/calculate";
-import CalculatorInput from "../../CalculatorInput";
 import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import { formatNumber } from "../../../utils/formatNumbers";
+import { MoneyInput } from "../../MoneyInput";
 
 export function CalculatorINSS1({
 	setAllInputsFilled,
@@ -15,19 +15,19 @@ export function CalculatorINSS1({
 }) {
 	const [results, setResults] = useState([
 		"VALOR EMPRÉSTIMO: R$00000,00",
-		"PARCELA - R$ 0000,00",
+		"PARCELA R$ 0000,00",
 		"VALOR CARTÃO INSS: R$ 000,00",
-		"PARCELA - R$ 0000,00",
+		"PARCELA R$ 0000,00",
 		"VALOR CARTÃO ENVIADO: R$ 000,00",
-		"PARCELA - R$ 0000,00",
+		"PARCELA R$ 0000,00",
 		"VALOR CARTÃO BENEFÍCIO: R$ 000,00",
-		"PARCELA - R$ 0000,00",
+		"PARCELA R$ 0000,00",
 		"VALOR CARTÃO ENVIADO: R$ 000,00",
-		"PARCELA - R$ 0000,00",
+		"PARCELA R$ 0000,00",
 	]);
 	const [totais, setTotal] = useState([
 		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"84x",
 	]);
 	const labels: string[] = [
@@ -93,11 +93,21 @@ export function CalculatorINSS1({
 			/>
 			<div className='inputsContainer'>
 				{labels.map((label: string) => (
-					<CalculatorInput
+					<MoneyInput
 						key={label}
 						label={label}
+						value={
+							values.find((item) => item.label === label)
+								?.value || 0
+						}
+						addOnBefore='R$'
 						onChange={(e) =>
-							handleInputValue(label, +e.target.value)
+							handleInputValue(
+								label,
+								typeof e.target.value === "string"
+									? parseFloat(e.target.value)
+									: e.target.value
+							)
 						}
 					/>
 				))}

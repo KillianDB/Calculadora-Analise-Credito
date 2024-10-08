@@ -1,9 +1,9 @@
 import { Key, useEffect, useState } from "react";
-import CalculatorInput from "../../CalculatorInput";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./prefeituras.css";
 import { formatNumber } from "../../../utils/formatNumbers";
+import { MoneyInput } from "../../MoneyInput";
 
 export function CalculatorPrefeitura({
 	setAllInputsFilled,
@@ -20,22 +20,22 @@ export function CalculatorPrefeitura({
 	const [result, setResult] = useState(["VALOR LIBERADO:", "R$ 0,00", "84x"]);
 	const [totais, setTotais] = useState([
 		"TOTAL: R$ 0,00",
-		"PARCELA - R$ 0,00",
+		"PARCELA R$ 0,00",
 		"84x",
 		// "TOTAL: R$ 0,00",
-		// "PARCELA - R$ 0,00",
+		// "PARCELA R$ 0,00",
 		// "72x",
 		// "TOTAL: R$ 0,00",
-		// "PARCELA - R$ 0,00",
+		// "PARCELA R$ 0,00",
 		// "60x",
 		// "TOTAL: R$ 0,00",
-		// "PARCELA - R$ 0,00",
+		// "PARCELA R$ 0,00",
 		// "48x",
 		// "TOTAL: R$ 0,00",
-		// "PARCELA - R$ 0,00",
+		// "PARCELA R$ 0,00",
 		// "36x",
 		// "TOTAL: R$ 0,00",
-		// "PARCELA - R$ 0,00",
+		// "PARCELA R$ 0,00",
 		// "24x",
 	]);
 
@@ -50,7 +50,7 @@ export function CalculatorPrefeitura({
 			]);
 			setTotais([
 				`TOTAL: R$ ${formatNumber(value / 0.0387)}`,
-				`PARCELA - R$ ${value}`,
+				`PARCELA R$ ${value}`,
 				"84x",
 			]);
 		} else if (banco === "DAYCOVAL" || banco === "SANTANDER") {
@@ -61,7 +61,7 @@ export function CalculatorPrefeitura({
 			]);
 			setTotais([
 				`TOTAL: R$ ${formatNumber(value / 0.0387)}`,
-				`PARCELA - R$ ${value}`,
+				`PARCELA R$ ${value}`,
 				"84x",
 			]);
 		} else if (banco === "ASPECIR") {
@@ -72,7 +72,7 @@ export function CalculatorPrefeitura({
 			]);
 			setTotais([
 				`TOTAL: R$ ${formatNumber(value / 0.0387)}`,
-				`PARCELA - R$ ${value}`,
+				`PARCELA R$ ${value}`,
 				"84x",
 			]);
 		}
@@ -123,9 +123,15 @@ export function CalculatorPrefeitura({
 		<div className='calculatorComponentDiv' id='calculatorComponentDivTwo'>
 			<CalculatorTitle menu='Prefeituras' submenu={banco} />
 			<div className='inputsContainer'>
-				<CalculatorInput
+				<MoneyInput
 					key={values[0].label}
 					label={values[0].label}
+					value={
+						typeof values[0].value === "string"
+							? parseFloat(values[0].value)
+							: values[0].value
+					}
+					addOnBefore='R$'
 					onChange={(e) =>
 						handleInputValue(values[0].label, +e.target.value)
 					}

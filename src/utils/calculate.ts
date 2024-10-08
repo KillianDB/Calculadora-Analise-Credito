@@ -36,22 +36,22 @@ export function calculate(
 
 		return [
 			"VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
-			" PARCELA - R$ " + formatNumber(emprestimoP),
+			" PARCELA R$ " + formatNumber(emprestimoP),
 
 			"CARTÃO INSS: R$ " + formatNumber(cartaoINSST),
-			" PARCELA - R$ " + formatNumber(cartaoINSSP),
+			" PARCELA R$ " + formatNumber(cartaoINSSP),
 
 			"VALOR CARTÃO ENVIADO: R$ " + formatNumber(cartaoEIT),
-			" PARCELA - R$ " + formatNumber(cartaoEIP),
+			" PARCELA R$ " + formatNumber(cartaoEIP),
 
 			"CARTÃO BENEFÍCIO: R$ " + formatNumber(cartaoBT),
-			" PARCELA - R$ " + formatNumber(cartaoBP),
+			" PARCELA R$ " + formatNumber(cartaoBP),
 
 			"VALOR CARTÃO ENVIADO: R$ " + formatNumber(cartaoEBT),
-			" PARCELA - R$ " + formatNumber(cartaoEBP),
+			" PARCELA R$ " + formatNumber(cartaoEBP),
 
 			"TOTAL: R$ " + formatNumber(totalT),
-			" PARCELA - R$ " + formatNumber(totalP),
+			" PARCELA R$ " + formatNumber(totalP),
 			" 84x",
 			//soma total cartão
 			formatNumber(cartaoINSST + cartaoBT),
@@ -71,37 +71,37 @@ export function calculate(
 			//[0]
 			"TOTAL: R$ " + formatNumber(+values[0].value),
 			//[1]
-			" PARCELA - R$ " + formatNumber(x84),
+			" PARCELA R$ " + formatNumber(x84),
 			//[2]
 			" 84x",
 			//[3]
 			"TOTAL: R$ " + formatNumber(+values[0].value),
 			//[4]
-			" PARCELA - R$ " + formatNumber(x72),
+			" PARCELA R$ " + formatNumber(x72),
 			//[5]
 			" 72x",
 			//[6]
 			"TOTAL: R$ " + formatNumber(+values[0].value),
 			//[7]
-			" PARCELA - R$ " + formatNumber(x60),
+			" PARCELA R$ " + formatNumber(x60),
 			//[8]
 			" 60x",
 			//[9]
 			"TOTAL: R$ " + formatNumber(+values[0].value),
 			//[10]
-			" PARCELA - R$ " + formatNumber(x48),
+			" PARCELA R$ " + formatNumber(x48),
 			//[11]
 			" 48x",
 			//[12]
 			"TOTAL: R$ " + formatNumber(+values[0].value),
 			//[13]
-			" PARCELA - R$ " + formatNumber(x36),
+			" PARCELA R$ " + formatNumber(x36),
 			//[14]
 			" 36x",
 			//[15]
 			"TOTAL: R$ " + formatNumber(+values[0].value),
 			//[16]
-			" PARCELA - R$ " + formatNumber(x24),
+			" PARCELA R$ " + formatNumber(x24),
 			//[17]
 			" 24x",
 		];
@@ -128,7 +128,7 @@ export function calculate(
 			"VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
 			"VALOR MARGEM EMPRÉSTIMO: R$ " + formatNumber(emprestimoP),
 			"TOTAL: R$ " + formatNumber(total),
-			" PARCELA - R$ " + formatNumber(emprestimoP),
+			" PARCELA R$ " + formatNumber(emprestimoP),
 			" 84x ",
 			"SALDO DEVEDOR (APROXIMADO): R$ " + formatNumber(saldo),
 			"PARCELA: R$ " + formatNumber(parcela),
@@ -137,7 +137,7 @@ export function calculate(
 			"LIBERA + O VALOR (APROXIMADO) DE: R$ " +
 				formatNumber(valorLiberado),
 			"TOTAL: R$ " + formatNumber(totalExtra),
-			" PARCELA - R$ " + formatNumber(parcelaComExtra),
+			" PARCELA R$ " + formatNumber(parcelaComExtra),
 			" 84x ",
 		];
 	} else if (menu == "INSS" && submenu == "Cálculo Salário Cliente") {
@@ -181,7 +181,7 @@ export function calculate(
 			//[8]
 			"TOTAL: R$ " + formatNumber(total),
 			//[9]
-			" PARCELA - R$ " + formatNumber(totalP),
+			" PARCELA R$ " + formatNumber(totalP),
 			//[10]
 			" 84x ",
 			//[11]
@@ -199,7 +199,7 @@ export function calculate(
 			//[16]
 			"TOTAL: R$ " + formatNumber(totalExtra),
 			//[17]
-			" PARCELA - R$ " + formatNumber(parcelaComExtra),
+			" PARCELA R$ " + formatNumber(parcelaComExtra),
 			//[18]
 			"84x",
 			//[19] soma total cartão
@@ -291,7 +291,7 @@ export function calculate(
 			//[19]
 			"TOTAL: R$ " + formatNumber(total),
 			//[20]
-			" PARCELA - R$ " + formatNumber(parcela),
+			" PARCELA R$ " + formatNumber(parcela),
 			//[21]
 			" 84x",
 			//[22] soma total cartão
@@ -342,7 +342,7 @@ export function calculate(
 			//[6]
 			"TOTAL: R$ " + formatNumber(total),
 			//[7]
-			" PARCELA - R$ " + formatNumber(totalP),
+			" PARCELA R$ " + formatNumber(totalP),
 			//[8]
 			" 84x ",
 			//[9]
@@ -351,7 +351,7 @@ export function calculate(
 			//[10]
 			"TOTAL: R$ " + formatNumber(totalExtra),
 			//[11]
-			" PARCELA - R$ " + formatNumber(parcelaComExtra),
+			" PARCELA R$ " + formatNumber(parcelaComExtra),
 			//[12]
 			"84x",
 		];

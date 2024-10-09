@@ -1,79 +1,79 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 body {
-	background-color: white;
-	width: 100vw;
-	height: 100vh;
-	margin: 0;
-	padding: 0;
-	font-family: "Inter";
+  background-color: white;
+  width: 98vw;
+  height: 98vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter";
 }
 
 #root {
-	width: 100vw;
-	display: flex;
-	flex-direction: column;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
 }
 
 input {
-	background-color: #d9d9d9;
-	border: none;
-	border-radius: 10px;
-	width: 200px;
-	height: 28px;
-	margin-bottom: 2vh;
+  background-color: #d9d9d9;
+  border: none;
+  border-radius: 10px;
+  width: 200px;
+  height: 28px;
+  margin-bottom: 2vh;
 }
 
 .linha {
-	background-color: #d9d9d9;
-	width: 80%;
-	align-self: center;
-	justify-self: center;
-	height: 1px;
+  background-color: #d9d9d9;
+  width: 80%;
+  align-self: center;
+  justify-self: center;
+  height: 1px;
 }
 
 label {
-	color: black;
-	font-weight: 300;
+  color: black;
+  font-weight: 300;
 }
 
 button {
-	background-color: #f99401;
-	color: white;
-	border: none;
-	border-radius: 30px;
-	width: 300px;
-	height: 39px;
-	font-weight: bold;
+  background-color: #f99401;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  width: 300px;
+  height: 39px;
+  font-weight: bold;
 }
 
 h3 {
-	color: black;
-	font-weight: bold;
+  color: black;
+  font-weight: bold;
 }
 
 a {
-	color: #265064;
-	text-decoration: none;
-	font-weight: bold;
+  color: #265064;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 form {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 select {
-	padding-top: 9px;
-	padding-bottom: 9px;
-	border-radius: 30px;
-	font-weight: bold;
-	font-family: "Inter";
-	font-size: 14px;
-	color: #2e2e2e;
-	margin-right: 2vw;
-	height: fit-content;
-	width: fit-content;
-	align-self: center;
-	text-align: center;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-family: "Inter";
+  font-size: 14px;
+  color: #2e2e2e;
+  margin-right: 2vw;
+  height: fit-content;
+  width: fit-content;
+  align-self: center;
+  text-align: center;
 }

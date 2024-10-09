@@ -5,77 +5,78 @@ import { useState } from "react";
 import BackgroundFullGradient from "../../components/BackgroundFullGradient";
 import "./loginScreen.css";
 import Input from "../../components/Input";
+import { Button } from "@chakra-ui/react";
 
 export default function LoginScreen() {
-	const navigate = useNavigate();
-	const { login } = useUser();
-	// const [loginData, setLoginData] = useState({ email: "", password: "" });
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { login } = useUser();
+  // const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-	const handleLogin = async (event: { preventDefault: () => void }) => {
-		event.preventDefault();
-		try {
-			console.log("email", email);
-			const response = await axios.post(
-				"https://calculadora.reallcredito.com.br/auth",
-				{
-					email,
-					password,
-				}
-			);
+  const handleLogin = async (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    try {
+      console.log("email", email);
+      const response = await axios.post(
+        "https://calculadora.reallcredito.com.br/auth",
+        {
+          email,
+          password,
+        }
+      );
 
-			if (response.status === 200) {
-				navigate("/calculadora");
-				console.log("Login efetuado com sucesso", response);
-				const { token } = response.data;
-				// const user =
-				await login(token);
+      if (response.status === 200) {
+        navigate("/calculadora");
+        console.log("Login efetuado com sucesso", response);
+        const { token } = response.data;
+        // const user =
+        await login(token);
 
-				// if (user !== null) {
-				// 		if (user.role === "admin") {
-				// 			navigate("/admin/home");
-				// 		} else {
-				// 			navigate("/home");
-				// 		}
-				// 	navigate("/calculadora");
-				// }
-			} else {
-				console.error("Erro ao fazer login", response);
-			}
-		} catch (error) {
-			console.error("Erro ao fazer login", error);
-		}
-	};
+        // if (user !== null) {
+        // 		if (user.role === "admin") {
+        // 			navigate("/admin/home");
+        // 		} else {
+        // 			navigate("/home");
+        // 		}
+        // 	navigate("/calculadora");
+        // }
+      } else {
+        console.error("Erro ao fazer login", response);
+      }
+    } catch (error) {
+      console.error("Erro ao fazer login", error);
+    }
+  };
 
-	return (
-		<>
-			<BackgroundFullGradient />
-			<main className='mainLogin'>
-				<img
-					className='loginLogoImg'
-					src='https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814'
-				/>
-				<form className='formLogin' onSubmit={handleLogin}>
-					<h3 id='h3-login'>Login</h3>
-					<section>
-						{/* <label>Email</label> */}
-						<Input
-							label='Email'
-							type='email'
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-					</section>
-					<section>
-						{/* <label>Senha</label> */}
-						<Input
-							label='Senha'
-							type='password'
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-						{/* <input
+  return (
+    <>
+      <BackgroundFullGradient />
+      <main className="mainLogin">
+        <img
+          className="loginLogoImg"
+          src="https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814"
+        />
+        <form className="formLogin" onSubmit={handleLogin}>
+          <h3 id="h3-login">Login</h3>
+          <section>
+            {/* <label>Email</label> */}
+            <Input
+              label="Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </section>
+          <section>
+            {/* <label>Senha</label> */}
+            <Input
+              label="Senha"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {/* <input
 							type='password'
 							name='password'
 							value={loginData.password}
@@ -86,11 +87,18 @@ export default function LoginScreen() {
 								})
 							}
 						/> */}
-					</section>
-					<button onClick={handleLogin}>Entrar</button>
-					<Link to='/redefinir-senha'>Esqueceu sua senha?</Link>
-				</form>
-			</main>
-		</>
-	);
+          </section>
+          <Button
+            borderRadius={"full"}
+            color={"white"}
+            bgColor={"#f99401"}
+            onClick={handleLogin}
+          >
+            Entrar
+          </Button>
+          <Link to="/redefinir-senha">Esqueceu sua senha?</Link>
+        </form>
+      </main>
+    </>
+  );
 }

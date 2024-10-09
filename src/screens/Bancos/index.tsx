@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
 import Menu from "../../components/Menu";
-import { Flex, Image, Select, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  HStack,
+  Image,
+  Select,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
 
 export function Bancos() {
   // const [addMemberModalOpen, setAddMemberModalOpen] = useState(false);
@@ -145,24 +154,41 @@ export function Bancos() {
         <Flex w={"100vw"} justifyContent={"space-evenly"}>
           <SimpleGrid columns={3} spacingX={100} spacingY={5}>
             {bancos.map((banco) => (
-              <div className="equipe_equipes">
-                <h3>{banco.nome}</h3>
-                <div className="membro_equipes">
-                  <h6>{banco.tipo}</h6>
-                  <h6>{banco.link}</h6>
-                  <h6
-                    style={{
-                      color: banco.status === "Ativo" ? "green" : "red",
-                    }}
+              <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-between"
+                alignItems="center"
+                boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
+                width="min-content"
+                padding="4vh"
+              >
+                <Heading as="h3" size="md" mb={4}>
+                  {banco.nome}
+                </Heading>
+                <HStack
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="flex-end"
+                  width="100%"
+                  alignItems="center"
+                  spacing={4}
+                >
+                  <Text as="h6">{banco.tipo}</Text>
+                  <Text as="h6">{banco.link}</Text>
+                  <Text
+                    as="h6"
+                    color={banco.status === "Ativo" ? "green.500" : "red.500"}
                   >
                     {banco.status}
-                  </h6>
+                  </Text>
                   <Image
                     src="https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/slash.svg?alt=media&token=d49903be-229f-4b6a-b540-c67467ed599e"
                     onClick={() => bloquearBanco({ id: banco.id })}
+                    cursor="pointer"
                   />
-                </div>
-              </div>
+                </HStack>
+              </Box>
             ))}
           </SimpleGrid>
         </Flex>

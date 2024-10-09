@@ -1,11 +1,16 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Form, Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../utils/UserContext";
 import axios from "axios";
 import { useState } from "react";
 import BackgroundFullGradient from "../../components/BackgroundFullGradient";
 import "./loginScreen.css";
-import Input from "../../components/Input";
-import { Button } from "@chakra-ui/react";
+import {
+  Button,
+  VStack,
+  Input,
+  FormLabel,
+  FormControl,
+} from "@chakra-ui/react";
 
 export default function LoginScreen() {
   const navigate = useNavigate();
@@ -59,43 +64,38 @@ export default function LoginScreen() {
         />
         <form className="formLogin" onSubmit={handleLogin}>
           <h3 id="h3-login">Login</h3>
-          <section>
-            {/* <label>Email</label> */}
-            <Input
-              label="Email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </section>
-          <section>
-            {/* <label>Senha</label> */}
-            <Input
-              label="Senha"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {/* <input
-							type='password'
-							name='password'
-							value={loginData.password}
-							onChange={(e) =>
-								setLoginData({
-									...loginData,
-									password: e.target.value,
-								})
-							}
-						/> */}
-          </section>
-          <Button
-            borderRadius={"full"}
-            color={"white"}
-            bgColor={"#f99401"}
-            onClick={handleLogin}
-          >
-            Entrar
-          </Button>
+          <VStack spacing={4} width="100%" maxW="400px" mx="auto">
+            <FormControl>
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <Input
+                placeholder="Email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                size="lg"
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="password">Senha</FormLabel>
+              <Input
+                placeholder="Senha"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                size="lg"
+              />
+            </FormControl>
+            <Button
+              borderRadius="full"
+              color="white"
+              bgColor="#f99401"
+              size="lg"
+              width="100%"
+              onClick={handleLogin}
+            >
+              Entrar
+            </Button>
+          </VStack>
           <Link to="/redefinir-senha">Esqueceu sua senha?</Link>
         </form>
       </main>

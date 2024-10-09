@@ -142,7 +142,7 @@ export function Bancos() {
 					/>
 				</section> */}
         <div className="filtros_equipes">
-          <Select width={"150px"} borderRadius={"10px"}>
+          <Select width={"400px"} borderRadius={"10px"}>
             <option value="todos">Todos</option>
             {bancos.map((banco) => (
               <option defaultValue="Geral" value={banco.nome}>

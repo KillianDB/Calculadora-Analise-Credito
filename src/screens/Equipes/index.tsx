@@ -1,11 +1,24 @@
 import { useEffect, useState } from "react";
-import BlueButton from "../../components/BlueButton";
-import Modal from "react-modal";
 import "./equipes.css";
 import Menu from "../../components/Menu";
 import axios from "axios";
 import OrangeButton from "../../components/OrangeButton";
-import { Flex, Image, Select, SimpleGrid } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Input,
+  Select,
+  VStack,
+  SimpleGrid,
+  Image,
+  Flex,
+} from "@chakra-ui/react";
 
 export function Equipes() {
   const [editMemberModalOpen, setEditMemberModalOpen] = useState(false);
@@ -264,14 +277,6 @@ export function Equipes() {
       <main className="main_equipes">
         <Menu type="admin" />
         <div className="linha"></div>
-
-        {/* <section className='section_buscar'>
-					<input
-						type='text'
-						placeholder='Buscar'
-						onChange={handleSearch}
-					/>
-				</section> */}
         <div className="filtros_equipes">
           <Select width={"150px"} borderRadius={"10px"} mr={4}>
             <option defaultValue="Geral">Geral</option>
@@ -321,85 +326,126 @@ export function Equipes() {
           </SimpleGrid>
         </Flex>
         {addMemberModalOpen && (
-          <Modal isOpen={addMemberModalOpen} className="modalCalculator">
-            <h2
-              className="close-button"
-              onClick={() => {
-                setAddMemberModalOpen(false);
-              }}
-            >
-              X
-            </h2>
-            <label>Adicionar Membro</label>
-            <input
-              type="text"
-              placeholder="Nome"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Select value={role} onChange={(e) => setRole(e.target.value)}>
-              <option value="admin">Administrador</option>
-              <option value="manager">Gerente</option>
-              <option value="operational">Operacional</option>
-              <option value="seller">Vendedor</option>
-              <option value="enterprise">Empresa Parceira</option>
-            </Select>
-            {role === "enterprise" && (
-              <>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) =>
-                    setImagem(e.target.files ? e.target.files[0] : null)
-                  }
-                />
-                <input
-                  type="phone"
-                  placeholder="telefone"
-                  value={telefone}
-                  onChange={(e) => setTelefone(e.target.value)}
-                ></input>
-              </>
-            )}
-            <OrangeButton text="Salvar" onClick={() => adicionarMembro} />
+          <Modal
+            isOpen={addMemberModalOpen}
+            onClose={() => setAddMemberModalOpen(false)}
+          >
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Adicionar Membro</ModalHeader>
+              <ModalCloseButton onClick={() => setAddMemberModalOpen(false)} />
+              <ModalBody>
+                <VStack spacing={4}>
+                  <Input
+                    placeholder="Nome"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    size="lg"
+                  />
+                  <Input
+                    placeholder="Email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    size="lg"
+                  />
+                  <Select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    placeholder="Selecione um papel"
+                    size="lg"
+                  >
+                    <option value="admin">Administrador</option>
+                    <option value="manager">Gerente</option>
+                    <option value="operational">Operacional</option>
+                    <option value="seller">Vendedor</option>
+                    <option value="enterprise">Empresa Parceira</option>
+                  </Select>
+                  {role === "enterprise" && (
+                    <>
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) =>
+                          setImagem(e.target.files ? e.target.files[0] : null)
+                        }
+                        size="lg"
+                      />
+                      <Input
+                        type="tel"
+                        placeholder="Telefone"
+                        value={telefone}
+                        onChange={(e) => setTelefone(e.target.value)}
+                        size="lg"
+                      />
+                    </>
+                  )}
+                </VStack>
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  borderRadius="full"
+                  color="white"
+                  bgColor="#f99401"
+                  size="lg"
+                  width="100%"
+                  onClick={() => adicionarMembro}
+                >
+                  Salvar
+                </Button>
+              </ModalFooter>
+            </ModalContent>
           </Modal>
         )}
         {editMemberModalOpen && (
-          <Modal isOpen={editMemberModalOpen} className="modalCalculator">
-            <h2
-              className="close-button"
-              onClick={() => {
-                setEditMemberModalOpen(false);
-              }}
-            >
-              X
-            </h2>
-            <label>Editar Membro</label>
-            <input
-              type="text"
-              placeholder="Nome"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Select value={role} onChange={(e) => setRole(e.target.value)}>
-              <option value="admin">Administrador</option>
-              <option value="manager">Gerente</option>
-              <option value="operational">Operacional</option>
-              <option value="seller">Vendedor</option>
-            </Select>
-            <BlueButton text="Salvar" onClick={() => editarMembro} />
+          <Modal
+            isOpen={editMemberModalOpen}
+            onClose={() => setEditMemberModalOpen(false)}
+          >
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Editar Membro</ModalHeader>
+              <ModalCloseButton onClick={() => setEditMemberModalOpen(false)} />
+              <ModalBody>
+                <VStack spacing={4}>
+                  <Input
+                    placeholder="Nome"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    size="lg"
+                  />
+                  <Input
+                    placeholder="Email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    size="lg"
+                  />
+                  <Select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    placeholder="Selecione um papel"
+                    size="lg"
+                  >
+                    <option value="admin">Administrador</option>
+                    <option value="manager">Gerente</option>
+                    <option value="operational">Operacional</option>
+                    <option value="seller">Vendedor</option>
+                  </Select>
+                </VStack>
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  borderRadius="full"
+                  colorScheme="blue"
+                  size="lg"
+                  width="100%"
+                  onClick={() => editarMembro}
+                >
+                  Salvar
+                </Button>
+              </ModalFooter>
+            </ModalContent>
           </Modal>
         )}
       </main>

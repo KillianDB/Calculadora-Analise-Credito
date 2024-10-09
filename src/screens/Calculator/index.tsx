@@ -10,10 +10,9 @@ import { CalculatorIMGResult } from "../CalculatorIMGResult";
 import axios from "axios";
 import { CalculatorLOAS } from "../../components/Calculators/CalculatorLOAS";
 import { CalculatorExercito1 } from "../../components/Calculators/CalculatorExercito1";
-// import { CalculatorExercito2 } from "../../components/Calculators/CalculatorExercito2";
+import { CalculatorExercito2 } from "../../components/Calculators/CalculatorExercito2";
 import { CalculatorPrefeitura } from "../../components/Calculators/CalculatorPrefeituras";
 import Menu from "../../components/Menu";
-// import { SideMenu } from "../../components/SideMenu";
 
 function Calculator() {
 	const [menu, setMenu] = useState("");
@@ -138,16 +137,14 @@ function Calculator() {
 					setFinalResult={setFinalResult}
 				/>
 			);
-		}
-		//  else if (menu == "EXERCITO" && submenu == "Possibilidades Gerais") {
-		// 	return (
-		// 		<CalculatorExercito2
-		// 			setAllInputsFilled={setAllInputsFilled}
-		// 			setFinalResult={setFinalResult}
-		// 		/>
-		// 	);
-		// }
-		else if (menu == "PREFEITURA" && submenu == "DAYCOVAL") {
+		} else if (menu == "EXERCITO" && submenu == "Possibilidades Gerais") {
+			return (
+				<CalculatorExercito2
+					setAllInputsFilled={setAllInputsFilled}
+					setFinalResult={setFinalResult}
+				/>
+			);
+		} else if (menu == "PREFEITURA" && submenu == "DAYCOVAL") {
 			return (
 				<CalculatorPrefeitura
 					setAllInputsFilled={setAllInputsFilled}

@@ -17,7 +17,7 @@ export function CreateUser() {
 	const create = async () => {
 		const password = generatePassword();
 		try {
-			axios.post("https://calculadora.reallcredito.com.br/member", {
+			axios.post("https://calculadora.reallcredito.com.br/members", {
 				name,
 				// userType,
 				role,

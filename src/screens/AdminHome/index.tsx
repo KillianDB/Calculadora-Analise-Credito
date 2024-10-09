@@ -64,7 +64,7 @@ export function AdminHome() {
 		async function fetchTotalClientes() {
 			try {
 				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/client/total",
+					"https://calculadora.reallcredito.com.br/clients/total",
 					{
 						headers: {
 							Authorization: `Bearer ${localStorage.getItem(
@@ -86,7 +86,7 @@ export function AdminHome() {
 		async function fetchClientesContato() {
 			try {
 				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/client/emContato",
+					"https://calculadora.reallcredito.com.br/clients/emContato",
 					{
 						headers: {
 							Authorization: `Bearer ${localStorage.getItem(
@@ -108,7 +108,7 @@ export function AdminHome() {
 		async function graficoPizza() {
 			try {
 				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/client/totalPerType",
+					"https://calculadora.reallcredito.com.br/clients/perType",
 					{
 						headers: {
 							Authorization: `Bearer ${localStorage.getItem(
@@ -152,7 +152,7 @@ export function AdminHome() {
 		async function fetchClients() {
 			try {
 				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/client/lastActions",
+					"https://calculadora.reallcredito.com.br/clients/lastActions",
 					{
 						headers: {
 							Authorization: `Bearer ${localStorage.getItem(

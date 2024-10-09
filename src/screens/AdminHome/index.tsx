@@ -26,7 +26,7 @@ export function AdminHome() {
 	// const [barValues, setBarValues] = useState<BarValues | null>(null);
 	const [clients, setClients] = useState<
 		{
-			id: number;
+			id: string;
 			name: string;
 			type: string;
 			status: string;
@@ -35,7 +35,7 @@ export function AdminHome() {
 		}[]
 	>([
 		{
-			id: 1,
+			id: "1",
 			name: "João",
 			type: "pensionista",
 			status: "Entrou em contato",
@@ -43,7 +43,7 @@ export function AdminHome() {
 			hour: "14:00",
 		},
 		{
-			id: 2,
+			id: "2",
 			name: "Maria",
 			type: "geral",
 			status: "Entrou em contato",
@@ -51,7 +51,7 @@ export function AdminHome() {
 			hour: "13:00",
 		},
 		{
-			id: 3,
+			id: "3",
 			name: "José",
 			type: "aposentado",
 			status: "Fez simulação geral",

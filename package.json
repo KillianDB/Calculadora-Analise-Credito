@@ -17,6 +17,7 @@
 		"@vercel/og": "^0.6.2",
 		"antd": "^5.21.2",
 		"axios": "^1.7.4",
+		"chakra-react-select": "^4.10.0",
 		"chart.js": "^4.4.4",
 		"date-fns": "^4.0.0",
 		"firebase": "^10.12.1",

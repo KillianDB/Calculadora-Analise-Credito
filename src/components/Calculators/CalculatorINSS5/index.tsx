@@ -416,27 +416,28 @@ export function CalculatorINSS5({
             style: "currency",
             currency: "BRL",
           })}`}</Text>
-          <Text
-            fontSize={"12px"}
-          >{`PARCELA: R$ ${margemEmprestimo.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-          })}`}</Text>
+          <Text fontSize={"12px"}>{`PARCELA: ${margemEmprestimo.toLocaleString(
+            "pt-BR",
+            {
+              style: "currency",
+              currency: "BRL",
+            }
+          )}`}</Text>
           <Text fontSize={"12px"}>{`84x`}</Text>
-          <Text fontSize={"12px"}>{`CARTÃO INSS: R$ ${(
+          <Text fontSize={"12px"}>{`CARTÃO INSS: ${(
             margemCartaoInss * 22.67
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}`}</Text>
-          <Text fontSize={"12px"}>{`PARCELA: R$ ${(
+          <Text fontSize={"12px"}>{`PARCELA:${(
             margemCartaoInss * 0.7
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}`}</Text>
           <Text fontSize={"12px"}>{`84x`}</Text>
-          <Text fontSize={"12px"}>{`VALOR COMPRAS: R$ ${(
+          <Text fontSize={"12px"}>{`VALOR COMPRAS: ${(
             margemCartaoInss *
             22.67 *
             0.32
@@ -444,33 +445,33 @@ export function CalculatorINSS5({
             style: "currency",
             currency: "BRL",
           })}`}</Text>
-          <Text fontSize={"12px"}>{`PARCELA: R$ ${(
+          <Text fontSize={"12px"}>{`PARCELA: ${(
             margemCartaoInss * 0.3
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}`}</Text>
           <Text fontSize={"12px"}>{`84x`}</Text>
-          <Text fontSize={"12px"}>{`CARTÃO BENEFÍCIO: R$ ${(
+          <Text fontSize={"12px"}>{`CARTÃO BENEFÍCIO: ${(
             margemCartaoBeneficio * 22.67
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}`}</Text>
-          <Text fontSize={"12px"}>{`PARCELA: R$ ${(
+          <Text fontSize={"12px"}>{`PARCELA: ${(
             margemCartaoBeneficio * 0.7
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}`}</Text>
           <Text fontSize={"12px"}>{`84x`}</Text>
-          <Text fontSize={"12px"}>{`VALOR COMPRAS: R$ ${(
+          <Text fontSize={"12px"}>{`VALOR COMPRAS: ${(
             margemCartaoBeneficio * 0.32
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}`}</Text>
-          <Text fontSize={"12px"}>{`PARCELA: R$ ${(
+          <Text fontSize={"12px"}>{`PARCELA: ${(
             margemCartaoBeneficio * 0.3
           ).toLocaleString("pt-BR", {
             style: "currency",

@@ -7,7 +7,7 @@ import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS5.css";
 import { formatNumber } from "../../../utils/formatNumbers";
-import { MoneyInput } from "../../MoneyInput";
+import { NumericFormat } from "react-number-format";
 import {
   Flex,
   FormControl,
@@ -351,9 +351,17 @@ export function CalculatorINSS5({
             <FormLabel>VALOR MARGEM EMPRÉSTIMO: </FormLabel>
             <InputGroup>
               <InputLeftAddon>R$</InputLeftAddon>
-              <Input
+              <NumericFormat
                 value={margemEmprestimo}
-                onChange={(e) => setMargememprestimo(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setMargememprestimo(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </InputGroup>
           </FormControl>
@@ -361,9 +369,17 @@ export function CalculatorINSS5({
             <FormLabel>VALOR MARGEM CARTÃO INSS: </FormLabel>
             <InputGroup>
               <InputLeftAddon>R$</InputLeftAddon>
-              <Input
+              <NumericFormat
                 value={margemCartaoInss}
-                onChange={(e) => setMargemcartaoInss(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setMargemcartaoInss(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </InputGroup>
           </FormControl>
@@ -371,11 +387,17 @@ export function CalculatorINSS5({
             <FormLabel>VALOR MARGEM CARTÃO BENEFÍCIO: </FormLabel>
             <InputGroup>
               <InputLeftAddon>R$</InputLeftAddon>
-              <Input
+              <NumericFormat
                 value={margemCartaoBeneficio}
-                onChange={(e) =>
-                  setMargemcartaoBeneficio(Number(e.target.value))
-                }
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setMargemcartaoBeneficio(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </InputGroup>
           </FormControl>
@@ -473,18 +495,36 @@ export function CalculatorINSS5({
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"} mr={2}>
                 PARCELA
               </Text>
-              <Input
+              <NumericFormat
                 value={parcela1}
-                onChange={(e) => setParcela1(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setParcela1(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                prefix="R$ "
+                decimalScale={2}
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </Flex>
             <Flex>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 SALDO DEVEDOR
               </Text>
-              <Input
+              <NumericFormat
                 value={saldoDevedor1}
-                onChange={(e) => setSaldoDevedor1(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setSaldoDevedor1(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                fixedDecimalScale={true}
+                prefix="R$ "
+                customInput={Input}
               />
             </Flex>
             <Flex>
@@ -503,18 +543,36 @@ export function CalculatorINSS5({
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"} mr={2}>
                 PARCELA
               </Text>
-              <Input
+              <NumericFormat
                 value={parcela2}
-                onChange={(e) => setParcela2(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setParcela2(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                fixedDecimalScale={true}
+                prefix="R$ "
+                customInput={Input}
               />
             </Flex>
             <Flex>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 SALDO DEVEDOR
               </Text>
-              <Input
+              <NumericFormat
                 value={saldoDevedor2}
-                onChange={(e) => setSaldoDevedor2(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setSaldoDevedor2(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                prefix="R$ "
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </Flex>
             <Flex>
@@ -533,18 +591,36 @@ export function CalculatorINSS5({
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"} mr={2}>
                 PARCELA
               </Text>
-              <Input
+              <NumericFormat
                 value={parcela3}
-                onChange={(e) => setParcela3(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setParcela3(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                prefix="R$ "
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </Flex>
             <Flex>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 SALDO DEVEDOR
               </Text>
-              <Input
+              <NumericFormat
                 value={saldoDevedor3}
-                onChange={(e) => setSaldoDevedor3(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setSaldoDevedor3(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                prefix="R$ "
+                decimalScale={2}
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </Flex>
             <Flex>
@@ -563,18 +639,36 @@ export function CalculatorINSS5({
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"} mr={2}>
                 PARCELA
               </Text>
-              <Input
+              <NumericFormat
                 value={parcela4}
-                onChange={(e) => setParcela4(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setParcela4(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                prefix="R$ "
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </Flex>
             <Flex>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 SALDO DEVEDOR
               </Text>
-              <Input
+              <NumericFormat
                 value={saldoDevedor4}
-                onChange={(e) => setSaldoDevedor4(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setSaldoDevedor4(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                prefix="R$ "
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </Flex>
             <Flex>
@@ -593,18 +687,36 @@ export function CalculatorINSS5({
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"} mr={2}>
                 PARCELA
               </Text>
-              <Input
+              <NumericFormat
                 value={parcela5}
-                onChange={(e) => setParcela5(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setParcela5(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                prefix="R$ "
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </Flex>
             <Flex>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 SALDO DEVEDOR
               </Text>
-              <Input
+              <NumericFormat
                 value={saldoDevedor5}
-                onChange={(e) => setSaldoDevedor5(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setSaldoDevedor5(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                prefix="R$ "
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </Flex>
             <Flex>
@@ -623,18 +735,36 @@ export function CalculatorINSS5({
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"} mr={2}>
                 PARCELA
               </Text>
-              <Input
+              <NumericFormat
                 value={parcela6}
-                onChange={(e) => setParcela6(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setParcela6(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                prefix="R$ "
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </Flex>
             <Flex>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 SALDO DEVEDOR
               </Text>
-              <Input
+              <NumericFormat
                 value={saldoDevedor6}
-                onChange={(e) => setSaldoDevedor6(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setSaldoDevedor6(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                prefix="R$ "
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </Flex>
             <Flex>
@@ -653,18 +783,36 @@ export function CalculatorINSS5({
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"} mr={2}>
                 PARCELA
               </Text>
-              <Input
+              <NumericFormat
                 value={parcela7}
-                onChange={(e) => setParcela7(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setParcela7(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                prefix="R$ "
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </Flex>
             <Flex>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 SALDO DEVEDOR
               </Text>
-              <Input
+              <NumericFormat
                 value={saldoDevedor7}
-                onChange={(e) => setSaldoDevedor7(Number(e.target.value))}
+                onValueChange={(values) => {
+                  const { floatValue } = values;
+                  setSaldoDevedor7(Number(floatValue));
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                decimalScale={2}
+                prefix="R$ "
+                fixedDecimalScale={true}
+                customInput={Input}
               />
             </Flex>
             <Flex>

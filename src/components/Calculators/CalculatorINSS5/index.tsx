@@ -111,11 +111,6 @@ export function CalculatorINSS5({
   const [totalSaldoDevedor, setTotalSaldoDevedor] = useState(0);
 
   useEffect(() => {
-    const allFilled = values.every((item) => item.value !== 0);
-    setAllInputsFilled(allFilled);
-  }, [values, setAllInputsFilled]);
-
-  useEffect(() => {
     console.log("saldos: ", saldos);
     if (saldos[indexCalc].value !== 0 && parcelas[indexCalc].value !== 0) {
       console.log("parcelas: ", parcelas);
@@ -334,6 +329,17 @@ export function CalculatorINSS5({
     const possibilidade = parcela / 0.0223 - eval(`saldoDevedor${index + 1}`);
     return possibilidade >= 0 ? acc + possibilidade : acc;
   }, 0);
+
+  useEffect(() => {
+    const array = [margemEmprestimo, margemCartaoInss, margemCartaoBeneficio];
+    const allFilled = array.every((item) => item !== 0);
+    setAllInputsFilled(allFilled);
+  }, [
+    margemEmprestimo,
+    margemCartaoInss,
+    margemCartaoBeneficio,
+    setAllInputsFilled,
+  ]);
 
   return (
     <div className="calculatorComponentDivPossibilidades">

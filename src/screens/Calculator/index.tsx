@@ -266,6 +266,7 @@ function Calculator() {
           <select
             onChange={(e) => handleSubmenuChange(menu, e.target.value)}
             defaultValue="Submenu"
+            value={submenu}
           >
             {filterSubmenuOptions(menu).map((option) => (
               <option key={option} value={option}>

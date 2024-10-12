@@ -104,11 +104,6 @@ export function CalculatorExercito2({
   }, []);
 
   useEffect(() => {
-    const allFilled = values.slice(0, 3).every((item) => item.value !== 0);
-    setAllInputsFilled(allFilled);
-  }, [values, setAllInputsFilled]);
-
-  useEffect(() => {
     console.log(prazos);
     if (prazos[0].value !== 0 && taxas[0].value !== 0) {
       if (parcelas[0].value !== 0) {
@@ -335,6 +330,11 @@ export function CalculatorExercito2({
     return liquidoCliente > 0 ? acc + parcela : acc;
   }, 0);
 
+  useEffect(() => {
+    const allFilled = [valorMargememprestimo].every((item) => item !== 0);
+    setAllInputsFilled(allFilled);
+  }, [valorMargememprestimo, setAllInputsFilled]);
+
   return (
     <div className="calculatorComponentDivPossibilidadesExercito">
       <section className="mainContainerPossibilidadesExercito">
@@ -400,11 +400,6 @@ export function CalculatorExercito2({
                   const { floatValue } = values;
                   setPrazoRestante1(Number(floatValue));
                 }}
-                thousandSeparator="."
-                decimalSeparator=","
-                decimalScale={2}
-                fixedDecimalScale={true}
-                // prefix="R$ "
                 customInput={Input}
               />
             </Flex>
@@ -486,10 +481,6 @@ export function CalculatorExercito2({
                   const { floatValue } = values;
                   setPrazoRestante2(Number(floatValue));
                 }}
-                thousandSeparator="."
-                decimalSeparator=","
-                decimalScale={2}
-                fixedDecimalScale={true}
                 customInput={Input}
               />
             </Flex>
@@ -574,10 +565,6 @@ export function CalculatorExercito2({
                   const { floatValue } = values;
                   setPrazoRestante3(Number(floatValue));
                 }}
-                thousandSeparator="."
-                decimalSeparator=","
-                decimalScale={2}
-                fixedDecimalScale={true}
                 customInput={Input}
               />
             </Flex>
@@ -661,10 +648,6 @@ export function CalculatorExercito2({
                   const { floatValue } = values;
                   setPrazoRestante4(Number(floatValue));
                 }}
-                thousandSeparator="."
-                decimalSeparator=","
-                decimalScale={2}
-                fixedDecimalScale={true}
                 customInput={Input}
               />
             </Flex>
@@ -749,10 +732,6 @@ export function CalculatorExercito2({
                   const { floatValue } = values;
                   setPrazoRestante5(Number(floatValue));
                 }}
-                thousandSeparator="."
-                decimalSeparator=","
-                decimalScale={2}
-                fixedDecimalScale={true}
                 customInput={Input}
               />
             </Flex>
@@ -837,10 +816,6 @@ export function CalculatorExercito2({
                   const { floatValue } = values;
                   setPrazoRestante6(Number(floatValue));
                 }}
-                thousandSeparator="."
-                decimalSeparator=","
-                decimalScale={2}
-                fixedDecimalScale={true}
                 customInput={Input}
               />
             </Flex>
@@ -925,10 +900,6 @@ export function CalculatorExercito2({
                   const { floatValue } = values;
                   setPrazoRestante7(Number(floatValue));
                 }}
-                thousandSeparator="."
-                decimalSeparator=","
-                decimalScale={2}
-                fixedDecimalScale={true}
                 customInput={Input}
               />
             </Flex>

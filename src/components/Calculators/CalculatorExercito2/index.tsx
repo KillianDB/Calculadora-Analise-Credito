@@ -1031,9 +1031,23 @@ export function CalculatorExercito2({
           })}`}</Text>
         </div>
         <div className="totaisContainer">
-          {total.map((t) => (
+          <Text fontSize={"14px"} fontWeight={"bold"} mx={4}>{`TOTAL: ${(
+            trocoLiquidoPortabilidade +
+            valorMargememprestimo / 0.02385
+          ).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}`}</Text>
+          <Text fontSize={"14px"} fontWeight={"bold"} mx={4}>{`PARCELA: ${(
+            valorMargememprestimo + somaParcelasPositivas
+          ).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}`}</Text>
+          <Text fontSize={"14px"} fontWeight={"bold"} mx={4}>{`84x`}</Text>
+          {/* {total.map((t) => (
             <CalculatorTotal total={t} />
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

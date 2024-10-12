@@ -325,10 +325,11 @@ export function CalculatorExercito2({
         </h4>
         <section className="mainSecondContainerPossibilidadesExercito">
           <SimpleGrid
+            templateColumns="repeat(5, 1fr)"
             columns={5}
-            spacingX={8}
+            spacingX={10}
             spacingY={2}
-            w={"60vw"}
+            w={"80vw"}
             mt={2}
             mx={"auto"}
           >

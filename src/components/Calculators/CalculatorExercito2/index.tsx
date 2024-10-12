@@ -317,11 +317,6 @@ export function CalculatorExercito2({
               customInput={Input}
             />
           </FormControl>
-          {/* <CalculatorInput
-            key={values[0].label}
-            label={values[0].label}
-            onChange={(e) => handleInputValue(values[0].label, +e.target.value)}
-          /> */}
         </div>
       </section>
       <div className="secondContainerPossibilidadesExercito">
@@ -386,8 +381,8 @@ export function CalculatorExercito2({
                 thousandSeparator="."
                 decimalSeparator=","
                 decimalScale={2}
+                suffix=" %"
                 fixedDecimalScale={true}
-                prefix="R$ "
                 customInput={Input}
               />
             </Flex>
@@ -473,7 +468,7 @@ export function CalculatorExercito2({
                 decimalSeparator=","
                 decimalScale={2}
                 fixedDecimalScale={true}
-                prefix="R$ "
+                suffix=" %"
                 customInput={Input}
               />
             </Flex>
@@ -561,7 +556,7 @@ export function CalculatorExercito2({
                 decimalSeparator=","
                 decimalScale={2}
                 fixedDecimalScale={true}
-                prefix="R$ "
+                suffix=" %"
                 customInput={Input}
               />
             </Flex>
@@ -648,7 +643,7 @@ export function CalculatorExercito2({
                 decimalSeparator=","
                 decimalScale={2}
                 fixedDecimalScale={true}
-                prefix="R$ "
+                suffix=" %"
                 customInput={Input}
               />
             </Flex>
@@ -736,7 +731,7 @@ export function CalculatorExercito2({
                 decimalSeparator=","
                 decimalScale={2}
                 fixedDecimalScale={true}
-                prefix="R$ "
+                suffix=" %"
                 customInput={Input}
               />
             </Flex>
@@ -824,7 +819,7 @@ export function CalculatorExercito2({
                 decimalSeparator=","
                 decimalScale={2}
                 fixedDecimalScale={true}
-                prefix="R$ "
+                suffix=" %"
                 customInput={Input}
               />
             </Flex>
@@ -912,7 +907,7 @@ export function CalculatorExercito2({
                 decimalSeparator=","
                 decimalScale={2}
                 fixedDecimalScale={true}
-                prefix="R$ "
+                suffix=" %"
                 customInput={Input}
               />
             </Flex>

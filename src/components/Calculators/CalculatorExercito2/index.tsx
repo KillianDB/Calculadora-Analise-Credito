@@ -297,6 +297,44 @@ export function CalculatorExercito2({
   const [taxaJuros6, setTaxaJuros6] = useState(0);
   const [taxaJuros7, setTaxaJuros7] = useState(0);
 
+  const trocoLiquidoPortabilidade = [
+    parcela1,
+    parcela2,
+    parcela3,
+    parcela4,
+    parcela5,
+    parcela6,
+    parcela7,
+  ].reduce((acc, parcela, index) => {
+    const prazoRestante = eval(`prazoRestante${index + 1}`);
+    const taxaJuros = eval(`taxaJuros${index + 1}`);
+
+    const liquidoCliente =
+      parcela / 0.0222 -
+      (parcela / taxaJuros - parcela * (84 - prazoRestante) * 0.45);
+
+    return liquidoCliente > 0 ? acc + liquidoCliente : acc;
+  }, 0);
+
+  const somaParcelasPositivas = [
+    parcela1,
+    parcela2,
+    parcela3,
+    parcela4,
+    parcela5,
+    parcela6,
+    parcela7,
+  ].reduce((acc, parcela, index) => {
+    const prazoRestante = eval(`prazoRestante${index + 1}`);
+    const taxaJuros = eval(`taxaJuros${index + 1}`);
+
+    const liquidoCliente =
+      parcela / 0.0222 -
+      (parcela / taxaJuros - parcela * (84 - prazoRestante) * 0.45);
+
+    return liquidoCliente > 0 ? acc + parcela : acc;
+  }, 0);
+
   return (
     <div className="calculatorComponentDivPossibilidadesExercito">
       <section className="mainContainerPossibilidadesExercito">
@@ -313,6 +351,7 @@ export function CalculatorExercito2({
               thousandSeparator="."
               decimalSeparator=","
               decimalScale={2}
+              prefix="R$ "
               fixedDecimalScale={true}
               customInput={Input}
             />
@@ -953,9 +992,43 @@ export function CalculatorExercito2({
           e a possibilidade de conseguir seguir devido as regras de cada banco.
         </h3>
         <div className="resultsContainerPossibilidadesExercito">
-          {results.map((result) => (
-            <CalculatorResult result={result.label + result.value} />
-          ))}
+          <Text
+            fontSize={"12px"}
+            fontWeight={"medium"}
+            mx={4}
+          >{`VALOR EMPRÉSTIMO: ${(
+            valorMargememprestimo / 0.02385
+          ).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}`}</Text>
+          <Text
+            fontSize={"12px"}
+            fontWeight={"medium"}
+            mx={4}
+          >{`PARCELA: ${valorMargememprestimo.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}`}</Text>
+          <Text
+            fontSize={"12px"}
+            fontWeight={"medium"}
+            mx={4}
+          >{`TROCO LIQUÍDO DA PORTABILIDADE: ${trocoLiquidoPortabilidade.toLocaleString(
+            "pt-BR",
+            {
+              style: "currency",
+              currency: "BRL",
+            }
+          )}`}</Text>
+          <Text
+            fontSize={"12px"}
+            fontWeight={"medium"}
+            mx={4}
+          >{`PARCELA: ${somaParcelasPositivas.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}`}</Text>
         </div>
         <div className="totaisContainer">
           {total.map((t) => (

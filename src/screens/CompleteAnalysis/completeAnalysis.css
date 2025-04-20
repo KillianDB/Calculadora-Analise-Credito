@@ -6,7 +6,7 @@
 .home-main-div {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	align-items: center;
 	width: 100%;
 	height: auto;

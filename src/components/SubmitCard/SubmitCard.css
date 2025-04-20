@@ -1,45 +1,49 @@
 .submit-div {
 	background: #ffffff;
-	box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.25);
-	border-radius: 20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 500px;
-	width: 90%;
-	max-width: 740px;
-	padding: 20px;
-	box-sizing: border-box;
-	margin: 0;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: max-content;
+    width: fit-content;
+    max-width: 740px;
+    padding: 2rem;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .submit-div select {
-	width: 80%;
-	height: 40px;
-	border-radius: 10px;
-	border: 1px solid #d5d5d5;
-	background-color: #d5d5d5;
-	font-weight: 200;
-	padding: 10px;
-	/* margin-top: 10px; */
+	width: 100%;
+    /* height: 40px; */
+    border-radius: 10px;
+    border: 1px solid #d5d5d5;
+    /* background-color: #d5d5d5; */
+    font-weight: 200;
+    /* padding: 10px; */
+    /* margin-top: 10px; */
+    margin: 0;
 }
 
 .submit-div input {
-	width: 80%;
-	height: 40px;
-	border-radius: 10px;
-	/* border: 1px solid #265064; */
-	padding: 10px;
-	/* margin-top: 10px; */
-	/* background-color: #ffffff; */
-	height: 20px;
+	width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #d5d5d5;
+    padding: 10px;
+    /* margin-top: 10px; */
+    background-color: #ffffff;
+    /* height: 40px; */
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .submit-grid-layout {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: 16px; /* Ajuste o espaçamento conforme necessário */
+	column-gap: 1.6rem;
+    padding: 1rem;
 }
 
 .submit-input-div {
@@ -47,5 +51,4 @@
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
-	padding-left: 44px;
 }

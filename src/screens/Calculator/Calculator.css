@@ -108,6 +108,7 @@
 	flex-direction: column;
 	flex-wrap: wrap;
 	align-items: center;
+	justify-content: space-between;
 	align-self: center;
 	height: 37vh;
 	width: 100%;

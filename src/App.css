@@ -64,12 +64,16 @@ form {
 }
 
 select {
-  padding-top: 9px;
+  /* padding-top: 9px;
   padding-bottom: 9px;
-  border-radius: 30px;
+   */
+   padding: 8px;
+  border-radius: 16px;
+  border-color: #9a9a9a69;
+  border-width: 1px;
   font-weight: bold;
   font-family: "Inter";
-  font-size: 14px;
+  font-size: 1rem;
   color: #2e2e2e;
   margin-right: 2vw;
   height: fit-content;

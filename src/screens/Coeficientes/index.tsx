@@ -44,7 +44,7 @@ export function Coeficientes() {
     valor: string;
   }) => {
     const response = await fetch(
-      `https://api.creditorealsf.com/coefficients/${coeficiente.id}`,
+      `api.creditorealsf.com/coefficients/${coeficiente.id}`,
       {
         method: "PUT",
         headers: {
@@ -65,7 +65,7 @@ export function Coeficientes() {
     const fetchCoeficientes = async () => {
       try {
         const response = await fetch(
-          "https://api.creditorealsf.com/coefficients/all"
+          "api.creditorealsf.com/coefficients/all"
         );
         if (response.status !== 200) {
           console.error("Error fetching equipes:", response);

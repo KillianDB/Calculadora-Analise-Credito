@@ -216,7 +216,7 @@ function Calculator() {
       console.log("token", token);
       try {
         const response = await axios.post(
-          "https://api.creditorealsf.com/calculator/image",
+          "api.creditorealsf.com/calculator/image",
           {
             menu,
             submenu,

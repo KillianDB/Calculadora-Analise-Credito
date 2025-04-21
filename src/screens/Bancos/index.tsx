@@ -69,7 +69,7 @@ export function Bancos() {
 
   // const adicionarBanco = async () => {
   // 	const response = await axios.post(
-  // 		"https://api.creditorealsf.com/banks",
+  // 		"api.creditorealsf.com/banks",
   // 		{
   // 			name,
   //             key,
@@ -90,7 +90,7 @@ export function Bancos() {
 
   const bloquearBanco = async (banco: { id: string }) => {
     const response = await fetch(
-      `https://api.creditorealsf.com/banks/block/${banco.id}`,
+      `api.creditorealsf.com/banks/block/${banco.id}`,
       {
         method: "PUT",
         headers: {

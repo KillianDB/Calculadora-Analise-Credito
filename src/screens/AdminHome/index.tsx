@@ -64,7 +64,7 @@ export function AdminHome() {
     async function fetchTotalClientes() {
       try {
         const response = await fetch(
-          "https://api.creditorealsf.com/clients/total",
+          "api.creditorealsf.com/clients/total",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -84,7 +84,7 @@ export function AdminHome() {
     async function fetchClientesContato() {
       try {
         const response = await fetch(
-          "https://api.creditorealsf.com/clients/emContato",
+          "api.creditorealsf.com/clients/emContato",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -104,7 +104,7 @@ export function AdminHome() {
     async function graficoPizza() {
       try {
         const response = await fetch(
-          "https://api.creditorealsf.com/clients/perType",
+          "api.creditorealsf.com/clients/perType",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -124,7 +124,7 @@ export function AdminHome() {
     // async function graficoBar() {
     // 	try {
     // 		const response = await fetch(
-    // 			"https://api.creditorealsf.com/analysis/totalPerType",
+    // 			"api.creditorealsf.com/analysis/totalPerType",
     // 			{
     // 				headers: {
     // 					Authorization: `Bearer ${localStorage.getItem(
@@ -146,7 +146,7 @@ export function AdminHome() {
     async function fetchClients() {
       try {
         const response = await fetch(
-          "https://api.creditorealsf.com/clients/lastActions",
+          "api.creditorealsf.com/clients/lastActions",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -48,7 +48,7 @@ export function CompleteAnalysis() {
       console.log("user", user);
       console.log("inputs", inputs);
       const response = await axios.post(
-        "https://api.creditorealsf.com/banks",
+        "api.creditorealsf.com/banks",
         {
           body: {
             birthday: inputs.birthday,

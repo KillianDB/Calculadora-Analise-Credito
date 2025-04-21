@@ -41,7 +41,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     setUser(newUser);
     console.log("User:", user);
     try {
-      const response = await axios.get("https://api.creditorealsf.com/auth", {
+      const response = await axios.get("api.creditorealsf.com/auth", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -28,7 +28,7 @@ export default function CodeConfirmation() {
     const { user } = userContext;
 
     axios
-      .get("https://api.creditorealsf.com/auth", {
+      .get("api.creditorealsf.com/auth", {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -49,7 +49,7 @@ export default function CodeConfirmation() {
 
   async function handleCheckCode() {
     const response = await fetch(
-      "https://api.creditorealsf.com/auth/validate/code",
+      "api.creditorealsf.com/auth/validate/code",
       {
         method: "POST",
         headers: {

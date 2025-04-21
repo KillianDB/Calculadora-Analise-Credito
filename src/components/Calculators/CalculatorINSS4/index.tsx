@@ -5,6 +5,8 @@ import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS4.css";
 import { MoneyInput } from "../../MoneyInput";
+import { Flex, FormControl, FormLabel, Input, InputGroup } from "@chakra-ui/react";
+import { NumericFormat } from "react-number-format";
 
 interface CalculatorINSS4Props {
 	isChecked: boolean;
@@ -85,30 +87,37 @@ export function CalculatorINSS4({
 	}, [values, setAllInputsFilled]);
 
 	return (
-		<div
+		<Flex
 			className='calculatorComponentDiv'
 			id='calculatorComponentDivINSS4'
 			style={isChecked ? { height: "70vh" } : { height: "49vh" }}
 		>
 			<CalculatorTitle menu='INSS' submenu='Cálculo Salário Cliente' />
-			<div className='inputsContainer' id='inputsContainerINSS4'>
-				<MoneyInput
-					key={label}
-					label={label}
-					value={
-						typeof values[0].value === "string"
-							? parseFloat(values[0].value)
-							: values[0].value
-					}
-					addOnBefore='R$'
-					onChange={(e) =>
-						handleInputValue(values[0].label, +e.target.value)
-					}
-				/>
-			</div>
+			<Flex className='inputsContainer' id='inputsContainerINSS4'>
+				<FormControl>
+										<FormLabel>{values[0].label}</FormLabel>
+										<InputGroup>
+											<NumericFormat
+												value={values[0].value}
+												onValueChange={(values) => {
+													const { floatValue } = values;
+													setValues(
+														[{ label: "SALÁRIO: ", value: Number(floatValue) }]
+													);
+												}}
+												thousandSeparator='.'
+												decimalSeparator=','
+												prefix="R$ "
+												decimalScale={2}
+												fixedDecimalScale={true}
+												customInput={Input}
+											/>
+										</InputGroup>
+									</FormControl>
+			</Flex>
 			{!isChecked ? (
-				<div className='answerContainer' style={{ height: "31vh" }}>
-					<div className='resultsContainer'>
+				<Flex className='answerContainer' style={{ height: "31vh" }}>
+					<Flex className='resultsContainer'>
 						<CalculatorResult result={results[0]} />
 						<CalculatorResult result={results[1]} />
 						<CalculatorResult result={results[2]} />
@@ -117,16 +126,16 @@ export function CalculatorINSS4({
 						<CalculatorResult result={results[5]} />
 						<CalculatorResult result={results[6]} />
 						<CalculatorResult result={results[7]} />
-					</div>
-					<div className='totaisContainer'>
+					</Flex>
+					<Flex className='totaisContainer'>
 						{totais.slice(0, 3).map((total) => (
 							<CalculatorTotal total={total} />
 						))}
-					</div>
-				</div>
+					</Flex>
+				</Flex>
 			) : (
-				<div className='answerContainer' id='answerContainerINSS4'>
-					<div className='resultsContainer'>
+				<Flex className='answerContainer' id='answerContainerINSS4'>
+					<Flex className='resultsContainer'>
 						<CalculatorResult result={results[0]} />
 						<CalculatorResult result={results[1]} />
 						<CalculatorResult result={results[2]} />
@@ -135,13 +144,13 @@ export function CalculatorINSS4({
 						<CalculatorResult result={results[5]} />
 						<CalculatorResult result={results[6]} />
 						<CalculatorResult result={results[7]} />
-					</div>
-					<div className='totaisContainer'>
+					</Flex>
+					<Flex className='totaisContainer'>
 						{totais.slice(0, 3).map((total) => (
 							<CalculatorTotal total={total} />
 						))}
-					</div>
-					<div className='resultsContainer'>
+					</Flex>
+					<Flex className='resultsContainer'>
 						<CalculatorResult result={results[8]} />
 						<CalculatorResult result={results[9]} />
 						<CalculatorResult result={results[10]} />
@@ -151,14 +160,14 @@ export function CalculatorINSS4({
 							APÓS 03 PARCELAS PAGAS NA REDUÇÃO DE JUROS SEM
 							ALTERAR A PARCELA.
 						</p>
-					</div>
-					<div className='totaisContainer'>
+					</Flex>
+					<Flex className='totaisContainer'>
 						{totais.slice(3, 7).map((total) => (
 							<CalculatorTotal total={total} />
 						))}
-					</div>
-				</div>
+					</Flex>
+				</Flex>
 			)}
-		</div>
+		</Flex>
 	);
 }

@@ -5,6 +5,8 @@ import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import { formatNumber } from "../../../utils/formatNumbers";
 import { MoneyInput } from "../../MoneyInput";
+import { Flex, FormControl, FormLabel, Input, InputGroup } from "@chakra-ui/react";
+import { NumericFormat } from "react-number-format";
 
 export function CalculatorINSS1({
 	setAllInputsFilled,
@@ -36,9 +38,9 @@ export function CalculatorINSS1({
 		"VALOR MARGEM CARTÃO BENEFÍCIO: ",
 	];
 	const [values, setValues] = useState([
-		{ label: "VALOR MARGEM EMPRÉSTIMO: ", value: 0 },
-		{ label: "VALOR MARGEM CARTÃO INSS: ", value: 0 },
-		{ label: "VALOR MARGEM CARTÃO BENEFÍCIO: ", value: 0 },
+		{ label: "VALOR MARGEM EMPRÉSTIMO: ", value: 0, index: 0},
+		{ label: "VALOR MARGEM CARTÃO INSS: ", value: 0, index: 1 },
+		{ label: "VALOR MARGEM CARTÃO BENEFÍCIO: ", value: 0, index: 2 },
 	]);
 
 	useEffect(() => {
@@ -86,44 +88,50 @@ export function CalculatorINSS1({
 	}
 
 	return (
-		<div className='calculatorComponentDiv'>
+		<Flex className='calculatorComponentDiv'>
 			<CalculatorTitle
 				menu='INSS'
 				submenu='Cálculo por Margem Disponível'
 			/>
-			<div className='inputsContainer'>
-				{labels.map((label: string) => (
-					<MoneyInput
-						key={label}
-						label={label}
-						value={
-							values.find((item) => item.label === label)
-								?.value || 0
-						}
-						addOnBefore='R$'
-						onChange={(e) =>
-							handleInputValue(
-								label,
-								typeof e.target.value === "string"
-									? parseFloat(e.target.value)
-									: e.target.value
-							)
-						}
-					/>
+			<Flex className='inputsContainer'>
+				{values.map((value) => (
+					<FormControl>
+					<FormLabel>VALOR MARGEM CARTÃO BENEFÍCIO: </FormLabel>
+					<InputGroup>
+						<NumericFormat
+							value={value.value}
+							onValueChange={(number) => {
+								const { floatValue } = number;
+								handleInputValue(value.label, floatValue??0);
+								// setValues(
+								// 	values.map((item) =>
+								// 		item.index === value.index ? { ...item, value: Number(floatValue) } : item
+								// 	)
+								// );
+							}}
+							thousandSeparator='.'
+							decimalSeparator=','
+							prefix="R$ "
+							decimalScale={2}
+							fixedDecimalScale={true}
+							customInput={Input}
+						/>
+					</InputGroup>
+				</FormControl>
 				))}
-			</div>
-			<section className='answerContainer'>
-				<div className='resultsContainer'>
+			</Flex>
+			<Flex className='answerContainer'>
+				<Flex className='resultsContainer'>
 					{results.map((result: string, index) => (
 						<CalculatorResult key={index} result={result} />
 					))}
-				</div>
-				<div className='totaisContainer'>
+				</Flex>
+				<Flex className='totaisContainer'>
 					{totais.map((total) => (
 						<CalculatorTotal total={total} />
 					))}
-				</div>
-			</section>
-		</div>
+				</Flex>
+			</Flex>
+		</Flex>
 	);
 }

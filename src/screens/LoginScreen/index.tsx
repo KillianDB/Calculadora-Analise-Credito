@@ -12,6 +12,7 @@ import {
   FormControl,
   Image,
 } from "@chakra-ui/react";
+import { Flex } from "antd";
 
 export default function LoginScreen() {
   const navigate = useNavigate();
@@ -24,13 +25,10 @@ export default function LoginScreen() {
     event.preventDefault();
     try {
       console.log("email", email);
-      const response = await axios.post(
-        "https://calculadora.reallcredito.com.br/auth",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("https://api.creditorealsf.com/auth", {
+        email,
+        password,
+      });
 
       if (response.status === 200) {
         navigate("/calculadora");
@@ -58,7 +56,7 @@ export default function LoginScreen() {
   return (
     <>
       <BackgroundFullGradient />
-      <main className="mainLogin">
+      <Flex className="mainLogin">
         <Image
           width={"60vh"}
           marginBottom={"21vh"}
@@ -100,7 +98,7 @@ export default function LoginScreen() {
           </VStack>
           <Link to="/redefinir-senha">Esqueceu sua senha?</Link>
         </form>
-      </main>
+      </Flex>
     </>
   );
 }

@@ -3,7 +3,8 @@ import { calculate } from "../../../utils/calculate";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS2.css";
-import { MoneyInput } from "../../MoneyInput";
+import { Flex, FormControl, FormLabel, Input, InputGroup } from "@chakra-ui/react";
+import { NumericFormat } from "react-number-format";
 
 export function CalculatorINSS2({
 	setAllInputsFilled,
@@ -84,24 +85,33 @@ export function CalculatorINSS2({
 	const chunkedTotais = chunkArray(totais, 3);
 
 	return (
-		<div className='calculatorComponentDiv' id='calculatorComponentDivTwo'>
+		<Flex className='calculatorComponentDiv' id='calculatorComponentDivTwo'>
 			<CalculatorTitle menu='INSS' submenu='Cálculo Valor Solicitado' />
-			<div className='inputsContainer'>
-				<MoneyInput
-					key={label}
-					label={label}
-					value={
-						typeof values[0].value === "string"
-							? parseFloat(values[0].value)
-							: values[0].value
-					}
-					addOnBefore='R$'
-					onChange={(e) => handleInputValue(label, +e.target.value)}
-				/>
-			</div>
-			<section className='answerContainer' id='answerContainerTwo'>
+			<Flex className='inputsContainer'>
+			<FormControl>
+						<FormLabel>{values[0].label}</FormLabel>
+						<InputGroup>
+							<NumericFormat
+								value={values[0].value}
+								onValueChange={(values) => {
+									const { floatValue } = values;
+									setValues(
+										[{ label: "VALOR DE EMPRÉSTIMO SOLICITADO: ", value: Number(floatValue) }]
+									);
+								}}
+								thousandSeparator='.'
+								decimalSeparator=','
+								prefix="R$ "
+								decimalScale={2}
+								fixedDecimalScale={true}
+								customInput={Input}
+							/>
+						</InputGroup>
+					</FormControl>
+			</Flex>
+			<Flex className='answerContainer' id='answerContainerTwo'>
 				{chunkedTotais.map((chunk, index) => (
-					<div
+					<Flex
 						key={index}
 						className='totaisContainer'
 						id='totaisContainerINSS2'
@@ -114,9 +124,9 @@ export function CalculatorINSS2({
 								<CalculatorTotal key={subIndex} total={total} />
 							)
 						)}
-					</div>
+					</Flex>
 				))}
-			</section>
-		</div>
+			</Flex>
+		</Flex>
 	);
 }

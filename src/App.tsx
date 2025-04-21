@@ -3,7 +3,7 @@ import "./App.css";
 // import NotFoundScreen from './screens/NotFoundScreen';
 import { Routes, Route } from "react-router-dom";
 import LoginScreen from "./screens/LoginScreen";
-import { Home } from "./screens/Home";
+import { CompleteAnalysis } from "./screens/CompleteAnalysis";
 import { AdminHome } from "./screens/AdminHome";
 import { Equipes } from "./screens/Equipes";
 import ResultadoAnalise from "./screens/ResultadoAnalise";
@@ -24,7 +24,7 @@ function App() {
 				<Route path='/equipes' element={<Equipes />} />
 				<Route path='/bancos' element={<Bancos />} />
 				<Route path='/coeficientes' element={<Coeficientes />} />
-				<Route path='/analise' element={<Home />} />
+				<Route path='/analise' element={<CompleteAnalysis />} />
 				<Route path='/calculadora' element={<Calculator />} />
 				<Route path='/vendas' element={<Vendas />} />
 				<Route path='/perfil' element={<Perfil />} />

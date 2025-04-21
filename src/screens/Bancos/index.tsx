@@ -69,7 +69,7 @@ export function Bancos() {
 
   // const adicionarBanco = async () => {
   // 	const response = await axios.post(
-  // 		"https://calculadora.reallcredito.com.br/banks",
+  // 		"https://api.creditorealsf.com/banks",
   // 		{
   // 			name,
   //             key,
@@ -90,7 +90,7 @@ export function Bancos() {
 
   const bloquearBanco = async (banco: { id: string }) => {
     const response = await fetch(
-      `https://calculadora.reallcredito.com.br/banks/block/${banco.id}`,
+      `https://api.creditorealsf.com/banks/block/${banco.id}`,
       {
         method: "PUT",
         headers: {
@@ -111,9 +111,7 @@ export function Bancos() {
   useEffect(() => {
     const fetchBancos = async () => {
       try {
-        const response = await fetch(
-          "https://calculadora.reallcredito.com.br/banks/all"
-        );
+        const response = await fetch("https://api.creditorealsf.com/banks/all");
         if (response.status !== 200) {
           console.error("Error fetching equipes:", response);
           setBancos([]);

@@ -14,6 +14,8 @@ import { CalculatorPrefeitura } from "../../components/Calculators/CalculatorPre
 import Menu from "../../components/Menu";
 import {
   Button,
+  Flex,
+  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -214,7 +216,7 @@ function Calculator() {
       console.log("token", token);
       try {
         const response = await axios.post(
-          "https://calculadora.reallcredito.com.br/calculator/image",
+          "https://api.creditorealsf.com/calculator/image",
           {
             menu,
             submenu,
@@ -248,11 +250,11 @@ function Calculator() {
 
   return (
     <>
-      <main className="body_colaborators">
+      <Flex className="body_colaborators">
         <Menu type="colaborator" />
-        <div className="linha"></div>
+        <Flex className="linha"></Flex>
 
-        <div className="divMenus">
+        <Flex className="divMenus">
           <select
             onChange={(e) => handleMenuChange(e.target.value)}
             title="Menu"
@@ -276,7 +278,7 @@ function Calculator() {
           </select>
           {submenu.slice(0, 15) === "Cálculo Salário" && (
             <label className="checkboxDiv">
-              <input
+              <Input
                 type="checkbox"
                 checked={isChecked}
                 onChange={toggleCheckbox}
@@ -286,16 +288,16 @@ function Calculator() {
             </label>
           )}
           {allInputsFilled && (
-            <div>
-              <button
+            <Flex>
+              <Button
                 className="buttonBaixarResultado"
                 onClick={handleResultDownload}
               >
                 Visualizar Resultado
-              </button>
-            </div>
+              </Button>
+            </Flex>
           )}
-        </div>
+        </Flex>
         {/* Modal para escolher a quantidade de parcelas */}
         <Modal
           isOpen={parcelModalIsOpen}
@@ -360,7 +362,7 @@ function Calculator() {
         </Modal>
 
         {renderCalculatorByMenus(menu, submenu)}
-      </main>
+      </Flex>
     </>
   );
 }

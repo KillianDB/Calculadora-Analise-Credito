@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { calculate } from "../../../utils/calculate";
-import CalculatorInput from "../../CalculatorInput";
 import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
-import { MoneyInput } from "../../MoneyInput";
+import { Flex, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { NumericFormat } from "react-number-format";
 
 interface CalculatorExercito1Props {
 	setAllInputsFilled: (filled: boolean) => void;
@@ -27,10 +27,9 @@ export function CalculatorExercito1({
 		"PARCELA: R$ 0,00",
 		"84x",
 	]);
-	const label: string = "VALOR MARGEM EMPRÉSTIMO: ";
-
 	function handleInputValue(label: string, value: number) {
 		setValues([{ label, value }]);
+		setAllInputsFilled(true);
 		const result = calculate("Exército", "Cálculo por Margem Disponível", [
 			{ label, value },
 		]);
@@ -53,47 +52,41 @@ export function CalculatorExercito1({
 		}
 	}
 
-	useEffect(() => {
-		const allFilled = values.every((item) => item.value !== 0);
-		setAllInputsFilled(allFilled);
-	}, [values, setAllInputsFilled]);
-
 	return (
-		<div className='calculatorComponentDiv'>
+		<Flex className='calculatorComponentDiv'>
 			<CalculatorTitle
 				menu='Exército'
 				submenu='Cálculo por Margem Disponível'
 			/>
-			<div className='inputsContainer'>
-				<MoneyInput
-					key={values[0].label}
-					label={values[0].label}
-					value={
-						typeof values[0].value === "string"
-							? parseFloat(values[0].value)
-							: values[0].value
-					}
-					addOnBefore='R$'
-					onChange={(e) =>
-						handleInputValue(values[0].label, +e.target.value)
-					}
-				/>
-				<CalculatorInput
-					label={label}
-					onChange={(e) => handleInputValue(label, +e.target.value)}
-				/>
-			</div>
-			<div className='answerContainer'>
-				<div className='resultsContainer'>
+			<Flex className='inputsContainer'>
+				<FormControl>
+					<FormLabel>{values[0].label}</FormLabel>
+					 <NumericFormat
+								  value={values[0].value}
+								  onValueChange={(values) => {
+									const { floatValue } = values;
+									handleInputValue("VALOR MARGEM EMPRÉSTIMO: ", floatValue??0);
+								  }}
+								  thousandSeparator="."
+								  decimalSeparator=","
+								  decimalScale={2}
+								  prefix="R$ "
+								  fixedDecimalScale={true}
+								  customInput={Input}
+								/>
+				</FormControl>
+			</Flex>
+			<Flex className='answerContainer'>
+				<Flex className='resultsContainer'>
 					<CalculatorResult result={results[0]} />
 					<CalculatorResult result={results[1]} />
-				</div>
-				<div className='totaisContainer'>
+				</Flex>
+				<Flex className='totaisContainer'>
 					{totais.slice(0, 3).map((total) => (
 						<CalculatorTotal total={total} />
 					))}
-				</div>
-			</div>
-		</div>
+				</Flex>
+			</Flex>
+		</Flex>
 	);
 }

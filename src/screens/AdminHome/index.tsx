@@ -6,8 +6,8 @@ import Menu from "../../components/Menu";
 // import { SideMenu } from "../../components/SideMenu";
 
 interface PieValues {
-	clientesGerais: number;
-	aposentadosPensionistas: number;
+  clientesGerais: number;
+  aposentadosPensionistas: number;
 }
 
 // interface BarValues {
@@ -18,196 +18,181 @@ interface PieValues {
 // }
 
 export function AdminHome() {
-	const [totalClientes, setTotalClientes] = useState<number | null>(null);
-	const [clientesEmContato, setClientesEmContato] = useState<number | null>(
-		null
-	);
-	const [pieValues, setPieValues] = useState<PieValues | null>(null);
-	// const [barValues, setBarValues] = useState<BarValues | null>(null);
-	const [clients, setClients] = useState<
-		{
-			id: string;
-			name: string;
-			type: string;
-			status: string;
-			date: string;
-			hour: string;
-		}[]
-	>([
-		{
-			id: "1",
-			name: "João",
-			type: "pensionista",
-			status: "Entrou em contato",
-			date: "09/09/2024",
-			hour: "14:00",
-		},
-		{
-			id: "2",
-			name: "Maria",
-			type: "geral",
-			status: "Entrou em contato",
-			date: "09/09/2024",
-			hour: "13:00",
-		},
-		{
-			id: "3",
-			name: "José",
-			type: "aposentado",
-			status: "Fez simulação geral",
-			date: "09/09/2024",
-			hour: "12:00",
-		},
-	]);
+  const [totalClientes, setTotalClientes] = useState<number | null>(null);
+  const [clientesEmContato, setClientesEmContato] = useState<number | null>(
+    null
+  );
+  const [pieValues, setPieValues] = useState<PieValues | null>(null);
+  // const [barValues, setBarValues] = useState<BarValues | null>(null);
+  const [clients, setClients] = useState<
+    {
+      id: string;
+      name: string;
+      type: string;
+      status: string;
+      date: string;
+      hour: string;
+    }[]
+  >([
+    {
+      id: "1",
+      name: "João",
+      type: "pensionista",
+      status: "Entrou em contato",
+      date: "09/09/2024",
+      hour: "14:00",
+    },
+    {
+      id: "2",
+      name: "Maria",
+      type: "geral",
+      status: "Entrou em contato",
+      date: "09/09/2024",
+      hour: "13:00",
+    },
+    {
+      id: "3",
+      name: "José",
+      type: "aposentado",
+      status: "Fez simulação geral",
+      date: "09/09/2024",
+      hour: "12:00",
+    },
+  ]);
 
-	useEffect(() => {
-		async function fetchTotalClientes() {
-			try {
-				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/clients/total",
-					{
-						headers: {
-							Authorization: `Bearer ${localStorage.getItem(
-								"token"
-							)}`,
-						},
-					}
-				);
-				const contentType = response.headers.get("content-type");
-				if (!contentType || !contentType.includes("application/json")) {
-					throw new Error("A resposta não é um JSON válido");
-				}
-				const data = await response.json();
-				setTotalClientes(data);
-			} catch (error) {
-				console.error("Error fetching total clients:", error);
-			}
-		}
-		async function fetchClientesContato() {
-			try {
-				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/clients/emContato",
-					{
-						headers: {
-							Authorization: `Bearer ${localStorage.getItem(
-								"token"
-							)}`,
-						},
-					}
-				);
-				const contentType = response.headers.get("content-type");
-				if (!contentType || !contentType.includes("application/json")) {
-					throw new Error("A resposta não é um JSON válido");
-				}
-				const data = await response.json();
-				setClientesEmContato(data);
-			} catch (error) {
-				console.error("Error fetching clients in contact:", error);
-			}
-		}
-		async function graficoPizza() {
-			try {
-				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/clients/perType",
-					{
-						headers: {
-							Authorization: `Bearer ${localStorage.getItem(
-								"token"
-							)}`,
-						},
-					}
-				);
-				const contentType = response.headers.get("content-type");
-				if (!contentType || !contentType.includes("application/json")) {
-					throw new Error("A resposta não é um JSON válido");
-				}
-				const data: PieValues = await response.json();
-				setPieValues(data);
-			} catch (error) {
-				console.error("Error fetching pie chart data:", error);
-			}
-		}
-		// async function graficoBar() {
-		// 	try {
-		// 		const response = await fetch(
-		// 			"https://calculadora.reallcredito.com.br/analysis/totalPerType",
-		// 			{
-		// 				headers: {
-		// 					Authorization: `Bearer ${localStorage.getItem(
-		// 						"token"
-		// 					)}`,
-		// 				},
-		// 			}
-		// 		);
-		// 		const contentType = response.headers.get("content-type");
-		// 		if (!contentType || !contentType.includes("application/json")) {
-		// 			throw new Error("A resposta não é um JSON válido");
-		// 		}
-		// 		const data: BarValues = await response.json();
-		// 		setBarValues(data);
-		// 	} catch (error) {
-		// 		console.error("Error fetching bar chart data:", error);
-		// 	}
-		// }
-		async function fetchClients() {
-			try {
-				const response = await fetch(
-					"https://calculadora.reallcredito.com.br/clients/lastActions",
-					{
-						headers: {
-							Authorization: `Bearer ${localStorage.getItem(
-								"token"
-							)}`,
-						},
-					}
-				);
-				const contentType = response.headers.get("content-type");
-				if (!contentType || !contentType.includes("application/json")) {
-					throw new Error("A resposta não é um JSON válido");
-				}
-				const data = await response.json();
-				setClients(data);
-			} catch (error) {
-				console.error("Error fetching clients:", error);
-			}
-		}
-		fetchTotalClientes();
-		fetchClientesContato();
-		graficoPizza();
-		// graficoBar();
-		fetchClients();
-	}, []);
+  useEffect(() => {
+    async function fetchTotalClientes() {
+      try {
+        const response = await fetch(
+          "https://api.creditorealsf.com/clients/total",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("A resposta não é um JSON válido");
+        }
+        const data = await response.json();
+        setTotalClientes(data);
+      } catch (error) {
+        console.error("Error fetching total clients:", error);
+      }
+    }
+    async function fetchClientesContato() {
+      try {
+        const response = await fetch(
+          "https://api.creditorealsf.com/clients/emContato",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("A resposta não é um JSON válido");
+        }
+        const data = await response.json();
+        setClientesEmContato(data);
+      } catch (error) {
+        console.error("Error fetching clients in contact:", error);
+      }
+    }
+    async function graficoPizza() {
+      try {
+        const response = await fetch(
+          "https://api.creditorealsf.com/clients/perType",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("A resposta não é um JSON válido");
+        }
+        const data: PieValues = await response.json();
+        setPieValues(data);
+      } catch (error) {
+        console.error("Error fetching pie chart data:", error);
+      }
+    }
+    // async function graficoBar() {
+    // 	try {
+    // 		const response = await fetch(
+    // 			"https://api.creditorealsf.com/analysis/totalPerType",
+    // 			{
+    // 				headers: {
+    // 					Authorization: `Bearer ${localStorage.getItem(
+    // 						"token"
+    // 					)}`,
+    // 				},
+    // 			}
+    // 		);
+    // 		const contentType = response.headers.get("content-type");
+    // 		if (!contentType || !contentType.includes("application/json")) {
+    // 			throw new Error("A resposta não é um JSON válido");
+    // 		}
+    // 		const data: BarValues = await response.json();
+    // 		setBarValues(data);
+    // 	} catch (error) {
+    // 		console.error("Error fetching bar chart data:", error);
+    // 	}
+    // }
+    async function fetchClients() {
+      try {
+        const response = await fetch(
+          "https://api.creditorealsf.com/clients/lastActions",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("A resposta não é um JSON válido");
+        }
+        const data = await response.json();
+        setClients(data);
+      } catch (error) {
+        console.error("Error fetching clients:", error);
+      }
+    }
+    fetchTotalClientes();
+    fetchClientesContato();
+    graficoPizza();
+    // graficoBar();
+    fetchClients();
+  }, []);
 
-	return (
-		<>
-			<div className='admin-home-main-div'>
-				<Menu type='admin' />
-				<div className='linha'></div>
-				<section className='admin-home-top-section'>
-					<div className='absolute-metrics'>
-						<div className='total-clientes'>
-							<span className='number-absolut'>
-								{totalClientes !== null ? totalClientes : 0}
-							</span>
-							<br></br>Total de clientes<br></br>
-							<span className='destaque-text'>
-								registrados
-							</span>{" "}
-							no APP
-						</div>
-						<div className='total-call'>
-							<span className='number-absolut'>
-								{clientesEmContato !== null
-									? clientesEmContato
-									: 0}
-							</span>
-							<br></br>Total de clientes que<br></br>
-							<span className='destaque-text'>
-								entraram em contato
-							</span>
-						</div>
-					</div>
-					{/* <div className='bar-graphic'>
+  return (
+    <>
+      <div className="admin-home-main-div">
+        <Menu type="admin" />
+        <div className="linha"></div>
+        <section className="admin-home-top-section">
+          <div className="absolute-metrics">
+            <div className="total-clientes">
+              <span className="number-absolut">
+                {totalClientes !== null ? totalClientes : 0}
+              </span>
+              <br></br>Total de clientes<br></br>
+              <span className="destaque-text">registrados</span> no APP
+            </div>
+            <div className="total-call">
+              <span className="number-absolut">
+                {clientesEmContato !== null ? clientesEmContato : 0}
+              </span>
+              <br></br>Total de clientes que<br></br>
+              <span className="destaque-text">entraram em contato</span>
+            </div>
+          </div>
+          {/* <div className='bar-graphic'>
 						<BarChart
 							value1={barValues ? barValues.INSS : 1}
 							value2={barValues ? barValues.FGTS : 1}
@@ -219,55 +204,51 @@ export function AdminHome() {
 							label4='Credito'
 						/>
 					</div> */}
-					<div className='pizza-graphic'>
-						<PieChart
-							value1={pieValues ? pieValues.clientesGerais : 50}
-							value2={
-								pieValues
-									? pieValues.aposentadosPensionistas
-									: 50
-							}
-							label1='Clientes Gerais'
-							label2='Aposentados/pensionistas'
-						/>
-						{/* <p className='tituloGraficoPizza'>
+          <div className="pizza-graphic">
+            <PieChart
+              value1={pieValues ? pieValues.clientesGerais : 50}
+              value2={pieValues ? pieValues.aposentadosPensionistas : 50}
+              label1="Clientes Gerais"
+              label2="Aposentados/pensionistas"
+            />
+            {/* <p className='tituloGraficoPizza'>
 							Porcentagem de{" "}
 							<span className='spanTituloGraficoPizza'>
 								aposentados <br></br> e pensionistas
 							</span>{" "}
 							em relação ao <br></br>número total de clientes
 						</p> */}
-					</div>
-				</section>
-				<section className='admin-home-bottom-section'>
-					<div className='clients-list'>
-						{clients.map((client) => (
-							<div key={client.id} className='client-card'>
-								<h6>{client.name}</h6>
-								<h6
-									style={{
-										color:
-											client.type === "pensionista"
-												? "green"
-												: client.type === "geral"
-												? "blue"
-												: "red",
-										border: "1px solid",
-										borderRadius: "12px",
-										padding: "4px",
-									}}
-								>
-									{client.type}
-								</h6>
+          </div>
+        </section>
+        <section className="admin-home-bottom-section">
+          <div className="clients-list">
+            {clients.map((client) => (
+              <div key={client.id} className="client-card">
+                <h6>{client.name}</h6>
+                <h6
+                  style={{
+                    color:
+                      client.type === "pensionista"
+                        ? "green"
+                        : client.type === "geral"
+                        ? "blue"
+                        : "red",
+                    border: "1px solid",
+                    borderRadius: "12px",
+                    padding: "4px",
+                  }}
+                >
+                  {client.type}
+                </h6>
 
-								<h6>{client.status}</h6>
-								<h6>{client.date}</h6>
-								<h6>{client.hour}</h6>
-							</div>
-						))}
-					</div>
-				</section>
-			</div>
-		</>
-	);
+                <h6>{client.status}</h6>
+                <h6>{client.date}</h6>
+                <h6>{client.hour}</h6>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </>
+  );
 }

@@ -3,7 +3,8 @@ import { calculate } from "../../../utils/calculate";
 import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
-import { MoneyInput } from "../../MoneyInput";
+import { Flex, FormControl, FormLabel, Input, InputGroup } from "@chakra-ui/react";
+import { NumericFormat } from "react-number-format";
 
 interface CalculatorINSS3Props {
 	isChecked: boolean;
@@ -84,7 +85,7 @@ export function CalculatorINSS3({
 	}, [values, setAllInputsFilled]);
 
 	return (
-		<div
+		<Flex
 			className='calculatorComponentDiv'
 			style={isChecked ? { height: "70vh" } : { height: "44vh" }}
 		>
@@ -92,61 +93,69 @@ export function CalculatorINSS3({
 				menu='INSS'
 				submenu='Cálculo Salário Cliente Sem Cartões'
 			/>
-			<div className='inputsContainer'>
-				<MoneyInput
-					key={label}
-					label={label}
-					value={
-						typeof values[0].value === "string"
-							? parseFloat(values[0].value)
-							: values[0].value
-					}
-					addOnBefore='R$'
-					onChange={(e) => handleInputValue(label, +e.target.value)}
-				/>
-			</div>
+			<Flex className='inputsContainer'>
+			<FormControl>
+						<FormLabel>{values[0].label}</FormLabel>
+						<InputGroup>
+							<NumericFormat
+								value={values[0].value}
+								onValueChange={(values) => {
+									const { floatValue } = values;
+									setValues(
+										[{ label: "SALÁRIO: ", value: Number(floatValue) }]
+									);
+								}}
+								thousandSeparator='.'
+								decimalSeparator=','
+								prefix="R$ "
+								decimalScale={2}
+								fixedDecimalScale={true}
+								customInput={Input}
+							/>
+						</InputGroup>
+					</FormControl>
+			</Flex>
 
 			{!isChecked ? (
-				<div className='answerContainer' style={{ height: "11vh" }}>
-					<div className='resultsContainer'>
+				<Flex className='answerContainer' style={{ height: "11vh" }}>
+					<Flex className='resultsContainer'>
 						<CalculatorResult result={results[0]} />
 						<CalculatorResult result={results[1]} />
-					</div>
-					<div className='totaisContainer'>
+					</Flex>
+					<Flex className='totaisContainer'>
 						{totais.slice(0, 3).map((total) => (
 							<CalculatorTotal total={total} />
 						))}
-					</div>
-				</div>
+					</Flex>
+				</Flex>
 			) : (
-				<div className='answerContainer'>
-					<div className='resultsContainer'>
+				<Flex className='answerContainer'>
+					<Flex className='resultsContainer'>
 						<CalculatorResult result={results[0]} />
 						<CalculatorResult result={results[1]} />
-					</div>
-					<div className='totaisContainer'>
+					</Flex>
+					<Flex className='totaisContainer'>
 						{totais.slice(0, 3).map((total) => (
 							<CalculatorTotal total={total} />
 						))}
-					</div>
-					<div className='resultsContainer'>
+					</Flex>
+					<Flex className='resultsContainer'>
 						<CalculatorResult result={results[2]} />
 						<CalculatorResult result={results[3]} />
 						<CalculatorResult result={results[4]} />
-						<p></p>
 						<CalculatorResult result={results[5]} />
 						<p>
 							APÓS 03 PARCELAS PAGAS NA REDUÇÃO DE JUROS SEM
 							ALTERAR A PARCELA.
 						</p>
-					</div>
-					<div className='totaisContainer'>
+					</Flex>
+					<Flex className='totaisContainer'>
 						{totais.slice(3, 7).map((total) => (
 							<CalculatorTotal total={total} />
 						))}
-					</div>
-				</div>
+					</Flex>
+				</Flex>
 			)}
-		</div>
+		</Flex>
 	);
 }

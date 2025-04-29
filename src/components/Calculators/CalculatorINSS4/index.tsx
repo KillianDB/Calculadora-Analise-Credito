@@ -84,6 +84,7 @@ export function CalculatorINSS4({
 	useEffect(() => {
 		const allFilled = values.every((item) => item.value !== 0);
 		setAllInputsFilled(allFilled);
+		handleInputValue(label, values[0].value);
 	}, [values, setAllInputsFilled]);
 
 	return (

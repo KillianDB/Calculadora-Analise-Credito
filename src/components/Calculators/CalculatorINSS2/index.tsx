@@ -43,28 +43,27 @@ export function CalculatorINSS2({
 		const result = calculate("INSS", "Cálculo Valor Solicitado", [
 			{ label, value },
 		]);
+		
 		if (result !== "no valid labels" && result !== undefined) {
 			setTotais(result);
+			
+			// Verifique o formato real do resultado primeiro
+			console.log("Resultado do cálculo:", result);
+			
 			const finalResult: string[] = [
-				//[0]
 				"Bem vindo, Cliente CR",
-				//[1]
 				`Valor Empréstimo Solicitado R$ ${result[0].split(" R$ ")[1]}`,
-				//[2]
-				`${result[0].split(" R$ ")[1]}`,
-				//[3]
-				`${result[1].split(" - R$ ")[1]} 84x`,
-				//[4]
-				`${result[4].split(" - R$ ")[1]} 72x`,
-				//[5]
-				`${result[7].split(" - R$ ")[1]} 60x`,
-				//[6]
-				`${result[10].split(" - R$ ")[1]} 48x`,
-				//[7]
-				`${result[13].split(" - R$ ")[1]} 36x`,
-				//[8]
-				`${result[16].split(" - R$ ")[1]} 24x`,
+				`Parcela 84x R$ ${result[1].split(" R$ ")[1]}`,
+				`Parcela 72x R$ ${result[4].split(" R$ ")[1]}`,
+				`Parcela 60x R$ ${result[7].split(" R$ ")[1]}`,
+				`Parcela 48x R$ ${result[10].split(" R$ ")[1]}`,
+				`Parcela 36x R$ ${result[13].split(" R$ ")[1]}`,
+				`Parcela 24x R$ ${result[16].split(" R$ ")[1]}`,
+				`Total R$ ${result[0].split(" R$ ")[1]}`,
+				`Parcela Total R$ ${result[1].split(" R$ ")[1]} 84x`
 			];
+			
+			console.log("Final result:", finalResult);
 			setFinalResult(finalResult);
 		}
 	}
@@ -78,9 +77,11 @@ export function CalculatorINSS2({
 	}
 
 	useEffect(() => {
-		const allFilled = values.every((item) => item.value !== 0);
+		const allFilled = values.every(item => item.value !== 0);
 		setAllInputsFilled(allFilled);
-	}, [values, setAllInputsFilled]);
+		handleInputValue(label, values[0].value); // Chama a função para atualizar os totais
+		console.log("Totais atualizados:", totais); // Para debug
+	}, [values, totais, setAllInputsFilled]);
 
 	const chunkedTotais = chunkArray(totais, 3);
 

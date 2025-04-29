@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
-import { calculate } from "../../../utils/calculate";
-import CalculatorInput from "../../CalculatorInput";
-import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
-import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS5.css";
-import { formatNumber } from "../../../utils/formatNumbers";
 import { NumericFormat } from "react-number-format";
 import {
 	Flex,
@@ -14,14 +9,9 @@ import {
 	FormLabel,
 	Input,
 	InputGroup,
-	InputLeftAddon,
-	InputLeftElement,
 	SimpleGrid,
 	Text,
 } from "@chakra-ui/react";
-import { Form } from "react-router-dom";
-import result from "antd/es/result";
-import { all } from "axios";
 
 export function CalculatorINSS5({
 	setAllInputsFilled,
@@ -31,7 +21,7 @@ export function CalculatorINSS5({
 	setFinalResult: (result: string[]) => void;
 }) {
 	const [indexCalc, setIndexCalc] = useState(0);
-	const allFilled = false;
+	// const allFilled = false;
 	// const [results, setResults] = useState([
 	//   "VALOR EMPRESTIMO: R$ 00.000,00",
 	//   "PARCELA: R$ 000,00",

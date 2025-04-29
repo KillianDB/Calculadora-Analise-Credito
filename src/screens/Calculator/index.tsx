@@ -216,7 +216,7 @@ function Calculator() {
       console.log("token", token);
       try {
         const response = await axios.post(
-          "api.creditorealsf.com/calculator/image",
+          "https://api.creditorealsf.com/calculator/image",
           {
             menu,
             submenu,
@@ -234,8 +234,8 @@ function Calculator() {
         // link.href = response.data.downloadURL;
         // link.click();
         if (response.status === 200) {
-          window.location.href = response.data;
-          // window.open(response.data, "_blank");
+          // window.location.href = response.data;
+          window.open(response.data, "_blank");
           console.log("Redirecionando", response.data);
         }
         // })

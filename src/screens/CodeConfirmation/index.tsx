@@ -2,81 +2,90 @@ import { useNavigate } from "react-router-dom";
 import OrangeButton from "../../components/OrangeButton";
 import SubmitCard from "../../components/SubmitCard";
 import "../AlterarSenha/AlterarSenha.css";
-import { useEffect, useState, useContext } from "react";
-import { UserContext } from "../../utils/UserContext";
+import { useEffect, useState } from "react";
+import { useUser } from "../../utils/UserContext";
 import axios from "axios";
 
 export default function CodeConfirmation() {
   const navigate = useNavigate();
   const [code, setCode] = useState("");
-  const userContext = useContext(UserContext);
-  const [userData, setUserData] = useState({
-    id: "",
-    name: "",
-    email: "",
-    role: "",
-    userType: "",
-  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const { user, logout } = useUser();
 
+  // Redireciona se não estiver logado
   useEffect(() => {
-    if (!userContext || !userContext.user) {
-      console.error("User context is not defined");
+    if (!user) {
       navigate("/login");
       return;
     }
 
-    const { user } = userContext;
+    // Verificação adicional de segurança
+    const verifyUser = async () => {
+      try {
+        const response = await axios.get(
+          "https://api.creditorealsf.com/auth",
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
 
-    axios
-      .get("api.creditorealsf.com/auth", {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      .then((response) => {
         if (response.status !== 200) {
-          console.error("Erro ao verificar usuário", response);
-          navigate("/login");
-        } else {
-          setUserData(response.data);
+          throw new Error("Falha na verificação do usuário");
         }
-      })
-      .catch((error) => {
-        console.error("Erro ao verificar usuário", error);
+
+      } catch (error) {
+        console.error("Erro na verificação:", error);
+        logout();
         navigate("/login");
-      });
-  }, [userContext, navigate]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    verifyUser();
+  }, [user, navigate, logout]);
 
   async function handleCheckCode() {
-    const response = await fetch(
-      "api.creditorealsf.com/auth/validate/code",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ code }),
-      }
-    );
+    try {
+      setError("");
+      const response = await axios.post(
+        "https://api.creditorealsf.com/auth/validate/code",
+        { code },
+        {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    if (response.status !== 200) {
-      console.log("Erro ao verificar código", response);
-      return response;
-    } else {
-      navigate("/nova-senha");
+      if (response.status === 200) {
+        navigate("/nova-senha");
+      }
+    } catch (error) {
+      setError("Código inválido ou expirado");
+      console.error("Erro na verificação:", error);
     }
   }
 
+  if (loading) {
+    return <div className="loading">Verificando autenticação...</div>;
+  }
+
   return (
-    <>
+    <div className="code-confirmation-container">
       <img
         src="https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-comprido.svg?alt=media&token=135c3133-5dad-40be-a694-c2a143de847b"
-        id="home-logo"
+        alt="Logo Credito Real"
+        className="logo"
       />
 
-      <section className="main-alterar-senha">
+      <main className="main-content">
         <SubmitCard
-          title={`Enviamos o código de verificação para o Email: ${userData.email}`}
+          title={`Enviamos o código de verificação para: ${user?.email || ""}`}
           inputs={[
             {
               label: "Digite o código enviado abaixo",
@@ -86,9 +95,18 @@ export default function CodeConfirmation() {
               onChange: (e) => setCode(e.target.value),
             },
           ]}
-          button={<OrangeButton text="Confirmar" onClick={handleCheckCode} />}
+          button={
+            <>
+              {error && <div className="error-message">{error}</div>}
+              <OrangeButton 
+                text="Confirmar" 
+                onClick={handleCheckCode}
+                // disabled={!code.trim()}
+              />
+            </>
+          }
         />
-      </section>
-    </>
+      </main>
+    </div>
   );
 }

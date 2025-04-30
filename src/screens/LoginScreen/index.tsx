@@ -17,9 +17,9 @@ import { Flex } from "antd";
 export default function LoginScreen() {
   const navigate = useNavigate();
   const { login } = useUser();
-  // const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -49,7 +49,7 @@ export default function LoginScreen() {
         console.error("Erro ao fazer login", response);
       }
     } catch (error) {
-      console.error("Erro ao fazer login", error);
+      setError("Credenciais inválidas");
     }
   };
 
@@ -95,6 +95,7 @@ export default function LoginScreen() {
             >
               Entrar
             </Button>
+            {error && <div className="error">{error}</div>}
           </VStack>
           <Link to="/redefinir-senha">Esqueceu sua senha?</Link>
         </form>

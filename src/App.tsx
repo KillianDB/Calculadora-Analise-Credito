@@ -13,13 +13,20 @@ import { Bancos } from "./screens/Bancos";
 import { Coeficientes } from "./screens/Coeficientes";
 import { Vendas } from "./screens/Vendas";
 import { Perfil } from "./screens/Perfil";
+import { ProtectedRoute } from "./utils/ProtectedRoute";
 // import { Loading } from "./screens/Loading";
 
 function App() {
 	return (
 		<UserProvider>
 			<Routes>
-				<Route path='*' element={<LoginScreen />} />
+        <Route path="*" element={<LoginScreen />} />
+        
+        <Route
+          path="/*"
+          element={
+            <ProtectedRoute>
+              <Routes>
 				<Route path='/metricas' element={<AdminHome />} />
 				<Route path='/equipes' element={<Equipes />} />
 				<Route path='/bancos' element={<Bancos />} />
@@ -34,7 +41,11 @@ function App() {
 					element={<ResultadoAnalise />}
 				/>
 				{/* <Route path='*' element={<NotFoundScreen />}/> */}
-			</Routes>
+              </Routes>
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
 		</UserProvider>
 	);
 }

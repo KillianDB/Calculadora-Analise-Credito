@@ -3,17 +3,13 @@ import OrangeButton from "../../components/OrangeButton/index.tsx";
 import SubmitCard from "../../components/SubmitCard/index.tsx";
 import "./completeAnalysis.css";
 import { useState } from "react";
-import { useContext } from "react";
-import { UserContext } from "../../utils/UserContext.tsx";
 import axios from "axios";
 import Menu from "../../components/Menu/index.tsx";
 import { Flex, Grid, Img } from "@chakra-ui/react";
+import { useUser } from "../../utils/UserContext.tsx";
 
 export function CompleteAnalysis() {
-  const { user } = useContext(UserContext) ?? { user: undefined };
-  if (!user) {
-    throw new Error("User not found");
-  }
+  const { user } = useUser();
 
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({

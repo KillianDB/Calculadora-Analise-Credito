@@ -3,7 +3,8 @@ import { calculate } from "../../../utils/calculate";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS2.css";
-import { MoneyInput } from "../../MoneyInput";
+import { Flex, FormControl, FormLabel, Input, InputGroup } from "@chakra-ui/react";
+import { NumericFormat } from "react-number-format";
 
 export function CalculatorINSS2({
 	setAllInputsFilled,
@@ -42,28 +43,27 @@ export function CalculatorINSS2({
 		const result = calculate("INSS", "Cálculo Valor Solicitado", [
 			{ label, value },
 		]);
+		
 		if (result !== "no valid labels" && result !== undefined) {
 			setTotais(result);
+			
+			// Verifique o formato real do resultado primeiro
+			console.log("Resultado do cálculo:", result);
+			
 			const finalResult: string[] = [
-				//[0]
 				"Bem vindo, Cliente CR",
-				//[1]
 				`Valor Empréstimo Solicitado R$ ${result[0].split(" R$ ")[1]}`,
-				//[2]
-				`${result[0].split(" R$ ")[1]}`,
-				//[3]
-				`${result[1].split(" - R$ ")[1]} 84x`,
-				//[4]
-				`${result[4].split(" - R$ ")[1]} 72x`,
-				//[5]
-				`${result[7].split(" - R$ ")[1]} 60x`,
-				//[6]
-				`${result[10].split(" - R$ ")[1]} 48x`,
-				//[7]
-				`${result[13].split(" - R$ ")[1]} 36x`,
-				//[8]
-				`${result[16].split(" - R$ ")[1]} 24x`,
+				`Parcela 84x R$ ${result[1].split(" R$ ")[1]}`,
+				`Parcela 72x R$ ${result[4].split(" R$ ")[1]}`,
+				`Parcela 60x R$ ${result[7].split(" R$ ")[1]}`,
+				`Parcela 48x R$ ${result[10].split(" R$ ")[1]}`,
+				`Parcela 36x R$ ${result[13].split(" R$ ")[1]}`,
+				`Parcela 24x R$ ${result[16].split(" R$ ")[1]}`,
+				`Total R$ ${result[0].split(" R$ ")[1]}`,
+				`Parcela Total R$ ${result[1].split(" R$ ")[1]} 84x`
 			];
+			
+			console.log("Final result:", finalResult);
 			setFinalResult(finalResult);
 		}
 	}
@@ -77,31 +77,42 @@ export function CalculatorINSS2({
 	}
 
 	useEffect(() => {
-		const allFilled = values.every((item) => item.value !== 0);
+		const allFilled = values.every(item => item.value !== 0);
 		setAllInputsFilled(allFilled);
-	}, [values, setAllInputsFilled]);
+		handleInputValue(label, values[0].value); // Chama a função para atualizar os totais
+		console.log("Totais atualizados:", totais); // Para debug
+	}, [values, totais, setAllInputsFilled]);
 
 	const chunkedTotais = chunkArray(totais, 3);
 
 	return (
-		<div className='calculatorComponentDiv' id='calculatorComponentDivTwo'>
+		<Flex className='calculatorComponentDiv' id='calculatorComponentDivTwo'>
 			<CalculatorTitle menu='INSS' submenu='Cálculo Valor Solicitado' />
-			<div className='inputsContainer'>
-				<MoneyInput
-					key={label}
-					label={label}
-					value={
-						typeof values[0].value === "string"
-							? parseFloat(values[0].value)
-							: values[0].value
-					}
-					addOnBefore='R$'
-					onChange={(e) => handleInputValue(label, +e.target.value)}
-				/>
-			</div>
-			<section className='answerContainer' id='answerContainerTwo'>
+			<Flex className='inputsContainer'>
+			<FormControl>
+						<FormLabel>{values[0].label}</FormLabel>
+						<InputGroup>
+							<NumericFormat
+								value={values[0].value}
+								onValueChange={(values) => {
+									const { floatValue } = values;
+									setValues(
+										[{ label: "VALOR DE EMPRÉSTIMO SOLICITADO: ", value: Number(floatValue) }]
+									);
+								}}
+								thousandSeparator='.'
+								decimalSeparator=','
+								prefix="R$ "
+								decimalScale={2}
+								fixedDecimalScale={true}
+								customInput={Input}
+							/>
+						</InputGroup>
+					</FormControl>
+			</Flex>
+			<Flex className='answerContainer' id='answerContainerTwo'>
 				{chunkedTotais.map((chunk, index) => (
-					<div
+					<Flex
 						key={index}
 						className='totaisContainer'
 						id='totaisContainerINSS2'
@@ -114,9 +125,9 @@ export function CalculatorINSS2({
 								<CalculatorTotal key={subIndex} total={total} />
 							)
 						)}
-					</div>
+					</Flex>
 				))}
-			</section>
-		</div>
+			</Flex>
+		</Flex>
 	);
 }

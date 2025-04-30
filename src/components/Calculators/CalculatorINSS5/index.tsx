@@ -15,12 +15,12 @@ import {
 
 export function CalculatorINSS5({
 	setAllInputsFilled,
-	setFinalResult,
+	// setFinalResult,
 }: {
 	setAllInputsFilled: (filled: boolean) => void;
 	setFinalResult: (result: string[]) => void;
 }) {
-	const [indexCalc, setIndexCalc] = useState(0);
+	const [indexCalc] = useState(0);
 	// const allFilled = false;
 	// const [results, setResults] = useState([
 	//   "VALOR EMPRESTIMO: R$ 00.000,00",
@@ -64,7 +64,7 @@ export function CalculatorINSS5({
 	//   "PARCELA R$ 000,00",
 	//   "84x",
 	// ]);
-	const [parcelas, setParcelas] = useState([
+	const [parcelas] = useState([
 		{ label: "PARCELA-0", value: 0, index: 0 },
 		{ label: "PARCELA-1", value: 0, index: 1 },
 		{ label: "PARCELA-2", value: 0, index: 2 },
@@ -73,7 +73,7 @@ export function CalculatorINSS5({
 		{ label: "PARCELA-5", value: 0, index: 5 },
 		{ label: "PARCELA-6", value: 0, index: 6 },
 	]);
-	const [saldos, setSaldos] = useState([
+	const [saldos] = useState([
 		{ label: "SALDO DEVEDOR-0", value: 0, index: 0 },
 		{ label: "SALDO DEVEDOR-1", value: 0, index: 1 },
 		{ label: "SALDO DEVEDOR-2", value: 0, index: 2 },
@@ -91,7 +91,7 @@ export function CalculatorINSS5({
 		{ label: "POSSIBILIDADE-5", value: 0, index: 5 },
 		{ label: "POSSIBILIDADE-6", value: 0, index: 6 },
 	]);
-	const [values, setValues] = useState([
+	const [, setValues] = useState([
 		{ label: "VALOR MARGEM EMPRÉSTIMO: ", value: 0 },
 		{ label: "VALOR MARGEM CARTÃO INSS: ", value: 0 },
 		{
@@ -111,24 +111,24 @@ export function CalculatorINSS5({
 		}
 	}, [parcelas, saldos, indexCalc]);
 
-	const handleSetParcelas = (value: number, index: number) => {
-		setIndexCalc(index);
-		setParcelas((prevState) => {
-			const newState = [...prevState];
-			newState[index].value =
-				typeof value === "string" ? parseFloat(value) : value;
-			return newState;
-		});
-	};
-	const handleSetSaldos = (value: number, index: number) => {
-		setIndexCalc(index);
-		setSaldos((prevState) => {
-			const newState = [...prevState];
-			newState[index].value =
-				typeof value === "string" ? parseFloat(value) : value;
-			return newState;
-		});
-	};
+	// const handleSetParcelas = (value: number, index: number) => {
+	// 	setIndexCalc(index);
+	// 	setParcelas((prevState) => {
+	// 		const newState = [...prevState];
+	// 		newState[index].value =
+	// 			typeof value === "string" ? parseFloat(value) : value;
+	// 		return newState;
+	// 	});
+	// };
+	// const handleSetSaldos = (value: number, index: number) => {
+	// 	setIndexCalc(index);
+	// 	setSaldos((prevState) => {
+	// 		const newState = [...prevState];
+	// 		newState[index].value =
+	// 			typeof value === "string" ? parseFloat(value) : value;
+	// 		return newState;
+	// 	});
+	// };
 
 	function handleCalcular(
 		saldos: { label: string; value: number; index: number }[],

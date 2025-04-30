@@ -4,7 +4,6 @@ import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./calculatorINSS4.css";
-import { MoneyInput } from "../../MoneyInput";
 import { Flex, FormControl, FormLabel, Input, InputGroup } from "@chakra-ui/react";
 import { NumericFormat } from "react-number-format";
 

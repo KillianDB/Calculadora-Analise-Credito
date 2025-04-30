@@ -20,11 +20,6 @@ export function CalculatorExercito2({
   setAllInputsFilled: (filled: boolean) => void;
   setFinalResult: (result: string[]) => void;
 }) {
-  const [somaLiquidosArray, setSomaLiquidosArray] = useState<
-    { index: number; value: number }[]
-  >([]);
-  let somaLiquidos = 0;
-  let somaParcelas = 0;
 
   const [indexCalc, setIndexCalc] = useState(0);
   const [results, setResults] = useState([
@@ -38,7 +33,7 @@ export function CalculatorExercito2({
     { label: "PARCELA: R$ ", value: "000,00" },
   ]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [resultsPossibilidade, setResultsPossibilidade] = useState([
+  const [, setResultsPossibilidade] = useState([
     { label: "SALDO DEVEDOR", value: " R$ 000,00" },
     { label: "SALDO DEVEDOR", value: " R$ 000,00" },
     { label: "SALDO DEVEDOR", value: " R$ 000,00" },

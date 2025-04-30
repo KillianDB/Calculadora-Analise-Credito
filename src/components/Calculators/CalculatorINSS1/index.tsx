@@ -4,7 +4,6 @@ import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import { formatNumber } from "../../../utils/formatNumbers";
-import { MoneyInput } from "../../MoneyInput";
 import { Flex, FormControl, FormLabel, Input, InputGroup } from "@chakra-ui/react";
 import { NumericFormat } from "react-number-format";
 
@@ -32,11 +31,6 @@ export function CalculatorINSS1({
 		"PARCELA R$ 0,00",
 		"84x",
 	]);
-	const labels: string[] = [
-		"VALOR MARGEM EMPRÉSTIMO: ",
-		"VALOR MARGEM CARTÃO INSS: ",
-		"VALOR MARGEM CARTÃO BENEFÍCIO: ",
-	];
 	const [values, setValues] = useState([
 		{ label: "VALOR MARGEM EMPRÉSTIMO: ", value: 0, index: 0},
 		{ label: "VALOR MARGEM CARTÃO INSS: ", value: 0, index: 1 },

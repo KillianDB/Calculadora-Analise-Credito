@@ -30,7 +30,11 @@ export default function LoginScreen() {
         password,
       });
 
-      if (response.status === 200) {
+      if (response.status != 200) {
+        console.error("Erro ao fazer login", response);
+        setError("Credenciais inválidas");
+        return;
+      }
         navigate("/calculadora");
         console.log("Login efetuado com sucesso", response);
         const { token } = response.data;
@@ -43,11 +47,8 @@ export default function LoginScreen() {
         // 		} else {
         // 			navigate("/home");
         // 		}
-        // 	navigate("/calculadora");
+        	navigate("/calculadora");
         // }
-      } else {
-        console.error("Erro ao fazer login", response);
-      }
     } catch (error) {
       setError("Credenciais inválidas");
     }

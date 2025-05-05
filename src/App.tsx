@@ -19,34 +19,29 @@ import { ProtectedRoute } from "./utils/ProtectedRoute";
 function App() {
 	return (
 		<UserProvider>
-			<Routes>
-        <Route path="*" element={<LoginScreen />} />
+      <Routes>
+        {/* Rotas Públicas */}
+        <Route path="/login" element={<LoginScreen />} />
         
-        <Route
-          path="/*"
-          element={
-            <ProtectedRoute>
-              <Routes>
-				<Route path='/metricas' element={<AdminHome />} />
-				<Route path='/equipes' element={<Equipes />} />
-				<Route path='/bancos' element={<Bancos />} />
-				<Route path='/coeficientes' element={<Coeficientes />} />
-				<Route path='/analise' element={<CompleteAnalysis />} />
-				<Route path='/calculadora' element={<Calculator />} />
-				<Route path='/vendas' element={<Vendas />} />
-				<Route path='/perfil' element={<Perfil />} />
+		<Route path="/metricas" element={<ProtectedRoute children={<AdminHome />} />} />
+				<Route path='/equipes' element={<ProtectedRoute children={<Equipes />}/>} />
+				<Route path='/bancos' element={<ProtectedRoute children={<Bancos />}/>} />
+				<Route path='/coeficientes' element={<ProtectedRoute children={<Coeficientes />}/>} />
+				<Route path='/analise' element={<ProtectedRoute children={<CompleteAnalysis />}/>} />
+				<Route path='/calculadora' element={<ProtectedRoute children={<Calculator />}/>} />
+				<Route path='/vendas' element={<ProtectedRoute children={<Vendas />}/>} />
+				<Route path='/perfil' element={<ProtectedRoute children={<Perfil />}/>} />
 				{/* <Route path='/loading' element={<Loading />} /> */}
 				<Route
 					path='/resultado-analise'
-					element={<ResultadoAnalise />}
+					element={<ProtectedRoute children={<ResultadoAnalise />}/>}
 				/>
 				{/* <Route path='*' element={<NotFoundScreen />}/> */}
-              </Routes>
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-		</UserProvider>
+
+{/* Redirecionamento Padrão */}
+<Route path="*" element={<LoginScreen />} />
+</Routes>
+</UserProvider>
 	);
 }
 

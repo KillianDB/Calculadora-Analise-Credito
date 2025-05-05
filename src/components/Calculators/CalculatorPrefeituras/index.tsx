@@ -40,6 +40,7 @@ export function CalculatorPrefeitura({
 	]);
 
 	function handleInputValue(label: string, value: number) {
+		if (value === 0) return; 
 		setValues([{ label, value }]);
 
 		if (banco === "VALOR") {
@@ -78,26 +79,9 @@ export function CalculatorPrefeitura({
 		}
 
 		const finalResult: string[] = [
-			//[0]
-			"Bem vindo, Cliente CR",
-			//[1]
 			`Valor Empréstimo R$ ${formatNumber(value / 0.032057)}`,
-			//[2]
-			`Valor Parcela R$ ${value} 84x`,
-			//[3]
-			`${formatNumber(value / 0.0387)}`,
-			//[4]
-			`${value} 84x`,
-			// //[5]
-			// `${result[4].split(" - R$ ")[1]} 72x`,
-			// //[6]
-			// `${result[5].split(" - R$ ")[1]} 60x`,
-			// //[7]
-			// `${result[6].split(" - R$ ")[1]} 48x`,
-			// //[8]
-			// `${result[7].split(" - R$ ")[1]} 36x`,
-			// //[9]
-			// `${result[8].split(" - R$ ")[1]} 24x`,
+			`VALOR TOTAL R$ ${formatNumber(value / 0.0387)}`,
+			`PARCELA TOTAL R$ ${formatNumber(value)} 84x`,
 		];
 		setFinalResult(finalResult);
 		console.log("finalResult", finalResult);
@@ -114,7 +98,11 @@ export function CalculatorPrefeitura({
 	useEffect(() => {
 		const allFilled = values.every((item) => item.value !== 0);
 		setAllInputsFilled(allFilled);
-	}, [values, setAllInputsFilled]);
+	  }, [values]);
+	  
+	  useEffect(() => {
+		values.map((item)=>(item.value !== 0 ? handleInputValue(item.label, item.value) : null))
+	  }, [setAllInputsFilled]);
 
 	const chunkedTotais = chunkArray(totais, 3);
 	const chunkedLiberado = chunkArray(result.slice(0, 3), 3);

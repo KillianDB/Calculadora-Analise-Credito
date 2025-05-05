@@ -6,14 +6,15 @@ import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import { UserProvider } from "./utils/UserContext.tsx";
 
+// main.tsx (correto)
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <UserProvider>
     <BrowserRouter>
       <ChakraProvider>
-        <App />
+        <UserProvider>
+          <App />
+        </UserProvider>
       </ChakraProvider>
     </BrowserRouter>
-    </UserProvider>
   </React.StrictMode>
 );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Calculator.css";
 import { CalculatorINSS1 } from "../../components/Calculators/CalculatorINSS1";
 import { CalculatorINSS2 } from "../../components/Calculators/CalculatorINSS2";
@@ -25,10 +25,14 @@ import {
   ModalOverlay,
   Select,
 } from "@chakra-ui/react";
+import { useUser } from "../../utils/UserContext";
+import { Checkbox } from "antd";
 
 function Calculator() {
+  const modalBodyRef = useRef<HTMLDivElement>(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [menu, setMenu] = useState("");
-  const [submenu, setSubmenu] = useState("");
+  const [submenu, setSubmenu] = useState("Submenu");
   const [allInputsFilled, setAllInputsFilled] = useState(false);
   const [finalResult, setFinalResult] = useState<string[]>([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -36,11 +40,37 @@ function Calculator() {
   const [isChecked, setIsChecked] = useState(false);
   const [parcelas, setParcelas] = useState("");
   const token = localStorage.getItem("token");
+  const { user } = useUser();
+  const [clientName, setClientName] = useState("");
+  const [NameModalIsOpen, setNameModalIsOpen] = useState(false);
 
   function toggleCheckbox() {
     console.log("isChecked", isChecked);
     setIsChecked(!isChecked);
   }
+
+  useEffect(() => {
+    console.log("Modal is open ", modalIsOpen);
+
+    if (modalIsOpen) {
+      const timeout = setTimeout(() => {
+        const ref = modalBodyRef.current;
+        if (!ref) return;
+        if (modalBodyRef.current) {
+          const observer = new ResizeObserver((entries) => {
+            for (let entry of entries) {
+              const { width, height } = entry.contentRect;
+              console.log("Width: ", width, "Height: ", height);
+              setDimensions({ width, height });
+            }
+          });
+
+          observer.observe(ref);
+        }
+      }, 100); // delay para esperar render
+      return () => clearTimeout(timeout);
+    }
+  }, [modalIsOpen]);
 
   function handleMenuChange(newMenu: React.SetStateAction<string>) {
     setMenu(newMenu);
@@ -75,6 +105,8 @@ function Calculator() {
 
   function renderCalculatorByMenus(menu: string, submenu: string) {
     console.log("menu", menu);
+    // setParcelas("");
+    // setClientName("");
     if (menu === "" || submenu === "" || submenu === "Submenu") {
       return (
         <>
@@ -197,19 +229,25 @@ function Calculator() {
   function handleResultDownload() {
     if (
       menu === "INSS" &&
-      submenu === "Cálculo Valor Solicitado" &&
-      parcelas == ""
+      submenu === "Cálculo Valor Solicitado"
       // ||
       // (menu === "PREFEITURA" && parcelas == "")
     ) {
-      setParcelModalIsOpen(true);
+      setParcelModalIsOpen(!parcelModalIsOpen);
     } else {
       console.log("final result", finalResult);
-      setModalIsOpen(true);
+      // document.body.classList.add("no-scroll");
+      // document.styleSheets[0].insertRule(
+      //   "body.no-scroll { overflow: hidden; }",
+      // );
+      // setModalIsOpen(!modalIsOpen);
+      setNameModalIsOpen(!NameModalIsOpen);
     }
   }
 
   const handleDownloadImage = async () => {
+    setParcelas("");
+    setClientName("");
     const element = document.getElementById("calculatorIMGResult");
     if (element) {
       console.log("Baixando a imagem");
@@ -248,6 +286,14 @@ function Calculator() {
     }
   };
 
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
+    setParcelas("");
+    setClientName("");
+    setParcelModalIsOpen(false);
+    setNameModalIsOpen(false);
+  };
+
   return (
     <>
       <Flex className="body_colaborators">
@@ -267,7 +313,6 @@ function Calculator() {
           </select>
           <select
             onChange={(e) => handleSubmenuChange(menu, e.target.value)}
-            defaultValue="Submenu"
             value={submenu}
           >
             {filterSubmenuOptions(menu).map((option) => (
@@ -278,7 +323,7 @@ function Calculator() {
           </select>
           {submenu.slice(0, 15) === "Cálculo Salário" && (
             <label className="checkboxDiv">
-              <Input
+              <Checkbox
                 type="checkbox"
                 checked={isChecked}
                 onChange={toggleCheckbox}
@@ -299,14 +344,11 @@ function Calculator() {
           )}
         </Flex>
         {/* Modal para escolher a quantidade de parcelas */}
-        <Modal
-          isOpen={parcelModalIsOpen}
-          onClose={() => setParcelModalIsOpen(false)}
-        >
+        <Modal isOpen={parcelModalIsOpen} onClose={() => handleCloseModal()}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Selecione o número de parcelas</ModalHeader>
-            <ModalCloseButton onClick={() => setParcelas("")} />
+            <ModalCloseButton onClick={() => handleCloseModal()} />
             <ModalBody>
               <p>
                 Selecione o número de parcelas do resultado que deseja baixar
@@ -328,7 +370,11 @@ function Calculator() {
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-              <Button colorScheme="blue" mr={3} onClick={handleResultDownload}>
+              <Button
+                colorScheme="orange"
+                mr={3}
+                onClick={() => setNameModalIsOpen(true)}
+              >
                 Confirmar
               </Button>
               <Button onClick={() => setParcelModalIsOpen(false)}>
@@ -338,23 +384,68 @@ function Calculator() {
           </ModalContent>
         </Modal>
 
-        {/* Modal para exibir o resultado */}
-        <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
+        {/* Modal para adicionar nome do cliente */}
+        <Modal isOpen={NameModalIsOpen} onClose={() => handleCloseModal()}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Selecione o número de parcelas</ModalHeader>
-            <ModalCloseButton onClick={() => setParcelas("")} />
+            <ModalHeader>Nome do(a) cliente</ModalHeader>
+            <ModalCloseButton onClick={() => handleCloseModal()} />
             <ModalBody>
+              <p>Digite o primeiro nome do(a) cliente</p>
+              <Input
+                placeholder="Nome do(a) cliente"
+                value={clientName}
+                onChange={(e) => setClientName(e.target.value)}
+                mt={4}
+              />
+            </ModalBody>
+
+            <ModalFooter justifyContent={"center"}>
+              <Button
+                colorScheme="orange"
+                mr={3}
+                onClick={() => setModalIsOpen(true)}
+              >
+                Confirmar
+              </Button>
+              <Button onClick={() => setNameModalIsOpen(false)}>
+                Cancelar
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
+        {/* Modal para exibir o resultado */}
+        <Modal isOpen={modalIsOpen} onClose={() => handleCloseModal()}>
+          <ModalOverlay />
+          <ModalContent
+            h={"90vh"}
+            margin={"5vh"}
+            alignItems={"center"}
+            alignSelf={"center"}
+          >
+            <ModalHeader>Visualização do resultado</ModalHeader>
+            <ModalCloseButton onClick={() => setParcelas("")} />
+            <ModalBody
+              ref={modalBodyRef}
+              maxH={"71vh"}
+              padding={"0"}
+              minH={"511px"}
+              minW={"269px"}
+            >
               <CalculatorIMGResult
                 menu={menu}
-                submenu={submenu}
+                clientName={clientName}
+                isPartner={user?.userType === "partner"}
                 values={finalResult}
-                isChecked={isChecked}
+                containerWidth={dimensions.width}
+                containerHeight={dimensions.height}
+                hasSubtotal={isChecked}
                 parcelas={parcelas}
               />
             </ModalBody>
             <ModalFooter justifyContent={"center"}>
-              <Button colorScheme="blue" mr={3} onClick={handleDownloadImage}>
+              <Button colorScheme="orange" mr={3} onClick={handleDownloadImage}>
                 Baixar Imagem
               </Button>
             </ModalFooter>

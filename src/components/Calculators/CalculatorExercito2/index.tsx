@@ -158,6 +158,7 @@ export function CalculatorExercito2({
   }
 
   function handleInputValue(label: string, value: number) {
+    if (value === 0) return; 
     // const index = parseInt(label.split("-")[1]) - 1;
 
     // if (
@@ -246,13 +247,12 @@ export function CalculatorExercito2({
       });
     // }
     const finalResult = [
-      "Bem vindo, Cliente CR",
       `Valor Empréstimo R$ ${results[0].value}`,
       `Parcela Empréstimo R$ ${results[1].value} 84x`,
       `Portabilidade Aprox. R$ ${results[2].value}`,
       `Parcela Portabilidade R$ ${results[3].value} 84x`,
-      `${total[0].split(" R$ ")[1]}`,
-      `${total[1].split(" R$ ")[1]} 84x`,
+      `VALOR TOTAL R$ ${total[0].split(" R$ ")[1]}`,
+      `PARCELA TOTAL R$ ${total[1].split(" R$ ")[1]} 84x`,
     ];
     setFinalResult(finalResult);
     console.log("finalResult on exercito", finalResult);
@@ -321,7 +321,7 @@ export function CalculatorExercito2({
   }, 0);
 
   return (
-    <Flex className="calculatorComponentFlexPossibilidadesExercito">
+    <Flex className="calculatorComponentFlexPossibilidadesExercito" style={{flexDirection:"column"}}>
       <Flex className="mainContainerPossibilidadesExercito">
         <CalculatorTitle menu="Exército" submenu="Possibilidades Gerais" />
         <Flex className="inputsContainerExercito">
@@ -408,12 +408,12 @@ export function CalculatorExercito2({
             </Flex>
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
-                {`SALDO DEVEDOR: ${(taxaJuros1 > 0
-                  ? Math.max(
+                {`SALDO DEVEDOR: ${(taxaJuros1 > 0 ?
+                  // ? Math.max(
                       parcela1 / taxaJuros1 -
-                        parcela1 * (84 - prazoRestante1) * 0.45,
-                      0
-                    )
+                        parcela1 * (84 - prazoRestante1) * 0.45
+                      
+                    // )
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",

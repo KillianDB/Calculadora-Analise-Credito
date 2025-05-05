@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { calculate } from "../../../utils/calculate";
 import { CalculatorResult } from "../../CalculatorResult";
 import { CalculatorTitle } from "../../CalculatorTitle";
@@ -28,6 +28,7 @@ export function CalculatorExercito1({
 		"84x",
 	]);
 	function handleInputValue(label: string, value: number) {
+		if (value === 0) return; 
 		setValues([{ label, value }]);
 		setAllInputsFilled(true);
 		const result = calculate("Exército", "Cálculo por Margem Disponível", [
@@ -39,18 +40,26 @@ export function CalculatorExercito1({
 			setTotal(result.slice(2, 5));
 
 			const finalResult: string[] = [
-				"Bem vindo, Cliente CR",
 				`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
 				`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 72x`,
 				//total
-				`${result[2].split(" R$ ")[1]}`,
+				`VALOR TOTAL R$ ${result[2].split(" R$ ")[1]}`,
 				//parcela
-				`${result[3].split(" R$ ")[1]} 72x`,
+				`PARCELA TOTAL R$ ${result[3].split(" R$ ")[1]} 72x`,
 			];
 			console.log("finalResult", finalResult);
 			setFinalResult(finalResult);
 		}
 	}
+
+	useEffect(() => {
+		const allFilled = values.every((item) => item.value !== 0);
+		setAllInputsFilled(allFilled);
+	  }, [values]);
+	  
+	  useEffect(() => {
+		handleInputValue(values[0].label, values[0].value);
+	  }, [values[0].value]);
 
 	return (
 		<Flex className='calculatorComponentDiv'>
@@ -76,14 +85,16 @@ export function CalculatorExercito1({
 								/>
 				</FormControl>
 			</Flex>
-			<Flex className='answerContainer'>
-				<Flex className='resultsContainer'>
+			<Flex className='answerContainer' style={{ height: "20vh", 
+    justifyContent: "flex-end",
+    gap: "6vh"}}>
+				<Flex className='resultsContainer' style={{height:"fit-content"}}>
 					<CalculatorResult result={results[0]} />
 					<CalculatorResult result={results[1]} />
 				</Flex>
 				<Flex className='totaisContainer'>
-					{totais.slice(0, 3).map((total) => (
-						<CalculatorTotal total={total} />
+					{totais.slice(0, 3).map((total, index) => (
+						<CalculatorTotal total={total} key={`totalExercito${index}`}/>
 					))}
 				</Flex>
 			</Flex>

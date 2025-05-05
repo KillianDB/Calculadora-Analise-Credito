@@ -30,6 +30,28 @@
 	margin-right: 8px;
 }
 
+.checkboxDiv .checkbox:checked {
+	background-color: black; /* Cor de fundo do checkbox quando marcado */
+	border-color: black; /* Cor da borda do checkbox quando marcado */
+  }
+
+  .ant-checkbox-checked .ant-checkbox-inner {
+	background-color: black !important; /* Força a cor preta */
+	border-color: black !important; /* Força a borda preta */
+  }
+
+  :where(.css-dev-only-do-not-override-ccdg5a)
+  .ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover
+  .ant-checkbox-checked:not(.ant-checkbox-disabled)
+  .ant-checkbox-inner {
+  background-color: black; /* Cor de fundo preta ao passar o mouse */
+  border-color: black; /* Cor da borda preta ao passar o mouse */
+}
+
+.checkbox:hover {
+	border-color: black !important; /* Define a borda preta no hover */
+  }
+
 .checkbox {
 	width: 21px;
 	margin: 0;

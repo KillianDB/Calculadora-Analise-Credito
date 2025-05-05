@@ -43,6 +43,7 @@ function Calculator() {
   const { user } = useUser();
   const [clientName, setClientName] = useState("");
   const [NameModalIsOpen, setNameModalIsOpen] = useState(false);
+  const [isGeneratingImage, setIsGeneratingImage] = useState(false);
 
   function toggleCheckbox() {
     console.log("isChecked", isChecked);
@@ -245,38 +246,42 @@ function Calculator() {
     }
   }
   async function handleDownloadImage() {
-    const element = document.getElementById("calculatorIMGResult");
-    if (!element) return;
-  
-    // Clonar o elemento para não afetar o DOM original
-    const elementClone = element.cloneNode(true) as HTMLElement;
-    
-    // Remover transformações de escala e ajustar para tamanho original
-    elementClone.style.transform = 'none';
-    elementClone.style.width = '891px';
-    elementClone.style.minHeight = '1644px';
-    elementClone.style.padding = '40px 20px';
-    
-    // Ajustar todos os estilos internos para o tamanho original (scale=1)
-    const scaledElements = elementClone.querySelectorAll('[style*="scale"]');
-    scaledElements.forEach(el => {
-      (el as HTMLElement).style.transform = 'none';
-    });
-    
-    // Converter todas as unidades de estilo para valores originais (891px base)
-    const stylesToFix = elementClone.querySelectorAll('[style]');
-    stylesToFix.forEach(el => {
-      const style = el.getAttribute('style');
-      // Converter valores escalados para originais (dividir por 0.48)
-      const fixedStyle = style?style.replace(/(\d+\.?\d*)px/g, (match, p1) => {
-        return parseFloat(p1) / 0.48 + 'px';
-      }) : '';
-      el.setAttribute('style', fixedStyle);
-    });
-    
-    // Adicionar fontes necessárias
-    const style = document.createElement('style');
-    style.textContent = `
+    setIsGeneratingImage(true);
+    try {
+      const element = document.getElementById("calculatorIMGResult");
+      if (!element) return;
+
+      // Clonar o elemento para não afetar o DOM original
+      const elementClone = element.cloneNode(true) as HTMLElement;
+
+      // Remover transformações de escala e ajustar para tamanho original
+      elementClone.style.transform = "none";
+      elementClone.style.width = "891px";
+      elementClone.style.minHeight = "1644px";
+      elementClone.style.padding = "40px 20px";
+
+      // Ajustar todos os estilos internos para o tamanho original (scale=1)
+      const scaledElements = elementClone.querySelectorAll('[style*="scale"]');
+      scaledElements.forEach((el) => {
+        (el as HTMLElement).style.transform = "none";
+      });
+
+      // Converter todas as unidades de estilo para valores originais (891px base)
+      const stylesToFix = elementClone.querySelectorAll("[style]");
+      stylesToFix.forEach((el) => {
+        const style = el.getAttribute("style");
+        // Converter valores escalados para originais (dividir por 0.48)
+        const fixedStyle = style
+          ? style.replace(/(\d+\.?\d*)px/g, (match, p1) => {
+              return parseFloat(p1) / 0.48 + "px";
+            })
+          : "";
+        el.setAttribute("style", fixedStyle);
+      });
+
+      // Adicionar fontes necessárias
+      const style = document.createElement("style");
+      style.textContent = `
       @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;700;800;900&display=swap');
       * {
         margin: 0;
@@ -284,9 +289,8 @@ function Calculator() {
         box-sizing: border-box;
       }
     `;
-    elementClone.prepend(style);
-    
-    try {
+      elementClone.prepend(style);
+
       const response = await axios.post(
         "https://api.creditorealsf.com/calculator/image",
         {
@@ -300,7 +304,7 @@ function Calculator() {
           },
         }
       );
-      
+
       if (response.status === 200) {
         // window.location.href = response.data;
         window.open(response.data, "_blank");
@@ -308,6 +312,8 @@ function Calculator() {
       }
     } catch (error) {
       console.error("Error generating image:", error);
+    } finally {
+      setIsGeneratingImage(false); // Desativa o loading independente do resultado
     }
   }
   // const handleDownloadImage = async () => {
@@ -510,7 +516,13 @@ function Calculator() {
               />
             </ModalBody>
             <ModalFooter justifyContent={"center"}>
-              <Button colorScheme="orange" mr={3} onClick={handleDownloadImage}>
+              <Button
+                colorScheme="orange"
+                mr={3}
+                onClick={handleDownloadImage}
+                isLoading={isGeneratingImage}
+                loadingText="Gerando..."
+              >
                 Gerar Imagem
               </Button>
             </ModalFooter>

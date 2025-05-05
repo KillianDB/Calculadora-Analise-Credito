@@ -180,10 +180,11 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
         fontFamily: "Roboto Condensed",
         fontStyle: "normal",
         fontWeight: 400,
-        fontSize: `${scaled(20)}px`,
+        fontSize: `${scaled(27)}px`,
         lineHeight: `${scaled(35)}px`,
         color: "#FFFFFF",
         textAlign: "center",
+        padding: `${scaled(16)}px`,
       },
       valuesContainer: {
         width: "100%",

@@ -13,8 +13,10 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { Flex } from "antd";
+import { useAppToast } from "../../utils/toaster";
 
 export default function LoginScreen() {
+  const { showToast } = useAppToast();
   const navigate = useNavigate();
   const { login } = useUser();
   const [email, setEmail] = useState("");
@@ -32,9 +34,15 @@ export default function LoginScreen() {
 
       if (response.status != 200) {
         console.error("Erro ao fazer login", response);
-        setError("Credenciais inválidas");
+        showToast(
+          response?.data?.message || "Credenciais inválidas", 
+          "error",
+          8000 // Duração maior para erros
+        );
+        // setError("Credenciais inválidas");
         return;
       }
+      showToast("Login efetuado com sucesso!", "success");
         navigate("/calculadora");
         console.log("Login efetuado com sucesso", response);
         const { token } = response.data;
@@ -50,7 +58,13 @@ export default function LoginScreen() {
         	navigate("/calculadora");
         // }
     } catch (error) {
-      setError("Credenciais inválidas");
+      console.error("Erro ao fazer login", error);
+      showToast(
+        "Erro ao fazer login. Verifique suas credenciais e tente novamente.",
+        "error",
+        8000 // Duração maior para erros
+      );
+      // setError("Credenciais inválidas");
     }
   };
 

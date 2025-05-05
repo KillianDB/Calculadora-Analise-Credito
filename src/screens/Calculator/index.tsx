@@ -27,8 +27,11 @@ import {
 } from "@chakra-ui/react";
 import { useUser } from "../../utils/UserContext";
 import { Checkbox } from "antd";
+import { useAppToast } from "../../utils/toaster";
 
 function Calculator() {
+
+  const { showToast } = useAppToast();
   const modalBodyRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [menu, setMenu] = useState("");
@@ -306,12 +309,20 @@ function Calculator() {
       );
 
       if (response.status === 200) {
+        showToast("Imagem gerada com sucesso!", "success");
         // window.location.href = response.data;
         window.open(response.data, "_blank");
         console.log("Redirecionando", response.data);
+        return;
       }
+      showToast(
+        response?.data || "Falha ao gerar imagem", 
+        "error",
+        8000 // Duração maior para erros
+      );
     } catch (error) {
       console.error("Error generating image:", error);
+      showToast("Erro ao gerar a imagem", "error");
     } finally {
       setIsGeneratingImage(false); // Desativa o loading independente do resultado
     }

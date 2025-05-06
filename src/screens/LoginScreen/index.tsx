@@ -31,32 +31,31 @@ export default function LoginScreen() {
         email,
         password,
       });
-
-      if (response.status != 200) {
+  
+      if (response.status !== 200) {
         console.error("Erro ao fazer login", response);
         showToast(
-          response?.data?.message || "Credenciais inválidas", 
+          response?.data?.message || "Credenciais inválidas",
           "error",
           8000 // Duração maior para erros
         );
-        // setError("Credenciais inválidas");
         return;
       }
+  
       showToast("Login efetuado com sucesso!", "success");
+      console.log("Login efetuado com sucesso", response);
+  
+      const { token } = response.data;
+      await login(token); // Atualiza o estado do usuário no contexto
+  
+      // Redireciona com base no tipo de usuário
+      if (response.data.usertype === "admin") {
+        console.log("Redirecionando para admin/home");
+        navigate("/equipes");
+      } else {
+        console.log("Redirecionando para /calculadora");
         navigate("/calculadora");
-        console.log("Login efetuado com sucesso", response);
-        const { token } = response.data;
-        // const user =
-        await login(token);
-
-        // if (user !== null) {
-        // 		if (user.role === "admin") {
-        // 			navigate("/admin/home");
-        // 		} else {
-        // 			navigate("/home");
-        // 		}
-        	navigate("/calculadora");
-        // }
+      }
     } catch (error) {
       console.error("Erro ao fazer login", error);
       showToast(
@@ -64,7 +63,6 @@ export default function LoginScreen() {
         "error",
         8000 // Duração maior para erros
       );
-      // setError("Credenciais inválidas");
     }
   };
 

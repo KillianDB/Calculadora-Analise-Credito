@@ -133,40 +133,44 @@ export function CalculatorLOAS({
           </InputGroup>
         </FormControl>
       </Flex>
-      <Flex className="answerContainer" style={{ height: "25vh" }}>
-        <Flex
-          className="resultsContainer"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            columnGap: "200px",
-            rowGap: "18px",
-            height: "max-content",
-            alignContent: "flex-start",
-            padding: "0 4px",
-            width: "100%",
-          }}
-        >
-          <CalculatorResult result={results[0]} />
-          <CalculatorResult result={results[1]} />
-          <CalculatorResult result={results[2]} />
-          <CalculatorResult result={results[3]} />
-          <CalculatorResult result={results[4]} />
-          <CalculatorResult result={results[5]} />
-          <CalculatorResult result={results[6]} />
-          <CalculatorResult result={results[7]} />
+      <Flex className="answerContainer" style={{ height: "34vh" }}>
+          <Flex
+            className="resultsContainer"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              columnGap: "200px",
+              rowGap: "18px",
+              height: "max-content",
+              alignContent: "flex-start",
+              padding: "30px",
+              width: "100%",
+            }}
+          >
+            <CalculatorResult result={results[0]} />
+            <CalculatorResult result={results[1]} />
+            <CalculatorResult result={results[2]} />
+            <CalculatorResult result={results[3]} />
+            <CalculatorResult result={results[4]} />
+            <CalculatorResult result={results[5]} />
+            <CalculatorResult result={results[6]} />
+            <CalculatorResult result={results[7]} />
+          </Flex>
+          <Flex className="totaisContainer">
+            {totais.slice(0, 3).map((total, index) => (
+              <CalculatorTotal
+                total={total}
+                key={`calculatorsubtotal+${index}`}
+              />
+            ))}
+          </Flex>
         </Flex>
-        <Flex className="totaisContainer">
-          {totais.slice(0, 3).map((total, index) => (
-            <CalculatorTotal
-              total={total}
-              key={`calculatorsubtotal+${index}`}
-            />
-          ))}
-        </Flex>
-      </Flex>
-      {isChecked && (
-        <Flex className="answerContainer" id="answerContainerINSS4">
+		{isChecked && (
+        <Flex className="answerContainer"
+        style={{
+          justifyContent: "end",
+          height: "fit-content",
+        }}>
           <Flex
             className="resultsContainer"
             style={{
@@ -175,8 +179,7 @@ export function CalculatorLOAS({
               columnGap: "200px",
               rowGap: "8px",
               height: "max-content",
-              alignContent: "flex-start",
-              padding: "0 4px",
+              padding: "30px",
               width: "100%",
             }}
           >
@@ -189,7 +192,7 @@ export function CalculatorLOAS({
               APÓS 03 PARCELAS PAGAS NA REDUÇÃO DE JUROS SEM ALTERAR A PARCELA.
             </p>
           </Flex>
-          <Flex className="totaisContainer" style={{ fontSize: "0.9rem" }}>
+          <Flex className="totaisContainer" style={{"fontSize": "0.9rem"}}>
             {totais.slice(3, 7).map((total, index) => (
               <CalculatorTotal total={total} key={`total+${index}`} />
             ))}

@@ -131,7 +131,7 @@ export function CalculatorINSS3({
       </Flex>
 
       <Flex className="answerContainer" style={{ height: "15vh" }}>
-        <Flex className="resultsContainer">
+        <Flex className="resultsContainer" id="inss3resultsContainer">
           <CalculatorResult result={results[0]} />
           <CalculatorResult result={results[1]} />
         </Flex>
@@ -145,6 +145,7 @@ export function CalculatorINSS3({
         <Flex className="answerContainer" style={{ gap: "4px", height: "max-content", justifyContent: "center" }}>
           <Flex
             className="resultsContainer"
+            id="inss3resultsContainer"
           >
             <CalculatorResult result={results[2]} />
             <CalculatorResult result={results[3]} />

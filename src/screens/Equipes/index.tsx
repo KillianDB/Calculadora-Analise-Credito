@@ -177,14 +177,30 @@ export function Equipes() {
     { key: "8", value: "Geral", label: "Geral" },
   ];
   const adicionarMembro = async () => {
-    const response = await axios.post("http://localhost:3000/members", {
-      name,
-      email,
-      telefone,
-      imagem,
-      role,
-      escritorio,
-    });
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("Token não encontrado");
+      return;
+    }
+
+    const binaryImage = imagem ? await imagem.arrayBuffer() : null;
+    const base64Image = binaryImage
+      ? btoa(String.fromCharCode(...new Uint8Array(binaryImage)))
+      : null;
+    const response = await axios.post(
+      "https://api.creditorealsf.com/members/create",
+      {
+        name,
+        email,
+        telefone,
+        image: base64Image,
+        role,
+        escritorio,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
 
     if (response.status !== 200) {
       console.error("Erro ao adicionar membro");
@@ -198,21 +214,18 @@ export function Equipes() {
   };
 
   const editarMembro = async (membro: { id: string }) => {
-    const response = await fetch(
-      `api.creditorealsf.com/members/${membro.id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          // userType,
-          role,
-        }),
-      }
-    );
+    const response = await fetch(`api.creditorealsf.com/members/${membro.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        // userType,
+        role,
+      }),
+    });
 
     if (response.status !== 200) {
       console.error("Erro ao editar membro");
@@ -396,7 +409,7 @@ export function Equipes() {
                   bgColor="#f99401"
                   size="lg"
                   width="100%"
-                  onClick={() => adicionarMembro}
+                  onClick={() => adicionarMembro()}
                 >
                   Salvar
                 </Button>

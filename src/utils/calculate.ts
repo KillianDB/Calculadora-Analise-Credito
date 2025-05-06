@@ -368,6 +368,8 @@ export function calculate(
 
 		const totalT = emprestimoT;
 		const totalP = emprestimoP;
+		console.log("emprestimoT", emprestimoT);
+		console.log("emprestimoP", emprestimoP);
 
 		return [
 			"VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),

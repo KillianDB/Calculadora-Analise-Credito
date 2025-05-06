@@ -90,7 +90,7 @@ export function Bancos() {
 
   const bloquearBanco = async (banco: { id: string }) => {
     const response = await fetch(
-      `api.creditorealsf.com/banks/block/${banco.id}`,
+      `https://api.creditorealsf.com/banks/block/${banco.id}`,
       {
         method: "PUT",
         headers: {

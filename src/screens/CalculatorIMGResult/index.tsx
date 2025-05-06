@@ -11,7 +11,7 @@ interface CalculatorIMGResultProps {
   isPartner: boolean;
   hasSubtotal: boolean;
   phone?: string;
-  logoSRC?: string;
+  logo?: string;
   containerWidth?: number; //Largura do container pai
   containerHeight?: number; //Altura do container pai
 }
@@ -24,7 +24,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
   isPartner,
   hasSubtotal = false,
   phone = "08006080181",
-  logoSRC = "https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814",
+  logo = "https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814",
   containerWidth = 890,
   containerHeight = 1644,
 }) => {
@@ -114,7 +114,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
         fontWeight: 500,
         fontSize: `${scaled(70)}px`,
         lineHeight: `${scaled(82)}px`,
-        color: "#265064",
+        color: `${isPartner?"#001E2D":"#265064"}`,
         marginBottom: `${scaled(10)}px`,
       },
       title2: {
@@ -123,7 +123,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
         fontWeight: 700,
         fontSize: `${scaled(111.55)}px`,
         lineHeight: `${scaled(131)}px`,
-        color: "#F99401",
+        color: `${isPartner?"#000D00":"#F99401"}`,
         marginBottom: `${scaled(10)}px`,
       },
       title3: {
@@ -132,7 +132,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
         fontWeight: 500,
         fontSize: `${scaled(77.52)}px`,
         lineHeight: `${scaled(91)}px`,
-        color: "#265064",
+        color: `${isPartner?"#001E2D":"#265064"}`,
       },
       introSection: {
         width: "100%",
@@ -143,8 +143,8 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
       introLeft: {
         width: `${scaled(542)}px`,
         height: `${scaled(123)}px`,
-        background:
-          "radial-gradient(50% 50% at 50% 50%, rgba(38, 80, 100, 0.7) 0%, rgba(38, 80, 100, 0.35) 70%, rgba(38, 80, 100, 0.35) 100%), #265064",
+        background:`${isPartner? "radial-gradient(50% 50% at 50% 50%, rgba(38, 80, 100, 0.7) 0%, rgba(38, 80, 100, 0.35) 70%, rgba(38, 80, 100, 0.35) 100%), #2E2E2E":
+          "radial-gradient(50% 50% at 50% 50%, rgba(38, 80, 100, 0.7) 0%, rgba(38, 80, 100, 0.35) 70%, rgba(38, 80, 100, 0.35) 100%), #265064"}`,
         borderRadius: `${scaled(50)}px`,
         display: "flex",
         alignItems: "center",
@@ -239,7 +239,8 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
       valueButton: {
         width: `${scaled(244.51)}px`,
         height: `${scaled(53.37)}px`,
-        background: "#F99401",
+        background: 
+        `${isPartner? "#001E2D":"#F99401"}`,
         borderRadius: `${scaled(39.5202)}px`,
         display: "flex",
         alignItems: "center",
@@ -310,7 +311,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
         width: `${scaled(328)}px`,
         height: `${scaled(140)}px`,
         background:
-          "linear-gradient(180deg, rgba(249, 169, 52, 0.8) 0%, rgba(249, 158, 26, 0.9) 50%, #F99401 100%)",
+          `${isPartner? "#001E2D":"linear-gradient(180deg, rgba(249, 169, 52, 0.8) 0%, rgba(249, 158, 26, 0.9) 50%, #F99401 100%)"}`,
         borderRadius: `${scaled(25.1148)}px`,
         padding: `${scaled(15)}px`,
         display: "flex",
@@ -353,7 +354,8 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
       highlightBox: {
         width: `${scaled(145)}px`,
         height: `${scaled(33)}px`,
-        background: "#F99401",
+        background: 
+          `${isPartner? "#001E2D":"#F99401"}`,
         borderRadius: `${scaled(17.0327)}px`,
         display: "flex",
         alignItems: "center",
@@ -378,7 +380,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
         width: `${scaled(419)}px`,
         height: `${scaled(161)}px`,
         background:
-          "linear-gradient(180deg, rgba(249, 169, 52, 0.8) 0%, rgba(249, 158, 26, 0.9) 50%, #F99401 100%)",
+          `${isPartner? "#001E2D":"linear-gradient(180deg, rgba(249, 169, 52, 0.8) 0%, rgba(249, 158, 26, 0.9) 50%, #F99401 100%)"}`,
         borderRadius: `${scaled(39.2571)}px`,
         display: "flex",
         flexDirection: "column",
@@ -475,9 +477,9 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
           <div style={styles.introRight}>
             <div style={styles.introRightText as React.CSSProperties}>
               Segue abaixo a{" "}
-              {<span style={{ color: "#FF9940" }}>simulação prévia</span>} de
+              {<span style={{ color: `${isPartner? "001E2D":"#FF9940"}` }}>simulação prévia</span>} de
               valores disponíveis no seu benefício{" "}
-              {<span style={{ color: "#FF9940" }}>{menu}</span>}
+              {<span style={{ color: `${isPartner? "001E2D":"#FF9940"}` }}>{menu}</span>}
             </div>
           </div>
         </div>
@@ -648,7 +650,7 @@ export const CalculatorIMGResult: React.FC<CalculatorIMGResultProps> = ({
               {isPartner ? phone : "08006080181"}
             </div>
           </div>
-          <img src={logoSRC} style={styles.logo} alt="Logo" />
+          <img src={logo} style={styles.logo} alt="Logo" />
         </div>
       </div>
     </div>

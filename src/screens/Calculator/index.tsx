@@ -44,6 +44,7 @@ function Calculator() {
   const [parcelas, setParcelas] = useState("");
   const token = localStorage.getItem("token");
   const { user } = useUser();
+  console.log("user-> ", user);
   const [clientName, setClientName] = useState("");
   const [NameModalIsOpen, setNameModalIsOpen] = useState(false);
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
@@ -114,7 +115,11 @@ function Calculator() {
     if (menu === "" || submenu === "" || submenu === "Submenu") {
       return (
         <>
-          <div className="calculatorComponentDiv">
+<div className="calculatorComponentDiv" style={{
+  height: "fit-content",
+  minHeight: "30vh",
+  justifyContent: "center",
+}}>
             <h2>Selecione valores de menu e submenu para calcular</h2>
           </div>
         </>
@@ -518,7 +523,10 @@ function Calculator() {
               <CalculatorIMGResult
                 menu={menu}
                 clientName={clientName}
-                isPartner={user?.userType === "partner"}
+                isPartner={user?.usertype === "enterprise"}
+                logo={user?.logo? user?.logo : undefined}
+                phone=
+                {user?.usertype === "enterprise" ? user.phone : "08006080181"}
                 values={finalResult}
                 containerWidth={dimensions.width}
                 containerHeight={dimensions.height}

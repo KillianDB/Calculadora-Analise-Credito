@@ -8,6 +8,16 @@
     padding: 8px;
   }
 
+  #inss3resultsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 200px;
+    row-gap: 4px;
+    height: 70%;
+    align-content: center;
+    padding: 8px;
+  }
+
   .calculatorComponentDiv {
     height: fit-content;
   }

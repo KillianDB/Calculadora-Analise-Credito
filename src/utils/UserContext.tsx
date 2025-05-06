@@ -9,7 +9,9 @@ interface User {
   name: string;
   email: string;
   role: string;
-  userType: string;
+  usertype: string;
+  phone?: string;
+  logo?: string;
 }
 
 interface UserContextType {
@@ -40,7 +42,13 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
           headers: { Authorization: `Bearer ${token}` }
         });
         
-        setUser({ token, ...response.data });
+        const { phone, logo, ...rest } = response.data;
+        setUser({
+          token,
+          ...rest,
+          phone: phone,
+          logo: logo || "https://firebasestorage.googleapis.com/v0/b/credito-real-financeira.appspot.com/o/logo-square.svg?alt=media&token=b0fafaf2-4dfc-47eb-9a5d-18bae8cdb814",
+        });
       } catch (error) {
         console.error("Token inválido:", error);
         logout();

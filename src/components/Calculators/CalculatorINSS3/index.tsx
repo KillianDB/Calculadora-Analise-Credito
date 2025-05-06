@@ -68,24 +68,24 @@ export function CalculatorINSS3({
       const finalResult: string[] = [
         `Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
         `Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
-		//total sem extra
+        //total sem extra
         `${
-			isChecked
-			  ? "SUBTOTAL R$ " + result[2].split(" R$ ")[1]
-			  : "VALOR TOTAL R$ " + result[2].split(" R$ ")[1]
-		  }`,
-		  //parcela sem extra
-		  `${
-			isChecked
-			  ? "PARCELA R$ " + result[3].split(" R$ ")[1]
-			  : "PARCELA TOTAL R$ " + result[3].split(" R$ ")[1]
-		  } 84x`,
-  
-		  isChecked ? `R$ ${result[8].split(" R$ ")[1]}` : "",
-		  // total com extra
-		  isChecked ? `VALOR TOTAL R$ ${result[9].split(" R$ ")[1]}` : "",
-		  // parcela com extra
-		  isChecked ? `PARCELA TOTAL R$ ${result[10].split(" R$ ")[1]} 84x` : "",
+          isChecked
+            ? "SUBTOTAL R$ " + result[2].split(" R$ ")[1]
+            : "VALOR TOTAL R$ " + result[2].split(" R$ ")[1]
+        }`,
+        //parcela sem extra
+        `${
+          isChecked
+            ? "PARCELA R$ " + result[3].split(" R$ ")[1]
+            : "PARCELA TOTAL R$ " + result[3].split(" R$ ")[1]
+        } 84x`,
+
+        isChecked ? `R$ ${result[8].split(" R$ ")[1]}` : "",
+        // total com extra
+        isChecked ? `VALOR TOTAL R$ ${result[9].split(" R$ ")[1]}` : "",
+        // parcela com extra
+        isChecked ? `PARCELA TOTAL R$ ${result[10].split(" R$ ")[1]} 84x` : "",
       ];
       setFinalResult(finalResult.filter((str) => str !== ""));
     }
@@ -98,7 +98,7 @@ export function CalculatorINSS3({
 
   useEffect(() => {
     handleInputValue(values[0].label, values[0].value);
-  }, [values[0].value]);
+  }, [values[0].value, isChecked]);
 
   return (
     <Flex
@@ -142,11 +142,15 @@ export function CalculatorINSS3({
         </Flex>
       </Flex>
       {isChecked && (
-        <Flex className="answerContainer" style={{ gap: "4px", height: "max-content", justifyContent: "center" }}>
-          <Flex
-            className="resultsContainer"
-            id="inss3resultsContainer"
-          >
+        <Flex
+          className="answerContainer"
+          style={{
+            gap: "4px",
+            height: "max-content",
+            justifyContent: "center",
+          }}
+        >
+          <Flex className="resultsContainer" id="inss3resultsContainer">
             <CalculatorResult result={results[2]} />
             <CalculatorResult result={results[3]} />
             <CalculatorResult result={results[4]} />

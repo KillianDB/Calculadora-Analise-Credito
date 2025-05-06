@@ -30,7 +30,6 @@ import { Checkbox } from "antd";
 import { useAppToast } from "../../utils/toaster";
 
 function Calculator() {
-
   const { showToast } = useAppToast();
   const modalBodyRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -121,11 +120,14 @@ function Calculator() {
     if (menu === "" || submenu === "" || submenu === "Submenu") {
       return (
         <>
-<div className="calculatorComponentDiv" style={{
-  height: "fit-content",
-  minHeight: "30vh",
-  justifyContent: "center",
-}}>
+          <div
+            className="calculatorComponentDiv"
+            style={{
+              height: "fit-content",
+              minHeight: "30vh",
+              justifyContent: "center",
+            }}
+          >
             <h2>Selecione valores de menu e submenu para calcular</h2>
           </div>
         </>
@@ -287,7 +289,7 @@ function Calculator() {
         // Converter valores escalados para originais (dividir por 0.48)
         const fixedStyle = style
           ? style.replace(/(\d+\.?\d*)px/g, (match, p1) => {
-            console.log("match", match);
+              console.log("match", match);
               return parseFloat(p1) / 0.48 + "px";
             })
           : "";
@@ -328,7 +330,7 @@ function Calculator() {
         return;
       }
       showToast(
-        response?.data || "Falha ao gerar imagem", 
+        response?.data || "Falha ao gerar imagem",
         "error",
         8000 // Duração maior para erros
       );
@@ -369,9 +371,12 @@ function Calculator() {
             <option value="PREFEITURA">PREFEITURA</option>
           </select>
           <select
-            onChange={(e) => handleSubmenuChange(
-              // menu,
-               e.target.value)}
+            onChange={(e) =>
+              handleSubmenuChange(
+                // menu,
+                e.target.value
+              )
+            }
             value={submenu}
           >
             {filterSubmenuOptions(menu).map((option) => (
@@ -496,9 +501,10 @@ function Calculator() {
                 menu={menu}
                 clientName={clientName}
                 isPartner={user?.usertype === "enterprise"}
-                logo={user?.logo? user?.logo : undefined}
-                phone=
-                {user?.usertype === "enterprise" ? user.phone : "08006080181"}
+                logo={user?.logo ? user?.logo : undefined}
+                phone={
+                  user?.usertype === "enterprise" ? user.phone : "08006080181"
+                }
                 values={finalResult}
                 containerWidth={dimensions.width}
                 containerHeight={dimensions.height}

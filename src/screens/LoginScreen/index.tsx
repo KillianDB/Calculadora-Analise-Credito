@@ -21,7 +21,7 @@ export default function LoginScreen() {
   const { login } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
 
   const handleLogin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -108,7 +108,7 @@ export default function LoginScreen() {
             >
               Entrar
             </Button>
-            {error && <div className="error">{error}</div>}
+            {/* {error && <div className="error">{error}</div>} */}
           </VStack>
           <Link to="/redefinir-senha">Esqueceu sua senha?</Link>
         </form>

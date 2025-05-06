@@ -3,7 +3,6 @@ import { CalculatorTitle } from "../../CalculatorTitle";
 import CalculatorTotal from "../../CalculatorTotal";
 import "./prefeituras.css";
 import { formatNumber } from "../../../utils/formatNumbers";
-import { MoneyInput } from "../../MoneyInput";
 import {
   Flex,
   FormControl,

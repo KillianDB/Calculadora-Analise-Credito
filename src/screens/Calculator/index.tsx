@@ -281,6 +281,7 @@ function Calculator() {
         // Converter valores escalados para originais (dividir por 0.48)
         const fixedStyle = style
           ? style.replace(/(\d+\.?\d*)px/g, (match, p1) => {
+            console.log("match", match);
               return parseFloat(p1) / 0.48 + "px";
             })
           : "";

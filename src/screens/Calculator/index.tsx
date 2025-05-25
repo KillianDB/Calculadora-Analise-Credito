@@ -30,7 +30,6 @@ import { Checkbox } from "antd";
 import { useAppToast } from "../../utils/toaster";
 
 function Calculator() {
-
   const { showToast } = useAppToast();
   const modalBodyRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -53,6 +52,14 @@ function Calculator() {
     console.log("isChecked", isChecked);
     setIsChecked(!isChecked);
   }
+
+  useEffect(() => {
+    setParcelas("");
+    setClientName("");
+    setIsChecked(false);
+    setAllInputsFilled(false);
+    setFinalResult([]);
+  }, [menu, submenu]);
 
   useEffect(() => {
     console.log("Modal is open ", modalIsOpen);
@@ -110,16 +117,17 @@ function Calculator() {
 
   function renderCalculatorByMenus(menu: string, submenu: string) {
     console.log("menu", menu);
-    // setParcelas("");
-    // setClientName("");
     if (menu === "" || submenu === "" || submenu === "Submenu") {
       return (
         <>
-<div className="calculatorComponentDiv" style={{
-  height: "fit-content",
-  minHeight: "30vh",
-  justifyContent: "center",
-}}>
+          <div
+            className="calculatorComponentDiv"
+            style={{
+              height: "fit-content",
+              minHeight: "30vh",
+              justifyContent: "center",
+            }}
+          >
             <h2>Selecione valores de menu e submenu para calcular</h2>
           </div>
         </>
@@ -228,11 +236,11 @@ function Calculator() {
   }
 
   function handleSubmenuChange(
-    menu: string,
+    // menu: string,
     newSubmenu: React.SetStateAction<string>
   ) {
     setSubmenu(newSubmenu);
-    renderCalculatorByMenus(menu, newSubmenu.toString());
+    // renderCalculatorByMenus(menu, newSubmenu.toString());
   }
 
   function handleResultDownload() {
@@ -281,7 +289,7 @@ function Calculator() {
         // Converter valores escalados para originais (dividir por 0.48)
         const fixedStyle = style
           ? style.replace(/(\d+\.?\d*)px/g, (match, p1) => {
-            console.log("match", match);
+              console.log("match", match);
               return parseFloat(p1) / 0.48 + "px";
             })
           : "";
@@ -322,7 +330,7 @@ function Calculator() {
         return;
       }
       showToast(
-        response?.data || "Falha ao gerar imagem", 
+        response?.data || "Falha ao gerar imagem",
         "error",
         8000 // Duração maior para erros
       );
@@ -330,49 +338,12 @@ function Calculator() {
       console.error("Error generating image:", error);
       showToast("Erro ao gerar a imagem", "error");
     } finally {
-      setIsGeneratingImage(false); // Desativa o loading independente do resultado
+      setIsGeneratingImage(false);
+      setParcelModalIsOpen(false);
+      setNameModalIsOpen(false);
+      setModalIsOpen(false);
     }
   }
-  // const handleDownloadImage = async () => {
-  //   setParcelas("");
-  //   setClientName("");
-  //   const element = document.getElementById("calculatorIMGResult");
-  //   if (element) {
-  //     console.log("Baixando a imagem");
-  //     console.log("token", token);
-  //     try {
-  //       const response = await axios.post(
-  //         "https://api.creditorealsf.com/calculator/image",
-  //         {
-  //           menu,
-  //           submenu,
-  //           element: element.outerHTML,
-  //         },
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         }
-  //       );
-  //       // .then((response) => {
-  //       // console.log("Imagem gerada com sucesso!", response.data);
-  //       // const link = document.createElement("a");
-  //       // link.href = response.data.downloadURL;
-  //       // link.click();
-  //       if (response.status === 200) {
-  //         // window.location.href = response.data;
-  //         window.open(response.data, "_blank");
-  //         console.log("Redirecionando", response.data);
-  //       }
-  //       // })
-  //     } catch (error) {
-  //       console.error("Erro ao gerar a imagem:", error);
-  //     }
-  //   } else {
-  //     console.log("Não foi possível encontrar o elemento ", element);
-  //     alert("Não foi possível encontrar o elemento para gerar a imagem.");
-  //   }
-  // };
 
   const handleCloseModal = () => {
     setModalIsOpen(false);
@@ -400,7 +371,12 @@ function Calculator() {
             <option value="PREFEITURA">PREFEITURA</option>
           </select>
           <select
-            onChange={(e) => handleSubmenuChange(menu, e.target.value)}
+            onChange={(e) =>
+              handleSubmenuChange(
+                // menu,
+                e.target.value
+              )
+            }
             value={submenu}
           >
             {filterSubmenuOptions(menu).map((option) => (
@@ -525,9 +501,10 @@ function Calculator() {
                 menu={menu}
                 clientName={clientName}
                 isPartner={user?.usertype === "enterprise"}
-                logo={user?.logo? user?.logo : undefined}
-                phone=
-                {user?.usertype === "enterprise" ? user.phone : "08006080181"}
+                logo={user?.logo ? user?.logo : undefined}
+                phone={
+                  user?.usertype === "enterprise" ? user.phone : "08006080181"
+                }
                 values={finalResult}
                 containerWidth={dimensions.width}
                 containerHeight={dimensions.height}

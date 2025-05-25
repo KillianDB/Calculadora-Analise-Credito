@@ -20,7 +20,6 @@ export function CalculatorExercito2({
   setAllInputsFilled: (filled: boolean) => void;
   setFinalResult: (result: string[]) => void;
 }) {
-
   const [indexCalc, setIndexCalc] = useState(0);
   const [results, setResults] = useState([
     //input 1/0.02385
@@ -54,6 +53,7 @@ export function CalculatorExercito2({
     "PARCELA - R$ 000,00",
     "72x",
   ]);
+  console.log("total", total);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [parcelas, setParcelas] = useState([
     { label: "PARCELA-0", value: 0, index: 0 },
@@ -158,7 +158,7 @@ export function CalculatorExercito2({
   }
 
   function handleInputValue(label: string, value: number) {
-    if (value === 0) return; 
+    if (value === 0) return;
     // const index = parseInt(label.split("-")[1]) - 1;
 
     // if (
@@ -216,46 +216,35 @@ export function CalculatorExercito2({
     //   }
     // } else {
     setAllInputsFilled(true);
-      console.log("ta no else do handleInputValue");
-      console.log("label", label);
-      console.log("value", value);
-      setValues((prevState) => {
-        prevState[0].value =
-          typeof value === "number" ? value : parseFloat(value);
-        return [...prevState];
-      });
-      setResults((prevState) => {
-        prevState[0].value = formatNumber(
-          (typeof value === "number" ? value : parseFloat(value)) /
-            0.02385
-        );
-        return [...prevState];
-      });
-      setResults((prevState) => {
-        prevState[1].value = formatNumber(
-          typeof value === "number" ? value : parseFloat(value)
-        );
-        return [...prevState];
-      });
-      setTotal((prevState) => {
-        prevState[0] = `TOTAL R$ ${results[0].value}`;
-        return [...prevState];
-      });
-      setTotal((prevState) => {
-        prevState[1] = `PARCELA - R$ ${results[1].value}`;
-        return [...prevState];
-      });
+    console.log("ta no else do handleInputValue");
+    console.log("label", label);
+    console.log("value", value);
+    setValues((prevState) => {
+      prevState[0].value =
+        typeof value === "number" ? value : parseFloat(value);
+      return [...prevState];
+    });
+    setResults((prevState) => {
+      prevState[0].value = formatNumber(
+        (typeof value === "number" ? value : parseFloat(value)) / 0.02385
+      );
+      return [...prevState];
+    });
+    setResults((prevState) => {
+      prevState[1].value = formatNumber(
+        typeof value === "number" ? value : parseFloat(value)
+      );
+      return [...prevState];
+    });
+    setTotal((prevState) => {
+      prevState[0] = `TOTAL R$ ${results[0].value}`;
+      return [...prevState];
+    });
+    setTotal((prevState) => {
+      prevState[1] = `PARCELA - R$ ${results[1].value}`;
+      return [...prevState];
+    });
     // }
-    const finalResult = [
-      `Valor Empréstimo R$ ${results[0].value}`,
-      `Parcela Empréstimo R$ ${results[1].value} 84x`,
-      `Portabilidade Aprox. R$ ${results[2].value}`,
-      `Parcela Portabilidade R$ ${results[3].value} 84x`,
-      `VALOR TOTAL R$ ${total[0].split(" R$ ")[1]}`,
-      `PARCELA TOTAL R$ ${total[1].split(" R$ ")[1]} 84x`,
-    ];
-    setFinalResult(finalResult);
-    console.log("finalResult on exercito", finalResult);
   }
 
   const [parcela1, setParcela1] = useState(0);
@@ -320,8 +309,42 @@ export function CalculatorExercito2({
     return liquidoCliente > 0 ? acc + parcela : acc;
   }, 0);
 
+  useEffect(() => {
+    // Atualiza o estado de inputs preenchidos
+    const filled =
+      values[0].value > 0 &&
+      (trocoLiquidoPortabilidade > 0 || somaParcelasPositivas > 0);
+    setAllInputsFilled(filled);
+
+    // Atualiza o resultado final
+    if (filled) {
+      const finalResult = [
+        `Valor Empréstimo R$ ${formatNumber(values[0].value / 0.02385)}`,
+        `Parcela Empréstimo R$ ${formatNumber(values[0].value)} 84x`,
+        `Portabilidade Aprox. R$ ${formatNumber(trocoLiquidoPortabilidade)}`,
+        `Parcela Portabilidade R$ ${formatNumber(somaParcelasPositivas)} 84x`,
+        `VALOR TOTAL R$ ${formatNumber(
+          values[0].value / 0.02385 + trocoLiquidoPortabilidade
+        )}`,
+        `PARCELA TOTAL R$ ${formatNumber(
+          values[0].value + somaParcelasPositivas
+        )} 84x`,
+      ];
+
+      setFinalResult(finalResult);
+    }
+  }, [
+    values[0].value,
+    trocoLiquidoPortabilidade,
+    somaParcelasPositivas,
+    setAllInputsFilled,
+  ]);
+
   return (
-    <Flex className="calculatorComponentFlexPossibilidadesExercito" style={{flexDirection:"column"}}>
+    <Flex
+      className="calculatorComponentFlexPossibilidadesExercito"
+      style={{ flexDirection: "column" }}
+    >
       <Flex className="mainContainerPossibilidadesExercito">
         <CalculatorTitle menu="Exército" submenu="Possibilidades Gerais" />
         <Flex className="inputsContainerExercito">
@@ -344,9 +367,9 @@ export function CalculatorExercito2({
         </Flex>
       </Flex>
       <Flex className="secondContainerPossibilidadesExercito">
-        <Text  className="h4CalculadoraDePortabilidadeRapida">
+        <Text className="h4CalculadoraDePortabilidadeRapida">
           Calculadora de Portabilidade Rápida
-        </Text >
+        </Text>
         <Flex className="mainSecondContainerPossibilidadesExercito">
           <SimpleGrid
             templateColumns="repeat(5, 1fr)"
@@ -408,13 +431,12 @@ export function CalculatorExercito2({
             </Flex>
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
-                {`SALDO DEVEDOR: ${(taxaJuros1 > 0 ?
-                  // ? Math.max(
-                      parcela1 / taxaJuros1 -
-                        parcela1 * (84 - prazoRestante1) * 0.45
-                      
-                    // )
-                  : 0
+                {`SALDO DEVEDOR: ${(taxaJuros1 > 0
+                  ? // ? Math.max(
+                    parcela1 / taxaJuros1 -
+                    parcela1 * (84 - prazoRestante1) * 0.45
+                  : // )
+                    0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
                   currency: "BRL",
@@ -952,12 +974,13 @@ export function CalculatorExercito2({
             fontSize={"12px"}
             fontWeight={"medium"}
             mx={4}
-          >{`VALOR EMPRÉSTIMO: ${(
-            values[0].value / 0.02385
-          ).toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-          })}`}</Text>
+          >{`VALOR EMPRÉSTIMO: ${(values[0].value / 0.02385).toLocaleString(
+            "pt-BR",
+            {
+              style: "currency",
+              currency: "BRL",
+            }
+          )}`}</Text>
           <Text
             fontSize={"12px"}
             fontWeight={"medium"}

@@ -102,7 +102,7 @@ export function CalculatorINSS4({
   useEffect(() => {
     console.log("values changing", values[0].value);
     handleInputValue(values[0].label, values[0].value);
-  }, [values]);
+  }, [values, isChecked]);
 
   return (
     <Flex

@@ -6,7 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import Menu from "../../components/Menu/index.tsx";
 import { Flex, Grid, Img } from "@chakra-ui/react";
-import { useUser } from "../../utils/UserContext.tsx";
+import { useUser } from "../../contexts/UserContext.tsx";
 
 export function CompleteAnalysis() {
   const { user } = useUser();

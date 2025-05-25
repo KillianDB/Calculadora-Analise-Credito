@@ -16,7 +16,7 @@ export default function NovaSenha() {
     }
 
     const response = await fetch(
-      "api.creditorealsf.com/auth/change/pass",
+      "https://api.creditorealsf.com/auth/change/pass",
       {
         method: "POST",
         headers: {

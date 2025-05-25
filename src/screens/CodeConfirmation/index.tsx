@@ -3,7 +3,7 @@ import OrangeButton from "../../components/OrangeButton";
 import SubmitCard from "../../components/SubmitCard";
 import "../AlterarSenha/AlterarSenha.css";
 import { useEffect, useState } from "react";
-import { useUser } from "../../utils/UserContext";
+import { useUser } from "../../contexts/UserContext";
 import axios from "axios";
 
 export default function CodeConfirmation() {

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useUser } from "../../utils/UserContext";
+import { useUser } from "../../contexts/UserContext";
 import axios from "axios";
 import { useState } from "react";
 import BackgroundFullGradient from "../../components/BackgroundFullGradient";

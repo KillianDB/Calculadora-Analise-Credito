@@ -17,7 +17,7 @@ export function CreateUser() {
   const create = async () => {
     const password = generatePassword();
     try {
-      axios.post("api.creditorealsf.com/members", {
+      axios.post("https://api.creditorealsf.com/members", {
         name,
         // userType,
         role,

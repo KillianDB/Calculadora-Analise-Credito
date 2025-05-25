@@ -214,7 +214,7 @@ export function Equipes() {
   };
 
   const editarMembro = async (membro: { id: string }) => {
-    const response = await fetch(`api.creditorealsf.com/members/${membro.id}`, {
+    const response = await fetch(`https://api.creditorealsf.com/members/${membro.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -240,11 +240,12 @@ export function Equipes() {
 
   const bloquearMembro = async (membro: { id: string }) => {
     const response = await fetch(
-      `api.creditorealsf.com/members/block/${membro.id}`,
+      `https://api.creditorealsf.com/members/block/${membro.id}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
@@ -262,7 +263,7 @@ export function Equipes() {
     const fetchEquipes = async () => {
       try {
         const response = await fetch(
-          "api.creditorealsf.com/members/all/escritorio"
+          "https://api.creditorealsf.com/members/all/escritorio"
         );
         if (response.status !== 200) {
           console.error("Error fetching equipes:", response);

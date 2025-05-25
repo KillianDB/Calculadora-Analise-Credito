@@ -25,7 +25,7 @@ import {
   ModalOverlay,
   Select,
 } from "@chakra-ui/react";
-import { useUser } from "../../utils/UserContext";
+import { useUser } from "../../contexts/UserContext";
 import { Checkbox } from "antd";
 import { useAppToast } from "../../utils/toaster";
 

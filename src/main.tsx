@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import { UserProvider } from "./utils/UserContext.tsx";
+import { UserProvider } from "./contexts/UserContext.tsx";
 
 // main.tsx (correto)
 ReactDOM.createRoot(document.getElementById("root")!).render(

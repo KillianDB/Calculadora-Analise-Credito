@@ -2,19 +2,19 @@ import "./OrangeButton.css";
 
 interface ButtonProps {
 	text: string;
-	// disabled?: boolean;
+	disabled?: boolean;
 	onClick: () => unknown;
 }
 
-function BlueButton({
+function OrangeButton({
 	text,
-	// disabled,
+	disabled,
 	onClick,
 }: ButtonProps) {
 	const handleClick = () => {
-		// if (!disabled) {
-		onClick();
-		// }
+		if (!disabled) {
+			onClick();
+		}
 	};
 
 	return (
@@ -22,11 +22,11 @@ function BlueButton({
 			type='submit'
 			className='orange-button'
 			onClick={handleClick}
-			// disabled={disabled}
+			disabled={disabled}
 		>
 			{text}
 		</button>
 	);
 }
 
-export default BlueButton;
+export default OrangeButton;

@@ -58,8 +58,12 @@ export function CalculatorLOAS({
       { label, value },
     ]);
     console.log("CHECKED", isChecked);
+    if (typeof result === 'string') {
+    console.error(result);
+    return;
+  }
 
-    if (result != "no valid labels" && result != undefined) {
+    if (Array.isArray(result) && result.length > 0) {
       setResults(result.slice(0, 8).concat(result.slice(11, 16)));
       setTotais(result.slice(8, 11).concat(result.slice(16, 19)));
       console.log("isChecked ", isChecked);

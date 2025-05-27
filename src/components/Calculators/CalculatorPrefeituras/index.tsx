@@ -50,38 +50,66 @@ export function CalculatorPrefeitura({
     if (value === 0) return;
     setValues([{ label, value }]);
 
+     const paramsString = localStorage.getItem("calculatorParams");
+  if (!paramsString) return "no parameters found";
+
+  const params = JSON.parse(paramsString);
+
+    let coeficienteValorLiberadoVALOR = +params?.Prefeitura?.["VALOR"]?.coeficiente_valor_liberado;
+    let coeficiente24xVALOR = +params?.Prefeitura?.["VALOR"]?.coeficiente_24x;
+
+    let coeficienteValorLiberadoDAYCOVAL = +params?.Prefeitura?.["DAYCOVAL"]?.coeficiente_valor_liberado;
+    let coeficiente24xDAYCOVAL = +params?.Prefeitura?.["DAYCOVAL"]?.coeficiente_24x;
+
+    let coeficienteValorLiberadoASPECIR = +params?.Prefeitura?.["ASPECIR"]?.coeficiente_valor_liberado;
+    let coeficiente24xASPECIR = +params?.Prefeitura?.["ASPECIR"]?.coeficiente_24x;
+
+    let coeficienteValorLiberadoSANTANDER = +params?.Prefeitura?.["SANTANDER"]?.coeficiente_valor_liberado;
+    let coeficiente24xSANTANDER = +params?.Prefeitura?.["SANTANDER"]?.coeficiente_24x;
+
     if (banco === "VALOR") {
       setResult([
         "VALOR LIBERADO:",
-        `R$ ${formatNumber(value / 0.0749)}`,
-        "84x",
+        `R$ ${formatNumber(value / coeficienteValorLiberadoVALOR)}`,
+        "24x",
       ]);
       setTotais([
-        `TOTAL: R$ ${formatNumber(value / 0.0387)}`,
+        `TOTAL: R$ ${formatNumber(value / coeficiente24xVALOR)}`,
         `PARCELA R$ ${value}`,
-        "84x",
+        "24x",
       ]);
-    } else if (banco === "DAYCOVAL" || banco === "SANTANDER") {
+    } else if (banco === "DAYCOVAL"){
       setResult([
         "VALOR LIBERADO:",
-        `R$ ${formatNumber(value / 0.0295)}`,
-        "84x",
+        `R$ ${formatNumber(value / coeficienteValorLiberadoDAYCOVAL)}`,
+        "24x",
       ]);
       setTotais([
-        `TOTAL: R$ ${formatNumber(value / 0.0387)}`,
+        `TOTAL: R$ ${formatNumber(value / coeficiente24xDAYCOVAL)}`,
         `PARCELA R$ ${value}`,
-        "84x",
+        "24x",
+      ]);
+    }else if (banco === "SANTANDER") {
+      setResult([
+        "VALOR LIBERADO:",
+        `R$ ${formatNumber(value / coeficienteValorLiberadoSANTANDER)}`,
+        "24x",
+      ]);
+      setTotais([
+        `TOTAL: R$ ${formatNumber(value / coeficiente24xSANTANDER)}`,
+        `PARCELA R$ ${value}`,
+        "24x",
       ]);
     } else if (banco === "ASPECIR") {
       setResult([
         "VALOR LIBERADO:",
-        `R$ ${formatNumber(value / 0.032057)}`,
-        "84x",
+        `R$ ${formatNumber(value / coeficienteValorLiberadoASPECIR)}`,
+        "24x",
       ]);
       setTotais([
-        `TOTAL: R$ ${formatNumber(value / 0.0387)}`,
+        `TOTAL: R$ ${formatNumber(value / coeficiente24xASPECIR)}`,
         `PARCELA R$ ${value}`,
-        "84x",
+        "24x",
       ]);
     }
 

@@ -35,7 +35,7 @@ export function CalculatorExercito1({
       { label, value },
     ]);
 
-    if (result != "no valid labels" && result != undefined) {
+    if (Array.isArray(result) && result.length > 0) {
       setResults(result.slice(0, 2));
       setTotal(result.slice(2, 5));
 	  console.log("RESULT-> ", result);

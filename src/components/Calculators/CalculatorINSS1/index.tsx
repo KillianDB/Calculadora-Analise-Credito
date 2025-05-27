@@ -66,7 +66,7 @@ export function CalculatorINSS1({
       updatedValues
     );
 
-    if (result != "no valid labels" && result != undefined) {
+    if (Array.isArray(result) && result.length > 0) {
       setResults(result.slice(0, 10));
       setTotal(result.slice(10, 13));
       const finalResult = [

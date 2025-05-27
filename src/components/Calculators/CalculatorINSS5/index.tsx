@@ -22,50 +22,12 @@ export function CalculatorINSS5({
   setAllInputsFilled: (filled: boolean) => void;
   setFinalResult: (result: string[]) => void;
 }) {
+  const paramsString = localStorage.getItem("calculatorParams");
+  if (!paramsString) return "no parameters found";
+
+  const params = JSON.parse(paramsString);
+  console.log("params at INSS Possibilidades Gerais => ", params);
   const [indexCalc] = useState(0);
-  // const allFilled = false;
-  // const [results, setResults] = useState([
-  //   "VALOR EMPRESTIMO: R$ 00.000,00",
-  //   "PARCELA: R$ 000,00",
-  //   "84x",
-  //   "CARTAO INSS: R$ 00.000,00",
-  //   "PARCELA: R$ 000,00",
-  //   "84x",
-  //   "VALOR COMPRAS: R$ 00.000,00",
-  //   "PARCELA: R$ 000,00",
-  //   "84x",
-  //   "CARTÃO BENEFICIO: R$ 00.000,00",
-  //   "PARCELA: R$ 000,00",
-  //   "84x",
-  //   "VALOR COMPRAS: R$ 00.000,00",
-  //   "PARCELA: R$ 000,00",
-  //   "84x",
-  // ]);
-  // const [resultsPossibilidade, setResultsPossibilidade] = useState([
-  //   { label: "POSSIBILIDADE", value: " R$ 000,00" },
-  //   { label: "POSSIBILIDADE", value: " R$ 000,00" },
-  //   { label: "POSSIBILIDADE", value: " R$ 000,00" },
-  //   { label: "POSSIBILIDADE", value: " R$ 000,00" },
-  //   { label: "POSSIBILIDADE", value: " R$ 000,00" },
-  //   { label: "POSSIBILIDADE", value: " R$ 000,00" },
-  //   { label: "POSSIBILIDADE", value: " R$ 000,00" },
-  // ]);
-  // const [resultTotalPossibilidade, setResultTotalPossibilidade] = useState([
-  //   { label: "TOTAL DAS PARCELAS: R$ ", value: "000,00" },
-  //   { label: "TOTAL SALDO DEVEDOR: R$ ", value: "000,00" },
-  //   {
-  //     label: "VALOR LIQUÍDO APROXIMADO NA PORTABILIDADE: R$ ",
-  //     value: "000,00",
-  //   },
-  // ]);
-  // const [resultTrocoLiquido, setResultsTrocoLiquido] = useState(
-  //   "TROCO LIQUÍDO DA PORTABILIDADE (VALOR APROXIMADO): R$ 000,00"
-  // );
-  // const [total, setTotal] = useState([
-  //   "TOTAL R$ 00.000,00",
-  //   "PARCELA R$ 000,00",
-  //   "84x",
-  // ]);
   const [parcelas] = useState([
     { label: "PARCELA-0", value: 0, index: 0 },
     { label: "PARCELA-1", value: 0, index: 1 },
@@ -113,25 +75,6 @@ export function CalculatorINSS5({
     }
   }, [parcelas, saldos, indexCalc]);
 
-  // const handleSetParcelas = (value: number, index: number) => {
-  // 	setIndexCalc(index);
-  // 	setParcelas((prevState) => {
-  // 		const newState = [...prevState];
-  // 		newState[index].value =
-  // 			typeof value === "string" ? parseFloat(value) : value;
-  // 		return newState;
-  // 	});
-  // };
-  // const handleSetSaldos = (value: number, index: number) => {
-  // 	setIndexCalc(index);
-  // 	setSaldos((prevState) => {
-  // 		const newState = [...prevState];
-  // 		newState[index].value =
-  // 			typeof value === "string" ? parseFloat(value) : value;
-  // 		return newState;
-  // 	});
-  // };
-
   function handleCalcular(
     saldos: { label: string; value: number; index: number }[],
     parcelas: { label: string; value: number; index: number }[],
@@ -153,18 +96,10 @@ export function CalculatorINSS5({
         setTotalSaldoDevedor(
           totalSaldoDevedor + saldos[+item.label.split("-")[1] - 1].value
         );
-        // setResultTotalPossibilidade((prevState) => {
-        // 	prevState[0].value = `${formatNumber(totalParcelas)}`;
-        // 	prevState[1].value = `${formatNumber(totalSaldoDevedor)}`;
-        // 	prevState[2].value = `${formatNumber(portabilidade)}`;
-        // 	return [...prevState];
-        // });
       }
     });
     setPortabilidade(portabilidade);
-    // values[3].value = portabilidade;
     setTotalParcelas(totalParcelas);
-    // values[4].value = totalParcelas;
     setTotalSaldoDevedor(totalSaldoDevedor);
   }
 
@@ -173,10 +108,10 @@ export function CalculatorINSS5({
   const [margemCartaoBeneficio, setMargemcartaoBeneficio] = useState(0);
 
   const totalValores =
-    margemEmprestimo / 0.02339 +
-    margemCartaoInss * 22.67 +
-    margemCartaoInss * 22.67 * 0.32 +
-    margemCartaoBeneficio * 22.67 +
+    margemEmprestimo / +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_emprestimo +
+    margemCartaoInss * +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_inss +
+    margemCartaoInss * +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_inss * 0.32 +
+    margemCartaoBeneficio * +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_beneficio +
     margemCartaoBeneficio * 0.32;
 
   const totalparcelas =
@@ -241,14 +176,12 @@ export function CalculatorINSS5({
   }, 0);
 
   useEffect(() => {
-    // Verifica os 3 valores principais
     const mainValuesFilled = [
       margemEmprestimo,
       margemCartaoInss,
       margemCartaoBeneficio,
     ].every((item) => item !== 0);
 
-    // Verifica se pelo menos um conjunto parcela/saldo está preenchido
     const hasValidPair = [
       { parcela: parcela1, saldo: saldoDevedor1 },
       { parcela: parcela2, saldo: saldoDevedor2 },
@@ -408,7 +341,7 @@ export function CalculatorINSS5({
           mx={"auto"}
         >
           <Text fontSize={"14px"}>{`VALOR EMPRÉSTIMO:  ${(
-            margemEmprestimo / 0.02339
+            margemEmprestimo / +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_emprestimo
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
@@ -422,7 +355,7 @@ export function CalculatorINSS5({
           )}`}</Text>
           <Text fontSize={"14px"}>{`84x`}</Text>
           <Text fontSize={"14px"}>{`CARTÃO INSS: ${(
-            margemCartaoInss * 22.67
+            margemCartaoInss * +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_inss
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
@@ -436,7 +369,7 @@ export function CalculatorINSS5({
           <Text fontSize={"14px"}>{`84x`}</Text>
           <Text fontSize={"14px"}>{`VALOR COMPRAS: ${(
             margemCartaoInss *
-            22.67 *
+            +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_inss *
             0.32
           ).toLocaleString("pt-BR", {
             style: "currency",
@@ -450,7 +383,7 @@ export function CalculatorINSS5({
           })}`}</Text>
           <Text fontSize={"14px"}>{`84x`}</Text>
           <Text fontSize={"14px"}>{`CARTÃO BENEFÍCIO: ${(
-            margemCartaoBeneficio * 22.67
+            margemCartaoBeneficio * +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_beneficio
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
@@ -825,33 +758,6 @@ export function CalculatorINSS5({
               </Text>
             </Flex>
           </SimpleGrid>
-          {/* <div className="parcelasPossibilidades">
-            {parcelas.map((parcela) => (
-              <CalculatorInput
-                key={parcela.label}
-                label={parcela.label.split("-")[0]}
-                onChange={(e) =>
-                  handleSetParcelas(+e.target.value, parcela.index)
-                }
-              />
-            ))}
-          </div>
-          <div className="saldoPossibilidades">
-            {saldos.map((saldo) => (
-              <CalculatorInput
-                key={saldo.label}
-                label={saldo.label.split("-")[0]}
-                onChange={(e) => handleSetSaldos(+e.target.value, saldo.index)}
-              />
-            ))}
-          </div>
-          <div className="possibilidadesPossibilidades">
-            {resultsPossibilidade.map(
-              (result: { label: string; value: string }) => (
-                <CalculatorResult result={result.label + result.value} />
-              )
-            )}
-          </div> */}
         </section>
         <div className="resultadosPossibilidades">
           <Text

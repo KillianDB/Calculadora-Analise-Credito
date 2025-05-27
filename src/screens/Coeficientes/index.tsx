@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Menu from "../../components/Menu";
 import OrangeButton from "../../components/OrangeButton";
 import { CalculatorTitle } from "../../components/CalculatorTitle";
 import Input from "../../components/Input";
 import "./coeficientes.css";
-import { useCalculatorParams } from '../../contexts/CalculatorContext';
-
-  // {
-  //       "menu": "Prefeitura",
-  //       "submenu": "VALOR",
-  //       "value": {
-  //           "coeficiente_valor_liberado": 0.0749,
-  //           "coeficiente_24x": 0.0946,
-  //           "coeficiente_18x": 0.11345,
-  //           "coeficiente_12x": 0.13996,
-  //           "coeficiente_10x": 0.1593
-  //       },
-  //       "id": "4YcAKLNZVcVYfZT2hpdE"
-  //   },
 
  export function Coeficientes() {
   interface Coeficiente {
@@ -25,27 +11,25 @@ import { useCalculatorParams } from '../../contexts/CalculatorContext';
     menu: string;
     submenu: string;
     value: {
-      [key: string]: number;  // Defina value como um objeto com chaves string e valores number
+      [key: string]: number;
     };
   }
 
   const [selectedCoeficiente, setSelectedCoeficiente] = useState<Coeficiente | null>(null);
-  const [selectedKey, setSelectedKey] = useState<string>(""); // Para armazenar a chave selecionada (ex: "coeficiente_valor_liberado")
+  const [selectedKey, setSelectedKey] = useState<string>("");
   const [newValue, setNewValue] = useState<string>("");
   const [coeficientes, setCoeficientes] = useState<Coeficiente[]>([]);
 
-  // Função para lidar com a seleção de coeficiente
   const handleCoeficienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = e.target.value;
     const selected = coeficientes.find((c) => c.id === selectedId);
     if (selected) {
       setSelectedCoeficiente(selected);
-      setSelectedKey(""); // Resetar a chave selecionada ao mudar de coeficiente
-      setNewValue(""); // Resetar o valor
+      setSelectedKey("");
+      setNewValue("");
     }
   };
 
-  // Função para lidar com a seleção da chave do coeficiente
   const handleKeyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const key = e.target.value;
     setSelectedKey(key);

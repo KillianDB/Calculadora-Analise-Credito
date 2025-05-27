@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { calculate } from "../../../utils/calculate";
 import { CalculatorTitle } from "../../CalculatorTitle";
 import { formatNumber } from "../../../utils/formatNumbers";
 import "./exercito.css";
@@ -20,231 +19,25 @@ export function CalculatorExercito2({
   setAllInputsFilled: (filled: boolean) => void;
   setFinalResult: (result: string[]) => void;
 }) {
-  const [indexCalc, setIndexCalc] = useState(0);
-  const [results, setResults] = useState([
-    //input 1/0.02385
-    { label: "VALOR EMPRESTIMO: R$ ", value: "000,00" },
-    //valor input 1
-    { label: "PARCELA: R$ ", value: "000,00" },
-    //soma do liquido cliente positivo
-    { label: "TROCO LÍQUIDO PORTABILIDADE: R$ ", value: "000,00" },
-    //total parcelas positivo
-    { label: "PARCELA: R$ ", value: "000,00" },
-  ]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [, setResultsPossibilidade] = useState([
-    { label: "SALDO DEVEDOR", value: " R$ 000,00" },
-    { label: "SALDO DEVEDOR", value: " R$ 000,00" },
-    { label: "SALDO DEVEDOR", value: " R$ 000,00" },
-    { label: "SALDO DEVEDOR", value: " R$ 000,00" },
-    { label: "SALDO DEVEDOR", value: " R$ 000,00" },
-    { label: "SALDO DEVEDOR", value: " R$ 000,00" },
-    { label: "SALDO DEVEDOR", value: " R$ 000,00" },
-    { label: "LÍQUIDO CLIENTE", value: " R$ 000,00" },
-    { label: "LÍQUIDO CLIENTE", value: " R$ 000,00" },
-    { label: "LÍQUIDO CLIENTE", value: " R$ 000,00" },
-    { label: "LÍQUIDO CLIENTE", value: " R$ 000,00" },
-    { label: "LÍQUIDO CLIENTE", value: " R$ 000,00" },
-    { label: "LÍQUIDO CLIENTE", value: " R$ 000,00" },
-    { label: "LÍQUIDO CLIENTE", value: " R$ 000,00" },
-  ]);
-  const [total, setTotal] = useState([
-    "TOTAL R$ 00.000,00",
-    "PARCELA - R$ 000,00",
-    "72x",
-  ]);
-  console.log("total", total);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [parcelas, setParcelas] = useState([
-    { label: "PARCELA-0", value: 0, index: 0 },
-    { label: "PARCELA-1", value: 0, index: 1 },
-    { label: "PARCELA-2", value: 0, index: 2 },
-    { label: "PARCELA-3", value: 0, index: 3 },
-    { label: "PARCELA-4", value: 0, index: 4 },
-    { label: "PARCELA-5", value: 0, index: 5 },
-    { label: "PARCELA-6", value: 0, index: 6 },
-  ]);
+  const paramsString = localStorage.getItem("calculatorParams");
+  if (!paramsString) return "no parameters found";
 
-  const [prazos, setPrazos] = useState([
-    { label: "PRAZO RESTANTE-0", value: 0, index: 0 },
-    { label: "PRAZO RESTANTE-1", value: 0, index: 1 },
-    { label: "PRAZO RESTANTE-2", value: 0, index: 2 },
-    { label: "PRAZO RESTANTE-3", value: 0, index: 3 },
-    { label: "PRAZO RESTANTE-4", value: 0, index: 4 },
-    { label: "PRAZO RESTANTE-5", value: 0, index: 5 },
-    { label: "PRAZO RESTANTE-6", value: 0, index: 6 },
-  ]);
-
-  const [taxas, setTaxas] = useState([
-    { label: "TAXA DE JUROS-0", value: 0, index: 0 },
-    { label: "TAXA DE JUROS-1", value: 0, index: 1 },
-    { label: "TAXA DE JUROS-2", value: 0, index: 2 },
-    { label: "TAXA DE JUROS-3", value: 0, index: 3 },
-    { label: "TAXA DE JUROS-4", value: 0, index: 4 },
-    { label: "TAXA DE JUROS-5", value: 0, index: 5 },
-    { label: "TAXA DE JUROS-6", value: 0, index: 6 },
-  ]);
+  const params = JSON.parse(paramsString);
+  
   const [values, setValues] = useState([
     { label: "VALOR MARGEM EMPRÉSTIMO: ", value: 0 },
   ]);
 
-  useEffect(() => {
-    handleSetParcelas(0, 1);
-    handleSetTaxas(0, 1);
-    handleSetPrazos(1, 1);
-  }, []);
-
-  useEffect(() => {
-    console.log(prazos);
-    if (prazos[0].value !== 0 && taxas[0].value !== 0) {
-      if (parcelas[0].value !== 0) {
-        console.log(prazos, parcelas, taxas);
-        handleCalcular(prazos, parcelas, taxas, indexCalc);
-      }
-    }
-  }, [parcelas, prazos, taxas, indexCalc]);
-
-  const handleSetParcelas = (value: number, index: number) => {
-    setIndexCalc(index);
-    setParcelas((prevState) => {
-      const newState = [...prevState];
-      newState[index].value =
-        typeof value === "string" ? parseFloat(value) : value;
-      return newState;
-    });
-  };
-  const handleSetPrazos = (value: number, index: number) => {
-    setIndexCalc(index);
-    setPrazos((prevState) => {
-      const newState = [...prevState];
-      newState[index].value =
-        typeof value === "string" ? parseFloat(value) : value;
-      return newState;
-    });
-  };
-  const handleSetTaxas = (value: number, index: number) => {
-    setIndexCalc(index);
-    setTaxas((prevState) => {
-      const newState = [...prevState];
-      newState[index].value =
-        typeof value === "string" ? parseFloat(value) : value;
-      return newState;
-    });
-  };
-
-  function handleCalcular(
-    prazos: { label: string; value: number; index: number }[],
-    parcelas: { label: string; value: number; index: number }[],
-    taxas: { label: string; value: number; index: number }[],
-    index: number
-  ) {
-    const prazos1 = prazos[index].value;
-    const parcelas1 = parcelas[index].value;
-    const taxas1 = taxas[index].value;
-
-    const saldoDevedor =
-      parcelas1 / (taxas1 / 100) - parcelas1 * (84 - prazos1) * 0.45;
-    const liquidoCliente = parcelas1 / 0.0222 - saldoDevedor;
-    console.log(`Saldo do clinete ${liquidoCliente}`);
-    console.log(`Saldo do devedor ${saldoDevedor}`);
-    setResultsPossibilidade((prevState) => {
-      const newState = [...prevState];
-      newState[index].value = ` R$ ${formatNumber(saldoDevedor)}`;
-      newState[index + 7].value = ` R$ ${formatNumber(liquidoCliente)}`;
-      return newState;
-    });
-    console.log(saldoDevedor, liquidoCliente);
-    return [saldoDevedor, liquidoCliente];
-  }
-
-  function handleInputValue(label: string, value: number) {
+  function handleInputValue(value: number) {
     if (value === 0) return;
-    // const index = parseInt(label.split("-")[1]) - 1;
 
-    // if (
-    //   parcelas[index].value !== 0 &&
-    //   prazos[index].value !== 0 &&
-    //   taxas[index].value !== 0
-    // ) {
-    //   //parcela/taxa de juros - (parcela*(84-prazo)*45%)
-
-    //   const saldoDevedor =
-    //     parcelas[index].value / (taxas[index].value / 100) -
-    //     parcelas[index].value * (84 - prazos[index].value) * 0.45;
-    //   const liquidoCliente = parcelas[index].value / 0.0222 - saldoDevedor;
-
-    //   setResultsPossibilidade((prevState) => {
-    //     const newState = [...prevState];
-    //     newState[index].value = ` R$ ${formatNumber(saldoDevedor)}`;
-    //     newState[index + 7].value = ` R$ ${formatNumber(liquidoCliente)}`;
-    //     return newState;
-    //   });
-    //   if (liquidoCliente > 0) {
-    //     setSomaLiquidosArray((prevState) => {
-    //       const newState = [...prevState];
-    //       newState[index] = {
-    //         index,
-    //         value:
-    //           (typeof value === "number"
-    //             ? value
-    //             : parseFloat(value)) + liquidoCliente,
-    //       };
-    //       return newState;
-    //     });
-    //     somaParcelas += parcelas[index].value;
-    //     somaLiquidos = somaLiquidosArray.reduce(
-    //       (acc, curr) => acc + curr.value,
-    //       0
-    //     );
-    //     console.log("somaLiquidos antes de set", somaLiquidos);
-    //     setResults((prevState) => {
-    //       prevState[2].value = formatNumber(somaLiquidos);
-    //       // / 0.0222
-    //       // );
-    //       return [...prevState];
-    //     });
-    //     console.log("somaParcelas antes de set", somaParcelas);
-    //     setResults((prevState) => {
-    //       const newState = [...prevState];
-    //       newState[3].value = formatNumber(
-    //         typeof somaParcelas === "number"
-    //           ? somaParcelas
-    //           : parseFloat(somaParcelas)
-    //       );
-    //       return newState;
-    //     });
-    //   }
-    // } else {
     setAllInputsFilled(true);
-    console.log("ta no else do handleInputValue");
-    console.log("label", label);
-    console.log("value", value);
+
     setValues((prevState) => {
       prevState[0].value =
         typeof value === "number" ? value : parseFloat(value);
       return [...prevState];
     });
-    setResults((prevState) => {
-      prevState[0].value = formatNumber(
-        (typeof value === "number" ? value : parseFloat(value)) / 0.02385
-      );
-      return [...prevState];
-    });
-    setResults((prevState) => {
-      prevState[1].value = formatNumber(
-        typeof value === "number" ? value : parseFloat(value)
-      );
-      return [...prevState];
-    });
-    setTotal((prevState) => {
-      prevState[0] = `TOTAL R$ ${results[0].value}`;
-      return [...prevState];
-    });
-    setTotal((prevState) => {
-      prevState[1] = `PARCELA - R$ ${results[1].value}`;
-      return [...prevState];
-    });
-    // }
   }
 
   const [parcela1, setParcela1] = useState(0);
@@ -310,21 +103,19 @@ export function CalculatorExercito2({
   }, 0);
 
   useEffect(() => {
-    // Atualiza o estado de inputs preenchidos
     const filled =
       values[0].value > 0 &&
       (trocoLiquidoPortabilidade > 0 || somaParcelasPositivas > 0);
     setAllInputsFilled(filled);
 
-    // Atualiza o resultado final
     if (filled) {
       const finalResult = [
-        `Valor Empréstimo R$ ${formatNumber(values[0].value / 0.02385)}`,
+        `Valor Empréstimo R$ ${formatNumber(values[0].value / +params?.EXERCITO?.["Possibilidades Gerais"]?.coeficiente_emprestimo)}`,
         `Parcela Empréstimo R$ ${formatNumber(values[0].value)} 84x`,
         `Portabilidade Aprox. R$ ${formatNumber(trocoLiquidoPortabilidade)}`,
         `Parcela Portabilidade R$ ${formatNumber(somaParcelasPositivas)} 84x`,
         `VALOR TOTAL R$ ${formatNumber(
-          values[0].value / 0.02385 + trocoLiquidoPortabilidade
+          values[0].value / +params?.EXERCITO?.["Possibilidades Gerais"]?.coeficiente_emprestimo + trocoLiquidoPortabilidade
         )}`,
         `PARCELA TOTAL R$ ${formatNumber(
           values[0].value + somaParcelasPositivas
@@ -354,7 +145,7 @@ export function CalculatorExercito2({
               value={values[0].value}
               onValueChange={(values) => {
                 const { floatValue } = values;
-                handleInputValue("VALOR MARGEM EMPRÉSTIMO: ", floatValue ?? 0);
+                handleInputValue(floatValue ?? 0);
               }}
               thousandSeparator="."
               decimalSeparator=","
@@ -974,7 +765,7 @@ export function CalculatorExercito2({
             fontSize={"12px"}
             fontWeight={"medium"}
             mx={4}
-          >{`VALOR EMPRÉSTIMO: ${(values[0].value / 0.02385).toLocaleString(
+          >{`VALOR EMPRÉSTIMO: ${(values[0].value / +params?.EXERCITO?.["Possibilidades Gerais"]?.coeficiente_emprestimo).toLocaleString(
             "pt-BR",
             {
               style: "currency",
@@ -1012,7 +803,7 @@ export function CalculatorExercito2({
         <Flex className="totaisContainer">
           <Text fontSize={"14px"} fontWeight={"bold"} mx={4}>{`TOTAL: ${(
             trocoLiquidoPortabilidade +
-            values[0].value / 0.02385
+            values[0].value / +params?.EXERCITO?.["Possibilidades Gerais"]?.coeficiente_emprestimo
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
@@ -1024,9 +815,6 @@ export function CalculatorExercito2({
             currency: "BRL",
           })}`}</Text>
           <Text fontSize={"14px"} fontWeight={"bold"} mx={4}>{`84x`}</Text>
-          {/* {total.map((t) => (
-            <CalculatorTotal total={t} />
-          ))} */}
         </Flex>
       </Flex>
     </Flex>

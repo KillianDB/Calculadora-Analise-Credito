@@ -51,20 +51,10 @@ export function CalculatorINSS3({
     ]);
     console.log("CHECKED", isChecked);
 
-    if (result != "no valid labels" && result != undefined) {
+    if (Array.isArray(result) && result.length > 0) {
       setResults(result.slice(0, 2).concat(result.slice(5, 9)));
       setTotal(result.slice(2, 5).concat(result.slice(9, 12)));
 
-      // if (!isChecked) {
-      // 	const finalResult: string[] = [
-      // 		"Bem vindo, Cliente CR",
-      // 		`Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
-      // 		`Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
-      // 		`${result[2].split(" R$ ")[1]}`,
-      // 		`${result[3].split(" R$ ")[1]} 84x`,
-      // 	];
-      // 	setFinalResult(finalResult);
-      // } else {
       const finalResult: string[] = [
         `Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
         `Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
@@ -103,7 +93,6 @@ export function CalculatorINSS3({
   return (
     <Flex
       className="calculatorComponentDiv"
-      // style={isChecked ? { height: "70vh" } : { height: "44vh" }}
     >
       <CalculatorTitle
         menu="INSS"

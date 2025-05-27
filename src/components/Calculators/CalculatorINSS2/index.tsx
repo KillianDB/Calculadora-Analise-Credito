@@ -44,11 +44,8 @@ export function CalculatorINSS2({
 			{ label, value },
 		]);
 		
-		if (result !== "no valid labels" && result !== undefined) {
+		if (Array.isArray(result) && result.length > 0) {
 			setTotais(result);
-			
-			// Verifique o formato real do resultado primeiro
-			console.log("Resultado do cálculo:", result);
 			
 			const finalResult: string[] = [
 				`Valor Empréstimo Solicitado R$ ${result[0].split(" R$ ")[1]}`,

@@ -38,7 +38,7 @@ export function CalculatorExercito1({
     if (Array.isArray(result) && result.length > 0) {
       setResults(result.slice(0, 2));
       setTotal(result.slice(2, 5));
-	  console.log("RESULT-> ", result);
+      console.log("RESULT-> ", result);
 
       const finalResult: string[] = [
         `Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,

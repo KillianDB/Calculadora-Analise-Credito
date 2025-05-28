@@ -105,11 +105,6 @@ export function CalculatorINSS1({
                 onValueChange={(number) => {
                   const { floatValue } = number;
                   handleInputValue(value.label, floatValue ?? 0);
-                  // setValues(
-                  // 	values.map((item) =>
-                  // 		item.index === value.index ? { ...item, value: Number(floatValue) } : item
-                  // 	)
-                  // );
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -122,7 +117,7 @@ export function CalculatorINSS1({
           </FormControl>
         ))}
       </Flex>
-      <Flex className="answerContainer" style={{height:'31vh'}}>
+      <Flex className="answerContainer" style={{ height: "31vh" }}>
         <Flex
           className="resultsContainer"
           style={{
@@ -135,7 +130,7 @@ export function CalculatorINSS1({
           }}
         >
           {results.map((result: string, index) => (
-            <CalculatorResult key={index} result={result}/>
+            <CalculatorResult key={index} result={result} />
           ))}
         </Flex>
         <Flex className="totaisContainer">

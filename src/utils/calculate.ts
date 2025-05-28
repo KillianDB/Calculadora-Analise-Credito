@@ -21,13 +21,19 @@ export function calculate(
       return "no valid labels";
     }
 
-    let coeficienteEmprestimo = +params?.INSS?.["Cálculo Por Margem Disponível"]?.coeficiente_emprestimo;
+    let coeficienteEmprestimo =
+      +params?.INSS?.["Cálculo Por Margem Disponível"]?.coeficiente_emprestimo;
 
-    let coeficienteCartaoINSS = +params?.INSS?.["Cálculo Por Margem Disponível"]?.coeficiente_cartao_inss;
+    let coeficienteCartaoINSS =
+      +params?.INSS?.["Cálculo Por Margem Disponível"]?.coeficiente_cartao_inss;
 
-    let coeficienteCartaoBeneficio = +params?.INSS?.["Cálculo Por Margem Disponível"]?.coeficiente_cartao_beneficio;
+    let coeficienteCartaoBeneficio =
+      +params?.INSS?.["Cálculo Por Margem Disponível"]
+        ?.coeficiente_cartao_beneficio;
 
-    let porcentagemCartaoEnviado = +params?.INSS?.["Cálculo Por Margem Disponível"]?.porcentagem_cartao_enviado;
+    let porcentagemCartaoEnviado =
+      +params?.INSS?.["Cálculo Por Margem Disponível"]
+        ?.porcentagem_cartao_enviado;
 
     const emprestimoT: number = +values[0].value / coeficienteEmprestimo;
     const emprestimoP: number = +values[0].value;
@@ -75,16 +81,22 @@ export function calculate(
     if (!(values[0].label == "VALOR DE EMPRÉSTIMO SOLICITADO: ")) {
       return "no valid labels";
     }
-	
-	// let coeficienteEmprestimo = +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_emprestimo;
-	let coeficiente84x = +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_84x;
-	let coeficiente72x = +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_72x;
-	let coeficiente60x = +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_60x;
-	let coeficiente48x = +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_48x;
-	let coeficiente36x = +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_36x;
-	let coeficiente24x = +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_24x;
 
-	const x84 = +values[0].value * coeficiente84x;
+    // let coeficienteEmprestimo = +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_emprestimo;
+    let coeficiente84x =
+      +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_84x;
+    let coeficiente72x =
+      +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_72x;
+    let coeficiente60x =
+      +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_60x;
+    let coeficiente48x =
+      +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_48x;
+    let coeficiente36x =
+      +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_36x;
+    let coeficiente24x =
+      +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_24x;
+
+    const x84 = +values[0].value * coeficiente84x;
     const x72 = +values[0].value * coeficiente72x;
     const x60 = +values[0].value * coeficiente60x;
     const x48 = +values[0].value * coeficiente48x;
@@ -137,10 +149,18 @@ export function calculate(
       return "no valid labels";
     }
 
-	let coeficienteEmprestimo = +params?.INSS?.["Cálculo Salário Cliente Sem Cartão"]?.coeficiente_emprestimo;
-	let coeficienteReducaoJuros = +params?.INSS?.["Cálculo Salário Cliente Sem Cartão"]?.coeficiente_reducao_de_juros;
-	let porcentagemMargemEmprestimo = +params?.INSS?.["Cálculo Salário Cliente Sem Cartão"]?.porcentagem_margem_emprestimo;
-	let porcentagemSaldoDevedor = +params?.INSS?.["Cálculo Salário Cliente Sem Cartão"]?.porcentagem_saldo_devedor;
+    let coeficienteEmprestimo =
+      +params?.INSS?.["Cálculo Salário Cliente Sem Cartão"]
+        ?.coeficiente_emprestimo;
+    let coeficienteReducaoJuros =
+      +params?.INSS?.["Cálculo Salário Cliente Sem Cartão"]
+        ?.coeficiente_reducao_de_juros;
+    let porcentagemMargemEmprestimo =
+      +params?.INSS?.["Cálculo Salário Cliente Sem Cartão"]
+        ?.porcentagem_margem_emprestimo;
+    let porcentagemSaldoDevedor =
+      +params?.INSS?.["Cálculo Salário Cliente Sem Cartão"]
+        ?.porcentagem_saldo_devedor;
 
     const emprestimoT = (+values[0].value * 0.35) / coeficienteEmprestimo;
     const total = emprestimoT;
@@ -173,17 +193,26 @@ export function calculate(
       return "no valid labels";
     }
 
-	// let coeficienteCartaoBeneficio = +params?.INSS?.["Cálculo Salário Cliente"]?.coeficiente_cartao_beneficio;
-	let coeficienteCartaoINSS = +params?.INSS?.["Cálculo Salário Cliente"]?.coeficiente_cartao_inss;
-	let coeficienteEmprestimo = +params?.INSS?.["Cálculo Salário Cliente"]?.coeficiente_emprestimo;
-	let coeficienteReducaoJuros = +params?.INSS?.["Cálculo Salário Cliente"]?.coeficiente_reducao_de_juros;
-	let porcentagemCartaoEnviado = +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_cartao_enviado;
-	// let porcentagemMargemCartaoBeneficio = +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_margem_cartao_beneficio;
-	let porcentagemMargemCartaoINSS = +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_margem_cartao_inss;
-	let porcentagemMargemEmprestimo = +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_margem_emprestimo;
-	let porcentagemSaldoDevedor = +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_saldo_devedor;
+    // let coeficienteCartaoBeneficio = +params?.INSS?.["Cálculo Salário Cliente"]?.coeficiente_cartao_beneficio;
+    let coeficienteCartaoINSS =
+      +params?.INSS?.["Cálculo Salário Cliente"]?.coeficiente_cartao_inss;
+    let coeficienteEmprestimo =
+      +params?.INSS?.["Cálculo Salário Cliente"]?.coeficiente_emprestimo;
+    let coeficienteReducaoJuros =
+      +params?.INSS?.["Cálculo Salário Cliente"]?.coeficiente_reducao_de_juros;
+    let porcentagemCartaoEnviado =
+      +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_cartao_enviado;
+    // let porcentagemMargemCartaoBeneficio = +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_margem_cartao_beneficio;
+    let porcentagemMargemCartaoINSS =
+      +params?.INSS?.["Cálculo Salário Cliente"]
+        ?.porcentagem_margem_cartao_inss;
+    let porcentagemMargemEmprestimo =
+      +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_margem_emprestimo;
+    let porcentagemSaldoDevedor =
+      +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_saldo_devedor;
 
-    const emprestimoT = (+values[0].value * porcentagemMargemEmprestimo) / coeficienteEmprestimo;
+    const emprestimoT =
+      (+values[0].value * porcentagemMargemEmprestimo) / coeficienteEmprestimo;
     const emprestimoP = +values[0].value * porcentagemMargemEmprestimo;
     const cartaoP = +values[0].value * porcentagemMargemCartaoINSS;
     const cartaoT = cartaoP * coeficienteCartaoINSS;
@@ -259,21 +288,34 @@ export function calculate(
       return "no valid labels";
     }
 
-	console.log("calculate on Possibilidades Gerais => ", params.INSS?.["Possibilidades Gerais"]);
+    console.log(
+      "calculate on Possibilidades Gerais => ",
+      params.INSS?.["Possibilidades Gerais"]
+    );
 
-	let coeficienteEmprestimo = +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_emprestimo;
-	let coeficienteCartaoINSS = +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_inss;
-	let coeficienteCartaoBeneficio = +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_beneficio;
-	let porcentagemCompras = +params?.INSS?.["Possibilidades Gerais"]?.porcentagem_compras;
+    let coeficienteEmprestimo =
+      +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_emprestimo;
+    let coeficienteCartaoINSS =
+      +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_inss;
+    let coeficienteCartaoBeneficio =
+      +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_beneficio;
+    let porcentagemCompras =
+      +params?.INSS?.["Possibilidades Gerais"]?.porcentagem_compras;
+    let porcentagemMargemCartaoINSS =
+      +params?.INSS?.["Possibilidades Gerais"]?.porcentagem_margem_cartao_inss;
+    let porcentagemMargemCartaoBeneficio =
+      +params?.INSS?.["Possibilidades Gerais"]
+        ?.porcentagem_margem_cartao_beneficio;
 
     const emprestimo = +values[0].value / coeficienteEmprestimo;
     const parcelaEmprestimo = +values[0].value;
     const inss = +values[1].value * coeficienteCartaoINSS;
-    const parcelainss = +values[0].value * 0.7;
+    const parcelainss = +values[0].value * porcentagemMargemCartaoINSS;
     const comprasinss = inss * porcentagemCompras;
     const parcelacomprasinss = +values[1].value * porcentagemCompras;
     const beneficios = +values[2].value * coeficienteCartaoBeneficio;
-    const parcelabeneficios = +values[2].value * 0.7;
+    const parcelabeneficios =
+      +values[2].value * porcentagemMargemCartaoBeneficio;
     const comprasbeneficios = beneficios * porcentagemCompras;
     const parcelacomprasbeneficios = +values[2].value * porcentagemCompras;
     const totalParcelas = values[4].value;
@@ -354,24 +396,43 @@ export function calculate(
     if (!(values[0].label == "SALÁRIO: ")) {
       return "no valid labels";
     }
-    
-    let coeficienteCartaoINSS = +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]?.coeficiente_cartao_inss;
-    let coeficienteEmprestimo = +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]?.coeficiente_emprestimo;
-    let porcentagemCartaoEnviado = +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]?.porcentagem_cartao_enviado;
-    let porcentagemMargemEmprestimo = +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]?.porcentagem_margem_emprestimo;
-    let porcentagemMargemCartaoINSS = +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]?.porcentagem_margem_cartao_inss;
+
+    let coeficienteCartaoINSS =
+      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
+        ?.coeficiente_cartao_inss;
+    let coeficienteEmprestimo =
+      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
+        ?.coeficiente_emprestimo;
+    let porcentagemCartaoEnviado =
+      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
+        ?.porcentagem_cartao_enviado;
+    let porcentagemMargemEmprestimo =
+      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
+        ?.porcentagem_margem_emprestimo;
+    let porcentagemValorMargemCartaoINSS =
+      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
+        ?.porcentagem_valor_margem_cartao_inss;
+    let porcentagemMargemCartaoINSS =
+      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
+        ?.porcentagem_margem_cartao_inss;
+    let porcentagemMargemComprasCartaoINSS =
+      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
+        ?.porcentagem_compras_margem_cartao_inss;
+    let valorLiberado =
+      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
+        ?.valor_liberado;
 
     const emprestimoP = +values[0].value * porcentagemMargemEmprestimo;
     const emprestimoT = emprestimoP / coeficienteEmprestimo;
-    const parcelaTotalINSS = +values[0].value * porcentagemMargemCartaoINSS;
-    const INSSP = parcelaTotalINSS * 0.7;
+    const parcelaTotalINSS =
+      +values[0].value * porcentagemValorMargemCartaoINSS;
+    const INSSP = parcelaTotalINSS * porcentagemMargemCartaoINSS;
     const INSST = parcelaTotalINSS * coeficienteCartaoINSS;
     const enviadoT = INSST * porcentagemCartaoEnviado;
-    const enviadoP = parcelaTotalINSS * 0.3;
+    const enviadoP = parcelaTotalINSS * porcentagemMargemComprasCartaoINSS;
     const total = emprestimoT + INSST + enviadoT;
     const totalP = emprestimoP + INSSP + enviadoP;
 
-    const valorLiberado = 2000;
     const totalExtra = total + valorLiberado;
     const parcelaComExtra = totalP;
 
@@ -408,7 +469,9 @@ export function calculate(
       return "no valid labels";
     }
 
-    let coeficienteEmprestimo = +params?.EXERCITO?.["Cálculo por Margem Disponível"]?.coeficiente_emprestimo;
+    let coeficienteEmprestimo =
+      +params?.EXERCITO?.["Cálculo por Margem Disponível"]
+        ?.coeficiente_emprestimo;
     // let porcentagemMargemEmprestimo = +params?.EXERCITO?.["Cálculo por Margem Disponível"]?.porcentagem_margem_emprestimo;
 
     const emprestimoT = +values[0].value / coeficienteEmprestimo;
@@ -426,106 +489,9 @@ export function calculate(
       "PARCELA: R$ " + formatNumber(totalP),
       "72x",
     ];
+  } else if (menu == "Exército" && submenu == "Possibilidades Gerais") {
+    //!Cálculo Possibilidades Gerais Exército é feito direto no componente
+  } else if (menu == "Prefeitura") {
+    //!Cálculo Prefeitura é feito direto no componente
   }
-  else if (menu == "Exército" && submenu == "Possibilidades Gerais") {
-  	//!Cálculo Possibilidades Gerais Exército é feito direto no componente
-  } else if (menu == "Prefeitura" && submenu == "VALOR") {
-    if (!(values[0].label == "VALOR MARGEM EMPRÉSTIMO: ")) {
-      return "no valid labels";
-    }
-
-    let coeficienteEmprestimo = +params?.Prefeitura?.VALOR?.coeficiente_valor_liberado;
-    // let coeficiente24x = +params?.Prefeitura?.VALOR?.coeficiente_24x;
-    // let coeficiente18x = +params?.Prefeitura?.VALOR?.coeficiente_18x;
-    // let coeficiente12x = +params?.Prefeitura?.VALOR?.coeficiente_12x;
-    // let coeficiente10x = +params?.Prefeitura?.VALOR?.coeficiente_10x;
-
-    const emprestimoT = +values[0].value / coeficienteEmprestimo;
-    const emprestimoP = +values[0].value;
-
-    const totalT = emprestimoT;
-    const totalP = emprestimoP;
-
-    return [
-      "VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
-      "PARCELA: R$ " + formatNumber(emprestimoP),
-      "TOTAL: R$ " + formatNumber(totalT),
-      "PARCELA: R$ " + formatNumber(totalP),
-      "24x",
-    ];
-  } else if (menu == "Prefeitura" && submenu == "ASPECIR") {
-
-    if (!(values[0].label == "VALOR MARGEM EMPRÉSTIMO: ")) {
-      return "no valid labels";
-    }
-
-    let coeficienteEmprestimo = +params?.Prefeitura?.ASPECIR?.coeficiente_emprestimo;
-    // let coeficiente84x = +params?.Prefeitura?.ASPECIR?.coeficiente_84x;
-    // let coeficiente72x = +params?.Prefeitura?.ASPECIR?.coeficiente_72x;
-    // let coeficiente60x = +params?.Prefeitura?.ASPECIR?.coeficiente_60x;
-    // let coeficiente48x = +params?.Prefeitura?.ASPECIR?.coeficiente_48x;
-
-    const emprestimoT = +values[0].value / coeficienteEmprestimo;
-    const emprestimoP = +values[0].value;
-
-    const totalT = emprestimoT;
-    const totalP = emprestimoP;
-
-    return [
-      "VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
-      "PARCELA: R$ " + formatNumber(emprestimoP),
-      "TOTAL: R$ " + formatNumber(totalT),
-      "PARCELA: R$ " + formatNumber(totalP),
-      "24x",
-    ];
-  }else if (menu == "Prefeitura" && submenu == "SANTANDER") {
-    if (!(values[0].label == "VALOR MARGEM EMPRÉSTIMO: ")) {
-      return "no valid labels";
-    }
-
-    let coeficienteEmprestimo = +params?.Prefeitura?.SANTANDER?.coeficiente_emprestimo;
-    // let coeficiente48x = +params?.Prefeitura?.SANTANDER?.coeficiente_48x;
-    // let coeficiente60x = +params?.Prefeitura?.SANTANDER?.coeficiente_60x;
-    // let coeficiente72x = +params?.Prefeitura?.SANTANDER?.coeficiente_72x;
-    // let coeficiente84x = +params?.Prefeitura?.SANTANDER?.coeficiente_84x;
-
-    const emprestimoT = +values[0].value / coeficienteEmprestimo;
-    const emprestimoP = +values[0].value;
-
-    const totalT = emprestimoT;
-    const totalP = emprestimoP;
-
-    return [
-      "VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
-      "PARCELA: R$ " + formatNumber(emprestimoP),
-      "TOTAL: R$ " + formatNumber(totalT),
-      "PARCELA: R$ " + formatNumber(totalP),
-      "24x",
-    ];
-  }else if (menu == "Prefeitura" && submenu == "DAYCOVAL") {
-    if (!(values[0].label == "VALOR MARGEM EMPRÉSTIMO: ")) {
-      return "no valid labels";
-    }
-
-    let coeficienteEmprestimo = +params?.Prefeitura?.DAYCOVAL?.coeficiente_emprestimo;
-    // let coeficiente48x = +params?.Prefeitura?.DAYCOVAL?.coeficiente_48x;
-    // let coeficiente60x = +params?.Prefeitura?.DAYCOVAL?.coeficiente_60x;
-    // let coeficiente72x = +params?.Prefeitura?.DAYCOVAL?.coeficiente_72x;
-    // let coeficiente84x = +params?.Prefeitura?.DAYCOVAL?.coeficiente_84x;
-
-    const emprestimoT = +values[0].value / coeficienteEmprestimo;
-    const emprestimoP = +values[0].value;
-
-    const totalT = emprestimoT;
-    const totalP = emprestimoP;
-
-    return [
-      "VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
-      "PARCELA: R$ " + formatNumber(emprestimoP),
-      "TOTAL: R$ " + formatNumber(totalT),
-      "PARCELA: R$ " + formatNumber(totalP),
-      "24x",
-    ];
-  }
-
 }

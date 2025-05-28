@@ -58,10 +58,10 @@ export function CalculatorLOAS({
       { label, value },
     ]);
     console.log("CHECKED", isChecked);
-    if (typeof result === 'string') {
-    console.error(result);
-    return;
-  }
+    if (typeof result === "string") {
+      console.error(result);
+      return;
+    }
 
     if (Array.isArray(result) && result.length > 0) {
       setResults(result.slice(0, 8).concat(result.slice(11, 16)));

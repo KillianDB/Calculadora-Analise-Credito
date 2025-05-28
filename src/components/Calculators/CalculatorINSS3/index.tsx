@@ -49,7 +49,6 @@ export function CalculatorINSS3({
     const result = calculate("INSS", "Cálculo Salário Cliente Sem Cartões", [
       { label, value },
     ]);
-    console.log("CHECKED", isChecked);
 
     if (Array.isArray(result) && result.length > 0) {
       setResults(result.slice(0, 2).concat(result.slice(5, 9)));
@@ -91,9 +90,7 @@ export function CalculatorINSS3({
   }, [values[0].value, isChecked]);
 
   return (
-    <Flex
-      className="calculatorComponentDiv"
-    >
+    <Flex className="calculatorComponentDiv">
       <CalculatorTitle
         menu="INSS"
         submenu="Cálculo Salário Cliente Sem Cartões"

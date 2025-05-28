@@ -23,7 +23,7 @@ export function CalculatorExercito2({
   if (!paramsString) return "no parameters found";
 
   const params = JSON.parse(paramsString);
-  
+
   const [values, setValues] = useState([
     { label: "VALOR MARGEM EMPRÉSTIMO: ", value: 0 },
   ]);
@@ -77,8 +77,16 @@ export function CalculatorExercito2({
     const taxaJuros = eval(`taxaJuros${index + 1}`);
 
     const liquidoCliente =
-      parcela / 0.0222 -
-      (parcela / taxaJuros - parcela * (84 - prazoRestante) * 0.45);
+      parcela /
+        params?.EXERCITO?.["Possibilidades Gerais"]
+          .coeficiente_liquido_cliente -
+      (parcela / taxaJuros -
+        parcela *
+          (params?.EXERCITO?.["Possibilidades Gerais"]
+            .coeficiente_saldo_devedor -
+            prazoRestante) *
+          +params?.EXERCITO?.["Possibilidades Gerais"]
+            .porcentagem_saldo_devedor);
 
     return liquidoCliente > 0 ? acc + liquidoCliente : acc;
   }, 0);
@@ -96,8 +104,16 @@ export function CalculatorExercito2({
     const taxaJuros = eval(`taxaJuros${index + 1}`);
 
     const liquidoCliente =
-      parcela / 0.0222 -
-      (parcela / taxaJuros - parcela * (84 - prazoRestante) * 0.45);
+      parcela /
+        +params?.EXERCITO?.["Possibilidades Gerais"]
+          .coeficiente_liquido_cliente -
+      (parcela / taxaJuros -
+        parcela *
+          (+params?.EXERCITO?.["Possibilidades Gerais"]
+            .coeficiente_saldo_devedor -
+            prazoRestante) *
+          +params?.EXERCITO?.["Possibilidades Gerais"]
+            .porcentagem_saldo_devedor);
 
     return liquidoCliente > 0 ? acc + parcela : acc;
   }, 0);
@@ -110,12 +126,18 @@ export function CalculatorExercito2({
 
     if (filled) {
       const finalResult = [
-        `Valor Empréstimo R$ ${formatNumber(values[0].value / +params?.EXERCITO?.["Possibilidades Gerais"]?.coeficiente_emprestimo)}`,
+        `Valor Empréstimo R$ ${formatNumber(
+          values[0].value /
+            +params?.EXERCITO?.["Possibilidades Gerais"]?.coeficiente_emprestimo
+        )}`,
         `Parcela Empréstimo R$ ${formatNumber(values[0].value)} 84x`,
         `Portabilidade Aprox. R$ ${formatNumber(trocoLiquidoPortabilidade)}`,
         `Parcela Portabilidade R$ ${formatNumber(somaParcelasPositivas)} 84x`,
         `VALOR TOTAL R$ ${formatNumber(
-          values[0].value / +params?.EXERCITO?.["Possibilidades Gerais"]?.coeficiente_emprestimo + trocoLiquidoPortabilidade
+          values[0].value /
+            +params?.EXERCITO?.["Possibilidades Gerais"]
+              ?.coeficiente_emprestimo +
+            trocoLiquidoPortabilidade
         )}`,
         `PARCELA TOTAL R$ ${formatNumber(
           values[0].value + somaParcelasPositivas
@@ -225,7 +247,12 @@ export function CalculatorExercito2({
                 {`SALDO DEVEDOR: ${(taxaJuros1 > 0
                   ? // ? Math.max(
                     parcela1 / taxaJuros1 -
-                    parcela1 * (84 - prazoRestante1) * 0.45
+                    parcela1 *
+                      (+params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_saldo_devedor -
+                        prazoRestante1) *
+                      +params?.EXERCITO?.["Possibilidades Gerais"]
+                        .porcentagem_saldo_devedor
                   : // )
                     0
                 ).toLocaleString("pt-BR", {
@@ -236,13 +263,27 @@ export function CalculatorExercito2({
             </Flex>
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
-                {`LIQUIDO CLIENTE: ${(parcela1 / 0.0222 -
+                {`LIQUIDO CLIENTE: ${(parcela1 /
+                  params?.EXERCITO?.["Possibilidades Gerais"]
+                    .coeficiente_liquido_cliente -
                   (parcela1 / taxaJuros1 -
-                    parcela1 * (84 - prazoRestante1) * 0.45) >
+                    parcela1 *
+                      (+params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_saldo_devedor -
+                        prazoRestante1) *
+                      +params?.EXERCITO?.["Possibilidades Gerais"]
+                        .porcentagem_saldo_devedor) >
                 0
-                  ? parcela1 / 0.0222 -
+                  ? parcela1 /
+                      params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_liquido_cliente -
                     (parcela1 / taxaJuros1 -
-                      parcela1 * (84 - prazoRestante1) * 0.45)
+                      parcela1 *
+                        (+params?.EXERCITO?.["Possibilidades Gerais"]
+                          .coeficiente_saldo_devedor -
+                          prazoRestante1) *
+                        +params?.EXERCITO?.["Possibilidades Gerais"]
+                          .porcentagem_saldo_devedor)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -307,7 +348,12 @@ export function CalculatorExercito2({
                 {`SALDO DEVEDOR: ${(taxaJuros2 > 0
                   ? Math.max(
                       parcela2 / taxaJuros2 -
-                        parcela2 * (84 - prazoRestante2) * 0.45,
+                        parcela2 *
+                          (+params?.EXERCITO?.["Possibilidades Gerais"]
+                            .coeficiente_saldo_devedor -
+                            prazoRestante2) *
+                          +params?.EXERCITO?.["Possibilidades Gerais"]
+                            .porcentagem_saldo_devedor,
                       0
                     )
                   : 0
@@ -320,13 +366,27 @@ export function CalculatorExercito2({
 
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
-                {`LIQUIDO CLIENTE: ${(parcela2 / 0.0222 -
+                {`LIQUIDO CLIENTE: ${(parcela2 /
+                  params?.EXERCITO?.["Possibilidades Gerais"]
+                    .coeficiente_liquido_cliente -
                   (parcela2 / taxaJuros2 -
-                    parcela2 * (84 - prazoRestante2) * 0.45) >
+                    parcela2 *
+                      (+params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_saldo_devedor -
+                        prazoRestante2) *
+                      +params?.EXERCITO?.["Possibilidades Gerais"]
+                        .porcentagem_saldo_devedor) >
                 0
-                  ? parcela2 / 0.0222 -
+                  ? parcela2 /
+                      params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_liquido_cliente -
                     (parcela2 / taxaJuros2 -
-                      parcela2 * (84 - prazoRestante2) * 0.45)
+                      parcela2 *
+                        (+params?.EXERCITO?.["Possibilidades Gerais"]
+                          .coeficiente_saldo_devedor -
+                          prazoRestante2) *
+                        +params?.EXERCITO?.["Possibilidades Gerais"]
+                          .porcentagem_saldo_devedor)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -390,7 +450,12 @@ export function CalculatorExercito2({
                 {`SALDO DEVEDOR: ${(taxaJuros3 > 0
                   ? Math.max(
                       parcela3 / taxaJuros3 -
-                        parcela3 * (84 - prazoRestante3) * 0.45,
+                        parcela3 *
+                          (+params?.EXERCITO?.["Possibilidades Gerais"]
+                            .coeficiente_saldo_devedor -
+                            prazoRestante3) *
+                          +params?.EXERCITO?.["Possibilidades Gerais"]
+                            .porcentagem_saldo_devedor,
                       0
                     )
                   : 0
@@ -403,13 +468,27 @@ export function CalculatorExercito2({
 
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
-                {`LIQUIDO CLIENTE: ${(parcela3 / 0.0222 -
+                {`LIQUIDO CLIENTE: ${(parcela3 /
+                  params?.EXERCITO?.["Possibilidades Gerais"]
+                    .coeficiente_liquido_cliente -
                   (parcela3 / taxaJuros3 -
-                    parcela3 * (84 - prazoRestante3) * 0.45) >
+                    parcela3 *
+                      (+params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_saldo_devedor -
+                        prazoRestante3) *
+                      +params?.EXERCITO?.["Possibilidades Gerais"]
+                        .porcentagem_saldo_devedor) >
                 0
-                  ? parcela3 / 0.0222 -
+                  ? parcela3 /
+                      params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_liquido_cliente -
                     (parcela3 / taxaJuros3 -
-                      parcela3 * (84 - prazoRestante3) * 0.45)
+                      parcela3 *
+                        (+params?.EXERCITO?.["Possibilidades Gerais"]
+                          .coeficiente_saldo_devedor -
+                          prazoRestante3) *
+                        +params?.EXERCITO?.["Possibilidades Gerais"]
+                          .porcentagem_saldo_devedor)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -474,7 +553,12 @@ export function CalculatorExercito2({
                 {`SALDO DEVEDOR: ${(taxaJuros4 > 0
                   ? Math.max(
                       parcela4 / taxaJuros4 -
-                        parcela4 * (84 - prazoRestante4) * 0.45,
+                        parcela4 *
+                          (+params?.EXERCITO?.["Possibilidades Gerais"]
+                            .coeficiente_saldo_devedor -
+                            prazoRestante4) *
+                          +params?.EXERCITO?.["Possibilidades Gerais"]
+                            .porcentagem_saldo_devedor,
                       0
                     )
                   : 0
@@ -487,13 +571,27 @@ export function CalculatorExercito2({
 
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
-                {`LIQUIDO CLIENTE: ${(parcela4 / 0.0222 -
+                {`LIQUIDO CLIENTE: ${(parcela4 /
+                  params?.EXERCITO?.["Possibilidades Gerais"]
+                    .coeficiente_liquido_cliente -
                   (parcela4 / taxaJuros4 -
-                    parcela4 * (84 - prazoRestante4) * 0.45) >
+                    parcela4 *
+                      (+params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_saldo_devedor -
+                        prazoRestante4) *
+                      +params?.EXERCITO?.["Possibilidades Gerais"]
+                        .porcentagem_saldo_devedor) >
                 0
-                  ? parcela4 / 0.0222 -
+                  ? parcela4 /
+                      params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_liquido_cliente -
                     (parcela4 / taxaJuros4 -
-                      parcela4 * (84 - prazoRestante4) * 0.45)
+                      parcela4 *
+                        (+params?.EXERCITO?.["Possibilidades Gerais"]
+                          .coeficiente_saldo_devedor -
+                          prazoRestante4) *
+                        +params?.EXERCITO?.["Possibilidades Gerais"]
+                          .porcentagem_saldo_devedor)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -558,7 +656,12 @@ export function CalculatorExercito2({
                 {`SALDO DEVEDOR: ${(taxaJuros5 > 0
                   ? Math.max(
                       parcela5 / taxaJuros5 -
-                        parcela5 * (84 - prazoRestante5) * 0.45,
+                        parcela5 *
+                          (+params?.EXERCITO?.["Possibilidades Gerais"]
+                            .coeficiente_saldo_devedor -
+                            prazoRestante5) *
+                          +params?.EXERCITO?.["Possibilidades Gerais"]
+                            .porcentagem_saldo_devedor,
                       0
                     )
                   : 0
@@ -571,13 +674,27 @@ export function CalculatorExercito2({
 
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
-                {`LIQUIDO CLIENTE: ${(parcela5 / 0.0222 -
+                {`LIQUIDO CLIENTE: ${(parcela5 /
+                  params?.EXERCITO?.["Possibilidades Gerais"]
+                    .coeficiente_liquido_cliente -
                   (parcela5 / taxaJuros5 -
-                    parcela5 * (84 - prazoRestante5) * 0.45) >
+                    parcela5 *
+                      (+params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_saldo_devedor -
+                        prazoRestante5) *
+                      +params?.EXERCITO?.["Possibilidades Gerais"]
+                        .porcentagem_saldo_devedor) >
                 0
-                  ? parcela5 / 0.0222 -
+                  ? parcela5 /
+                      params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_liquido_cliente -
                     (parcela5 / taxaJuros5 -
-                      parcela5 * (84 - prazoRestante5) * 0.45)
+                      parcela5 *
+                        (+params?.EXERCITO?.["Possibilidades Gerais"]
+                          .coeficiente_saldo_devedor -
+                          prazoRestante5) *
+                        +params?.EXERCITO?.["Possibilidades Gerais"]
+                          .porcentagem_saldo_devedor)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -642,7 +759,12 @@ export function CalculatorExercito2({
                 {`SALDO DEVEDOR: ${(taxaJuros6 > 0
                   ? Math.max(
                       parcela6 / taxaJuros6 -
-                        parcela6 * (84 - prazoRestante6) * 0.45,
+                        parcela6 *
+                          (+params?.EXERCITO?.["Possibilidades Gerais"]
+                            .coeficiente_saldo_devedor -
+                            prazoRestante6) *
+                          +params?.EXERCITO?.["Possibilidades Gerais"]
+                            .porcentagem_saldo_devedor,
                       0
                     )
                   : 0
@@ -655,13 +777,27 @@ export function CalculatorExercito2({
 
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
-                {`LIQUIDO CLIENTE: ${(parcela6 / 0.0222 -
+                {`LIQUIDO CLIENTE: ${(parcela6 /
+                  params?.EXERCITO?.["Possibilidades Gerais"]
+                    .coeficiente_liquido_cliente -
                   (parcela6 / taxaJuros6 -
-                    parcela6 * (84 - prazoRestante6) * 0.45) >
+                    parcela6 *
+                      (+params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_saldo_devedor -
+                        prazoRestante6) *
+                      +params?.EXERCITO?.["Possibilidades Gerais"]
+                        .porcentagem_saldo_devedor) >
                 0
-                  ? parcela6 / 0.0222 -
+                  ? parcela6 /
+                      params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_liquido_cliente -
                     (parcela6 / taxaJuros6 -
-                      parcela6 * (84 - prazoRestante6) * 0.45)
+                      parcela6 *
+                        (+params?.EXERCITO?.["Possibilidades Gerais"]
+                          .coeficiente_saldo_devedor -
+                          prazoRestante6) *
+                        +params?.EXERCITO?.["Possibilidades Gerais"]
+                          .porcentagem_saldo_devedor)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -726,7 +862,12 @@ export function CalculatorExercito2({
                 {`SALDO DEVEDOR: ${(taxaJuros7 > 0
                   ? Math.max(
                       parcela7 / taxaJuros7 -
-                        parcela7 * (84 - prazoRestante7) * 0.45,
+                        parcela7 *
+                          (+params?.EXERCITO?.["Possibilidades Gerais"]
+                            .coeficiente_saldo_devedor -
+                            prazoRestante7) *
+                          +params?.EXERCITO?.["Possibilidades Gerais"]
+                            .porcentagem_saldo_devedor,
                       0
                     )
                   : 0
@@ -739,13 +880,27 @@ export function CalculatorExercito2({
 
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
-                {`LIQUIDO CLIENTE: ${(parcela7 / 0.0222 -
+                {`LIQUIDO CLIENTE: ${(parcela7 /
+                  params?.EXERCITO?.["Possibilidades Gerais"]
+                    .coeficiente_liquido_cliente -
                   (parcela7 / taxaJuros7 -
-                    parcela7 * (84 - prazoRestante7) * 0.45) >
+                    parcela7 *
+                      (+params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_saldo_devedor -
+                        prazoRestante7) *
+                      +params?.EXERCITO?.["Possibilidades Gerais"]
+                        .porcentagem_saldo_devedor) >
                 0
-                  ? parcela7 / 0.0222 -
+                  ? parcela7 /
+                      params?.EXERCITO?.["Possibilidades Gerais"]
+                        .coeficiente_liquido_cliente -
                     (parcela7 / taxaJuros7 -
-                      parcela7 * (84 - prazoRestante7) * 0.45)
+                      parcela7 *
+                        (+params?.EXERCITO?.["Possibilidades Gerais"]
+                          .coeficiente_saldo_devedor -
+                          prazoRestante7) *
+                        +params?.EXERCITO?.["Possibilidades Gerais"]
+                          .porcentagem_saldo_devedor)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -765,13 +920,13 @@ export function CalculatorExercito2({
             fontSize={"12px"}
             fontWeight={"medium"}
             mx={4}
-          >{`VALOR EMPRÉSTIMO: ${(values[0].value / +params?.EXERCITO?.["Possibilidades Gerais"]?.coeficiente_emprestimo).toLocaleString(
-            "pt-BR",
-            {
-              style: "currency",
-              currency: "BRL",
-            }
-          )}`}</Text>
+          >{`VALOR EMPRÉSTIMO: ${(
+            values[0].value /
+            +params?.EXERCITO?.["Possibilidades Gerais"]?.coeficiente_emprestimo
+          ).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}`}</Text>
           <Text
             fontSize={"12px"}
             fontWeight={"medium"}
@@ -803,7 +958,9 @@ export function CalculatorExercito2({
         <Flex className="totaisContainer">
           <Text fontSize={"14px"} fontWeight={"bold"} mx={4}>{`TOTAL: ${(
             trocoLiquidoPortabilidade +
-            values[0].value / +params?.EXERCITO?.["Possibilidades Gerais"]?.coeficiente_emprestimo
+            values[0].value /
+              +params?.EXERCITO?.["Possibilidades Gerais"]
+                ?.coeficiente_emprestimo
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",

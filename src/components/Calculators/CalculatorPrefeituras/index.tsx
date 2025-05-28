@@ -54,6 +54,8 @@ export function CalculatorPrefeitura({
   if (!paramsString) return "no parameters found";
 
   const params = JSON.parse(paramsString);
+    let coeficienteEmprestimo = +params?.Prefeitura?.["GERAL"]?.coeficiente_emprestimo;
+    let coeficienteValorTotal = +params?.Prefeitura?.["GERAL"]?.coeficiente_valor_total;
 
     let coeficienteValorLiberadoVALOR = +params?.Prefeitura?.["VALOR"]?.coeficiente_valor_liberado;
     let coeficiente24xVALOR = +params?.Prefeitura?.["VALOR"]?.coeficiente_24x;
@@ -114,8 +116,8 @@ export function CalculatorPrefeitura({
     }
 
     const finalResult: string[] = [
-      `Valor Empréstimo R$ ${formatNumber(value / 0.032057)}`,
-      `VALOR TOTAL R$ ${formatNumber(value / 0.0387)}`,
+      `Valor Empréstimo R$ ${formatNumber(value / coeficienteEmprestimo)}`,
+      `VALOR TOTAL R$ ${formatNumber(value / coeficienteValorTotal)}`,
       `PARCELA TOTAL R$ ${formatNumber(value)} 84x`,
     ];
     setFinalResult(finalResult);

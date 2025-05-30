@@ -1,56 +1,133 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import {
+  Box,
+  Flex,
+  Heading,
+  Select,
+  FormControl,
+  FormLabel,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Tooltip,
+  Badge,
+  Alert,
+  AlertIcon,
+  Card,
+  CardHeader,
+  CardBody,
+  Divider,
+  IconButton,
+  Text,
+  useToast,
+  Spinner,
+} from "@chakra-ui/react";
+import {
+  InfoOutlineIcon,
+  EditIcon,
+  CheckIcon,
+  CloseIcon,
+} from "@chakra-ui/icons";
 import Menu from "../../components/Menu";
 import OrangeButton from "../../components/OrangeButton";
 import { CalculatorTitle } from "../../components/CalculatorTitle";
-import Input from "../../components/Input";
-import "./coeficientes.css";
 
 interface Coeficiente {
   id: string;
   menu: string;
   submenu: string;
   value: {
-    [key: string]: {
-      valor: number;
-      descricao: string;
-    };
+    [key: string]: number;
   };
 }
 
-// Dicionário de explicações para cada tipo de coeficiente
 const explicacoesCoeficientes: Record<string, string> = {
-  coeficiente_1: "Usado no cálculo inicial do valor base do empréstimo",
-  coeficiente_2: "Aplicado na segunda fase de cálculo para ajuste de risco",
-  porcentagem_1: "Percentual aplicado sobre o valor total para taxas administrativas",
-  porcentagem_2: "Percentual de desconto para clientes especiais",
-  // Adicione mais explicações conforme necessário
+  coeficiente_valor_liberado: "O valor que será liberado para o cliente",
+  coeficiente_emprestimo: "Taxa de juros aplicada ao empréstimo",
+  coeficiente_cartao_inss: "Valor aplicado ao cartão INSS",
+  porcentagem_margem_emprestimo:
+    "Percentual da margem disponível para empréstimo",
+  // Adicione mais descrições conforme necessário
 };
 
 export function Coeficientes() {
   const [selectedMenu, setSelectedMenu] = useState<string>("");
   const [selectedSubmenu, setSelectedSubmenu] = useState<string>("");
   const [coeficientes, setCoeficientes] = useState<Coeficiente[]>([]);
-  const [filteredCoeficientes, setFilteredCoeficientes] = useState<Coeficiente[]>([]);
+  const [filteredCoeficientes, setFilteredCoeficientes] = useState<
+    Coeficiente[]
+  >([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [newValues, setNewValues] = useState<Record<string, string>>({});
+  const [menus, setMenus] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const toast = useToast();
+  // Use o contexto da calculadora para obter parâmetros
+  const parameters = localStorage.getItem("calculatorParams");
 
-  // Carregar coeficientes da API
+  // Carregar coeficientes da localStorage
   useEffect(() => {
-    const carregarCoeficientes = async () => {
+    const loadData = () => {
       try {
-        const response = await fetch("https://api.creditorealsf.com/coefficients", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+        console.log("Carregando coeficientes...");
+
+        // Tente carregar do contexto primeiro
+        let params;
+        if (parameters && Object.keys(parameters).length > 0) {
+          params = parameters;
+          console.log("Carregado do contexto:", params);
+        } else {
+          // Fallback para localStorage
+          const paramsString = localStorage.getItem("calculatorParams");
+          if (!paramsString) {
+            throw new Error("Parâmetros não encontrados");
+          }
+          params = JSON.parse(paramsString);
+          console.log("Carregado do localStorage:", params);
+        }
+
+        if (!params || Object.keys(params).length === 0) {
+          throw new Error("Parâmetros vazios");
+        }
+
+        const coeficientesArray: Coeficiente[] = [];
+        const menusArray: string[] = [];
+
+        Object.entries(params).forEach(([menu, submenus]) => {
+          menusArray.push(menu);
+
+          Object.entries(submenus as Record<string, any>).forEach(
+            ([submenu, value]) => {
+              coeficientesArray.push({
+                id: value.id,
+                menu,
+                submenu,
+                value: value.values as Record<string, number>,
+              });
+            }
+          );
         });
-        const data = await response.json();
-        setCoeficientes(data);
-      } catch (error) {
-        console.error("Erro ao carregar coeficientes:", error);
+
+        setCoeficientes(coeficientesArray);
+        setMenus(menusArray);
+        setIsLoading(false);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Erro desconhecido");
+        setIsLoading(false);
       }
     };
 
-    carregarCoeficientes();
+    loadData();
   }, []);
 
   // Filtrar coeficientes quando menu ou submenu mudar
@@ -65,20 +142,22 @@ export function Coeficientes() {
     }
   }, [selectedMenu, selectedSubmenu, coeficientes]);
 
-  // Extrair menus únicos
-  const menusUnicos = [...new Set(coeficientes.map((c) => c.menu))];
-
   // Extrair submenus baseado no menu selecionado
   const submenusFiltrados = selectedMenu
-    ? [...new Set(coeficientes.filter((c) => c.menu === selectedMenu).map((c) => c.submenu))]
+    ? [
+        ...new Set(
+          coeficientes
+            .filter((c) => c.menu === selectedMenu)
+            .map((c) => c.submenu)
+        ),
+      ]
     : [];
 
-  const handleEditar = (id: string, currentValues: Record<string, { valor: number; descricao: string }>) => {
+  const handleEditar = (id: string, currentValues: Record<string, number>) => {
     setEditingId(id);
-    // Inicializa os novos valores com os valores atuais
     const valoresIniciais: Record<string, string> = {};
-    Object.entries(currentValues).forEach(([key, valueObj]) => {
-      valoresIniciais[key] = valueObj.valor.toString();
+    Object.entries(currentValues).forEach(([key, value]) => {
+      valoresIniciais[key] = value.toString();
     });
     setNewValues(valoresIniciais);
   };
@@ -97,36 +176,43 @@ export function Coeficientes() {
 
   const salvarAlteracoes = async (id: string) => {
     try {
-      // Converter novos valores para o formato esperado
-      const valoresAtualizados: Record<string, { valor: number; descricao: string }> = {};
+      const valoresAtualizados: Record<string, number> = {};
       Object.entries(newValues).forEach(([key, value]) => {
         const valorNumerico = parseFloat(value);
         if (!isNaN(valorNumerico)) {
-          // Mantém a descrição original
-          const descricaoOriginal = coeficientes.find(c => c.id === id)?.value[key]?.descricao || "";
-          valoresAtualizados[key] = {
-            valor: valorNumerico,
-            descricao: descricaoOriginal
-          };
+          valoresAtualizados[key] = valorNumerico;
         }
       });
+      console.log("Valores atualizados: ", valoresAtualizados);
 
-      const response = await fetch(
+      const coeficiente = coeficientes.find((c) => c.id === id);
+      if (!coeficiente) throw new Error("Coeficiente não encontrado");
+      console.log("Coeficiente encontrado: ", coeficiente);
+      const token = localStorage.getItem("token");
+
+      // Aqui você faria a chamada à API real
+      console.log("Dados que serião enviados:", {
+        menu: coeficiente.menu,
+        submenu: coeficiente.submenu,
+        value: valoresAtualizados,
+      });
+
+      const response = await axios.put(
         `https://api.creditorealsf.com/coefficients/${id}`,
         {
-          method: "PUT",
+          menu: coeficiente.menu,
+          submenu: coeficiente.submenu,
+          value: valoresAtualizados,
+        },
+        {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({
-            value: valoresAtualizados,
-          }),
         }
       );
 
-      if (response.ok) {
-        // Atualizar estado local
+      if (response.status === 200) {
+        // Simulando uma resposta bem-sucedida
         setCoeficientes((prev) =>
           prev.map((c) =>
             c.id === id
@@ -137,146 +223,234 @@ export function Coeficientes() {
               : c
           )
         );
+
         setEditingId(null);
         setNewValues({});
-        alert("Coeficientes atualizados com sucesso!");
-      } else {
-        throw new Error("Erro ao atualizar coeficientes");
+
+        toast({
+          title: "Sucesso",
+          description: "Coeficientes atualizados com sucesso!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       }
-    } catch (error) {
-      console.error("Erro ao salvar alterações:", error);
-      alert("Erro ao atualizar coeficientes. Tente novamente.");
+    } catch (err) {
+      console.error("Erro ao salvar alterações:", err);
+      toast({
+        title: "Erro",
+        description:
+          err instanceof Error ? err.message : "Erro ao atualizar coeficientes",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
+  if (isLoading) {
+    return (
+      <Flex minH="100vh">
+        <Menu type="admin" />
+        <Box
+          flex="1"
+          p={8}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Spinner size="xl" />
+        </Box>
+      </Flex>
+    );
+  }
+
+  if (error) {
+    return (
+      <Flex minH="100vh">
+        <Menu type="admin" />
+        <Box flex="1" p={8}>
+          <Alert status="error" mb={6}>
+            <AlertIcon />
+            {error}
+          </Alert>
+        </Box>
+      </Flex>
+    );
+  }
+
   return (
-    <>
-      <main className="main_equipes">
+    <Flex h="100vh">
+      <main className="body_colaborators">
         <Menu type="admin" />
         <div className="linha"></div>
+        <div className="divMenus"></div>
 
-        <section className="coeficientes_section">
-          <div className="equipe_equipes">
-            <CalculatorTitle menu="Gerenciar Coeficientes" />
-
-            {/* Seleção de Menu */}
-            <div className="form-group">
-              <label htmlFor="menu-select">Menu:</label>
-              <select
-                id="menu-select"
+        <div className="mainCalculator" style={{ height: "77vh" }}>
+          <Flex direction="column" gap={6}>
+            <Flex className="divMenus" width="100%" gap={4}>
+              <Select
+                placeholder="Selecione um menu"
                 value={selectedMenu}
                 onChange={(e) => {
                   setSelectedMenu(e.target.value);
                   setSelectedSubmenu("");
                 }}
-                className="select-coeficiente"
+                width="200px"
               >
-                <option value="">Selecione um menu</option>
-                {menusUnicos.map((menu) => (
+                {menus.map((menu) => (
                   <option key={menu} value={menu}>
                     {menu}
                   </option>
                 ))}
-              </select>
-            </div>
+              </Select>
 
-            {/* Seleção de Submenu */}
-            {selectedMenu && (
-              <div className="form-group">
-                <label htmlFor="submenu-select">Submenu:</label>
-                <select
-                  id="submenu-select"
+              {selectedMenu && (
+                <Select
+                  placeholder="Selecione um submenu"
                   value={selectedSubmenu}
                   onChange={(e) => setSelectedSubmenu(e.target.value)}
-                  className="select-coeficiente"
+                  width="200px"
                 >
-                  <option value="">Selecione um submenu</option>
                   {submenusFiltrados.map((submenu) => (
                     <option key={submenu} value={submenu}>
                       {submenu}
                     </option>
                   ))}
-                </select>
-              </div>
-            )}
+                </Select>
+              )}
+            </Flex>
 
-            {/* Listagem de Coeficientes */}
             {filteredCoeficientes.length > 0 && (
-              <div className="coeficientes-list">
-                <h3 className="coeficientes-title">
-                  {selectedMenu} - {selectedSubmenu}
-                </h3>
-
+              <Box h="54vh" overflowY="auto">
                 {filteredCoeficientes.map((coeficiente) => (
-                  <div key={coeficiente.id} className="coeficiente-card">
-                    {editingId === coeficiente.id ? (
-                      <>
-                        <div className="coeficiente-values">
-                          {Object.entries(coeficiente.value).map(([key, valueObj]) => (
-                            <div key={key} className="value-row">
-                              {/* <label className="value-label">
-                                : */}
-                                <span 
-                                  className="tooltip" 
-                                  data-tooltip={explicacoesCoeficientes[key] || valueObj.descricao}
-                                >
-                                  ℹ️
-                                </span>
-                              {/* </label> */}
-                              <Input
-                                type="number"
-                                value={newValues[key] || ""}
-                                onChange={(e) => handleValueChange(key, e.target.value)} label={key.replace('_', ' ')}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                        <div className="coeficiente-actions">
-                          <OrangeButton
-                            text="Salvar"
-                            onClick={() => salvarAlteracoes(coeficiente.id)}
-                          />
-                          <button
-                            className="cancel-button"
-                            onClick={handleCancelarEdicao}
-                          >
-                            Cancelar
-                          </button>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div className="coeficiente-values">
-                          {Object.entries(coeficiente.value).map(([key, valueObj]) => (
-                            <div key={key} className="value-row">
-                              <span className="value-label">
-                                {key.replace('_', ' ')}:
-                                <span 
-                                  className="tooltip" 
-                                  data-tooltip={explicacoesCoeficientes[key] || valueObj.descricao}
-                                >
-                                  ℹ️
-                                </span>
-                              </span>
-                              <span className="value-display">{valueObj.valor}</span>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="coeficiente-actions">
-                          <OrangeButton
-                            text="Editar"
-                            onClick={() => handleEditar(coeficiente.id, coeficiente.value)}
-                          />
-                        </div>
-                      </>
-                    )}
-                  </div>
+                  <Card key={coeficiente.id} mb={6} variant="outline">
+                    <CardBody p={0}>
+                      <Table variant="simple">
+                        <Thead>
+                          <Tr>
+                            <Th>Chave</Th>
+                            <Th>Valor</Th>
+                            <Th>Descrição</Th>
+                            <Flex justify="space-between" align="center">
+                              {editingId === coeficiente.id ? (
+                                <Flex gap={2}>
+                                  <IconButton
+                                    aria-label="Salvar alterações"
+                                    icon={<CheckIcon />}
+                                    colorScheme="green"
+                                    onClick={() =>
+                                      salvarAlteracoes(coeficiente.id)
+                                    }
+                                    width="40px"
+                                  />
+                                  <IconButton
+                                    aria-label="Cancelar edição"
+                                    icon={<CloseIcon />}
+                                    onClick={handleCancelarEdicao}
+                                    width="40px"
+                                  />
+                                </Flex>
+                              ) : (
+                                <IconButton
+                                  aria-label="Editar coeficientes"
+                                  icon={<EditIcon />}
+                                  onClick={() =>
+                                    handleEditar(
+                                      coeficiente.id,
+                                      coeficiente.value
+                                    )
+                                  }
+                                  width="40px"
+                                />
+                              )}
+                            </Flex>
+                          </Tr>
+                        </Thead>
+
+                        <Tbody>
+                          {Object.entries(coeficiente.value).map(
+                            ([key, value]) => (
+                              <Tr key={key}>
+                                <Td>
+                                  <Flex align="center">
+                                    {key.replace("_", " ")}
+                                    <Tooltip
+                                      label={
+                                        explicacoesCoeficientes[key] || key
+                                      }
+                                      placement="top"
+                                      hasArrow
+                                    >
+                                      <InfoOutlineIcon
+                                        ml={2}
+                                        color="grey.500"
+                                      />
+                                    </Tooltip>
+                                  </Flex>
+                                </Td>
+                                <Td>
+                                  {editingId === coeficiente.id ? (
+                                    <NumberInput
+                                      value={newValues[key] || ""}
+                                      onChange={(valueString) =>
+                                        handleValueChange(key, valueString)
+                                      }
+                                      precision={4}
+                                      step={0.0001}
+                                      min={0}
+                                      width="150px"
+                                    >
+                                      <NumberInputField />
+                                      <NumberInputStepper>
+                                        {/* <NumberIncrementStepper />
+                                        <NumberDecrementStepper /> */}
+                                      </NumberInputStepper>
+                                    </NumberInput>
+                                  ) : (
+                                    <Badge
+                                      colorScheme={
+                                        key.includes("porcentagem")
+                                          ? "green"
+                                          : "blue"
+                                      }
+                                      fontSize="md"
+                                      px={3}
+                                      py={1}
+                                      borderRadius="full"
+                                    >
+                                      {value}
+                                      {key.includes("porcentagem") && "%"}
+                                    </Badge>
+                                  )}
+                                </Td>
+                                <Td>
+                                  <Text fontSize="sm" color="gray.600">
+                                    {explicacoesCoeficientes[key] || key}
+                                  </Text>
+                                </Td>
+                              </Tr>
+                            )
+                          )}
+                        </Tbody>
+                      </Table>
+                    </CardBody>
+                  </Card>
                 ))}
-              </div>
+              </Box>
             )}
-          </div>
-        </section>
+
+            {selectedMenu &&
+              selectedSubmenu &&
+              filteredCoeficientes.length === 0 && (
+                <Alert status="info">
+                  <AlertIcon />
+                  Nenhum coeficiente encontrado para este menu/submenu
+                </Alert>
+              )}
+          </Flex>
+        </div>
       </main>
-    </>
+    </Flex>
   );
 }

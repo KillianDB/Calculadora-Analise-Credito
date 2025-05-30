@@ -60,7 +60,7 @@ export const CalculatorProvider = ({ children }: CalculatorProviderProps) => {
           }
 
           // Armazena os valores do coeficiente sob o submenu
-          acc[param.menu][param.submenu] = param.value;
+            acc[param.menu][param.submenu] = { id: param.id, values: param.value };
 
           return acc;
         }, {});

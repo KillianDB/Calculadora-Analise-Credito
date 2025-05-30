@@ -1,16 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Calculator.css";
-import { CalculatorINSS1 } from "../../components/Calculators/CalculatorINSS1";
-import { CalculatorINSS2 } from "../../components/Calculators/CalculatorINSS2";
-import { CalculatorINSS3 } from "../../components/Calculators/CalculatorINSS3";
-import { CalculatorINSS4 } from "../../components/Calculators/CalculatorINSS4";
-import { CalculatorINSS5 } from "../../components/Calculators/CalculatorINSS5";
+import { CalculatorINSS1 } from "../../components/Calculators/INSS/CalculatorINSS1";
+import { CalculatorINSS2 } from "../../components/Calculators/INSS/CalculatorINSS2";
+import { CalculatorINSS3 } from "../../components/Calculators/INSS/CalculatorINSS3";
+import { CalculatorINSS4 } from "../../components/Calculators/INSS/CalculatorINSS4";
+import { CalculatorINSS5 } from "../../components/Calculators/INSS/CalculatorINSS5";
 import { CalculatorIMGResult } from "../CalculatorIMGResult";
 import axios from "axios";
-import { CalculatorLOAS } from "../../components/Calculators/CalculatorLOAS";
-import { CalculatorExercito1 } from "../../components/Calculators/CalculatorExercito1";
-import { CalculatorExercito2 } from "../../components/Calculators/CalculatorExercito2";
-import { CalculatorPrefeitura } from "../../components/Calculators/CalculatorPrefeituras";
+import { CalculatorLOAS } from "../../components/Calculators/LOAS/CalculatorLOAS";
+import { CalculatorExercito1 } from "../../components/Calculators/Exercito/CalculatorExercito1";
+import { CalculatorExercito2 } from "../../components/Calculators/Exercito/CalculatorExercito2";
+import { CalculatorPrefeituraDaycoval } from "../../components/Calculators/Prefeituras/CalculatorPrefeituraDaycoval";
+import { CalculatorPrefeituraValor } from "../../components/Calculators/Prefeituras/CalculatorPrefeituraValor";
+import { CalculatorPrefeituraAspecir } from "../../components/Calculators/Prefeituras/CaculatorPrefeituraAspecir";
+import { CalculatorPrefeituraSantander } from "../../components/Calculators/Prefeituras/CalculatorPrefeituraSantander";
 import Menu from "../../components/Menu";
 import {
   Button,
@@ -202,7 +205,7 @@ function Calculator() {
       );
     } else if (menu == "PREFEITURA" && submenu == "DAYCOVAL") {
       return (
-        <CalculatorPrefeitura
+        <CalculatorPrefeituraDaycoval
           setAllInputsFilled={setAllInputsFilled}
           setFinalResult={setFinalResult}
           banco="DAYCOVAL"
@@ -210,7 +213,7 @@ function Calculator() {
       );
     } else if (menu == "PREFEITURA" && submenu == "ASPECIR") {
       return (
-        <CalculatorPrefeitura
+        <CalculatorPrefeituraAspecir
           setAllInputsFilled={setAllInputsFilled}
           setFinalResult={setFinalResult}
           banco="ASPECIR"
@@ -218,7 +221,7 @@ function Calculator() {
       );
     } else if (menu == "PREFEITURA" && submenu == "SANTANDER") {
       return (
-        <CalculatorPrefeitura
+        <CalculatorPrefeituraSantander
           setAllInputsFilled={setAllInputsFilled}
           setFinalResult={setFinalResult}
           banco="SANTANDER"
@@ -226,7 +229,7 @@ function Calculator() {
       );
     } else if (menu == "PREFEITURA" && submenu == "VALOR") {
       return (
-        <CalculatorPrefeitura
+        <CalculatorPrefeituraValor
           setAllInputsFilled={setAllInputsFilled}
           setFinalResult={setFinalResult}
           banco="VALOR"

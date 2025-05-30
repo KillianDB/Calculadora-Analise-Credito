@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { CalculatorTitle } from "../../CalculatorTitle";
-import { formatNumber } from "../../../utils/formatNumbers";
+import { CalculatorTitle } from "../../../CalculatorTitle";
+import { formatNumber } from "../../../../utils/formatNumbers";
 import "./exercito.css";
 import {
   Flex,

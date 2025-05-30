@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CalculatorTitle } from "../../CalculatorTitle";
+import { CalculatorTitle } from "../../../CalculatorTitle";
 import "./calculatorINSS5.css";
 import { NumericFormat } from "react-number-format";
 import {
@@ -11,7 +11,7 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
-import { calculate } from "../../../utils/calculate";
+import { calculate } from "../../../../utils/calculate";
 
 export function CalculatorINSS5({
   setAllInputsFilled,

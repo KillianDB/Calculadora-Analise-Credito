@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { calculate } from "../../../utils/calculate";
-import { CalculatorResult } from "../../CalculatorResult";
-import { CalculatorTitle } from "../../CalculatorTitle";
-import CalculatorTotal from "../../CalculatorTotal";
+import { calculate } from "../../../../utils/calculate";
+import { CalculatorResult } from "../../../CalculatorResult";
+import { CalculatorTitle } from "../../../CalculatorTitle";
+import CalculatorTotal from "../../../CalculatorTotal";
 import { Flex, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { NumericFormat } from "react-number-format";
 

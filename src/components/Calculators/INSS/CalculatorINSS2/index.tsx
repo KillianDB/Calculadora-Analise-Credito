@@ -1,8 +1,8 @@
 import { Key, useEffect, useState } from "react";
-import { calculate } from "../../../utils/calculate";
-import { CalculatorTitle } from "../../CalculatorTitle";
-import CalculatorTotal from "../../CalculatorTotal";
-import "./calculatorINSS2.css";
+import { calculate } from "../../../../utils/calculate";
+import { CalculatorTitle } from "../../../CalculatorTitle";
+import CalculatorTotal from "../../../CalculatorTotal";
+// import "./calculatorINSS2.css";
 import {
   Flex,
   FormControl,

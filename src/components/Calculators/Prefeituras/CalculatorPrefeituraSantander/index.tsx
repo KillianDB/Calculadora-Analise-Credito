@@ -1,8 +1,8 @@
 import { Key, useEffect, useState } from "react";
-import { CalculatorTitle } from "../../CalculatorTitle";
-import CalculatorTotal from "../../CalculatorTotal";
-import "./prefeituras.css";
-import { formatNumber } from "../../../utils/formatNumbers";
+import { CalculatorTitle } from "../../../CalculatorTitle";
+import CalculatorTotal from "../../../CalculatorTotal";
+import "../prefeituras.css";
+import { formatNumber } from "../../../../utils/formatNumbers";
 import {
   Flex,
   FormControl,
@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { NumericFormat } from "react-number-format";
 
-export function CalculatorPrefeitura({
+export function CalculatorPrefeituraSantander({
   setAllInputsFilled,
   setFinalResult,
   banco,
@@ -54,70 +54,24 @@ export function CalculatorPrefeitura({
   if (!paramsString) return "no parameters found";
 
   const params = JSON.parse(paramsString);
-    let coeficienteEmprestimo = +params?.Prefeitura?.["GERAL"]?.coeficiente_emprestimo;
-    let coeficienteValorTotal = +params?.Prefeitura?.["GERAL"]?.coeficiente_valor_total;
 
-    let coeficienteValorLiberadoVALOR = +params?.Prefeitura?.["VALOR"]?.coeficiente_valor_liberado;
-    let coeficiente24xVALOR = +params?.Prefeitura?.["VALOR"]?.coeficiente_24x;
+    let coeficienteValorLiberadoSANTANDER = +params?.PREFEITURA?.["SANTANDER"]?.coeficiente_valor_liberado;
+    let coeficiente84xSANTANDER = +params?.PREFEITURA?.["SANTANDER"]?.coeficiente_84x;
 
-    let coeficienteValorLiberadoDAYCOVAL = +params?.Prefeitura?.["DAYCOVAL"]?.coeficiente_valor_liberado;
-    let coeficiente24xDAYCOVAL = +params?.Prefeitura?.["DAYCOVAL"]?.coeficiente_24x;
-
-    let coeficienteValorLiberadoASPECIR = +params?.Prefeitura?.["ASPECIR"]?.coeficiente_valor_liberado;
-    let coeficiente24xASPECIR = +params?.Prefeitura?.["ASPECIR"]?.coeficiente_24x;
-
-    let coeficienteValorLiberadoSANTANDER = +params?.Prefeitura?.["SANTANDER"]?.coeficiente_valor_liberado;
-    let coeficiente24xSANTANDER = +params?.Prefeitura?.["SANTANDER"]?.coeficiente_24x;
-
-    if (banco === "VALOR") {
-      setResult([
-        "VALOR LIBERADO:",
-        `R$ ${formatNumber(value / coeficienteValorLiberadoVALOR)}`,
-        "24x",
-      ]);
-      setTotais([
-        `TOTAL: R$ ${formatNumber(value / coeficiente24xVALOR)}`,
-        `PARCELA R$ ${value}`,
-        "24x",
-      ]);
-    } else if (banco === "DAYCOVAL"){
-      setResult([
-        "VALOR LIBERADO:",
-        `R$ ${formatNumber(value / coeficienteValorLiberadoDAYCOVAL)}`,
-        "24x",
-      ]);
-      setTotais([
-        `TOTAL: R$ ${formatNumber(value / coeficiente24xDAYCOVAL)}`,
-        `PARCELA R$ ${value}`,
-        "24x",
-      ]);
-    }else if (banco === "SANTANDER") {
       setResult([
         "VALOR LIBERADO:",
         `R$ ${formatNumber(value / coeficienteValorLiberadoSANTANDER)}`,
-        "24x",
+        "84x",
       ]);
       setTotais([
-        `TOTAL: R$ ${formatNumber(value / coeficiente24xSANTANDER)}`,
+        `TOTAL: R$ ${formatNumber(value / coeficiente84xSANTANDER)}`,
         `PARCELA R$ ${value}`,
-        "24x",
+        "84x",
       ]);
-    } else if (banco === "ASPECIR") {
-      setResult([
-        "VALOR LIBERADO:",
-        `R$ ${formatNumber(value / coeficienteValorLiberadoASPECIR)}`,
-        "24x",
-      ]);
-      setTotais([
-        `TOTAL: R$ ${formatNumber(value / coeficiente24xASPECIR)}`,
-        `PARCELA R$ ${value}`,
-        "24x",
-      ]);
-    }
 
     const finalResult: string[] = [
-      `Valor Empréstimo R$ ${formatNumber(value / coeficienteEmprestimo)}`,
-      `VALOR TOTAL R$ ${formatNumber(value / coeficienteValorTotal)}`,
+      `Valor Empréstimo R$ ${formatNumber(value / coeficiente84xSANTANDER)}`,
+      `VALOR TOTAL R$ ${formatNumber(value / coeficiente84xSANTANDER)}`,
       `PARCELA TOTAL R$ ${formatNumber(value)} 84x`,
     ];
     setFinalResult(finalResult);

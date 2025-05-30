@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { calculate } from "../../../utils/calculate";
-import { CalculatorResult } from "../../CalculatorResult";
-import { CalculatorTitle } from "../../CalculatorTitle";
-import CalculatorTotal from "../../CalculatorTotal";
-import { formatNumber } from "../../../utils/formatNumbers";
+import { calculate } from "../../../../utils/calculate";
+import { CalculatorResult } from "../../../CalculatorResult";
+import { CalculatorTitle } from "../../../CalculatorTitle";
+import CalculatorTotal from "../../../CalculatorTotal";
+import { formatNumber } from "../../../../utils/formatNumbers";
 import {
   Flex,
   FormControl,

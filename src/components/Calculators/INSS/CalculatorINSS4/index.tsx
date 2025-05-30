@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { calculate } from "../../../utils/calculate";
-import { CalculatorResult } from "../../CalculatorResult";
-import { CalculatorTitle } from "../../CalculatorTitle";
-import CalculatorTotal from "../../CalculatorTotal";
-import "../CalculatorINSS4/calculatorINSS4.css";
+import { calculate } from "../../../../utils/calculate";
+import { CalculatorResult } from "../../../CalculatorResult";
+import { CalculatorTitle } from "../../../CalculatorTitle";
+import CalculatorTotal from "../../../CalculatorTotal";
+import "./calculatorINSS4.css";
 import {
   Flex,
   FormControl,
@@ -19,7 +19,7 @@ interface CalculatorINSS4Props {
   setFinalResult: (result: string[]) => void;
 }
 
-export function CalculatorLOAS({
+export function CalculatorINSS4({
   isChecked,
   setAllInputsFilled,
   setFinalResult,
@@ -57,11 +57,6 @@ export function CalculatorLOAS({
     const result = calculate("INSS", "Cálculo Salário Cliente", [
       { label, value },
     ]);
-    console.log("CHECKED", isChecked);
-    if (typeof result === "string") {
-      console.error(result);
-      return;
-    }
 
     if (Array.isArray(result) && result.length > 0) {
       setResults(result.slice(0, 8).concat(result.slice(11, 16)));
@@ -110,10 +105,7 @@ export function CalculatorLOAS({
 
   return (
     <Flex className="calculatorComponentDiv" id="calculatorComponentDivINSS4">
-      <CalculatorTitle
-        menu="LOAS REP LEGAL"
-        submenu="Cálculo Salário LOAS/BPC"
-      />
+      <CalculatorTitle menu="INSS" submenu="Cálculo Salário Cliente" />
       <Flex className="inputsContainer" id="inputsContainerINSS4">
         <FormControl>
           <FormLabel>{values[0].label}</FormLabel>

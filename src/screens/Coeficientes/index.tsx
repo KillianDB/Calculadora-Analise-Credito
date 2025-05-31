@@ -83,11 +83,19 @@ export function Coeficientes() {
 
         // Tente carregar do contexto primeiro
         let params;
-        if (parameters && Object.keys(parameters).length > 0) {
-          params = parameters;
-          console.log("Carregado do contexto:", params);
-        } else {
-          // Fallback para localStorage
+        if (parameters) {
+          try {
+            // Se parameters for uma string, tenta fazer parse para objeto
+            params = typeof parameters === 'string' ? JSON.parse(parameters) : parameters;
+            console.log("Carregado do contexto:", params);
+          } catch (e) {
+            console.error("Erro ao fazer parse dos parâmetros do contexto:", e);
+            params = null;
+          }
+        }
+        
+        // Fallback para localStorage se params não for válido
+        if (!params || Object.keys(params).length === 0) {
           const paramsString = localStorage.getItem("calculatorParams");
           if (!paramsString) {
             throw new Error("Parâmetros não encontrados");
@@ -102,21 +110,34 @@ export function Coeficientes() {
 
         const coeficientesArray: Coeficiente[] = [];
         const menusArray: string[] = [];
-
-        Object.entries(params).forEach(([menu, submenus]) => {
+        
+        // Itera sobre os menus (INSS, LOAS REP LEGAL, PREFEITURA, EXERCITO)
+        for (const menu of Object.keys(params)) {
+          console.log("Processando menu:", menu);
           menusArray.push(menu);
-
-          Object.entries(submenus as Record<string, any>).forEach(
-            ([submenu, value]) => {
+          
+          // Itera sobre os submenus de cada menu
+          const submenus = params[menu];
+          for (const submenu of Object.keys(submenus)) {
+            console.log("Processando submenu:", submenu);
+            const submenuData = submenus[submenu];
+            
+            // Verifica se o submenuData tem a estrutura esperada (id e values)
+            if (submenuData && submenuData.id && submenuData.values) {
               coeficientesArray.push({
-                id: value.id,
+                id: submenuData.id,
                 menu,
                 submenu,
-                value: value.values as Record<string, number>,
+                value: submenuData.values as Record<string, number>,
               });
+            } else {
+              console.warn(`Estrutura inválida para submenu ${submenu} no menu ${menu}:`, submenuData);
             }
-          );
-        });
+          }
+        }
+        
+        console.log("Coeficientes carregados:", coeficientesArray);
+        console.log("Menus carregados:", menusArray);
 
         setCoeficientes(coeficientesArray);
         setMenus(menusArray);
@@ -286,7 +307,7 @@ export function Coeficientes() {
         <div className="linha"></div>
         <div className="divMenus"></div>
 
-        <div className="mainCalculator" style={{ height: "77vh" }}>
+        <div className="mainCalculator" style={{ height: "77vh", display: "flex", alignItems: "center", justifyContent: "flex-start"}}>
           <Flex direction="column" gap={6}>
             <Flex className="divMenus" width="100%" gap={4}>
               <Select

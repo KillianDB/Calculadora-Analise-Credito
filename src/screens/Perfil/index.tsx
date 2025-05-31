@@ -14,7 +14,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
   Stack,
   Text,
   useToast,
@@ -196,105 +195,110 @@ export function Perfil() {
   return (
     <>
       <main className="body_colaborators">
-        <Menu type="colaborator" />
+        <Menu type={user?.usertype == "admin" ? "admin" : "colaborator"} />
         <div className="linha"></div>
         <div className="divMenus"></div>
-		
-				<div className='mainCalculator'>
-        <Flex direction={{ base: "column", md: "row" }} gap={8} h={"100%"} w={"100%"}>
-          {/* Sidebar */}
-          <Box
-            w={{ base: "100%", md: "300px" }}
-            bg="gray.50"
-            p={6}
-            borderRadius="lg"
-            boxShadow="md"
+
+        <div className="mainCalculator">
+          <Flex
+            direction={{ base: "column", md: "row" }}
+            gap={8}
+            h={"100%"}
+            w={"100%"}
           >
-            <Flex direction="column" align="center">
-              <Avatar
-                size="2xl"
-                name={userData.name}
-                src={imagePreview}
-                mb={4}
-              />
-              <Heading size="md" mb={2}>
-                {userData.name}
+            {/* Sidebar */}
+            <Box
+              w={{ base: "100%", md: "300px" }}
+              bg="gray.50"
+              p={6}
+              borderRadius="lg"
+              boxShadow="md"
+            >
+              <Flex direction="column" align="center">
+                <Avatar
+                  size="2xl"
+                  name={userData.name}
+                  src={imagePreview}
+                  mb={4}
+                />
+                <Heading size="md" mb={2}>
+                  {userData.name}
+                </Heading>
+                <Text fontSize="medium" color="gray.500" mb={4}>
+                  {userData.email}
+                </Text>
+
+                <Box w="full" mb={6}>
+                  <Text fontWeight="bold" fontSize={1} mb={2}>
+                    Tipo de Usuário
+                  </Text>
+                  <Text fontSize={1}>
+                    {userData.usertype === "admin" && "Administrador"}
+                    {userData.usertype === "enterprise" && "Empresa Parceira"}
+                    {userData.usertype === "member" && "Vendedor"}
+                  </Text>
+                </Box>
+
+                <Button
+                  colorScheme={isEditing ? "red" : "blue"}
+                  leftIcon={isEditing ? <CloseIcon /> : <EditIcon />}
+                  onClick={() => setIsEditing(!isEditing)}
+                  w="full"
+                  mb={4}
+                >
+                  {isEditing ? "Cancelar" : "Editar Perfil"}
+                </Button>
+
+                <Button
+                  colorScheme="red"
+                  leftIcon={<LockIcon />}
+                  onClick={onOpen}
+                  w="full"
+                >
+                  Sair
+                </Button>
+              </Flex>
+            </Box>
+
+            {/* Main Content */}
+            <Box flex={1} bg="white" p={6} borderRadius="lg" boxShadow="md">
+              <Heading size="md" mb={6}>
+                Informações do Perfil
               </Heading>
-              <Text fontSize="medium" color="gray.500" mb={4}>
-                {userData.email}
-              </Text>
 
-              <Box w="full" mb={6}>
-                <Text fontWeight="bold" fontSize={1} mb={2}>
-                  Tipo de Usuário
-                </Text>
-                <Text fontSize={1}>
-                  {userData.usertype === "admin" && "Administrador"}
-                  {userData.usertype === "enterprise" && "Empresa Parceira"}
-                  {userData.usertype === "member" && "Vendedor"}
-                </Text>
-              </Box>
+              {isEditing ? (
+                <Stack spacing={6}>
+                  <FormControl>
+                    <FormLabel>Nome</FormLabel>
+                    <Input
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                    />
+                  </FormControl>
 
-              <Button
-                colorScheme={isEditing ? "red" : "blue"}
-                leftIcon={isEditing ? <CloseIcon /> : <EditIcon />}
-                onClick={() => setIsEditing(!isEditing)}
-                w="full"
-                mb={4}
-              >
-                {isEditing ? "Cancelar" : "Editar Perfil"}
-              </Button>
+                  <FormControl>
+                    <FormLabel>Email</FormLabel>
+                    <Input
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      isDisabled
+                    />
+                  </FormControl>
 
-              <Button
-                colorScheme="red"
-                leftIcon={<LockIcon />}
-                onClick={onOpen}
-                w="full"
-              >
-                Sair
-              </Button>
-            </Flex>
-          </Box>
+                  <FormControl>
+                    <FormLabel>Telefone</FormLabel>
+                    <Input
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                    />
+                  </FormControl>
 
-          {/* Main Content */}
-          <Box flex={1} bg="white" p={6} borderRadius="lg" boxShadow="md">
-            <Heading size="md" mb={6}>
-              Informações do Perfil
-            </Heading>
-
-            {isEditing ? (
-              <Stack spacing={6}>
-                <FormControl>
-                  <FormLabel>Nome</FormLabel>
-                  <Input
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                  />
-                </FormControl>
-
-                <FormControl>
-                  <FormLabel>Email</FormLabel>
-                  <Input
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    isDisabled
-                  />
-                </FormControl>
-
-                <FormControl>
-                  <FormLabel>Telefone</FormLabel>
-                  <Input
-                    name="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                  />
-                </FormControl>
-
-                {/* {(userData.usertype === 'member' || userData.usertype === 'admin') && (
+                  {/* {(userData.usertype === 'member' || userData.usertype === 'admin') && (
                 <FormControl>
                   <FormLabel>Escritório(s)</FormLabel>
                   <Input
@@ -306,46 +310,48 @@ export function Perfil() {
                 </FormControl>
               )} */}
 
-                <FormControl>
-                  <FormLabel>Foto de Perfil</FormLabel>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    pt={1}
-                  />
-                </FormControl>
+                  <FormControl>
+                    <FormLabel>Foto de Perfil</FormLabel>
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      pt={1}
+                    />
+                  </FormControl>
 
-                <Flex justify="flex-end" gap={4}>
-                  <Button onClick={() => setIsEditing(false)}>Cancelar</Button>
-                  <Button colorScheme="blue" onClick={handleSave}>
-                    Salvar Alterações
-                  </Button>
-                </Flex>
-              </Stack>
-            ) : (
-              <Stack spacing={6}>
-                <Box>
-                  <Text fontWeight="bold" mb={1}>
-                    Nome
-                  </Text>
-                  <Text>{userData.name}</Text>
-                </Box>
+                  <Flex justify="flex-end" gap={4}>
+                    <Button onClick={() => setIsEditing(false)}>
+                      Cancelar
+                    </Button>
+                    <Button colorScheme="blue" onClick={handleSave}>
+                      Salvar Alterações
+                    </Button>
+                  </Flex>
+                </Stack>
+              ) : (
+                <Stack spacing={6}>
+                  <Box>
+                    <Text fontWeight="bold" mb={1}>
+                      Nome
+                    </Text>
+                    <Text>{userData.name}</Text>
+                  </Box>
 
-                <Box>
-                  <Text fontWeight="bold" mb={1}>
-                    Email
-                  </Text>
-                  <Text>{userData.email}</Text>
-                </Box>
+                  <Box>
+                    <Text fontWeight="bold" mb={1}>
+                      Email
+                    </Text>
+                    <Text>{userData.email}</Text>
+                  </Box>
 
-                <Box>
-                  <Text fontWeight="bold" mb={1}>
-                    Telefone
-                  </Text>
-                  <Text>{userData.phone || "Não informado"}</Text>
-                </Box>
-                {/*               
+                  <Box>
+                    <Text fontWeight="bold" mb={1}>
+                      Telefone
+                    </Text>
+                    <Text>{userData.phone || "Não informado"}</Text>
+                  </Box>
+                  {/*               
               {(userData.usertype === 'member' || userData.usertype === 'admin') && (
                 <Box>
                   <Text fontWeight="bold" mb={1}>Escritório(s)</Text>
@@ -354,31 +360,31 @@ export function Perfil() {
                   </Text>
                 </Box>
               )} */}
-              </Stack>
-            )}
-          </Box>
-        </Flex>
+                </Stack>
+              )}
+            </Box>
+          </Flex>
 
-        {/* Logout Modal */}
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Confirmar Logout</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Text>Tem certeza que deseja sair da aplicação?</Text>
-            </ModalBody>
-            <ModalFooter>
-              <Button variant="ghost" mr={3} onClick={onClose}>
-                Cancelar
-              </Button>
-              <Button colorScheme="red" onClick={handleLogout}>
-                Sair
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-		</div>
+          {/* Logout Modal */}
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Confirmar Logout</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <Text>Tem certeza que deseja sair da aplicação?</Text>
+              </ModalBody>
+              <ModalFooter>
+                <Button variant="ghost" mr={3} onClick={onClose}>
+                  Cancelar
+                </Button>
+                <Button colorScheme="red" onClick={handleLogout}>
+                  Sair
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </div>
       </main>
     </>
   );

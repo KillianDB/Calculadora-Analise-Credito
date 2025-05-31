@@ -39,8 +39,10 @@ export function Perfil() {
         }
       : {}
   );
-  const [imageFile, setImageFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState("");
+  // const [imageFile, setImageFile] = useState(null);
+  const [imagePreview
+    // , setImagePreview
+  ] = useState("");
   const toast = useToast();
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -111,6 +113,7 @@ export function Perfil() {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("Image change event:", e);
     // const file = e.target.files && e.target.files[0];
     // if (file) {
     //   setImageFile(file);

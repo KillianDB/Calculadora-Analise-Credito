@@ -1,17 +1,11 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import {
   Box,
   Flex,
-  Heading,
-  Select,
-  FormControl,
-  FormLabel,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
   Table,
   Thead,
   Tbody,
@@ -23,9 +17,7 @@ import {
   Alert,
   AlertIcon,
   Card,
-  CardHeader,
   CardBody,
-  Divider,
   IconButton,
   Text,
   useToast,
@@ -38,8 +30,6 @@ import {
   CloseIcon,
 } from "@chakra-ui/icons";
 import Menu from "../../components/Menu";
-import OrangeButton from "../../components/OrangeButton";
-import { CalculatorTitle } from "../../components/CalculatorTitle";
 
 interface Coeficiente {
   id: string;
@@ -86,14 +76,17 @@ export function Coeficientes() {
         if (parameters) {
           try {
             // Se parameters for uma string, tenta fazer parse para objeto
-            params = typeof parameters === 'string' ? JSON.parse(parameters) : parameters;
+            params =
+              typeof parameters === "string"
+                ? JSON.parse(parameters)
+                : parameters;
             console.log("Carregado do contexto:", params);
           } catch (e) {
             console.error("Erro ao fazer parse dos parâmetros do contexto:", e);
             params = null;
           }
         }
-        
+
         // Fallback para localStorage se params não for válido
         if (!params || Object.keys(params).length === 0) {
           const paramsString = localStorage.getItem("calculatorParams");
@@ -110,18 +103,18 @@ export function Coeficientes() {
 
         const coeficientesArray: Coeficiente[] = [];
         const menusArray: string[] = [];
-        
+
         // Itera sobre os menus (INSS, LOAS REP LEGAL, PREFEITURA, EXERCITO)
         for (const menu of Object.keys(params)) {
           console.log("Processando menu:", menu);
           menusArray.push(menu);
-          
+
           // Itera sobre os submenus de cada menu
           const submenus = params[menu];
           for (const submenu of Object.keys(submenus)) {
             console.log("Processando submenu:", submenu);
             const submenuData = submenus[submenu];
-            
+
             // Verifica se o submenuData tem a estrutura esperada (id e values)
             if (submenuData && submenuData.id && submenuData.values) {
               coeficientesArray.push({
@@ -131,11 +124,14 @@ export function Coeficientes() {
                 value: submenuData.values as Record<string, number>,
               });
             } else {
-              console.warn(`Estrutura inválida para submenu ${submenu} no menu ${menu}:`, submenuData);
+              console.warn(
+                `Estrutura inválida para submenu ${submenu} no menu ${menu}:`,
+                submenuData
+              );
             }
           }
         }
-        
+
         console.log("Coeficientes carregados:", coeficientesArray);
         console.log("Menus carregados:", menusArray);
 
@@ -307,39 +303,48 @@ export function Coeficientes() {
         <div className="linha"></div>
         <div className="divMenus"></div>
 
-        <div className="mainCalculator" style={{ height: "77vh", display: "flex", alignItems: "center", justifyContent: "flex-start"}}>
+        <div
+          className="mainCalculator"
+          style={{
+            height: "77vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-start",
+          }}
+        >
           <Flex direction="column" gap={6}>
             <Flex className="divMenus" width="100%" gap={4}>
-              <Select
-                placeholder="Selecione um menu"
+              <select
+                title="Menu"
                 value={selectedMenu}
                 onChange={(e) => {
                   setSelectedMenu(e.target.value);
                   setSelectedSubmenu("");
                 }}
-                width="200px"
+                style={{ minWidth: "200px" }}
               >
+                <option value="">Menu</option>
                 {menus.map((menu) => (
                   <option key={menu} value={menu}>
                     {menu}
                   </option>
                 ))}
-              </Select>
+              </select>
 
-              {selectedMenu && (
-                <Select
-                  placeholder="Selecione um submenu"
-                  value={selectedSubmenu}
-                  onChange={(e) => setSelectedSubmenu(e.target.value)}
-                  width="200px"
-                >
-                  {submenusFiltrados.map((submenu) => (
-                    <option key={submenu} value={submenu}>
-                      {submenu}
-                    </option>
-                  ))}
-                </Select>
-              )}
+              <select
+                title="Submenu"
+                value={selectedSubmenu}
+                onChange={(e) => setSelectedSubmenu(e.target.value)}
+                disabled={!selectedMenu}
+                style={{ minWidth: "200px" }}
+              >
+                <option value="">Submenu</option>
+                {submenusFiltrados.map((submenu) => (
+                  <option key={submenu} value={submenu}>
+                    {submenu}
+                  </option>
+                ))}
+              </select>
             </Flex>
 
             {filteredCoeficientes.length > 0 && (
@@ -376,6 +381,7 @@ export function Coeficientes() {
                                 <IconButton
                                   aria-label="Editar coeficientes"
                                   icon={<EditIcon />}
+                                  backgroundColor="white"
                                   onClick={() =>
                                     handleEditar(
                                       coeficiente.id,

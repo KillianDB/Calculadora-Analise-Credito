@@ -55,8 +55,8 @@ export function CalculatorPrefeituraDaycoval({
 
   const params = JSON.parse(paramsString);
 
-    let coeficienteValorLiberadoDAYCOVAL = +params?.PREFEITURA?.["DAYCOVAL"]?.coeficiente_valor_liberado;
-    let coeficiente84xDAYCOVAL = +params?.PREFEITURA?.["DAYCOVAL"]?.coeficiente_84x;
+    let coeficienteValorLiberadoDAYCOVAL = +params?.PREFEITURA?.["DAYCOVAL"]?.coeficiente_valor_liberado.value;
+    let coeficiente84xDAYCOVAL = +params?.PREFEITURA?.["DAYCOVAL"]?.coeficiente_84x.value;
 
       setResult([
         "VALOR LIBERADO:",

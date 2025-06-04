@@ -21,34 +21,58 @@ export function calculate(
       return "no valid labels";
     }
 
-    let coeficienteEmprestimo =
-      +params?.INSS?.["Cálculo Por Margem Disponível"]?.coeficiente_emprestimo;
+    const INSSValues =
+      params?.INSS?.["Cálculo Por Margem Disponível"]?.values || [];
 
-    let coeficienteCartaoINSS =
-      +params?.INSS?.["Cálculo Por Margem Disponível"]?.coeficiente_cartao_inss;
+    let coeficienteEmprestimo = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_emprestimo"
+    )?.value;
 
-    let coeficienteCartaoBeneficio =
-      +params?.INSS?.["Cálculo Por Margem Disponível"]
-        ?.coeficiente_cartao_beneficio;
+    let coeficienteCartaoINSS = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_cartao_inss"
+    )?.value;
 
-    let porcentagemCartaoEnviado =
-      +params?.INSS?.["Cálculo Por Margem Disponível"]
-        ?.porcentagem_cartao_enviado;
+    let coeficienteCartaoBeneficio = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_cartao_beneficio"
+    )?.value;
+
+    let porcentagemCartaoEnviado = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_cartao_enviado"
+    )?.value;
+
+    let porcentagemMargemINSSCartaoEnviado = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_margem_cartao_inss"
+    )?.value;
+
+    let porcentagemMargemBeneficioCartaoEnviado = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_margem_cartao_beneficio"
+    )?.value;
+
+    let porcentagemMargemCartaoINSS = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_margem_cartao_inss"
+    )?.value;
+
+    let porcentagemMargemCartaoBeneficio = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_margem_cartao_beneficio"
+    )?.value;
 
     const emprestimoT: number = +values[0].value / coeficienteEmprestimo;
     const emprestimoP: number = +values[0].value;
 
     const cartaoINSST: number = +values[1].value * coeficienteCartaoINSS;
-    const cartaoINSSP: number = +values[1].value * 0.7;
+    const cartaoINSSP: number =
+      +values[1].value * porcentagemMargemINSSCartaoEnviado;
 
     const cartaoEIT: number = cartaoINSST * porcentagemCartaoEnviado;
-    const cartaoEIP: number = +values[1].value * 0.3;
+    const cartaoEIP: number = +values[1].value * porcentagemMargemCartaoINSS;
 
     const cartaoBT: number = +values[2].value * coeficienteCartaoBeneficio;
-    const cartaoBP: number = +values[2].value * 0.7;
+    const cartaoBP: number =
+      +values[2].value * porcentagemMargemBeneficioCartaoEnviado;
 
     const cartaoEBT: number = cartaoBT * porcentagemCartaoEnviado;
-    const cartaoEBP: number = +values[2].value * 0.3;
+    const cartaoEBP: number =
+      +values[2].value * porcentagemMargemCartaoBeneficio;
 
     const totalT: number =
       emprestimoT + cartaoINSST + cartaoEIT + cartaoBT + cartaoEBT;
@@ -82,19 +106,26 @@ export function calculate(
       return "no valid labels";
     }
 
-    // let coeficienteEmprestimo = +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_emprestimo;
-    let coeficiente84x =
-      +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_84x;
-    let coeficiente72x =
-      +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_72x;
-    let coeficiente60x =
-      +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_60x;
-    let coeficiente48x =
-      +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_48x;
-    let coeficiente36x =
-      +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_36x;
-    let coeficiente24x =
-      +params?.INSS?.["Cálculo Valor Solicitado"]?.coeficiente_24x;
+    const INSSValues = params?.INSS?.["Cálculo Valor Solicitado"]?.values || [];
+
+    let coeficiente84x = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_84x"
+    )?.value;
+    let coeficiente72x = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_72x"
+    )?.value;
+    let coeficiente60x = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_60x"
+    )?.value;
+    let coeficiente48x = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_48x"
+    )?.value;
+    let coeficiente36x = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_36x"
+    )?.value;
+    let coeficiente24x = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_24x"
+    )?.value;
 
     const x84 = +values[0].value * coeficiente84x;
     const x72 = +values[0].value * coeficiente72x;
@@ -149,20 +180,28 @@ export function calculate(
       return "no valid labels";
     }
 
-    let coeficienteEmprestimo =
-      +params?.INSS?.["Cálculo Salário Cliente Sem Cartão"]
-        ?.coeficiente_emprestimo;
-    let coeficienteReducaoJuros =
-      +params?.INSS?.["Cálculo Salário Cliente Sem Cartão"]
-        ?.coeficiente_reducao_de_juros;
-    let porcentagemMargemEmprestimo =
-      +params?.INSS?.["Cálculo Salário Cliente Sem Cartão"]
-        ?.porcentagem_margem_emprestimo;
-    let porcentagemSaldoDevedor =
-      +params?.INSS?.["Cálculo Salário Cliente Sem Cartão"]
-        ?.porcentagem_saldo_devedor;
+    const INSSValues =
+      params?.INSS?.["Cálculo Salário Cliente Sem Cartões"]?.values || [];
 
-    const emprestimoT = (+values[0].value * 0.35) / coeficienteEmprestimo;
+    let coeficienteEmprestimo = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_emprestimo"
+    )?.value;
+    let coeficienteReducaoJuros = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_reducao_de_juros"
+    )?.value;
+    let porcentagemMargemEmprestimo = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_margem_emprestimo"
+    )?.value;
+    let porcentagemSaldoDevedor = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_saldo_devedor"
+    )?.value;
+    let porcentagemMaximaMargemEmprestimo = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_maxima_margem_emprestimo"
+    )?.value;
+
+    const emprestimoT =
+      (+values[0].value * porcentagemMaximaMargemEmprestimo) /
+      coeficienteEmprestimo;
     const total = emprestimoT;
     const emprestimoP = +values[0].value * porcentagemMargemEmprestimo;
 
@@ -174,17 +213,28 @@ export function calculate(
     const parcelaComExtra = emprestimoP;
 
     return [
+      //[0]
       "VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
+      //[1]
       "VALOR MARGEM EMPRÉSTIMO: R$ " + formatNumber(emprestimoP),
+      //[2]
       "TOTAL: R$ " + formatNumber(total),
+      //[3]
       " PARCELA R$ " + formatNumber(emprestimoP),
+      //[4]
       " 84x ",
+      //[5]
       "SALDO DEVEDOR (APROXIMADO): R$ " + formatNumber(saldo),
+      //[6]
       "PARCELA: R$ " + formatNumber(parcela),
+      //[7]
       "VALOR REDUÇÃO DE JUROS (VALOR LÍQUIDO APROXIMADO): R$ " +
         formatNumber(reducao),
+      //[8]
       "LIBERA + O VALOR (APROXIMADO) DE: R$ " + formatNumber(valorLiberado),
+      // [9]
       "TOTAL: R$ " + formatNumber(totalExtra),
+      // [10]
       " PARCELA R$ " + formatNumber(parcelaComExtra),
       " 84x ",
     ];
@@ -192,34 +242,55 @@ export function calculate(
     if (!(values[0].label == "SALÁRIO: ")) {
       return "no valid labels";
     }
+    const INSSValues = params?.INSS?.["Cálculo Salário Cliente"]?.values || [];
 
-    // let coeficienteCartaoBeneficio = +params?.INSS?.["Cálculo Salário Cliente"]?.coeficiente_cartao_beneficio;
-    let coeficienteCartaoINSS =
-      +params?.INSS?.["Cálculo Salário Cliente"]?.coeficiente_cartao_inss;
-    let coeficienteEmprestimo =
-      +params?.INSS?.["Cálculo Salário Cliente"]?.coeficiente_emprestimo;
-    let coeficienteReducaoJuros =
-      +params?.INSS?.["Cálculo Salário Cliente"]?.coeficiente_reducao_de_juros;
-    let porcentagemCartaoEnviado =
-      +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_cartao_enviado;
-    // let porcentagemMargemCartaoBeneficio = +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_margem_cartao_beneficio;
-    let porcentagemMargemCartaoINSS =
-      +params?.INSS?.["Cálculo Salário Cliente"]
-        ?.porcentagem_margem_cartao_inss;
-    let porcentagemMargemEmprestimo =
-      +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_margem_emprestimo;
-    let porcentagemSaldoDevedor =
-      +params?.INSS?.["Cálculo Salário Cliente"]?.porcentagem_saldo_devedor;
+    let coeficienteCartaoINSS = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_cartao_inss"
+    )?.value;
+    let coeficienteEmprestimo = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_emprestimo"
+    )?.value;
+    let coeficienteReducaoJuros = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_reducao_de_juros"
+    )?.value;
+    let porcentagemCartaoEnviado = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_cartao_enviado"
+    )?.value;
+    let porcentagemMargemCartaoINSS = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_margem_cartao_inss"
+    )?.value;
+    let porcentagemMargemEmprestimo = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_margem_emprestimo"
+    )?.value;
+    let porcentagemSaldoDevedor = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_saldo_devedor"
+    )?.value;
+    let porcentagemMargemTotal = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_margem_total"
+    )?.value;
+    let coeficienteMultiplicadorCartao = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_multiplicador_cartao"
+    )?.value;
+    console.log(
+      "coeficienteMultiplicadorCartao => ",
+      coeficienteMultiplicadorCartao
+    );
 
     const emprestimoT =
       (+values[0].value * porcentagemMargemEmprestimo) / coeficienteEmprestimo;
     const emprestimoP = +values[0].value * porcentagemMargemEmprestimo;
     const cartaoP = +values[0].value * porcentagemMargemCartaoINSS;
     const cartaoT = cartaoP * coeficienteCartaoINSS;
-    const enviadoT = cartaoT * porcentagemCartaoEnviado * 2;
-    const enviadoP = cartaoP * porcentagemCartaoEnviado * 2;
-    const total = emprestimoT + cartaoT * 2 + enviadoT;
-    const totalP = emprestimoP + cartaoP * 0.7 * 2 + enviadoP;
+    const enviadoT =
+      cartaoT * porcentagemCartaoEnviado * coeficienteMultiplicadorCartao;
+    const enviadoP =
+      cartaoP * porcentagemCartaoEnviado * coeficienteMultiplicadorCartao;
+    const total =
+      emprestimoT + cartaoT * coeficienteMultiplicadorCartao + enviadoT;
+    const totalP =
+      emprestimoP +
+      cartaoP * porcentagemMargemTotal * coeficienteMultiplicadorCartao +
+      enviadoP;
 
     const saldo = emprestimoT * porcentagemSaldoDevedor;
     const parcela = emprestimoP;
@@ -292,20 +363,26 @@ export function calculate(
       "calculate on Possibilidades Gerais => ",
       params.INSS?.["Possibilidades Gerais"]
     );
+    const INSSValues = params?.INSS?.["Possibilidades Gerais"]?.values || [];
 
-    let coeficienteEmprestimo =
-      +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_emprestimo;
-    let coeficienteCartaoINSS =
-      +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_inss;
-    let coeficienteCartaoBeneficio =
-      +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_beneficio;
-    let porcentagemCompras =
-      +params?.INSS?.["Possibilidades Gerais"]?.porcentagem_compras;
-    let porcentagemMargemCartaoINSS =
-      +params?.INSS?.["Possibilidades Gerais"]?.porcentagem_margem_cartao_inss;
-    let porcentagemMargemCartaoBeneficio =
-      +params?.INSS?.["Possibilidades Gerais"]
-        ?.porcentagem_margem_cartao_beneficio;
+    let coeficienteEmprestimo = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_emprestimo"
+    )?.value;
+    let coeficienteCartaoINSS = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_cartao_inss"
+    )?.value;
+    let coeficienteCartaoBeneficio = +INSSValues.find(
+      (v: any) => v.key === "coeficiente_cartao_beneficio"
+    )?.value;
+    let porcentagemCompras = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_compras"
+    )?.value;
+    let porcentagemMargemCartaoINSS = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_margem_cartao_inss"
+    )?.value;
+    let porcentagemMargemCartaoBeneficio = +INSSValues.find(
+      (v: any) => v.key === "porcentagem_margem_cartao_beneficio"
+    )?.value;
 
     const emprestimo = +values[0].value / coeficienteEmprestimo;
     const parcelaEmprestimo = +values[0].value;
@@ -332,6 +409,7 @@ export function calculate(
     // const parcela = parcelaEmprestimo + parcelainss + parcelacomprasinss + parcelabeneficios + parcelacomprasbeneficios+totalParcelas;
     const parcela = +values[0].value + +values[1].value + +values[2].value;
 
+    console.log("total cartão => ", formatNumber(inss + beneficios));
     return [
       //[0]
       "VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimo),
@@ -392,90 +470,74 @@ export function calculate(
     menu == "LOAS REP LEGAL" &&
     submenu == "Cálculo Salário LOAS/BPC"
   ) {
-    console.log("values", values);
     if (!(values[0].label == "SALÁRIO: ")) {
       return "no valid labels";
     }
+    console.log("params at LOAS => ", params?.["LOAS REP LEGAL"]);
+    const loasValues =
+      params?.["LOAS REP LEGAL"]?.["Cálculo Salário LOAS/BPC"]?.values || [];
+    console.log("loasValues => ", loasValues);
+    //!arrumar no banco os valores
+    let coeficienteEmprestimo = +loasValues.find(
+      (v: any) => v.key === "coeficiente_emprestimo"
+    )?.value;
+    let coeficienteReducaoJuros = +loasValues.find(
+      (v: any) => v.key === "coeficiente_reducao_de_juros"
+    )?.value;
+    let porcentagemMargemEmprestimo = +loasValues.find(
+      (v: any) => v.key === "porcentagem_margem_emprestimo"
+    )?.value;
+    let porcentagemSaldoDevedor = +loasValues.find(
+      (v: any) => v.key === "porcentagem_saldo_devedor"
+    )?.value;
+    let porcentagemMaximaMargemEmprestimo = +loasValues.find(
+      (v: any) => v.key === "porcentagem_maxima_margem_emprestimo"
+    )?.value;
 
-    let coeficienteCartaoINSS =
-      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
-        ?.coeficiente_cartao_inss;
-    let coeficienteEmprestimo =
-      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
-        ?.coeficiente_emprestimo;
-    let porcentagemCartaoEnviado =
-      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
-        ?.porcentagem_cartao_enviado;
-    let porcentagemMargemEmprestimo =
-      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
-        ?.porcentagem_margem_emprestimo;
-    let porcentagemValorMargemCartaoINSS =
-      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
-        ?.porcentagem_valor_margem_cartao_inss;
-    let porcentagemMargemCartaoINSS =
-      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
-        ?.porcentagem_margem_cartao_inss;
-    let porcentagemMargemComprasCartaoINSS =
-      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
-        ?.porcentagem_compras_margem_cartao_inss;
-    let valorLiberado =
-      +params?.LOAS?.["Cálculo salário LOAS/BPC (sem emprestimo) "]
-        ?.valor_liberado;
-
+    const emprestimoT =
+      (+values[0].value * porcentagemMaximaMargemEmprestimo) /
+      coeficienteEmprestimo;
+    const total = emprestimoT;
     const emprestimoP = +values[0].value * porcentagemMargemEmprestimo;
-    const emprestimoT = emprestimoP / coeficienteEmprestimo;
-    const parcelaTotalINSS =
-      +values[0].value * porcentagemValorMargemCartaoINSS;
-    const INSSP = parcelaTotalINSS * porcentagemMargemCartaoINSS;
-    const INSST = parcelaTotalINSS * coeficienteCartaoINSS;
-    const enviadoT = INSST * porcentagemCartaoEnviado;
-    const enviadoP = parcelaTotalINSS * porcentagemMargemComprasCartaoINSS;
-    const total = emprestimoT + INSST + enviadoT;
-    const totalP = emprestimoP + INSSP + enviadoP;
 
+    const saldo = total * porcentagemSaldoDevedor;
+    const parcela = emprestimoP;
+    const reducao = parcela / coeficienteReducaoJuros - saldo;
+    const valorLiberado = reducao;
     const totalExtra = total + valorLiberado;
-    const parcelaComExtra = totalP;
+    const parcelaComExtra = emprestimoP;
 
     return [
-      //[0]
       "VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
-      //[1]
       "VALOR MARGEM EMPRÉSTIMO: R$ " + formatNumber(emprestimoP),
-      //[2]
-      "VALOR CARTÃO INSS: R$ " + formatNumber(INSST),
-      //[3]
-      "VALOR MARGEM CARTÃO INSS: R$ " + formatNumber(INSSP),
-      //[4]
-      "VALOR CARTÃO ENVIADO: R$ " + formatNumber(enviadoT),
-      //[5]
-      "VALOR MARGEM CARTÃO ENVIADO: R$ " + formatNumber(enviadoP),
-      //[6]
       "TOTAL: R$ " + formatNumber(total),
-      //[7]
-      " PARCELA R$ " + formatNumber(totalP),
-      //[8]
+      " PARCELA R$ " + formatNumber(emprestimoP),
       " 84x ",
-      //[9]
+      "SALDO DEVEDOR (APROXIMADO): R$ " + formatNumber(saldo),
+      "PARCELA: R$ " + formatNumber(parcela),
+      "VALOR REDUÇÃO DE JUROS (VALOR LÍQUIDO APROXIMADO): R$ " +
+        formatNumber(reducao),
       "LIBERA + O VALOR (APROXIMADO) DE: R$ " + formatNumber(valorLiberado),
-      //[10]
       "TOTAL: R$ " + formatNumber(totalExtra),
-      //[11]
       " PARCELA R$ " + formatNumber(parcelaComExtra),
-      //[12]
-      "84x",
+      " 84x ",
     ];
   } else if (menu == "Exército" && submenu == "Cálculo por Margem Disponível") {
     if (!(values[0].label == "VALOR MARGEM EMPRÉSTIMO: ")) {
       return "no valid labels";
     }
 
-    let coeficienteEmprestimo =
-      +params?.EXERCITO?.["Cálculo por Margem Disponível"]
-        ?.coeficiente_emprestimo;
-    // let porcentagemMargemEmprestimo = +params?.EXERCITO?.["Cálculo por Margem Disponível"]?.porcentagem_margem_emprestimo;
+    const exercitoValues =
+      params?.EXERCITO?.["Cálculo por Margem Disponível"]?.values || [];
+    let coeficienteEmprestimo = +exercitoValues.find(
+      (v: any) => v.key === "coeficiente_emprestimo"
+    )?.value;
+    let porcentagemMargemEmprestimo = +exercitoValues.find(
+      (v: any) => v.key === "porcentagem_margem_emprestimo"
+    )?.value;
 
     const emprestimoT = +values[0].value / coeficienteEmprestimo;
-    const emprestimoP = +values[0].value;
+    const emprestimoP = +values[0].value * porcentagemMargemEmprestimo;
 
     const totalT = emprestimoT;
     const totalP = emprestimoP;

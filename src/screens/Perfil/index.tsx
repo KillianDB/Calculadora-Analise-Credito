@@ -26,7 +26,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "../../contexts/UserContext";
 
 export function Perfil() {
-  const { user } = useUser();
+  const { user, logout } = useUser();
   const [userData, setUserData] = useState(user || null);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -40,7 +40,8 @@ export function Perfil() {
       : {}
   );
   // const [imageFile, setImageFile] = useState(null);
-  const [imagePreview
+  const [
+    imagePreview,
     // , setImagePreview
   ] = useState("");
   const toast = useToast();
@@ -165,18 +166,24 @@ export function Perfil() {
   };
 
   const handleLogout = async () => {
-    // try {
-    //   useContext(auth);
-    //   navigate('/login');
-    // } catch (error) {
-    //   toast({
-    //     title: 'Erro',
-    //     description: 'Falha ao fazer logout',
-    //     status: 'error',
-    //     duration: 5000,
-    //     isClosable: true,
-    //   });
-    // }
+    try {
+      logout();
+      toast({
+        title: "Sucesso",
+        description: "Você saiu com sucesso",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: "Erro",
+        description: "Falha ao fazer logout",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
 
   if (loading) {

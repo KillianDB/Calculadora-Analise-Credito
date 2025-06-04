@@ -51,12 +51,13 @@ export function CalculatorPrefeituraValor({
     setValues([{ label, value }]);
 
      const paramsString = localStorage.getItem("calculatorParams");
+     console.log("paramsString: ", paramsString);
   if (!paramsString) return "no parameters found";
 
   const params = JSON.parse(paramsString);
 
-    let coeficienteValorLiberadoVALOR = +params?.PREFEITURA?.["VALOR"]?.coeficiente_valor_liberado;
-    let coeficiente84xVALOR = +params?.PREFEITURA?.["VALOR"]?.coeficiente_84x;
+    let coeficienteValorLiberadoVALOR = +params?.PREFEITURA?.["VALOR"]?.["coeficiente_valor_liberado"].value;
+    let coeficiente84xVALOR = +params?.PREFEITURA?.["VALOR"]?.["coeficiente_84x"].value;
 
       setResult([
         "VALOR LIBERADO:",

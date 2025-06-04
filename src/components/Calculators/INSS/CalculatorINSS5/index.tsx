@@ -25,6 +25,25 @@ export function CalculatorINSS5({
 
   const params = JSON.parse(paramsString);
   console.log("params at INSS Possibilidades Gerais => ", params);
+  const INSSValues = params?.INSS?.["Possibilidades Gerais"]?.values || [];
+  let coeficienteEmprestimo = +INSSValues.find(
+    (v: any) => v.key === "coeficiente_emprestimo"
+  )?.value;
+  let coeficienteCartaoINSS = +INSSValues.find(
+    (v: any) => v.key === "coeficiente_cartao_inss"
+  )?.value;
+  let coeficienteCartaoBeneficio = +INSSValues.find(
+    (v: any) => v.key === "coeficiente_cartao_beneficio"
+  )?.value;
+  let porcentagemCompras = +INSSValues.find(
+    (v: any) => v.key === "porcentagem_compras"
+  )?.value;
+  let porcentagemMargemCartaoINSS = +INSSValues.find(
+    (v: any) => v.key === "porcentagem_margem_cartao_inss"
+  )?.value;
+  let porcentagemMargemCartaoBeneficio = +INSSValues.find(
+    (v: any) => v.key === "porcentagem_margem_cartao_beneficio"
+  )?.value;
 
   const [, setValues] = useState([
     { label: "VALOR MARGEM EMPRÉSTIMO: ", value: 0 },
@@ -40,30 +59,29 @@ export function CalculatorINSS5({
 
   const totalValores =
     margemEmprestimo /
-      +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_emprestimo +
+      INSSValues.find((v: any) => v.key === "coeficiente_emprestimo")?.value +
     margemCartaoInss *
-      +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_inss +
+      INSSValues.find((v: any) => v.key === "coeficiente_cartao_inss")?.value +
     margemCartaoInss *
-      +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_inss *
-      +params?.INSS?.["Possibilidades Gerais"]?.porcentagem_cartao_inss +
+      INSSValues.find((v: any) => v.key === "coeficiente_cartao_inss")?.value *
+      INSSValues.find((v: any) => v.key === "porcentagem_cartao_inss")?.value +
+    margemCartaoBeneficio * +coeficienteCartaoBeneficio +
     margemCartaoBeneficio *
-      +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_beneficio +
-    margemCartaoBeneficio *
-      +params?.INSS?.["Possibilidades Gerais"]?.porcentagem_cartao_beneficio;
+      INSSValues.find((v: any) => v.key === "porcentagem_cartao_beneficio")
+        ?.value;
 
   const totalparcelas =
     margemEmprestimo +
+    margemCartaoInss * +porcentagemMargemCartaoINSS +
     margemCartaoInss *
-      +params?.INSS?.["Possibilidades Gerais"]?.porcentagem_margem_cartao_inss +
-    margemCartaoInss *
-      +params?.INSS?.["Possibilidades Gerais"]
-        ?.porcentagem_compras_margem_cartao_inss +
+      INSSValues.find(
+        (v: any) => v.key === "porcentagem_compras_margem_cartao_inss"
+      )?.value +
+    margemCartaoBeneficio * +porcentagemMargemCartaoBeneficio +
     margemCartaoBeneficio *
-      +params?.INSS?.["Possibilidades Gerais"]
-        ?.porcentagem_margem_cartao_beneficio +
-    margemCartaoBeneficio *
-      +params?.INSS?.["Possibilidades Gerais"]
-        ?.porcentagem_compras_margem_cartao_beneficio;
+      INSSValues.find(
+        (v: any) => v.key === "porcentagem_compras_margem_cartao_beneficio"
+      )?.value;
 
   const [parcela1, setParcela1] = useState(0);
   const [parcela2, setParcela2] = useState(0);
@@ -91,7 +109,8 @@ export function CalculatorINSS5({
   ].reduce((acc, parcela, index) => {
     const possibilidade =
       parcela /
-        +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_possibilidade -
+        INSSValues.find((v: any) => v.key === "coeficiente_possibilidade")
+          ?.value -
       eval(`saldoDevedor${index + 1}`);
     return possibilidade >= 0 ? acc + parcela : acc;
   }, 0);
@@ -107,7 +126,8 @@ export function CalculatorINSS5({
   ].reduce((acc, saldoDevedor, index) => {
     const possibilidade =
       eval(`parcela${index + 1}`) /
-        +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_possibilidade -
+        INSSValues.find((v: any) => v.key === "coeficiente_possibilidade")
+          ?.value -
       saldoDevedor;
     return possibilidade >= 0 ? acc + saldoDevedor : acc;
   }, 0);
@@ -123,7 +143,8 @@ export function CalculatorINSS5({
   ].reduce((acc, parcela, index) => {
     const possibilidade =
       parcela /
-        +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_possibilidade -
+        INSSValues.find((v: any) => v.key === "coeficiente_possibilidade")
+          ?.value -
       eval(`saldoDevedor${index + 1}`);
     return possibilidade >= 0 ? acc + possibilidade : acc;
   }, 0);
@@ -193,20 +214,20 @@ export function CalculatorINSS5({
 
     if (result !== "no valid labels" && result?.length) {
       const getValue = (str: string) => str.split("R$ ")[1]?.trim() || "0,00";
-
+      console.log("total carão on INSS => ", result[22]);
       const finalResult = [
         `Valor Empréstimo R$ ${getValue(result[0])}`,
         `Valor Parcela R$ ${getValue(result[1])} 84x`,
-        `Valor Cartão R$ ${getValue(result[2])}`,
-        `Parcela Cartão R$ ${getValue(result[3])} 84x`,
-        `Valor Compras R$ ${getValue(result[4])}`,
-        `Parcela Compras R$ ${getValue(result[5])} 84x`,
-        `Portabilidade Aprox. R$ ${getValue(result[6])}`,
+        `Valor Cartão R$ ${result[22]}`,
+        `Parcela Cartão R$ ${result[23]} 84x`,
+        `Valor Compras R$ ${result[24]}`,
+        `Parcela Compras R$ ${result[25]} 84x`,
+        `Portabilidade Aprox. R$ ${getValue(result[17])}`,
         "Portando as parcelas R$ Não alteram",
-        `VALOR TOTAL R$ ${getValue(result[8])}`,
-        `PARCELA TOTAL R$ ${getValue(result[9])} 84x`,
-      ].filter(Boolean);
-
+        `VALOR TOTAL R$ ${getValue(result[19])}`,
+        `PARCELA TOTAL R$ ${getValue(result[20])} 84x`,
+      ];
+      console.log("finalResult => ", finalResult);
       setFinalResult(finalResult);
     }
   }, [
@@ -295,7 +316,8 @@ export function CalculatorINSS5({
         >
           <Text fontSize={"14px"}>{`VALOR EMPRÉSTIMO:  ${(
             margemEmprestimo /
-            +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_emprestimo
+            +INSSValues.find((v: any) => v.key === "coeficiente_emprestimo")
+              ?.value
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
@@ -309,16 +331,13 @@ export function CalculatorINSS5({
           )}`}</Text>
           <Text fontSize={"14px"}>{`84x`}</Text>
           <Text fontSize={"14px"}>{`CARTÃO INSS: ${(
-            margemCartaoInss *
-            +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_inss
+            margemCartaoInss * coeficienteCartaoINSS
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}`}</Text>
           <Text fontSize={"14px"}>{`PARCELA:${(
-            margemCartaoInss *
-            +params?.INSS?.["Possibilidades Gerais"]
-              ?.porcentagem_margem_cartao_inss
+            margemCartaoInss * porcentagemMargemCartaoINSS
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
@@ -326,33 +345,31 @@ export function CalculatorINSS5({
           <Text fontSize={"14px"}>{`84x`}</Text>
           <Text fontSize={"14px"}>{`VALOR COMPRAS: ${(
             margemCartaoInss *
-            +params?.INSS?.["Possibilidades Gerais"]?.coeficiente_cartao_inss *
-            +params?.INSS?.["Possibilidades Gerais"]?.porcentagem_cartao_inss
+            +coeficienteCartaoINSS *
+            +INSSValues.find((v: any) => v.key === "porcentagem_cartao_inss")
+              ?.value
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}`}</Text>
           <Text fontSize={"14px"}>{`PARCELA: ${(
             margemCartaoInss *
-            +params?.INSS?.["Possibilidades Gerais"]
-              ?.porcentagem_compras_margem_cartao_inss
+            +INSSValues.find(
+              (v: any) => v.key === "porcentagem_compras_margem_cartao_inss"
+            )?.value
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}`}</Text>
           <Text fontSize={"14px"}>{`84x`}</Text>
           <Text fontSize={"14px"}>{`CARTÃO BENEFÍCIO: ${(
-            margemCartaoBeneficio *
-            +params?.INSS?.["Possibilidades Gerais"]
-              ?.coeficiente_cartao_beneficio
+            margemCartaoBeneficio * +coeficienteCartaoBeneficio
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}`}</Text>
           <Text fontSize={"14px"}>{`PARCELA: ${(
-            margemCartaoBeneficio *
-            +params?.INSS?.["Possibilidades Gerais"]
-              ?.porcentagem_margem_cartao_beneficio
+            margemCartaoBeneficio * +porcentagemMargemCartaoBeneficio
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
@@ -360,16 +377,19 @@ export function CalculatorINSS5({
           <Text fontSize={"14px"}>{`84x`}</Text>
           <Text fontSize={"14px"}>{`VALOR COMPRAS: ${(
             margemCartaoBeneficio *
-            +params?.INSS?.["Possibilidades Gerais"]
-              ?.porcentagem_cartao_beneficio
+            +INSSValues.find(
+              (v: any) => v.key === "porcentagem_cartao_beneficio"
+            )?.value
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}`}</Text>
           <Text fontSize={"14px"}>{`PARCELA: ${(
             margemCartaoBeneficio *
-            +params?.INSS?.["Possibilidades Gerais"]
-              ?.porcentagem_compras_margem_cartao_beneficio
+            +INSSValues.find(
+              (v: any) =>
+                v.key === "porcentagem_compras_margem_cartao_beneficio"
+            )?.value
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
@@ -429,8 +449,9 @@ export function CalculatorINSS5({
               <Text fontSize={"14px"} mb={4} fontWeight={"bold"}>
                 {`POSSIBILIDADES: ${(
                   parcela1 /
-                    +params?.INSS?.["Possibilidades Gerais"]
-                      ?.coeficiente_possibilidade -
+                    +INSSValues.find(
+                      (v: any) => v.key === "coeficiente_possibilidade"
+                    )?.value -
                   saldoDevedor1
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -479,8 +500,9 @@ export function CalculatorINSS5({
               <Text fontSize={"14px"} mb={4} fontWeight={"bold"}>
                 {`POSSIBILIDADES: ${(
                   parcela2 /
-                    +params?.INSS?.["Possibilidades Gerais"]
-                      ?.coeficiente_possibilidade -
+                    +INSSValues.find(
+                      (v: any) => v.key === "coeficiente_possibilidade"
+                    )?.value -
                   saldoDevedor2
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -529,8 +551,9 @@ export function CalculatorINSS5({
               <Text fontSize={"14px"} mb={4} fontWeight={"bold"}>
                 {`POSSIBILIDADES: ${(
                   parcela3 /
-                    +params?.INSS?.["Possibilidades Gerais"]
-                      ?.coeficiente_possibilidade -
+                    +INSSValues.find(
+                      (v: any) => v.key === "coeficiente_possibilidade"
+                    )?.value -
                   saldoDevedor3
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -579,8 +602,9 @@ export function CalculatorINSS5({
               <Text fontSize={"14px"} mb={4} fontWeight={"bold"}>
                 {`POSSIBILIDADES: ${(
                   parcela4 /
-                    +params?.INSS?.["Possibilidades Gerais"]
-                      ?.coeficiente_possibilidade -
+                    +INSSValues.find(
+                      (v: any) => v.key === "coeficiente_possibilidade"
+                    )?.value -
                   saldoDevedor4
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -629,8 +653,9 @@ export function CalculatorINSS5({
               <Text fontSize={"14px"} mb={4} fontWeight={"bold"}>
                 {`POSSIBILIDADES: ${(
                   parcela5 /
-                    +params?.INSS?.["Possibilidades Gerais"]
-                      ?.coeficiente_possibilidade -
+                    +INSSValues.find(
+                      (v: any) => v.key === "coeficiente_possibilidade"
+                    )?.value -
                   saldoDevedor5
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -679,8 +704,9 @@ export function CalculatorINSS5({
               <Text fontSize={"14px"} mb={4} fontWeight={"bold"}>
                 {`POSSIBILIDADES: ${(
                   parcela6 /
-                    +params?.INSS?.["Possibilidades Gerais"]
-                      ?.coeficiente_possibilidade -
+                    +INSSValues.find(
+                      (v: any) => v.key === "coeficiente_possibilidade"
+                    )?.value -
                   saldoDevedor6
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -729,8 +755,9 @@ export function CalculatorINSS5({
               <Text fontSize={"14px"} mb={4} fontWeight={"bold"}>
                 {`POSSIBILIDADES: ${(
                   parcela7 /
-                    +params?.INSS?.["Possibilidades Gerais"]
-                      ?.coeficiente_possibilidade -
+                    +INSSValues.find(
+                      (v: any) => v.key === "coeficiente_possibilidade"
+                    )?.value -
                   saldoDevedor7
                 ).toLocaleString("pt-BR", {
                   style: "currency",

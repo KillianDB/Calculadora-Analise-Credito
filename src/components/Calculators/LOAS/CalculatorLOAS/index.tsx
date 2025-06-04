@@ -54,7 +54,7 @@ export function CalculatorLOAS({
   function handleInputValue(label: string, value: number) {
     if (value === 0) return;
     setValues([{ label, value }]);
-    const result = calculate("INSS", "Cálculo Salário Cliente", [
+    const result = calculate("LOAS REP LEGAL", "Cálculo Salário LOAS/BPC", [
       { label, value },
     ]);
     console.log("CHECKED", isChecked);

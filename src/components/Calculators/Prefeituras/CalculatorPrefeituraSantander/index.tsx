@@ -55,8 +55,8 @@ export function CalculatorPrefeituraSantander({
 
   const params = JSON.parse(paramsString);
 
-    let coeficienteValorLiberadoSANTANDER = +params?.PREFEITURA?.["SANTANDER"]?.coeficiente_valor_liberado;
-    let coeficiente84xSANTANDER = +params?.PREFEITURA?.["SANTANDER"]?.coeficiente_84x;
+    let coeficienteValorLiberadoSANTANDER = +params?.PREFEITURA?.["SANTANDER"]?.coeficiente_valor_liberado.value;
+    let coeficiente84xSANTANDER = +params?.PREFEITURA?.["SANTANDER"]?.coeficiente_84x.value;
 
       setResult([
         "VALOR LIBERADO:",

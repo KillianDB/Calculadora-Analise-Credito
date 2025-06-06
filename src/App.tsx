@@ -45,6 +45,10 @@ function App() {
             path="/analise"
             element={<ProtectedRoute children={<CompleteAnalysis />} />}
           />
+          <Route
+            path="/analise/resultado"
+            element={<ProtectedRoute children={<ResultadoAnalise />} />}
+          />
 
           <Route
             path="/calculadora"
@@ -60,10 +64,6 @@ function App() {
             element={<ProtectedRoute children={<Perfil />} />}
           />
           {/* <Route path='/loading' element={<Loading />} /> */}
-          <Route
-            path="/resultado-analise"
-            element={<ProtectedRoute children={<ResultadoAnalise />} />}
-          />
           {/* <Route path='*' element={<NotFoundScreen />}/> */}
 
           {/* Redirecionamento Padrão */}

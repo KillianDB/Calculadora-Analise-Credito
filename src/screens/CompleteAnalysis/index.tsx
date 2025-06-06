@@ -7,9 +7,11 @@ import axios from "axios";
 import Menu from "../../components/Menu/index.tsx";
 import { Flex, Grid, Img } from "@chakra-ui/react";
 import { useUser } from "../../contexts/UserContext.tsx";
+import { useToast } from "@chakra-ui/react";
 
 export function CompleteAnalysis() {
   const { user } = useUser();
+  const toast = useToast();
 
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
@@ -63,9 +65,25 @@ export function CompleteAnalysis() {
           },
         }
       );
+      toast({
+        title: "Análise gerada com sucesso",
+        description: "Você será redirecionado para a página de carregamento.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
 
-      navigate("/loading", { state: response });
+      navigate("/analise/resultado", { state: response });
     } catch (error) {
+      toast({
+        title: "Erro ao gerar análise",
+        description: "Verifique os dados inseridos e tente novamente.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
       console.error("Error submitting data:", error);
     }
   }

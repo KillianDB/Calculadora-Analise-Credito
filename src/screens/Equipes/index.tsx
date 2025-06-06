@@ -21,9 +21,11 @@ import {
   Image,
   Flex,
   Box,
+  useToast,
 } from "@chakra-ui/react";
 
 export function Equipes() {
+  const toast = useToast();
   const [editMemberModalOpen, setEditMemberModalOpen] = useState(false);
   const [addMemberModalOpen, setAddMemberModalOpen] = useState(false);
   const [name, setName] = useState("");
@@ -180,6 +182,14 @@ export function Equipes() {
     const token = localStorage.getItem("token");
     if (!token) {
       console.error("Token não encontrado");
+      toast({
+        title: "Erro",
+        description: "Token não encontrado. Por favor, faça login novamente.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
       return;
     }
 
@@ -214,18 +224,21 @@ export function Equipes() {
   };
 
   const editarMembro = async (membro: { id: string }) => {
-    const response = await fetch(`https://api.creditorealsf.com/members/${membro.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        // userType,
-        role,
-      }),
-    });
+    const response = await fetch(
+      `https://api.creditorealsf.com/members/${membro.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          // userType,
+          role,
+        }),
+      }
+    );
 
     if (response.status !== 200) {
       console.error("Erro ao editar membro");
@@ -252,10 +265,28 @@ export function Equipes() {
 
     if (response.status !== 200) {
       console.error("Erro ao bloquear membro");
-      alert(response);
+      toast({
+        title: "Erro ao bloquear membro",
+        description: "Tente novamente mais tarde.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       return;
     }
-    alert(response);
+    toast({
+      title: "Membro bloqueado com sucesso",
+      description: "O membro foi bloqueado com sucesso.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+    setEquipes((prevEquipes) =>
+      prevEquipes.map((equipe) => ({
+        ...equipe,
+        membros: equipe.membros.filter((m) => m.id !== membro.id),
+      }))
+    );
     return;
   };
 
@@ -271,8 +302,23 @@ export function Equipes() {
           return;
         }
         const data = await response.json();
+        toast({
+          title: "Equipes carregadas com sucesso",
+          description: "As equipes foram carregadas com sucesso.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
         setEquipes(data);
       } catch (error) {
+        toast({
+          title: "Erro ao buscar equipes",
+          description: "Não foi possível obter a lista de equipes.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top-right",
+        });
         console.error("Error fetching equipes:", error);
       }
     };

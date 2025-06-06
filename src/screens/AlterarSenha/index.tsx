@@ -3,8 +3,10 @@ import OrangeButton from "../../components/OrangeButton";
 import SubmitCard from "../../components/SubmitCard";
 import "./AlterarSenha.css";
 import { useState } from "react";
+import { useToast } from "@chakra-ui/react";
 
 export default function AlterarSenha() {
+  const toast = useToast();
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
@@ -17,6 +19,13 @@ export default function AlterarSenha() {
       body: JSON.stringify({ email }),
     });
     if (change.status !== 200) {
+      toast({
+        title: "Erro ao enviar código",
+        description: "Verifique se o email está correto.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       console.log("Erro ao enviar codigo");
       return change;
     } else {

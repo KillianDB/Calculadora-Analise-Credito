@@ -4,8 +4,10 @@ import { generatePassword } from "../../utils/randomPass";
 import Input from "../../components/Input";
 import BlueButton from "../../components/BlueButton";
 import Select from "../../components/Select";
+import { useToast } from "@chakra-ui/react";
 
 export function CreateUser() {
+  const toast = useToast();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [office, setOffice] = useState("");
@@ -26,8 +28,15 @@ export function CreateUser() {
         office,
       });
     } catch (err) {
+      toast({
+        title: "Erro ao criar usuário",
+        description: "Verifique os dados e tente novamente.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
       console.error(err);
-      throw new Error(`Erro ao criar usuário, ${err}`);
     }
   };
 

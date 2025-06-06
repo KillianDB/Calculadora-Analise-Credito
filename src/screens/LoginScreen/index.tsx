@@ -11,12 +11,12 @@ import {
   FormLabel,
   FormControl,
   Image,
+  useToast,
 } from "@chakra-ui/react";
 import { Flex } from "antd";
-import { useAppToast } from "../../utils/toaster";
 
 export default function LoginScreen() {
-  const { showToast } = useAppToast();
+  const toast = useToast();
   const navigate = useNavigate();
   const { login } = useUser();
   const [email, setEmail] = useState("");
@@ -31,38 +31,32 @@ export default function LoginScreen() {
         email,
         password,
       });
-  
-      if (response.status !== 200) {
-        console.error("Erro ao fazer login", response);
-        showToast(
-          response?.data?.message || "Credenciais inválidas",
-          "error",
-          8000 // Duração maior para erros
-        );
-        return;
-      }
-  
-      showToast("Login efetuado com sucesso!", "success");
-      console.log("Login efetuado com sucesso", response);
-  
+
       const { token } = response.data;
-      await login(token); // Atualiza o estado do usuário no contexto
-  
+      await login(token);
+
+      toast({
+        title: "Login efetuado com sucesso!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
       // Redireciona com base no tipo de usuário
       if (response.data.usertype === "admin") {
         console.log("Redirecionando para admin/home");
         navigate("/equipes");
-      } else {
-        console.log("Redirecionando para /calculadora");
-        navigate("/calculadora");
       }
     } catch (error) {
       console.error("Erro ao fazer login", error);
-      showToast(
-        "Erro ao fazer login. Verifique suas credenciais e tente novamente.",
-        "error",
-        8000 // Duração maior para erros
-      );
+      toast({
+        title:
+          "Erro ao fazer login. Verifique suas credenciais e tente novamente.",
+        status: "error",
+        duration: 8000,
+        isClosable: true,
+        position: "top-right",
+      });
     }
   };
 

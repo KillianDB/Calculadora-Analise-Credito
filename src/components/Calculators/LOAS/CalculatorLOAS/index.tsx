@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { calculate } from "../../../../utils/calculate";
 import { CalculatorResult } from "../../../CalculatorResult";
 import { CalculatorTitle } from "../../../CalculatorTitle";
@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { NumericFormat } from "react-number-format";
 
-interface CalculatorINSS4Props {
+interface CalculatorLOASProps {
   isChecked: boolean;
   setAllInputsFilled: (filled: boolean) => void;
   setFinalResult: (result: string[]) => void;
@@ -23,28 +23,24 @@ export function CalculatorLOAS({
   isChecked,
   setAllInputsFilled,
   setFinalResult,
-}: CalculatorINSS4Props) {
+}: CalculatorLOASProps) {
   const [values, setValues] = useState([{ label: "SALÁRIO: ", value: 0 }]);
   const [results, setResults] = useState([
-    "VALOR EMPRÉSTIMO: R$00.000,00",
     "VALOR MARGEM EMPRÉSTIMO: R$00.000,00",
-    "CARTÃO INSS: R$00.000,00",
     "VALOR MARGEM CARTÃO INSS: R$00.000,00",
-    "CARTÃO BENEFÍCIO: R$00.000,00",
-    "VALOR MARGEM CARTÃO BENEFÍCIO: R$00.000,00",
+    "VALOR EMPRÉSTIMO: R$00.000,00",
+    "CARTÃO INSS: R$00.000,00",
     "VALOR CARTÃO ENVIADO: R$00.000,00",
-    "VALOR MARGEM CARTÃO ENVIADO: R$00.000,00",
+    "PARCELA CARTÃO INSS: R$00.000,00",
+    "PARCELA MARGEM CARTÃO ENVIADO: R$00.000,00",
 
-    "SALDO DEVEDOR (APROXIMADO): R$00.000,00",
-    "PARCELA: R$00.000,00",
-    "VALOR REDUÇÃO DE JUROS (VALOR LIQUÍDO APROXIMADO): R$00.000,00",
     "LIBERA + O VALOR (APROXIMADO) DE: R$00.000,000",
-    "APÓS 03 PARCELAS PAGAS NA REDUÇÃO DE JUROS SEM ALTERAR A PARCELA.",
   ]);
   const [totais, setTotais] = useState([
     "TOTAL: R$ 0,00",
     "PARCELA R$ 0,00",
     "84x",
+
     "TOTAL: R$ 0,00",
     "(com redução)",
     "PARCELA R$ 0,00",
@@ -54,6 +50,7 @@ export function CalculatorLOAS({
   function handleInputValue(label: string, value: number) {
     if (value === 0) return;
     setValues([{ label, value }]);
+    setAllInputsFilled(true);
     const result = calculate("LOAS REP LEGAL", "Cálculo Salário LOAS/BPC", [
       { label, value },
     ]);
@@ -64,16 +61,16 @@ export function CalculatorLOAS({
     }
 
     if (Array.isArray(result) && result.length > 0) {
-      setResults(result.slice(0, 8).concat(result.slice(11, 16)));
-      setTotais(result.slice(8, 11).concat(result.slice(16, 19)));
+      setResults(result.slice(0, 7).concat(result.slice(7, 8)));
+      setTotais(result.slice(8, 11).concat(result.slice(11, 15)));
       console.log("isChecked ", isChecked);
       const finalResult: string[] = [
-        `Valor Empréstimo R$ ${result[0].split(" R$ ")[1]}`,
-        `Valor Parcela R$ ${result[1].split(" R$ ")[1]} 84x`,
-        `Valor Cartão R$ ${result[19]}`,
-        `Parcela Cartão R$ ${result[20]} 84x`,
-        `Valor Cartão Enviado R$ ${result[6].split(" R$ ")[1]}`,
-        `Parcela Cartão Enviado R$ ${result[7].split(" R$ ")[1]} 84x`,
+        `Valor Empréstimo R$ ${result[2].split(" R$ ")[1]}`,
+        `Valor Parcela R$ ${result[0].split(" R$ ")[1]} 84x`,
+        `Valor Cartão INSS R$ ${result[3].split(" R$ ")[1]}`,
+        `Parcela Cartão INSS R$ ${result[5].split(" R$ ")[1]} 84x`,
+        `Valor Cartão Enviado R$ ${result[4].split(" R$ ")[1]}`,
+        `Parcela Cartão Enviado R$ ${result[6].split(" R$ ")[1]} 84x`,
         //total sem extra
         `${
           isChecked
@@ -87,26 +84,26 @@ export function CalculatorLOAS({
             : "PARCELA TOTAL R$ " + result[9].split(" R$ ")[1]
         } 84x`,
 
-        isChecked ? `R$ ${result[14].split(" R$ ")[1]}` : "",
+        isChecked ? `R$ ${result[7].split(" R$ ")[1]}` : "",
         // total com extra
-        isChecked ? `VALOR TOTAL R$ ${result[16].split(" R$ ")[1]}` : "",
+        isChecked ? `VALOR TOTAL R$ ${result[11].split(" R$ ")[1]}` : "",
         // parcela com extra
-        isChecked ? `PARCELA TOTAL R$ ${result[17].split(" R$ ")[1]} 84x` : "",
+        isChecked ? `PARCELA TOTAL R$ ${result[13].split(" R$ ")[1]} 84x` : "",
       ];
       console.log("Final result: ", finalResult);
       setFinalResult(finalResult.filter((str) => str !== ""));
     }
   }
 
-  useEffect(() => {
-    const allFilled = values.every((item) => item.value !== 0);
-    setAllInputsFilled(allFilled);
-  }, [values]);
+  // useEffect(() => {
+  //   const allFilled = values.every((item) => item.value !== 0);
+  //   setAllInputsFilled(allFilled);
+  // }, [values]);
 
-  useEffect(() => {
-    console.log("values changing", values[0].value);
-    handleInputValue(values[0].label, values[0].value);
-  }, [values, isChecked]);
+  // useEffect(() => {
+  //   console.log("values changing", values[0].value);
+  //   handleInputValue(values[0].label, values[0].value);
+  // }, [values, isChecked]);
 
   return (
     <Flex className="calculatorComponentDiv" id="calculatorComponentDivINSS4">
@@ -121,11 +118,9 @@ export function CalculatorLOAS({
             <NumericFormat
               value={String(values[0].value)}
               valueIsNumericString
-              onValueChange={(values) => {
-                const { floatValue } = values;
-                setValues([
-                  { label: "SALÁRIO: ", value: Number(floatValue) || 0 },
-                ]);
+              onValueChange={(v) => {
+                const { floatValue } = v;
+                handleInputValue(values[0].label, floatValue as number);
               }}
               thousandSeparator="."
               decimalSeparator=","
@@ -158,7 +153,6 @@ export function CalculatorLOAS({
           <CalculatorResult result={results[4]} />
           <CalculatorResult result={results[5]} />
           <CalculatorResult result={results[6]} />
-          <CalculatorResult result={results[7]} />
         </Flex>
         <Flex className="totaisContainer">
           {totais.slice(0, 3).map((total, index) => (
@@ -189,11 +183,7 @@ export function CalculatorLOAS({
               width: "100%",
             }}
           >
-            <CalculatorResult result={results[8]} />
-            <CalculatorResult result={results[9]} />
-            <CalculatorResult result={results[10]} />
-            <p></p>
-            <CalculatorResult result={results[11]} />
+            <CalculatorResult result={results[7]} />
             <p>
               APÓS 03 PARCELAS PAGAS NA REDUÇÃO DE JUROS SEM ALTERAR A PARCELA.
             </p>

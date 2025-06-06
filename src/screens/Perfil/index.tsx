@@ -64,6 +64,7 @@ export function Perfil() {
           status: "error",
           duration: 5000,
           isClosable: true,
+          position: "top-right",
         });
       } finally {
         setLoading(false);
@@ -170,10 +171,11 @@ export function Perfil() {
       logout();
       toast({
         title: "Sucesso",
-        description: "Você saiu com sucesso",
+        description: "Você deslogou com sucesso",
         status: "success",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
     } catch (error) {
       toast({
@@ -182,6 +184,7 @@ export function Perfil() {
         status: "error",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
     }
   };

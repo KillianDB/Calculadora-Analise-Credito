@@ -351,18 +351,10 @@ export function calculate(
       !(values[0].label == "VALOR MARGEM EMPRÉSTIMO: ") ||
       !(values[1].label == "VALOR MARGEM CARTÃO INSS: ") ||
       !(values[2].label == "VALOR MARGEM CARTÃO BENEFÍCIO: ")
-      // ||
-      // !(values[3].label == "valor liquido aproximado") ||
-      // !(values[4].label == "total parcelas") ||
-      // !(values[5].label == "total saldo devedor")
     ) {
       return "no valid labels";
     }
 
-    console.log(
-      "calculate on Possibilidades Gerais => ",
-      params.INSS?.["Possibilidades Gerais"]
-    );
     const INSSValues = params?.INSS?.["Possibilidades Gerais"]?.values || [];
 
     let coeficienteEmprestimo = +INSSValues.find(
@@ -478,49 +470,73 @@ export function calculate(
       params?.["LOAS REP LEGAL"]?.["Cálculo Salário LOAS/BPC"]?.values || [];
     console.log("loasValues => ", loasValues);
     //!arrumar no banco os valores
-    let coeficienteEmprestimo = +loasValues.find(
-      (v: any) => v.key === "coeficiente_emprestimo"
-    )?.value;
-    let coeficienteReducaoJuros = +loasValues.find(
-      (v: any) => v.key === "coeficiente_reducao_de_juros"
-    )?.value;
     let porcentagemMargemEmprestimo = +loasValues.find(
       (v: any) => v.key === "porcentagem_margem_emprestimo"
     )?.value;
-    let porcentagemSaldoDevedor = +loasValues.find(
-      (v: any) => v.key === "porcentagem_saldo_devedor"
+    let porcentagemMargemCartaoINSS = +loasValues.find(
+      (v: any) => v.key === "porcentagem_margem_cartao_inss"
     )?.value;
-    let porcentagemMaximaMargemEmprestimo = +loasValues.find(
-      (v: any) => v.key === "porcentagem_maxima_margem_emprestimo"
+    let coeficienteEmprestimo = +loasValues.find(
+      (v: any) => v.key === "coeficiente_emprestimo"
     )?.value;
+    let coeficienteCartaoINSS = +loasValues.find(
+      (v: any) => v.key === "coeficiente_cartao_inss"
+    )?.value;
+    let porcentagemCartaoEnviado = +loasValues.find(
+      (v: any) => v.key === "porcentagem_cartao_enviado"
+    )?.value;
+    let porcentagemParcelaCartaoINSS = +loasValues.find(
+      (v: any) => v.key === "porcentagem_parcela_cartao_inss"
+    )?.value;
+    let porcentagemParcelaCartaoEnviado = +loasValues.find(
+      (v: any) => v.key === "porcentagem_parcela_cartao_enviado"
+    )?.value;
+    let valorLiberado = +loasValues.find((v: any) => v.key === "valor_liberado")
+      ?.value;
 
-    const emprestimoT =
-      (+values[0].value * porcentagemMaximaMargemEmprestimo) /
-      coeficienteEmprestimo;
-    const total = emprestimoT;
-    const emprestimoP = +values[0].value * porcentagemMargemEmprestimo;
-
-    const saldo = total * porcentagemSaldoDevedor;
-    const parcela = emprestimoP;
-    const reducao = parcela / coeficienteReducaoJuros - saldo;
-    const valorLiberado = reducao;
-    const totalExtra = total + valorLiberado;
-    const parcelaComExtra = emprestimoP;
+    const margemEmprestimo = +values[0].value * porcentagemMargemEmprestimo;
+    const margemCartaoINSS = +values[0].value * porcentagemMargemCartaoINSS;
+    const emprestimo = margemEmprestimo / coeficienteEmprestimo;
+    const cartaoINSS = margemCartaoINSS * coeficienteCartaoINSS;
+    const cartaoEnviado = cartaoINSS * porcentagemCartaoEnviado;
+    const parcelaCartaoINSS = margemCartaoINSS * porcentagemParcelaCartaoINSS;
+    const parcelaCartaoEnviado =
+      margemCartaoINSS * porcentagemParcelaCartaoEnviado;
+    const total = emprestimo + cartaoINSS + cartaoEnviado;
+    const parcela = margemEmprestimo + parcelaCartaoINSS + parcelaCartaoEnviado;
+    const totalComReducaoJuros = total + valorLiberado;
 
     return [
-      "VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimoT),
-      "VALOR MARGEM EMPRÉSTIMO: R$ " + formatNumber(emprestimoP),
-      "TOTAL: R$ " + formatNumber(total),
-      " PARCELA R$ " + formatNumber(emprestimoP),
-      " 84x ",
-      "SALDO DEVEDOR (APROXIMADO): R$ " + formatNumber(saldo),
-      "PARCELA: R$ " + formatNumber(parcela),
-      "VALOR REDUÇÃO DE JUROS (VALOR LÍQUIDO APROXIMADO): R$ " +
-        formatNumber(reducao),
+      //[0]
+      "VALOR MARGEM EMPRÉSTIMO: R$ " + formatNumber(margemEmprestimo),
+      //[1]
+      "VALOR MARGEM CARTÃO INSS: R$ " + formatNumber(margemCartaoINSS),
+      //[2]
+      "VALOR EMPRÉSTIMO: R$ " + formatNumber(emprestimo),
+      //[3]
+      "CARTÃO INSS: R$ " + formatNumber(cartaoINSS),
+      //[4]
+      "VALOR CARTÃO ENVIADO: R$ " + formatNumber(cartaoEnviado),
+      //[5]
+      "PARCELA CARTÃO INSS: R$ " + formatNumber(parcelaCartaoINSS),
+      //[6]
+      "PARCELA MARGEM CARTÃO ENVIADO: R$ " + formatNumber(parcelaCartaoEnviado),
+      //[7]
       "LIBERA + O VALOR (APROXIMADO) DE: R$ " + formatNumber(valorLiberado),
-      "TOTAL: R$ " + formatNumber(totalExtra),
-      " PARCELA R$ " + formatNumber(parcelaComExtra),
-      " 84x ",
+      //[8]
+      "TOTAL: R$ " + formatNumber(total),
+      //[9]
+      "PARCELA: R$ " + formatNumber(parcela),
+      //[10]
+      "84x",
+      //[11]
+      "TOTAL: R$ " + formatNumber(totalComReducaoJuros),
+      //[12]
+      "(com redução de juros)",
+      //[13]
+      "PARCELA: R$ " + formatNumber(parcela),
+      //[14]
+      "84x",
     ];
   } else if (menu == "Exército" && submenu == "Cálculo por Margem Disponível") {
     if (!(values[0].label == "VALOR MARGEM EMPRÉSTIMO: ")) {

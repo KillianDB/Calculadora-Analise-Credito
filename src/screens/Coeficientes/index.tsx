@@ -3,8 +3,6 @@ import axios from "axios";
 import {
   Box,
   Flex,
-  NumberInput,
-  NumberInputField,
   Input,
   Table,
   Thead,
@@ -14,8 +12,6 @@ import {
   Td,
   Tooltip,
   Badge,
-  Alert,
-  AlertIcon,
   Card,
   CardBody,
   IconButton,
@@ -62,7 +58,6 @@ export function Coeficientes() {
   >({});
   const [menus, setMenus] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const toast = useToast();
   const tableRef = useRef<HTMLDivElement>(null);
   const scrollPositionRef = useRef<number>(0);
@@ -117,7 +112,15 @@ export function Coeficientes() {
           setIsLoading(false);
         } catch (err) {
           console.error("Erro ao carregar coeficientes:", err);
-          setError(err instanceof Error ? err.message : "Erro desconhecido");
+          toast({
+            title: "Erro ao carregar coeficientes",
+            description:
+              err instanceof Error ? err.message : "Erro desconhecido",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "top-right",
+          });
           setIsLoading(false);
         }
       };
@@ -267,6 +270,7 @@ export function Coeficientes() {
           status: "success",
           duration: 5000,
           isClosable: true,
+          position: "top-right",
         });
       }
     } catch (err) {
@@ -278,39 +282,78 @@ export function Coeficientes() {
         status: "error",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (isLoading || contextLoading) {
+  if (isLoading) {
     return (
-      <Flex minH="100vh">
-        <Menu type="admin" />
-        <Box
-          flex="1"
-          p={8}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Spinner size="xl" />
-        </Box>
-      </Flex>
-    );
-  }
+      <Flex h="100vh">
+        <main className="body_colaborators">
+          <Menu type="admin" />
+          <div className="linha"></div>
+          <div className="divMenus"></div>
 
-  if (error) {
-    return (
-      <Flex minH="100vh">
-        <Menu type="admin" />
-        <Box flex="1" p={8}>
-          <Alert status="error" mb={6}>
-            <AlertIcon />
-            {error}
-          </Alert>
-        </Box>
+          <div
+            className="mainCalculator"
+            style={{
+              height: "77vh",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+            }}
+          >
+            <Flex direction="column" gap={6}>
+              <Flex className="divMenus" width="100%" gap={4}>
+                <select
+                  title="Menu"
+                  value={selectedMenu}
+                  onChange={(e) => {
+                    setSelectedMenu(e.target.value);
+                    setSelectedSubmenu("");
+                  }}
+                  style={{ minWidth: "200px" }}
+                >
+                  <option value="">Menu</option>
+                  {menus.map((menu) => (
+                    <option key={menu} value={menu}>
+                      {menu}
+                    </option>
+                  ))}
+                </select>
+
+                <select
+                  title="Submenu"
+                  value={selectedSubmenu}
+                  onChange={(e) => setSelectedSubmenu(e.target.value)}
+                  disabled={!selectedMenu}
+                  style={{ minWidth: "200px" }}
+                >
+                  <option value="">Submenu</option>
+                  {submenusFiltrados.map((submenu) => (
+                    <option key={submenu} value={submenu}>
+                      {submenu}
+                    </option>
+                  ))}
+                </select>
+              </Flex>
+              <Flex
+                flexDirection="column"
+                align="center"
+                justify="center"
+                mt={10}
+              >
+                <Spinner size="xl" />
+                <Text ml={4} fontSize="xl" color="gray.500">
+                  Recarregando coeficientes...
+                </Text>
+              </Flex>
+            </Flex>
+          </div>
+        </main>
       </Flex>
     );
   }
@@ -435,25 +478,23 @@ export function Coeficientes() {
                                 </Td>
                                 <Td>
                                   {editingId === coeficiente.id ? (
-                                    <NumberInput
+                                    <Input
+                                      type="number"
                                       value={
                                         newValues[key]?.value ||
                                         val.value.toString()
                                       }
-                                      onChange={(valueString) =>
+                                      onChange={(e) =>
                                         handleValueChange(
                                           key,
                                           "value",
-                                          valueString
+                                          e.target.value
                                         )
                                       }
-                                      precision={4}
-                                      step={0.0001}
+                                      step="any"
                                       min={0}
                                       width="150px"
-                                    >
-                                      <NumberInputField />
-                                    </NumberInput>
+                                    />
                                   ) : (
                                     <Badge
                                       colorScheme={
@@ -504,15 +545,6 @@ export function Coeficientes() {
                 ))}
               </Box>
             )}
-
-            {selectedMenu &&
-              selectedSubmenu &&
-              filteredCoeficientes.length === 0 && (
-                <Alert status="info">
-                  <AlertIcon />
-                  Nenhum coeficiente encontrado para este menu/submenu
-                </Alert>
-              )}
           </Flex>
         </div>
       </main>

@@ -3,8 +3,10 @@ import OrangeButton from "../../components/OrangeButton";
 import SubmitCard from "../../components/SubmitCard";
 import "../AlterarSenha/AlterarSenha.css";
 import { useState } from "react";
+import { useToast } from "@chakra-ui/react";
 
 export default function NovaSenha() {
+  const toast = useToast();
   const navigate = useNavigate();
   const [novaSenha, setNovaSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
@@ -28,9 +30,25 @@ export default function NovaSenha() {
 
     if (response.status !== 200) {
       console.log("Erro ao salvar nova senha", response);
+      toast({
+        title: "Erro ao alterar senha",
+        description: "Tente novamente mais tarde.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
       return response;
     } else {
       console.log("Salvando nova senha");
+      toast({
+        title: "Senha alterada com sucesso!",
+        description: "Você será redirecionado para a página de sucesso.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
       navigate("/sucesso", {
         state: { text: "Senha alterada com sucesso!" },
       });

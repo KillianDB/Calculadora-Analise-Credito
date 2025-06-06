@@ -9,9 +9,11 @@ import {
   Select,
   SimpleGrid,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 
 export function Bancos() {
+  const toast = useToast();
   // const [addMemberModalOpen, setAddMemberModalOpen] = useState(false);
   // const [name, setName] = useState("");
   // const [email, setEmail] = useState("");
@@ -101,10 +103,22 @@ export function Bancos() {
 
     if (response.status !== 200) {
       console.error("Erro ao bloquear banco");
-      alert(response);
+      toast({
+        title: "Erro ao bloquear banco",
+        description: "Tente novamente mais tarde.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       return;
     }
-    alert(response);
+    toast({
+      title: "Banco bloqueado com sucesso",
+      description: "O banco foi bloqueado com sucesso.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
     return;
   };
 
@@ -120,6 +134,13 @@ export function Bancos() {
         const data = await response.json();
         setBancos(data);
       } catch (error) {
+        toast({
+          title: "Erro ao buscar bancos",
+          description: "Não foi possível obter a lista de bancos.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
         console.error("Error fetching equipes:", error);
       }
     };

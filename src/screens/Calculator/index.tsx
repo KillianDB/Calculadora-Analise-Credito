@@ -30,10 +30,10 @@ import {
 } from "@chakra-ui/react";
 import { useUser } from "../../contexts/UserContext";
 import { Checkbox } from "antd";
-import { useAppToast } from "../../utils/toaster";
+import { useToast } from "@chakra-ui/react";
 
 function Calculator() {
-  const { showToast } = useAppToast();
+  const toast = useToast();
   const modalBodyRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [menu, setMenu] = useState("");
@@ -326,20 +326,37 @@ function Calculator() {
       );
 
       if (response.status === 200) {
-        showToast("Imagem gerada com sucesso!", "success");
+        toast({
+          title: "Imagem gerada com sucesso!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "top-right",
+        });
         // window.location.href = response.data;
         window.open(response.data, "_blank");
         console.log("Redirecionando", response.data);
         return;
       }
-      showToast(
-        response?.data || "Falha ao gerar imagem",
-        "error",
-        8000 // Duração maior para erros
-      );
+      toast({
+        title: response?.data || "Falha ao gerar imagem",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
     } catch (error) {
       console.error("Error generating image:", error);
-      showToast("Erro ao gerar a imagem", "error");
+
+      toast({
+        title: "Falha ao gerar imagem",
+        description:
+          error instanceof Error ? error.message : "Erro desconhecido",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
     } finally {
       setIsGeneratingImage(false);
       setParcelModalIsOpen(false);

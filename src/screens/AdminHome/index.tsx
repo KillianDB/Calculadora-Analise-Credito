@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import PieChart from "../../components/PizzaChart";
 // import BarChart from "../../components/BarChart";
 import Menu from "../../components/Menu";
+import { useToast } from "@chakra-ui/react";
 // import { SideMenu } from "../../components/SideMenu";
 
 interface PieValues {
@@ -18,6 +19,7 @@ interface PieValues {
 // }
 
 export function AdminHome() {
+  const toast = useToast();
   const [totalClientes, setTotalClientes] = useState<number | null>(null);
   const [clientesEmContato, setClientesEmContato] = useState<number | null>(
     null
@@ -98,6 +100,14 @@ export function AdminHome() {
         const data = await response.json();
         setClientesEmContato(data);
       } catch (error) {
+        toast({
+          title: "Nenhum cliente encontrado",
+          description: "Não há clientes em contato no momento.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top-right",
+        });
         console.error("Error fetching clients in contact:", error);
       }
     }
@@ -113,11 +123,27 @@ export function AdminHome() {
         );
         const contentType = response.headers.get("content-type");
         if (!contentType || !contentType.includes("application/json")) {
+          toast({
+            title: "Erro ao buscar dados do gráfico",
+            description: "A resposta não tem um formato válido",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "top-right",
+          });
           throw new Error("A resposta não é um JSON válido");
         }
         const data: PieValues = await response.json();
         setPieValues(data);
       } catch (error) {
+        toast({
+          title: "Erro ao buscar dados do gráfico",
+          description: "Não foi possível obter os dados do gráfico de pizza.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top-right",
+        });
         console.error("Error fetching pie chart data:", error);
       }
     }
@@ -155,11 +181,27 @@ export function AdminHome() {
         );
         const contentType = response.headers.get("content-type");
         if (!contentType || !contentType.includes("application/json")) {
+          toast({
+            title: "Erro ao buscar clientes",
+            description: "A resposta não tem um formato válido",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "top-right",
+          });
           throw new Error("A resposta não é um JSON válido");
         }
         const data = await response.json();
         setClients(data);
       } catch (error) {
+        toast({
+          title: "Erro ao buscar clientes",
+          description: "Não foi possível obter a lista de clientes.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top-right",
+        });
         console.error("Error fetching clients:", error);
       }
     }

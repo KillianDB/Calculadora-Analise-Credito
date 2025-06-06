@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CalculatorTitle } from "../../../CalculatorTitle";
 import { formatNumber } from "../../../../utils/formatNumbers";
 import "./exercito.css";
@@ -23,22 +23,13 @@ export function CalculatorExercito2({
   if (!paramsString) return "no parameters found";
 
   const params = JSON.parse(paramsString);
+  console.log("params at EXERCITO Possibilidades Gerais => ", params);
+  const ExercitoValues =
+    params?.EXERCITO?.["Possibilidades Gerais"]?.values || [];
 
   const [values, setValues] = useState([
     { label: "VALOR MARGEM EMPRÉSTIMO: ", value: 0 },
   ]);
-
-  function handleInputValue(value: number) {
-    if (value === 0) return;
-
-    setAllInputsFilled(true);
-
-    setValues((prevState) => {
-      prevState[0].value =
-        typeof value === "number" ? value : parseFloat(value);
-      return [...prevState];
-    });
-  }
 
   const [parcela1, setParcela1] = useState(0);
   const [parcela2, setParcela2] = useState(0);
@@ -78,15 +69,18 @@ export function CalculatorExercito2({
 
     const liquidoCliente =
       parcela /
-        params?.EXERCITO?.["Possibilidades Gerais"].values
-          .coeficiente_liquido_cliente.value -
+        +ExercitoValues.find(
+          (v: any) => v.key === "coeficiente_liquido_cliente"
+        )?.value -
       (parcela / taxaJuros -
         parcela *
-          (params?.EXERCITO?.["Possibilidades Gerais"].values
-            .coeficiente_saldo_devedor.value -
+          (+ExercitoValues.find(
+            (v: any) => v.key === "coeficiente_saldo_devedor"
+          )?.value -
             prazoRestante) *
-          +params?.EXERCITO?.["Possibilidades Gerais"].values
-            .porcentagem_saldo_devedor.value);
+          +ExercitoValues.find(
+            (v: any) => v.key === "porcentagem_saldo_devedor"
+          )?.value);
 
     return liquidoCliente > 0 ? acc + liquidoCliente : acc;
   }, 0);
@@ -105,39 +99,56 @@ export function CalculatorExercito2({
 
     const liquidoCliente =
       parcela /
-        +params?.EXERCITO?.["Possibilidades Gerais"].values
-          .coeficiente_liquido_cliente.value -
+        +ExercitoValues.find(
+          (v: any) => v.key === "coeficiente_liquido_cliente"
+        )?.value -
       (parcela / taxaJuros -
         parcela *
-          (+params?.EXERCITO?.["Possibilidades Gerais"].values
-            .coeficiente_saldo_devedor.value -
+          (+ExercitoValues.find(
+            (v: any) => v.key === "coeficiente_saldo_devedor"
+          )?.value -
             prazoRestante) *
-          +params?.EXERCITO?.["Possibilidades Gerais"].values
-            .porcentagem_saldo_devedor.value);
+          +ExercitoValues.find(
+            (v: any) => v.key === "porcentagem_saldo_devedor"
+          )?.value);
 
     return liquidoCliente > 0 ? acc + parcela : acc;
   }, 0);
 
-  useEffect(() => {
+  function handleInputValue(value: { label: string; value: string | number }) {
+    if (value.value === 0) return;
+    console.log("handleInputValue called with value => ", value);
+
+    if (value.label === "VALOR MARGEM EMPRÉSTIMO: ") {
+      setValues((prevState) => {
+        prevState[0].value =
+          typeof value === "number"
+            ? value
+            : parseFloat(value.value.toString());
+        return [...prevState];
+      });
+    }
+
     const filled =
       values[0].value > 0 &&
       (trocoLiquidoPortabilidade > 0 || somaParcelasPositivas > 0);
+    console.log("filled => ", filled);
     setAllInputsFilled(filled);
 
     if (filled) {
       const finalResult = [
         `Valor Empréstimo R$ ${formatNumber(
           values[0].value /
-            +params?.EXERCITO?.["Possibilidades Gerais"]?.values
-              .coeficiente_emprestimo.value
+            +ExercitoValues.find((v: any) => v.key === "coeficiente_emprestimo")
+              ?.value
         )}`,
         `Parcela Empréstimo R$ ${formatNumber(values[0].value)} 84x`,
         `Portabilidade Aprox. R$ ${formatNumber(trocoLiquidoPortabilidade)}`,
         `Parcela Portabilidade R$ ${formatNumber(somaParcelasPositivas)} 84x`,
         `VALOR TOTAL R$ ${formatNumber(
           values[0].value /
-            +params?.EXERCITO?.["Possibilidades Gerais"]?.values
-              .coeficiente_emprestimo.value +
+            +ExercitoValues.find((v: any) => v.key === "coeficiente_emprestimo")
+              ?.value +
             trocoLiquidoPortabilidade
         )}`,
         `PARCELA TOTAL R$ ${formatNumber(
@@ -147,12 +158,43 @@ export function CalculatorExercito2({
 
       setFinalResult(finalResult);
     }
-  }, [
-    values[0].value,
-    trocoLiquidoPortabilidade,
-    somaParcelasPositivas,
-    setAllInputsFilled,
-  ]);
+  }
+
+  // useEffect(() => {
+  //   const filled =
+  //     values[0].value > 0 &&
+  //     (trocoLiquidoPortabilidade > 0 || somaParcelasPositivas > 0);
+  //   setAllInputsFilled(filled);
+
+  //   if (filled) {
+  //     const finalResult = [
+  //       `Valor Empréstimo R$ ${formatNumber(
+  //         values[0].value /
+  //           +ExercitoValues.find((v: any) => v.key === "coeficiente_emprestimo")
+  //             ?.value
+  //       )}`,
+  //       `Parcela Empréstimo R$ ${formatNumber(values[0].value)} 84x`,
+  //       `Portabilidade Aprox. R$ ${formatNumber(trocoLiquidoPortabilidade)}`,
+  //       `Parcela Portabilidade R$ ${formatNumber(somaParcelasPositivas)} 84x`,
+  //       `VALOR TOTAL R$ ${formatNumber(
+  //         values[0].value /
+  //           +ExercitoValues.find((v: any) => v.key === "coeficiente_emprestimo")
+  //             ?.value +
+  //           trocoLiquidoPortabilidade
+  //       )}`,
+  //       `PARCELA TOTAL R$ ${formatNumber(
+  //         values[0].value + somaParcelasPositivas
+  //       )} 84x`,
+  //     ];
+
+  //     setFinalResult(finalResult);
+  //   }
+  // }, [
+  //   values[0].value,
+  //   trocoLiquidoPortabilidade,
+  //   somaParcelasPositivas,
+  //   setAllInputsFilled,
+  // ]);
 
   return (
     <Flex
@@ -166,9 +208,12 @@ export function CalculatorExercito2({
             <FormLabel>{values[0].label}</FormLabel>
             <NumericFormat
               value={values[0].value}
-              onValueChange={(values) => {
-                const { floatValue } = values;
-                handleInputValue(floatValue ?? 0);
+              onValueChange={(v) => {
+                const { floatValue } = v;
+                handleInputValue({
+                  label: values[0].label,
+                  value: floatValue ?? 0,
+                });
               }}
               thousandSeparator="."
               decimalSeparator=","
@@ -203,6 +248,10 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setParcela1(Number(floatValue));
+                  handleInputValue({
+                    label: "parcela1",
+                    value: floatValue ?? 0,
+                  });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -221,6 +270,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setPrazoRestante1(Number(floatValue));
+                  handleInputValue({ label: "prazo1", value: floatValue ?? 0 });
                 }}
                 customInput={Input}
               />
@@ -234,6 +284,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setTaxaJuros1(Number(floatValue));
+                  handleInputValue({ label: "taxa1", value: floatValue ?? 0 });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -249,11 +300,13 @@ export function CalculatorExercito2({
                   ? // ? Math.max(
                     parcela1 / taxaJuros1 -
                     parcela1 *
-                      (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_saldo_devedor.value -
+                      (+ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_saldo_devedor"
+                      )?.value -
                         prazoRestante1) *
-                      +params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .porcentagem_saldo_devedor.value
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "porcentagem_saldo_devedor"
+                      )?.value
                   : // )
                     0
                 ).toLocaleString("pt-BR", {
@@ -265,26 +318,32 @@ export function CalculatorExercito2({
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 {`LIQUIDO CLIENTE: ${(parcela1 /
-                  params?.EXERCITO?.["Possibilidades Gerais"].values
-                    .coeficiente_liquido_cliente.value -
+                  +ExercitoValues.find(
+                    (v: any) => v.key === "coeficiente_liquido_cliente"
+                  )?.value -
                   (parcela1 / taxaJuros1 -
                     parcela1 *
-                      (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_saldo_devedor.value -
+                      (+ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_saldo_devedor"
+                      )?.value -
                         prazoRestante1) *
-                      +params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .porcentagem_saldo_devedor.value) >
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "porcentagem_saldo_devedor"
+                      )?.value) >
                 0
                   ? parcela1 /
-                      params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_liquido_cliente.value -
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_liquido_cliente"
+                      )?.value -
                     (parcela1 / taxaJuros1 -
                       parcela1 *
-                        (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .coeficiente_saldo_devedor.value -
+                        (+ExercitoValues.find(
+                          (v: any) => v.key === "coeficiente_saldo_devedor"
+                        )?.value -
                           prazoRestante1) *
-                        +params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .porcentagem_saldo_devedor.value)
+                        +ExercitoValues.find(
+                          (v: any) => v.key === "porcentagem_saldo_devedor"
+                        )?.value)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -301,6 +360,10 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setParcela2(Number(floatValue));
+                  handleInputValue({
+                    label: "parcela2",
+                    value: floatValue ?? 0,
+                  });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -320,6 +383,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setPrazoRestante2(Number(floatValue));
+                  handleInputValue({ label: "prazo2", value: floatValue ?? 0 });
                 }}
                 customInput={Input}
               />
@@ -334,6 +398,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setTaxaJuros2(Number(floatValue));
+                  handleInputValue({ label: "taxa2", value: floatValue ?? 0 });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -350,11 +415,13 @@ export function CalculatorExercito2({
                   ? Math.max(
                       parcela2 / taxaJuros2 -
                         parcela2 *
-                          (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                            .coeficiente_saldo_devedor.value -
+                          (+ExercitoValues.find(
+                            (v: any) => v.key === "coeficiente_saldo_devedor"
+                          )?.value -
                             prazoRestante2) *
-                          +params?.EXERCITO?.["Possibilidades Gerais"].values
-                            .porcentagem_saldo_devedor.value,
+                          +ExercitoValues.find(
+                            (v: any) => v.key === "porcentagem_saldo_devedor"
+                          )?.value,
                       0
                     )
                   : 0
@@ -368,26 +435,32 @@ export function CalculatorExercito2({
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 {`LIQUIDO CLIENTE: ${(parcela2 /
-                  params?.EXERCITO?.["Possibilidades Gerais"].values
-                    .coeficiente_liquido_cliente.value -
+                  +ExercitoValues.find(
+                    (v: any) => v.key === "coeficiente_liquido_cliente"
+                  )?.value -
                   (parcela2 / taxaJuros2 -
                     parcela2 *
-                      (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_saldo_devedor.value -
+                      (+ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_saldo_devedor"
+                      )?.value -
                         prazoRestante2) *
-                      +params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .porcentagem_saldo_devedor.value) >
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "porcentagem_saldo_devedor"
+                      )?.value) >
                 0
                   ? parcela2 /
-                      params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_liquido_cliente.value -
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_liquido_cliente"
+                      )?.value -
                     (parcela2 / taxaJuros2 -
                       parcela2 *
-                        (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .coeficiente_saldo_devedor.value -
+                        (+ExercitoValues.find(
+                          (v: any) => v.key === "coeficiente_saldo_devedor"
+                        )?.value -
                           prazoRestante2) *
-                        +params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .porcentagem_saldo_devedor.value)
+                        +ExercitoValues.find(
+                          (v: any) => v.key === "porcentagem_saldo_devedor"
+                        )?.value)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -404,6 +477,10 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setParcela3(Number(floatValue));
+                  handleInputValue({
+                    label: "parcela3",
+                    value: floatValue ?? 0,
+                  });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -423,6 +500,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setPrazoRestante3(Number(floatValue));
+                  handleInputValue({ label: "prazo3", value: floatValue ?? 0 });
                 }}
                 customInput={Input}
               />
@@ -437,6 +515,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setTaxaJuros3(Number(floatValue));
+                  handleInputValue({ label: "taxa3", value: floatValue ?? 0 });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -452,11 +531,13 @@ export function CalculatorExercito2({
                   ? Math.max(
                       parcela3 / taxaJuros3 -
                         parcela3 *
-                          (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                            .coeficiente_saldo_devedor.value -
+                          (+ExercitoValues.find(
+                            (v: any) => v.key === "coeficiente_saldo_devedor"
+                          )?.value -
                             prazoRestante3) *
-                          +params?.EXERCITO?.["Possibilidades Gerais"].values
-                            .porcentagem_saldo_devedor.value,
+                          +ExercitoValues.find(
+                            (v: any) => v.key === "porcentagem_saldo_devedor"
+                          )?.value,
                       0
                     )
                   : 0
@@ -470,26 +551,32 @@ export function CalculatorExercito2({
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 {`LIQUIDO CLIENTE: ${(parcela3 /
-                  params?.EXERCITO?.["Possibilidades Gerais"].values
-                    .coeficiente_liquido_cliente.value -
+                  +ExercitoValues.find(
+                    (v: any) => v.key === "coeficiente_liquido_cliente"
+                  )?.value -
                   (parcela3 / taxaJuros3 -
                     parcela3 *
-                      (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_saldo_devedor.value -
+                      (+ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_saldo_devedor"
+                      )?.value -
                         prazoRestante3) *
-                      +params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .porcentagem_saldo_devedor.value) >
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "porcentagem_saldo_devedor"
+                      )?.value) >
                 0
                   ? parcela3 /
-                      params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_liquido_cliente.value -
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_liquido_cliente"
+                      )?.value -
                     (parcela3 / taxaJuros3 -
                       parcela3 *
-                        (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .coeficiente_saldo_devedor.value -
+                        (+ExercitoValues.find(
+                          (v: any) => v.key === "coeficiente_saldo_devedor"
+                        )?.value -
                           prazoRestante3) *
-                        +params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .porcentagem_saldo_devedor.value)
+                        +ExercitoValues.find(
+                          (v: any) => v.key === "porcentagem_saldo_devedor"
+                        )?.value)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -506,6 +593,10 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setParcela4(Number(floatValue));
+                  handleInputValue({
+                    label: "parcela4",
+                    value: floatValue ?? 0,
+                  });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -525,6 +616,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setPrazoRestante4(Number(floatValue));
+                  handleInputValue({ label: "prazo4", value: floatValue ?? 0 });
                 }}
                 customInput={Input}
               />
@@ -539,6 +631,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setTaxaJuros4(Number(floatValue));
+                  handleInputValue({ label: "taxa4", value: floatValue ?? 0 });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -555,11 +648,13 @@ export function CalculatorExercito2({
                   ? Math.max(
                       parcela4 / taxaJuros4 -
                         parcela4 *
-                          (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                            .coeficiente_saldo_devedor.value -
+                          (+ExercitoValues.find(
+                            (v: any) => v.key === "coeficiente_saldo_devedor"
+                          )?.value -
                             prazoRestante4) *
-                          +params?.EXERCITO?.["Possibilidades Gerais"].values
-                            .porcentagem_saldo_devedor.value,
+                          +ExercitoValues.find(
+                            (v: any) => v.key === "porcentagem_saldo_devedor"
+                          )?.value,
                       0
                     )
                   : 0
@@ -573,26 +668,32 @@ export function CalculatorExercito2({
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 {`LIQUIDO CLIENTE: ${(parcela4 /
-                  params?.EXERCITO?.["Possibilidades Gerais"].values
-                    .coeficiente_liquido_cliente.value -
+                  +ExercitoValues.find(
+                    (v: any) => v.key === "coeficiente_liquido_cliente"
+                  )?.value -
                   (parcela4 / taxaJuros4 -
                     parcela4 *
-                      (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_saldo_devedor.value -
+                      (+ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_saldo_devedor"
+                      )?.value -
                         prazoRestante4) *
-                      +params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .porcentagem_saldo_devedor.value) >
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "porcentagem_saldo_devedor"
+                      )?.value) >
                 0
                   ? parcela4 /
-                      params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_liquido_cliente.value -
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_liquido_cliente"
+                      )?.value -
                     (parcela4 / taxaJuros4 -
                       parcela4 *
-                        (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .coeficiente_saldo_devedor.value -
+                        (+ExercitoValues.find(
+                          (v: any) => v.key === "coeficiente_saldo_devedor"
+                        )?.value -
                           prazoRestante4) *
-                        +params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .porcentagem_saldo_devedor.value)
+                        +ExercitoValues.find(
+                          (v: any) => v.key === "porcentagem_saldo_devedor"
+                        )?.value)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -609,6 +710,10 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setParcela5(Number(floatValue));
+                  handleInputValue({
+                    label: "parcela5",
+                    value: floatValue ?? 0,
+                  });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -628,6 +733,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setPrazoRestante5(Number(floatValue));
+                  handleInputValue({ label: "prazo5", value: floatValue ?? 0 });
                 }}
                 customInput={Input}
               />
@@ -642,6 +748,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setTaxaJuros5(Number(floatValue));
+                  handleInputValue({ label: "taxa5", value: floatValue ?? 0 });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -658,11 +765,13 @@ export function CalculatorExercito2({
                   ? Math.max(
                       parcela5 / taxaJuros5 -
                         parcela5 *
-                          (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                            .coeficiente_saldo_devedor.value -
+                          (+ExercitoValues.find(
+                            (v: any) => v.key === "coeficiente_saldo_devedor"
+                          )?.value -
                             prazoRestante5) *
-                          +params?.EXERCITO?.["Possibilidades Gerais"].values
-                            .porcentagem_saldo_devedor.value,
+                          +ExercitoValues.find(
+                            (v: any) => v.key === "porcentagem_saldo_devedor"
+                          )?.value,
                       0
                     )
                   : 0
@@ -676,26 +785,32 @@ export function CalculatorExercito2({
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 {`LIQUIDO CLIENTE: ${(parcela5 /
-                  params?.EXERCITO?.["Possibilidades Gerais"].values
-                    .coeficiente_liquido_cliente.value -
+                  +ExercitoValues.find(
+                    (v: any) => v.key === "coeficiente_liquido_cliente"
+                  )?.value -
                   (parcela5 / taxaJuros5 -
                     parcela5 *
-                      (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_saldo_devedor.value -
+                      (+ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_saldo_devedor"
+                      )?.value -
                         prazoRestante5) *
-                      +params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .porcentagem_saldo_devedor.value) >
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "porcentagem_saldo_devedor"
+                      )?.value) >
                 0
                   ? parcela5 /
-                      params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_liquido_cliente.value -
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_liquido_cliente"
+                      )?.value -
                     (parcela5 / taxaJuros5 -
                       parcela5 *
-                        (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .coeficiente_saldo_devedor.value -
+                        (+ExercitoValues.find(
+                          (v: any) => v.key === "coeficiente_saldo_devedor"
+                        )?.value -
                           prazoRestante5) *
-                        +params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .porcentagem_saldo_devedor.value)
+                        +ExercitoValues.find(
+                          (v: any) => v.key === "porcentagem_saldo_devedor"
+                        )?.value)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -712,6 +827,10 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setParcela6(Number(floatValue));
+                  handleInputValue({
+                    label: "parcela6",
+                    value: floatValue ?? 0,
+                  });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -731,6 +850,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setPrazoRestante6(Number(floatValue));
+                  handleInputValue({ label: "prazo6", value: floatValue ?? 0 });
                 }}
                 customInput={Input}
               />
@@ -745,6 +865,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setTaxaJuros6(Number(floatValue));
+                  handleInputValue({ label: "taxa6", value: floatValue ?? 0 });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -761,11 +882,13 @@ export function CalculatorExercito2({
                   ? Math.max(
                       parcela6 / taxaJuros6 -
                         parcela6 *
-                          (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                            .coeficiente_saldo_devedor.value -
+                          (+ExercitoValues.find(
+                            (v: any) => v.key === "coeficiente_saldo_devedor"
+                          )?.value -
                             prazoRestante6) *
-                          +params?.EXERCITO?.["Possibilidades Gerais"].values
-                            .porcentagem_saldo_devedor.value,
+                          +ExercitoValues.find(
+                            (v: any) => v.key === "porcentagem_saldo_devedor"
+                          )?.value,
                       0
                     )
                   : 0
@@ -779,26 +902,32 @@ export function CalculatorExercito2({
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 {`LIQUIDO CLIENTE: ${(parcela6 /
-                  params?.EXERCITO?.["Possibilidades Gerais"].values
-                    .coeficiente_liquido_cliente.value -
+                  +ExercitoValues.find(
+                    (v: any) => v.key === "coeficiente_liquido_cliente"
+                  )?.value -
                   (parcela6 / taxaJuros6 -
                     parcela6 *
-                      (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_saldo_devedor.value -
+                      (+ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_saldo_devedor"
+                      )?.value -
                         prazoRestante6) *
-                      +params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .porcentagem_saldo_devedor.value) >
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "porcentagem_saldo_devedor"
+                      )?.value) >
                 0
                   ? parcela6 /
-                      params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_liquido_cliente.value -
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_liquido_cliente"
+                      )?.value -
                     (parcela6 / taxaJuros6 -
                       parcela6 *
-                        (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .coeficiente_saldo_devedor.value -
+                        (+ExercitoValues.find(
+                          (v: any) => v.key === "coeficiente_saldo_devedor"
+                        )?.value -
                           prazoRestante6) *
-                        +params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .porcentagem_saldo_devedor.value)
+                        +ExercitoValues.find(
+                          (v: any) => v.key === "porcentagem_saldo_devedor"
+                        )?.value)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -815,6 +944,10 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setParcela7(Number(floatValue));
+                  handleInputValue({
+                    label: "parcela7",
+                    value: floatValue ?? 0,
+                  });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -834,6 +967,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setPrazoRestante7(Number(floatValue));
+                  handleInputValue({ label: "prazo7", value: floatValue ?? 0 });
                 }}
                 customInput={Input}
               />
@@ -848,6 +982,7 @@ export function CalculatorExercito2({
                 onValueChange={(values) => {
                   const { floatValue } = values;
                   setTaxaJuros7(Number(floatValue));
+                  handleInputValue({ label: "taxa7", value: floatValue ?? 0 });
                 }}
                 thousandSeparator="."
                 decimalSeparator=","
@@ -864,11 +999,13 @@ export function CalculatorExercito2({
                   ? Math.max(
                       parcela7 / taxaJuros7 -
                         parcela7 *
-                          (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                            .coeficiente_saldo_devedor.value -
+                          (+ExercitoValues.find(
+                            (v: any) => v.key === "coeficiente_saldo_devedor"
+                          )?.value -
                             prazoRestante7) *
-                          +params?.EXERCITO?.["Possibilidades Gerais"].values
-                            .porcentagem_saldo_devedor.value,
+                          +ExercitoValues.find(
+                            (v: any) => v.key === "porcentagem_saldo_devedor"
+                          )?.value,
                       0
                     )
                   : 0
@@ -882,26 +1019,32 @@ export function CalculatorExercito2({
             <Flex alignItems={"center"} height={"60px"}>
               <Text fontSize={"12px"} mb={4} fontWeight={"bold"}>
                 {`LIQUIDO CLIENTE: ${(parcela7 /
-                  params?.EXERCITO?.["Possibilidades Gerais"].values
-                    .coeficiente_liquido_cliente.value -
+                  +ExercitoValues.find(
+                    (v: any) => v.key === "coeficiente_liquido_cliente"
+                  )?.value -
                   (parcela7 / taxaJuros7 -
                     parcela7 *
-                      (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_saldo_devedor.value -
+                      (+ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_saldo_devedor"
+                      )?.value -
                         prazoRestante7) *
-                      +params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .porcentagem_saldo_devedor.value) >
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "porcentagem_saldo_devedor"
+                      )?.value) >
                 0
                   ? parcela7 /
-                      params?.EXERCITO?.["Possibilidades Gerais"].values
-                        .coeficiente_liquido_cliente.value -
+                      +ExercitoValues.find(
+                        (v: any) => v.key === "coeficiente_liquido_cliente"
+                      )?.value -
                     (parcela7 / taxaJuros7 -
                       parcela7 *
-                        (+params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .coeficiente_saldo_devedor.value -
+                        (+ExercitoValues.find(
+                          (v: any) => v.key === "coeficiente_saldo_devedor"
+                        )?.value -
                           prazoRestante7) *
-                        +params?.EXERCITO?.["Possibilidades Gerais"].values
-                          .porcentagem_saldo_devedor.value)
+                        +ExercitoValues.find(
+                          (v: any) => v.key === "porcentagem_saldo_devedor"
+                        )?.value)
                   : 0
                 ).toLocaleString("pt-BR", {
                   style: "currency",
@@ -923,8 +1066,8 @@ export function CalculatorExercito2({
             mx={4}
           >{`VALOR EMPRÉSTIMO: ${(
             values[0].value /
-            +params?.EXERCITO?.["Possibilidades Gerais"]?.values
-              .coeficiente_emprestimo.value
+            +ExercitoValues.find((v: any) => v.key === "coeficiente_emprestimo")
+              ?.value
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
@@ -961,8 +1104,9 @@ export function CalculatorExercito2({
           <Text fontSize={"14px"} fontWeight={"bold"} mx={4}>{`TOTAL: ${(
             trocoLiquidoPortabilidade +
             values[0].value /
-              +params?.EXERCITO?.["Possibilidades Gerais"]?.values
-                .coeficiente_emprestimo.value
+              +ExercitoValues.find(
+                (v: any) => v.key === "coeficiente_emprestimo"
+              )?.value
           ).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",

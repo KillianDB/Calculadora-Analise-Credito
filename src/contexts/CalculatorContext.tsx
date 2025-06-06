@@ -16,7 +16,7 @@ interface CalculatorProviderProps {
   children: ReactNode;
 }
 
-interface Coeficiente {
+export interface Coeficiente {
   id: string;
   menu: string;
   submenu: string;

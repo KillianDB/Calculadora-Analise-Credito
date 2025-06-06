@@ -1,4 +1,4 @@
-import { Key, useEffect, useState } from "react";
+import { Key, useState } from "react";
 import { CalculatorTitle } from "../../../CalculatorTitle";
 import CalculatorTotal from "../../../CalculatorTotal";
 import "../prefeituras.css";
@@ -21,6 +21,11 @@ export function CalculatorPrefeituraAspecir({
   setFinalResult: (result: string[]) => void;
   banco: string;
 }) {
+  const paramsString = localStorage.getItem("calculatorParams");
+  if (!paramsString) return "no parameters found";
+
+  const params = JSON.parse(paramsString);
+  const PrefeituraValues = params?.PREFEITURA?.["ASPECIR"]?.values || [];
   const [values, setValues] = useState([
     { label: "CÁLCULO DE VALOR  POR PARCELA: ", value: 0 },
   ]);
@@ -47,37 +52,34 @@ export function CalculatorPrefeituraAspecir({
   ]);
 
   function handleInputValue(label: string, value: number) {
-    console.log("handleInputValue called with label: ", label, " and value: ", value);
     if (value === 0) return;
     setValues([{ label, value }]);
 
-     const paramsString = localStorage.getItem("calculatorParams");
-  if (!paramsString) return "no parameters found";
+    let coeficienteValorLiberadoASPECIR = +PrefeituraValues?.find(
+      (v: any) => v.key == "coeficiente_valor_liberado"
+    )?.value;
+    let coeficiente84xASPECIR = +PrefeituraValues?.find(
+      (v: any) => v.key == "coeficiente_84x"
+    )?.value;
 
-  const params = JSON.parse(paramsString);
-
-    let coeficienteValorLiberadoASPECIR = +params?.PREFEITURA?.["ASPECIR"]?.coeficiente_valor_liberado;
-    let coeficiente84xASPECIR = +params?.PREFEITURA?.["ASPECIR"]?.coeficiente_84x;
-
-      setResult([
-        "VALOR LIBERADO:",
-        `R$ ${formatNumber(value / coeficienteValorLiberadoASPECIR)}`,
-        "84x",
-      ]);
-      setTotais([
-        `TOTAL: R$ ${formatNumber(value / coeficiente84xASPECIR)}`,
-        `PARCELA R$ ${value}`,
-        "84x",
-      ]);
+    setAllInputsFilled(true);
+    setResult([
+      "VALOR LIBERADO:",
+      `R$ ${formatNumber(value / coeficienteValorLiberadoASPECIR)}`,
+      "84x",
+    ]);
+    setTotais([
+      `TOTAL: R$ ${formatNumber(value / coeficiente84xASPECIR)}`,
+      `PARCELA R$ ${formatNumber(value)}`,
+      "84x",
+    ]);
 
     const finalResult: string[] = [
       `Valor Empréstimo R$ ${formatNumber(value / coeficiente84xASPECIR)}`,
       `VALOR TOTAL R$ ${formatNumber(value / coeficiente84xASPECIR)}`,
       `PARCELA TOTAL R$ ${formatNumber(value)} 84x`,
     ];
-    console.log("Final result before set: ", finalResult);
     setFinalResult(finalResult);
-    console.log("finalResult after set=> ", finalResult);
   }
 
   function chunkArray(array: string[], chunkSize: number) {
@@ -87,18 +89,6 @@ export function CalculatorPrefeituraAspecir({
     }
     return result;
   }
-
-  useEffect(() => {
-    const allFilled = values.every((item) => item.value !== 0);
-    setAllInputsFilled(allFilled);
-  }, [values]);
-
-  useEffect(() => {
-    console.log("Values in useEffect: ", values);
-    values.map((item) =>
-      item.value !== 0 ? handleInputValue(item.label, item.value) : null
-    );
-  }, [setAllInputsFilled]);
 
   const chunkedTotais = chunkArray(totais, 3);
   const chunkedLiberado = chunkArray(result.slice(0, 3), 3);
@@ -111,24 +101,18 @@ export function CalculatorPrefeituraAspecir({
           <FormLabel>{values[0].label}</FormLabel>
           <InputGroup>
             <NumericFormat
-              key={values[0].label}
-              valueIsNumericString
-              onValueChange={(values) => {
-                const { floatValue } = values;
-                setValues([
-                  {
-                    label: "CÁLCULO DE VALOR  POR PARCELA: ",
-                    value: Number(floatValue) || 0,
-                  },
-                ]);
-              }}
-              thousandSeparator="."
-              decimalSeparator=","
-              prefix="R$ "
-              decimalScale={2}
-              fixedDecimalScale={true}
-              customInput={Input}
-            />
+                value={values[0].value}
+                onValueChange={(number) => {
+                  const { floatValue } = number;
+                  handleInputValue(values[0].label, floatValue ?? 0);
+                }}
+                thousandSeparator="."
+                decimalSeparator=","
+                prefix="R$ "
+                decimalScale={2}
+                fixedDecimalScale={true}
+                customInput={Input}
+              />
           </InputGroup>
         </FormControl>
       </Flex>

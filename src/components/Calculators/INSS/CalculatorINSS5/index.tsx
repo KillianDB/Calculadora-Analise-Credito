@@ -26,18 +26,18 @@ export function CalculatorINSS5({
   const params = JSON.parse(paramsString);
   console.log("params at INSS Possibilidades Gerais => ", params);
   const INSSValues = params?.INSS?.["Possibilidades Gerais"]?.values || [];
-  let coeficienteEmprestimo = +INSSValues.find(
-    (v: any) => v.key === "coeficiente_emprestimo"
-  )?.value;
+  // let coeficienteEmprestimo = +INSSValues.find(
+  //   (v: any) => v.key === "coeficiente_emprestimo"
+  // )?.value;
   let coeficienteCartaoINSS = +INSSValues.find(
     (v: any) => v.key === "coeficiente_cartao_inss"
   )?.value;
   let coeficienteCartaoBeneficio = +INSSValues.find(
     (v: any) => v.key === "coeficiente_cartao_beneficio"
   )?.value;
-  let porcentagemCompras = +INSSValues.find(
-    (v: any) => v.key === "porcentagem_compras"
-  )?.value;
+  // let porcentagemCompras = +INSSValues.find(
+  //   (v: any) => v.key === "porcentagem_compras"
+  // )?.value;
   let porcentagemMargemCartaoINSS = +INSSValues.find(
     (v: any) => v.key === "porcentagem_margem_cartao_inss"
   )?.value;

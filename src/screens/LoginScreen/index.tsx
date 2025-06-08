@@ -21,7 +21,6 @@ export default function LoginScreen() {
   const { login } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [error, setError] = useState("");
 
   const handleLogin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -42,10 +41,13 @@ export default function LoginScreen() {
         isClosable: true,
         position: "top-right",
       });
-      // Redireciona com base no tipo de usuário
+
       if (response.data.usertype === "admin") {
         console.log("Redirecionando para admin/home");
-        navigate("/equipes");
+        navigate("/coeficientes");
+      } else {
+        console.log("Redirecionando para calculadora");
+        navigate("/calculadora");
       }
     } catch (error) {
       console.error("Erro ao fazer login", error);
